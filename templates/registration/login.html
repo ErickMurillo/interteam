@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form action="/accounts/login/" method="POST" id="contact-form" class="contact">{% csrf_token %}
+    <div class="row">  
+    {% if form.errors %}
+        <p>Por favor, introduzca un nombre de usuario y clave correctos. Observe que ambos campos pueden ser sensibles a mayúsculas.</p>
+     {% endif %} 
+		<div class="col-sm-12">
+			{{form.username}}
+        </div>
+        <div class="col-sm-12">
+			{{form.password}}				
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-12">
+            <!--<ul class="list-inline">
+                <li><a href="/password_reset/">Olvidé mi contraseña</a></li>
+                <li>No esta registrado? <a href="/accounts/register/">Registrarse</a></li>
+            </ul>-->
+            <input type="submit" name="Login" id="submit-button" class="contact-submit pull-right" value="Iniciar sesión">
+        </div>
+    <p></p>
+	
+    </div>
+</form>
+</body>
+</html>

@@ -34,7 +34,7 @@ class Pais(models.Model):
     class Meta:
         verbose_name_plural = "Países"
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nombre
 
 class Contraparte(models.Model):
@@ -57,7 +57,7 @@ class Contraparte(models.Model):
         verbose_name_plural = "Contrapartes"
         unique_together = ("font_color", "nombre")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nombre
 
     def get_absolute_url(self):
@@ -71,7 +71,7 @@ class UserProfile(models.Model):
     avatar = ImageField(upload_to=get_file_path,null=True, blank=True)
     fileDir = 'usuario/avatar/'
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s - %s" % (self.user.username, self.contraparte.nombre)
 
     def __fecha_registro__(self):
@@ -82,9 +82,9 @@ class UserProfile(models.Model):
 
 class Mensajero(models.Model):
     user = models.ManyToManyField(User)
-    fecha = models.DateField(default=datetime.date.today())
+    fecha = models.DateField(auto_now_add=True)
     mensaje = RichTextUploadingField()
     usuario = models.CharField(max_length=200,blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s - %s ' % (self.fecha, self.mensaje)

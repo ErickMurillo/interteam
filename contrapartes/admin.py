@@ -10,7 +10,7 @@ class ContraparteAdmin(admin.ModelAdmin):
     #          '../files/js/editores/textareas.js',]
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['__unicode__','__fecha_registro__']
+    list_display = ['__str__','__fecha_registro__']
 
 admin.site.register(Pais)
 admin.site.register(Contraparte, ContraparteAdmin)

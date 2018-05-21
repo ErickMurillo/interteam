@@ -7,7 +7,7 @@ from foros.models import *
 from django.template.defaultfilters import slugify
 # from south.modelsinspector import add_introspection_rules
 from ckeditor_uploader.fields import RichTextUploadingField
-import datetime
+from sorl.thumbnail import ImageField
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
@@ -15,8 +15,9 @@ import datetime
 
 class Notas(models.Model):
 	titulo = models.CharField(max_length=200)
-	slug = models.SlugField(max_length=200)
-	fecha = models.DateField('Fecha de publicación', default=datetime.datetime.now())
+	foto = ImageField(upload_to='notas/',null=True, blank=True)
+	slug = models.SlugField(max_length=200,editable=False)
+	fecha = models.DateField('Fecha de publicación', auto_now_add=True)
 	contenido = RichTextUploadingField()
 	fotos = fields.GenericRelation(Imagen)
 	adjuntos = fields.GenericRelation(Documentos)
@@ -27,12 +28,11 @@ class Notas(models.Model):
 		verbose_name_plural = "Notas"
 		ordering = ['-fecha','-id']
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.titulo
 
 	def save(self, *args, **kwargs):
-		if not self.pk:
-			self.slug = slugify(self.titulo)
+		self.slug = slugify(self.titulo)
 		return super(Notas, self).save(*args, **kwargs)
 
 	def imagenes(self):
@@ -60,9 +60,9 @@ class Notas(models.Model):
 
 class ComentarioNotas(models.Model):
 	nota = models.ForeignKey(Notas,on_delete=models.DO_NOTHING)
-	fecha = models.DateField(default=datetime.datetime.now())
+	fecha = models.DateField(auto_now_add=True)
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	comentario = RichTextUploadingField()
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.user.username

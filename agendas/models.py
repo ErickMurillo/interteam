@@ -23,7 +23,7 @@ class Agendas(models.Model):
     class Meta:
     	verbose_name_plural = "Agendas"
 
-    def __unicode__(self):
+    def __str__(self):
     	return u'%s' % self.evento
 
     def get_absolute_url(self):

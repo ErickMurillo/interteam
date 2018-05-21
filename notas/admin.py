@@ -13,14 +13,14 @@ class ImagenInline(GenericTabularInline):
 	extra = 1
 
 class NotasAdmin(admin.ModelAdmin):
-	form = NotasForms
+	# form = NotasForms
 	#class Media:
 	#	css = {
 	#	    "all": ("css/custom.css",)
 	#	}
 
 	inlines = [ImagenInline, DocumentosInline, ]
-	list_display = ['__unicode__','fecha','user']
+	list_display = ['__str__','fecha','user']
 	list_filter = ['user','fecha']
 	date_hierarchy = 'fecha'
 

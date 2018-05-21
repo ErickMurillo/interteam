@@ -33,7 +33,7 @@ class AportesAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
     form = AporteForm
-    list_display = ['__unicode__','fecha','user',
+    list_display = ['__str__','fecha','user',
                     '__documento__','__fotos__', 
                     '__video__','__audio__']
     list_filter = ['user','fecha']

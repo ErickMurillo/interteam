@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>The Fund</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- ================= Favicon ================== -->
+    <link rel="icon" sizes="72x72" href="images/favicon-96x96.png">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900%7COpen+Sans:300,400,600,700,800" rel="stylesheet">
+    <!-- Font Awesome css-->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!-- Bootsrap css-->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Magnific Popup-->
+    <link rel="stylesheet" href="/static/css/magnific-popup.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/static/css/select2.min.css">
+    <!-- Countdown css-->
+   <link rel="stylesheet" href="/static/css/jquery.countdown.css">
+    <!-- Animate css-->
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <!-- Style-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Color Swhicher css-->
+	<link data-style="color-style" rel="stylesheet" href="/static/css/color-blue.css">
+    <!-- Modernizr-->
+    <script src="js/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header class="fund-header">
+        <div class="top-bar base-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-6 text-left text-xs-center">
+                        <!-- <div class="top-bar__contact">
+                            <i class="fa fa-envelope"></i> <span class="pdl5">correo@correo.com</span>
+                            <span class="pdl15 pdr15">|</span>
+                            <i class="fa fa-phone-square"></i> <span class="pdl5">+505 2222 2222</span>
+                        </div> -->
+                        <div class="social-icons ">
+                            <span>Siguenos en: </span>
+                            <ul class="list-inline pdl20">
+                                <li><a href="#"><i class="fa fa-facebook"></i> </a> </li>
+                                <li><a href="#"><i class="fa fa-twitter"></i> </a> </li>
+                                <li><a href="#"><i class="fa fa-instagram"></i> </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 text-right text-xs-center">
+                        <ul class="footer-menu text-xs-center">
+                            <li><a href="#"><i class="fa fa-user"></i> Usuario</a></li>
+                            <!-- <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li> -->
+                            <li><a href="#"><i class="fa fa-power-off"></i> Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- <nav class="mobile-background-nav">
+        <div class="mobile-inner">
+            <span class="mobile-menu-close"><i class="icon-icomooon-close"></i></span>
+            <ul class="menu-accordion">
+                <li><a href="index.html" class="has-submenu">Inicio <i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="index.html">Home One</a></li>
+                        <li><a href="index-two.html">Home Two</a></li>
+                    </ul>
+                </li>
+                <li><a href="blog.html" class="has-submenu">Noticias<i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="blog-details.html">Blog Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="events.html" class="has-submenu">Eventos<i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="event-details.html">Event Details</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="causes.html" class="has-submenu">Contraparte<i class="fa fa-angle-down"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="causes.html">Causes</a></li>
+                        <li><a href="causes-details.html">Causes Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="about-us.html">Acerca de</a></li>
+                <li><a href="contact-us.html">Contactanos</a></li>
+           </ul>
+        </div>
+    </nav>
+    <div class="main-menu-area main-menu-fixed">
+            <div class="container">
+                <div class="menu-logo">
+                    <div class="logo">
+                        <a href="index.html" class="logo-index"><img src="" alt="" /></a>
+                    </div>
+                    <nav id="easy-menu">
+                        <ul class="menu-list">
+                            <li><a href="index.html">Inicio <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="index.html">Home One</a></li>
+                                    <li><a href="index-two.html">Home Two</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="blog.html">Noticias <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="events.html">Eventos <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="events.html">Events</a></li>
+                                    <li><a href="event-details.html">Event Details</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li><a href="causes.html">Contraparte <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="causes.html">Causes</a></li>
+                                    <li><a href="causes-details.html">Causes Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="about-us.html">Acerca de</a></li>
+                            <li><a href="contact-us.html">Contactanos</a></li>
+                       </ul>
+                   </nav> 
+                </div>
+            </div>
+        </div> -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group ">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-user"></span>
+                        <p>Perfil</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-file-text-o"></span>
+                        <p>Notas</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-calendar"></span>
+                        <p>
+                        Eventos</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-comments"></span>
+                        <p>Foro</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-folder"></span>
+                        <p>Documentos</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-film"></span>
+                        <p>Multimedia</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-envelope"></span>
+                        <p>Mensajes</p>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-nav">
+                        <span class="fa fa-globe"></span>
+                        <p>Web</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content prueba">
+        <div class="container ">
+            <div class="row stickem-container prueba">
+                <div class="col-md-3" >
+                    <aside class="sidebar sidebar-profile stickem">
+                        <div class="profile ">
+
+                            <div class="image-wrap profile-image">
+                                <a href="#" class="btn special-btn btn-small"><span class="fa fa-pencil base-color "></span></a>
+                                <img src="https://objects-us-west-1.dream.io/monchitonet/wp-content/uploads/2014/01/simas.png"  alt="" width="100%">
+                                <!-- <img src="images/nuevo/logo1.png"  alt="" width="100%"> -->
+
+                            </div>
+
+                            <div class="profile-name">
+                                <div class="contact-address">
+                                    <div class="contact-address-item">
+                                        <span class="icon-wrap base-color border-color"><i class="fa fa-map-marker contact-icon"></i></span>
+                                        <div class="text-content">
+                                            <div class="contact-title base-color">País</div>
+                                            Nicaragua, Managua
+                                        </div>
+                                    </div><!--/.contact-address-item-->
+                                    <div class="contact-address-item">
+                                        <span class="icon-wrap base-color border-color"><i class="fa fa-phone contact-icon"></i></span>
+                                        <div class="text-content">
+                                            <div class="base-color contact-title">Teléfono</div>
+                                             (+505) 22682302
+                                        </div>
+                                    </div><!--/.contact-address-item-->
+                                    <div class="contact-address-item">
+                                        <span class="icon-wrap base-color border-color"><i class="fa fa-envelope contact-icon"></i></span>
+                                        <div class="text-content">
+                                            <div class="base-color contact-title">Correo</div>
+                                            simas@simas.com
+                                        </div>
+                                    </div><!--/.contact-address-item-->
+
+                                    <div class="contact-address-item">
+                                        <span class="icon-wrap base-color border-color"><i class="fa fa-map-marker contact-icon"></i></span>
+                                        <div class="text-content">
+                                            <div class="base-color contact-title">Website</div>
+                                            www.simas.com.ni<br/>
+                                            
+                                        </div>
+                                    </div><!--/.contact-address-item-->
+                                </div>
+                            </div>
+                            <!--<div class="profile-name">
+                                <ul>
+                                    <li><i class="fa fa-map-marker pdr5"></i> Pais:  Nicaragua <img src="https://www.citel.oas.org/es/SiteAssets/Paginas/SistemaTIC/countries/images/bandera-nicaragua.png" alt="" height="15px"></li>
+                                    <li><i class="fa fa-building pdr5"></i> Año de fundación: 1990</li>
+                                    <li><i class="fa fa-envelope pdr5"></i> Contacto: info@correo.com</li>
+                                    <li><i class="fa fa-phone pdr5"></i> Teléfono: 2222 2222</li>
+                                    <li><i class="fa fa-globe pdr5"></i> Web: www.simas.org.ni</li>
+                                </ul>
+                                 <h1 class="text-center">SIMAS</h1>
+                                <h5 class="text-center">Servicio de Información Mesoamericano sobre Agricultura Sostenible</h5> 
+                            </div>-->
+                        </div>
+                        <ul class="social-btn">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                        
+                    </aside>    
+                </div>
+                <div class="col-md-9">
+                    <section>
+                        <div class="blog-details-top mb40">
+                            <div class="blog-details-top__text-content">
+                                <h3 class="blog-details__title">Servicio de Información Mesoamericano sobre Agricultura Sostenible - SIMAS</h3>
+                                <hr>
+                                <h4 class="blog-details__title">ACERCA DE</h4>
+                                <p>
+                                    Es una asociación civil sin fines de lucro comprometida en la construcción de formas de vida 
+                                    democrática y sostenible para el mundo rural. Su legalización se realizó mediante el Decreto 
+                                    No 3533 sesión Asamblea Nacional mayo 14 2003. 
+                                </p>
+                                <h4 class="blog-details__title">NUESTRA MISIÓN</h4>
+                                <p>
+                                    Fortalecemos en conjunto con otros actores en articulación mesoamericana los procesos de innovación y comunicación para el desarrollo de capacidades de aprendizaje de las familias campesinas en Agricultura Sostenible, que permite el desarrollo humano rural integral con equidad de género y generacional.
+                                </p>
+                                <h4 class="blog-details__title">NUESTRA VISIÓN DE DESARROLLO</h4>
+                                <p>
+                                    Familias campesinas con capacidades de aprendizaje para afrontar retos ambientales y su inclusión a mercados e innovar junto con actores sociales una propuesta estructurada de desarrollo sostenible.
+                                </p>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="blog-details-top mb40">
+                            <div class="blog-details-top__text-content">
+                                <h3 class="blog-details__title">Estadísticas</h3>
+                                <hr>
+                                <div class="row">
+                                <div class="col-lg-3 col-sm-6">
+                                        <div class="circle-tile ">
+                                            <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-file-text-o fa-fw fa-3x"></i></div></a>
+                                            <div class="circle-tile-content dark-blue">
+                                                <div class="circle-tile-description text-faded"> Noticias</div>
+                                                <div class="circle-tile-number text-faded ">265</div>
+                                                <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="circle-tile ">
+                                            <a href="#"><div class="circle-tile-heading red"><i class="fa fa-calendar fa-fw fa-3x"></i></div></a>
+                                            <div class="circle-tile-content red">
+                                                <div class="circle-tile-description text-faded"> Eventos </div>
+                                                <div class="circle-tile-number text-faded ">52</div>
+                                                <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="circle-tile ">
+                                            <a href="#"><div class="circle-tile-heading orange"><i class="fa fa-film fa-fw fa-3x"></i></div></a>
+                                            <div class="circle-tile-content orange">
+                                                <div class="circle-tile-description text-faded"> Multimedia </div>
+                                                <div class="circle-tile-number text-faded ">300</div>
+                                                <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="circle-tile ">
+                                            <a href="#"><div class="circle-tile-heading purple"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+                                            <div class="circle-tile-content purple">
+                                                <div class="circle-tile-description text-faded"> Prticipación Foros </div>
+                                                <div class="circle-tile-number text-faded ">10</div>
+                                                <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                        <!-- <div class="blog-details-top mb40">
+                            <div class="blog-details-top__text-content">
+                                <a href="#" class="btn special-btn"><span class="fa fa-pencil base-color "></span> Redactar</a>
+                                <h3 class="blog-details__title ">Noticias de la organización</h3>
+                                <hr>
+                               
+                                
+                                <div class="row row-eq-rs-height">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="blog-post wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".2s">
+                                            <div class="blog-post__thumbnail-wrap">
+                                                <img src="images/blog/blog-1.jpg" alt="blog" width="100%">
+                                                <div class="blog-post__like-comment">
+                                                    <span><i class="fa fa-comments"></i>22 Comment</span>
+                                                    <span>|</span>
+                                                    <span><i class="fa fa-thumbs-up"></i>105 Likes</span>
+                                                </div>
+                                            </div>
+                                            <div class="blog-post__text-content">
+                                                <h4 class="blog-post__title heading-label-four"><a href="#">EDUCATION FOR CHILDREN</a></h4>
+                                                <div class="blog-post__meta-info">
+                                                    <span class="small-text"><i class="fa fa-user base-color"></i>Admin</span>
+                                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 January</span>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adip it scing elit, sed do eiusmod tempor incididu duut ut labore et dolore </p>
+
+                                                <a href="#" class="btn"><span class="fa fa-pencil base-color"></span> Editar</a>
+                                                <a href="#" class="btn"><span class="fa fa-eraser base-color"></span> Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="blog-post wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".4s">
+                                            <div class="blog-post__thumbnail-wrap">
+                                                <img src="images/blog/blog-2.jpg" alt="blog" width="100%">
+                                                <div class="blog-post__like-comment">
+                                                    <span><i class="fa fa-comments"></i>22 Comment</span>
+                                                    <span>|</span>
+                                                    <span><i class="fa fa-thumbs-up"></i>105 Likes</span>
+                                                </div>
+                                            </div>
+                                            <div class="blog-post__text-content">
+                                                <h4 class="blog-post__title heading-label-four"><a href="#">EDUCATION FOR CHILDREN</a></h4>
+                                                <div class="blog-post__meta-info">
+                                                    <span class="small-text"><i class="fa fa-user base-color"></i>Admin</span>
+                                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 January</span>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adip it scing elit, sed do eiusmod tempor incididu duut ut labore et dolore </p>
+                                                <a href="#" class="btn"><span class="fa fa-pencil base-color"></span> Editar</a>
+                                                <a href="#" class="btn"><span class="fa fa-eraser base-color"></span> Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                
+                            </div>
+                        </div> -->
+
+
+
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="fund-footer">
+        <div class="main-footer all-text-white section-padding">
+            <div class="container">
+
+                <div class="row row-eq-rs-height">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget widget--footer widget--userfull-link">
+                            <div class="widget__heading">
+                                <h4 class="widget__title">LINKS DE INTERES</h4>
+                            </div>
+                            <div class="widget__text-content">
+                                <ul>
+                                    <li>Lea nuestras noticias</li>
+                                    <li>Verifique los próximos eventos</li>
+                                    <li>Conozca a nuestros cooperantes</li>
+                                    <li>Infórmate de nuestro programa.</li>
+                                    <li>Descarga las últimas publicaciones</li>
+                                </ul>
+                            </div>
+                        </div><!--/.widget-->
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget widget--footer widget--contact">
+                            <div class="widget__heading">
+                                <h4 class="widget__title">CONTÁCTANOS</h4>
+                            </div>
+                            <div class="widget__text-content">
+                                <div class="contact-way">
+                                    <span class="base-bg contact-icon"><i class="fa fa-location-arrow"></i></span>
+                                    <span class="contact-text">Edificio Casa Estelí. Del Monumento Centenario 25 vrs al Sur.</span>
+                                </div>
+                                <div class="contact-way">
+                                    <span class="base-bg contact-icon"><i class="fa fa-phone"></i></span>
+                                    <span class="contact-text">+505 2713-7633</span>
+                                </div>
+                                <div class="contact-way">
+                                    <span class="base-bg contact-icon"><i class="fa fa-envelope-o"></i></span>
+                                    <span class="contact-text">info@asdenic.org</span>
+                                </div>
+                                <div class="social-icons pdt5">
+                                    <span>Siguenos en : </span>
+                                    <ul class="list-inline pdl20">
+                                        <li><a href="#"><i class="fa fa-facebook"></i> </a> </li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i> </a> </li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i> </a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!--/.widget-->
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="widget widget--footer widget--userfull-link">
+                            <div class="widget__heading">
+                                <h4 class="widget__title">ORGANIZACIONES COOPERANTES</h4>
+                            </div>
+                            <div class="widget__text-content">
+                                <a href="#" class="footer-logo"><img src="images/nuevo/logo.png" alt="logo" height="90px"></a>
+                                <br>
+                                <a href=""><img src="images/nuevo/logo1.png" alt="" width="250px"></a>
+                                
+                            </div>
+                        </div><!--/.widget-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area all-text-white pdt25 pdb25">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright-text text-xs-center">
+                            ASDENIC &copy; 2018. Todos los derechos reservados. Desarrollado por <span class="base-color">SIMAS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" id="toTop" class="cd-top"><i class="fa fa-angle-up"></i></a>
+    </footer>
+    <!-- // End Footer  -->
+    <!-- == jQuery Librery == -->
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <!-- == Bootsrap js File == -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- == mixitup == -->
+    <script src="/static/js/mixitup.min.js"></script>
+    <!-- == Select 2 == -->
+    <script src="/static/js/select2.min.js"></script>
+    <!-- == Select 2 == -->
+    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <!-- == Slick == -->
+    <script src="/static/js/slick.min.js"></script>
+    <!-- == Counter == -->
+    <script src="/static/js/jquery.waypoints.min.js"></script>
+    <script src="/static/js/jquery.counterup.min.js"></script>
+    <!-- == Countdown == -->
+    <script src="/static/js/jquery.plugin.js"></script>
+    <script src="/static/js/jquery.countdown.min.js"></script>
+    <!-- == Google Maps == -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBjaOVpxq-vyWE7EOrUjmYsDdxRSrlar08"></script>
+    <script src="/static/js/jquery.mapit.min.js"></script>
+    <script src="/static/js/map-init.js"></script>
+    <!-- == custom Js File == -->
+    <script src="/static/js/custom.js"></script>
+    <script>
+  
+
+        var activeEl = 0;
+$(function() {
+    var items = $('.btn-nav');
+    $( items[activeEl] ).addClass('active');
+    $( ".btn-nav" ).click(function() {
+        $( items[activeEl] ).removeClass('active');
+        $( this ).addClass('active');
+        activeEl = $( ".btn-nav" ).index( this );
+    });
+});
+    
+
+    
+</script>
+    </body>
+</html>

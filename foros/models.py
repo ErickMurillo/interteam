@@ -34,7 +34,7 @@ class Imagen(models.Model):
 	class Meta:
 		verbose_name_plural = "Imágenes"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre_img
 
 class Documentos(models.Model):
@@ -52,7 +52,7 @@ class Documentos(models.Model):
 	class Meta:
 		verbose_name_plural = "Documentos"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre_doc
 
 class Videos(models.Model):
@@ -68,7 +68,7 @@ class Videos(models.Model):
 	class Meta:
 		verbose_name_plural = "Videos"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre_video
 
 class Audios(models.Model):
@@ -86,12 +86,12 @@ class Audios(models.Model):
 	class Meta:
 		verbose_name_plural = "Audios"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre_audio
 
 class Foros(models.Model):
 	nombre = models.CharField(max_length=200)
-	creacion = models.DateField(default=datetime.datetime.now())
+	creacion = models.DateField(auto_now_add=True)
 	apertura = models.DateField('Apertura y recepción de aportes')
 	cierre = models.DateField('Cierre de aportes')
 	fecha_skype = models.DateField('Propuesta de reunión skype')
@@ -107,7 +107,7 @@ class Foros(models.Model):
 		verbose_name_plural = "Foros"
 		ordering = ['-creacion']
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre
 
 	def __documento__(self):
@@ -139,7 +139,7 @@ class Foros(models.Model):
 
 class Aportes(models.Model):
 	foro = models.ForeignKey(Foros,on_delete=models.DO_NOTHING)
-	fecha = models.DateField(default=datetime.datetime.now())
+	fecha = models.DateField(auto_now_add=True)
 	contenido = RichTextUploadingField()
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	adjuntos = fields.GenericRelation(Documentos)
@@ -150,7 +150,7 @@ class Aportes(models.Model):
 	class Meta:
 		verbose_name_plural = "Aportes"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.foro.nombre
 		
 	def __documento__(self):
@@ -178,7 +178,7 @@ class Aportes(models.Model):
 		return lista
 
 class Comentarios(models.Model):
-	fecha = models.DateField(default=datetime.datetime.now())
+	fecha = models.DateField(auto_now_add=True)
 	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	comentario = RichTextUploadingField()
 	aporte = models.ForeignKey(Aportes,on_delete=models.DO_NOTHING)
@@ -186,5 +186,5 @@ class Comentarios(models.Model):
 	class Meta:
 		verbose_name_plural = "Comentarios"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.usuario.username

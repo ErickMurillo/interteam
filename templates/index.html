@@ -1,0 +1,485 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+  <section class="blog-section section-padding ash-white-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h2 class="section-title wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">Últimas  <span class="base-color">Noticias</span></h2>
+                    <!-- <span class="section-sub-title wow fadeInUpXsd disinb" data-wow-duration=".9s" data-wow-delay=".1s">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</span> -->
+                    <div class="section-heading-separator wow fadeInUpXsd" data-wow-duration="1.1s" data-wow-delay=".1s"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-eq-rs-height notice-carousel">
+          {% for nota in notas %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="blog-post wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".2s">
+                    <div class="blog-post__thumbnail-wrap">
+                        {% thumbnail nota.foto "380x250" crop="center" as im %}
+                            <img src="{{im.url}}" alt="blog">
+                        {% endthumbnail %}
+                        <div class="blog-post__like-comment">
+                            <span><i class="fa fa-comments"></i>22 Comentarios</span>
+                            <span>|</span>
+                            <span><i class="fa fa-eye"></i>105 Vistas</span>
+                        </div>
+                    </div>
+                    <div class="blog-post__text-content">
+                        <h4 class="blog-post__title heading-label-four"><a href="#">{{nota.titulo}}</a></h4>
+                        <div class="blog-post__meta-info">
+                            <span class="small-text"><i class="fa fa-user base-color"></i>{{nota.user.userprofile.contraparte.siglas}}</span>
+                            <span class="small-text"><i class="fa fa-calendar base-color"></i>{{nota.fecha}}</span>
+                        </div>
+                        <p>{{nota.contenido|safe|truncatewords:20}} </p>
+                        <a href="{% url "detalle-notas" nota.slug %}" class="btn">Leer más</a>
+                    </div>
+                </div><!--/.blog-post-->
+            </div>
+          {% endfor %}
+            
+        </div>
+    </div>
+</section>
+<section class="upcomming-event-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="section-heading">
+                    <h2 class="section-title section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">PRÓXIMOS  <span class="base-color">EVENTOS</span></h2>
+                    <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
+                </div>
+                <div class="upcommig-event-carousel wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+                    <div class="upcomming-event">
+                        <div class="upcomming-event__image-wrap">
+                            <img src="http://cafodca.org/uploads/fotos/IMG_1027.380x250.JPG" class="upcomming-event__image" alt="event">
+                            <div class="upcomming-event__date">
+                                <i class="fa fa-calendar"></i>
+                                <span>21 MAY</span>
+                            </div>
+                        </div>
+                        <div class="upcomming-event__text-content">
+                            <h4 class="upcomming-event__title"><a href="#">Validación de plataforma CAFOD</a></h4>
+                            <div class="upcomming-event__meta-info">
+                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
+                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
+                            </div>
+                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
+                        </div>
+                    </div><!--/.upcomming-event-->
+                    <div class="upcomming-event">
+                        <div class="upcomming-event__image-wrap">
+                            <img src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" class="upcomming-event__image" alt="event">
+                            <div class="upcomming-event__date">
+                                <i class="fa fa-calendar"></i>
+                                <span>21 MAY</span>
+                            </div>
+                        </div>
+                        <div class="upcomming-event__text-content">
+                            <h4 class="upcomming-event__title"><a href="#">Capacitación sobre Doctrina Social</a></h4>
+                            <div class="upcomming-event__meta-info">
+                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
+                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
+                            </div>
+                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
+                        </div>
+                    </div><!--/.upcomming-event-->
+                    <div class="upcomming-event">
+                        <div class="upcomming-event__image-wrap">
+                            <img src="http://cafodca.org/uploads/fotos/IMG_0897.380x250.JPG" class="upcomming-event__image" alt="event">
+                            <div class="upcomming-event__date">
+                                <i class="fa fa-calendar"></i>
+                                <span>21 MAY</span>
+                            </div>
+                        </div>
+                        <div class="upcomming-event__text-content">
+                            <h4 class="upcomming-event__title"><a href="#">Reuniòn de Junta Directiva</a></h4>
+                            <div class="upcomming-event__meta-info">
+                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
+                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
+                            </div>
+                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
+                        </div>
+                    </div><!--/.upcomming-event-->
+                    <div class="upcomming-event">
+                        <div class="upcomming-event__image-wrap">
+                            <img src="http://cafodca.org/uploads/fotos/J23_3110.640x480.JPG" class="upcomming-event__image" alt="event">
+                            <div class="upcomming-event__date">
+                                <i class="fa fa-calendar"></i>
+                                <span>21 MAY</span>
+                            </div>
+                        </div>
+                        <div class="upcomming-event__text-content">
+                            <h4 class="upcomming-event__title"><a href="#">Taller de Genero y Violencia</a></h4>
+                            <div class="upcomming-event__meta-info">
+                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
+                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
+                            </div>
+                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
+                        </div>
+                    </div><!--/.upcomming-event-->
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="section-heading">
+                    <h2 class="section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">ÚLTIMAS <span class="base-color">PUBLICACIONES</span></h2>
+                    <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
+                </div>
+                <div class="donation-wrap wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+                
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="publicacion-carousel">
+                            
+                            <div class="div">
+                                <div class="our-causes">
+                                    <div class="our-causes__image-wrap">
+                                        <img src="/static/images/nuevo/pdf.jpg" class="our-causes__image" alt="">
+                                    </div>
+
+                                    <div class="our-causes__text-content text-center">
+
+                                        <h4 class=" our-causes__title"><a href="#">Manual de patios sostenibles</a></h4>
+                                        
+                                        <a href="#" class="btn">Descargar</a>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                           <div class="div">
+                                <div class="our-causes">
+                                    <div class="our-causes__image-wrap">
+                                        <img src="/static/images/nuevo/pdf.jpg" class="our-causes__image" alt="">
+                                    </div>
+
+                                    <div class="our-causes__text-content text-center">
+
+                                        <h4 class=" our-causes__title"><a href="#">Manual de patios sostenibles</a></h4>
+                                        
+                                        <a href="#" class="btn">Descargar</a>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                            <div class="div">
+                                <div class="our-causes">
+                                    <div class="our-causes__image-wrap">
+                                        <img src="/static/images/nuevo/pdf.jpg" class="our-causes__image" alt="">
+                                    </div>
+
+                                    <div class="our-causes__text-content text-center">
+
+                                        <h4 class=" our-causes__title"><a href="#">Manual de patios sostenibles</a></h4>
+                                        
+                                        <a href="#" class="btn">Descargar</a>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="gallery-section section-padding all-text-white lazy" style="display: block; ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h2 class="section-title wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">GALLERIA DE <span class="base-color">IMAGENES</span></h2>
+                    <div class="section-heading-separator wow fadeInUpXsd" data-wow-duration="1.1s" data-wow-delay=".1s"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center pdb35 wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+                    <ul class="list-inline filter-options">
+                        <li><a href="#!" class="filter-options__item filter btn active" data-filter=".all">Todos</a></li>
+                        <li><a href="#!" class="filter-options__item filter btn" data-filter=".charity">Ingreso</a></li>
+                        <li><a href="#!" class="filter-options__item filter btn" data-filter=".children">Clima</a></li>
+                        <li><a href="#!" class="filter-options__item filter btn" data-filter=".natureal">Alimentación</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+            <div class="col-md-12">
+                <div class="row row-eq-height" id="mixitup-grid">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item pr  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="/static/images/home/popup/gallery-1.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/d3/0f/d30f53ca6f12700df74c476809a26d21.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity children natureal" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".4s" href="/static/images/home/popup/gallery-2.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/da/7c/da7c0c8cb1cebdb241d3de43d6d49abf.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all children natureal" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".6s" href="/static/images/home/popup/gallery-3.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/af/5a/af5a49a57fbc612c60bd0c0c84798b8d.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity children" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".8s" href="/static/images/home/popup/gallery-4.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/a6/e1/a6e1e3e931ea08a763661391f1146fe0.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all children natureal" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="/static/images/home/popup/gallery-5.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/cb/e6/cbe60a152bd6d67f81bae74b12fb5ada.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity children" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".4s" href="/static/images/home/popup/gallery-6.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/e1/1a/e11ae8bf1e2e8dc923c5a9ae62340ee3.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".6s" href="/static/images/home/popup/gallery-7.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/52/95/5295f788e3bf58d8726f20a2087e1ac9.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all children natureal" style="display: inline-block;" data-bound="">
+                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".8s" href="/static/images/home/popup/gallery-8.jpg">
+                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/d9/a0/d9a0f7b72a19b0b3d5407a710abfd91b.jpg" style="display: inline;">
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-padding ash-white-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h2 class="section-title--smal">CLÚSTER SEGURIDAD ALIMENTARIA <br><span class="base-color">Y GENERACIÓN DE INGRESOS</span> </h2>
+                    <!-- <span class="section-sub-title"></span> -->
+                    <div class="section-heading-separator"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about-us-carousel mb30">
+                    <div>
+                        <img src="http://www.simas.org.ni/media/cache/f5/66/f566a2ace586ed303e9da62ed3212624.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="http://www.simas.org.ni/media/cache/8d/a1/8da118cb266a5dce1919f23614a69244.jpg" alt="">
+                    </div>
+                    <div>
+                        <img src="http://www.simas.org.ni/media/cache/ee/6c/ee6c7fb21d4ed1519c9be6e22aad0081.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-us-text-content mb30">
+                    <h4>PROPÓSITO</h4>
+                    <p>El Clúster “Seguridad alimentaria y generación de ingresos" esta conformado por más de 20 organizaciones copartes establecidas en la zona seca central en el norte de Nicaragua, de los departamentos Madriz, Las Segovias, Jinotega, Matagalpa y Estelí.</p>
+                    <p>El Clúster tiene como propósito desarrollar soluciones conjuntas para la seguridad alimentaria. Se promueve el intercambiaron conocimientos y experiencias, además de desarrollarse nuevos conceptos y proyectos, donde las familias campesinas son el grupo meta de enlace para todas las organizaciones.</p>
+                    <!-- <ul class="fund-arrow-left-list pdb10">
+                        <li>1.  La adaptación al cambio climático y la generación de perspectivas en los negocios de las familias campesinas.</li>
+                        <li>2.  El incremento de los ingresos familiares en los negocios de familias campesinas de la zona.</li>
+                        <li>3.  El fortalecimiento de los gremios y organizaciones que apoyan a los negocios de familias campesinas en la zona seca</li>
+                    </ul> -->
+                  
+                    <a href="#" class="btn base-bg">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="volunteer-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h2 class="section-title wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">ORGANIZACIONES DEL <span class="base-color">CLÚSTER</span> </h2>
+                    <div class="section-heading-separator wow fadeInUpXsd" data-wow-duration="1.1s" data-wow-delay=".1s"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-eq-rs-height">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".2s">
+                    <div class="fund-volunteer__photo-wrap">
+                        <img src="https://objects-us-west-1.dream.io/monchitonet/wp-content/uploads/2014/01/simas.png" class="img-circle fund-volunteer__photo" alt="volunteer">
+                    </div>
+                    <div class="fund-volunteer__text-content">
+                        <h3 class="fund-volunteer__name">SIMAS</h3>
+                        <div class="section-heading-separator section-heading-separator--small"></div>
+                        <p>SIMAS es una asociación civil sin fines de lucro comprometida en la construcción de formas de vida  democrática y sostenible para el mundo rural. </p>
+                        <ul class="list-inline round-social-icons mb30">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                        <a href="#" class="btn">Leer más</a>
+                    </div>
+                </div><!--/.fund-volunteer-->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".4s">
+                    <div class="fund-volunteer__photo-wrap">
+                        <img  src="/static/images/nuevo/logo3.png" class="img-circle fund-volunteer__photo" alt="volunteer">
+                    </div>
+                    <div class="fund-volunteer__text-content">
+                        <h3 class="fund-volunteer__name">ASDENIC</h3>
+                        <div class="section-heading-separator section-heading-separator--small"></div>
+                        <p>ASDENIC fue fundada en 1990, es un organismo de desarrollo local, con personería jurídica otorgada por la Asamblea Nacional de la República de Nicaragua.</p>
+                        <ul class="list-inline round-social-icons mb30">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                        <a href="#" class="btn">Leer más</a>
+                    </div>
+                </div><!--/.fund-volunteer-->
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".6s">
+                    <div class="fund-volunteer__photo-wrap">
+                        <img  src="/static/images/nuevo/UNAG.jpg" class="img-circle fund-volunteer__photo" alt="volunteer">
+                    </div>
+                    <div class="fund-volunteer__text-content">
+                        <h3 class="fund-volunteer__name">UNAG</h3>
+                        <div class="section-heading-separator section-heading-separator--small"></div>
+                        <p>UNAG es uno de los gremios agropecuarios más grandes del país, el que reúne a los pequeños y medianos productores y ganaderos</p>
+                        <ul class="list-inline round-social-icons mb30">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                        <a href="#" class="btn">Leer más</a>
+                    </div>
+                </div><!--/.fund-volunteer-->
+            </div>
+        </div>
+    </div>
+</section>
+<section class="testimonial-section section-padding ash-white-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h2 class="section-title">Opiniones  del<span class="base-color">Clúster</span> </h2>
+                    <div class="section-heading-separator"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="fund-testimonial-carousel">
+                    <div class="fund-testimonial">
+                        <div class="fund-testimonial__quote base-bg">
+                            Gracias en nombre de cada uno de los que disfrutaron de su ayuda y por las sonrisas que en medio del desastre ustedes nos ayudaron a arrancar a nuestros hermanos.
+                        </div>
+                        <div class="fund-testimonial__author">
+                            <div class="fund-testimonial__author-image">
+                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" alt="">
+                            </div>
+                            <div class="fund-testimonial__author-text">
+                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
+                                <span class="fund-testimonial__designation">Productor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fund-testimonial">
+                        <div class="fund-testimonial__quote base-bg">
+                            Queremos expresarle lo felicidad de estar viviendo en una casa muy bonita, que gracias a Dios y a la ayuda de ustedes, ya tenemos una vivienda permanente.
+                        </div>
+                        <div class="fund-testimonial__author">
+                            <div class="fund-testimonial__author-image">
+                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-128.png" alt="">
+                            </div>
+                            <div class="fund-testimonial__author-text">
+                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
+                                <span class="fund-testimonial__designation">Productor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fund-testimonial">
+                        <div class="fund-testimonial__quote base-bg">
+                            Queremos agradecerles por el apoyo y colaboración que han realizado con nuestra comunidad con la aprobación del proyecto y ejecución para las construcciones.
+                        </div>
+                        <div class="fund-testimonial__author">
+                            <div class="fund-testimonial__author-image">
+                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-128.png" alt="">
+                            </div>
+                            <div class="fund-testimonial__author-text">
+                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
+                                <span class="fund-testimonial__designation">Productor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fund-testimonial">
+                        <div class="fund-testimonial__quote base-bg">
+                            Gracias en nombre de cada uno de los que disfrutaron de su ayuda y por las sonrisas que en medio del desastre ustedes nos ayudaron a arrancar a nuestros hermanos.
+                        </div>
+                        <div class="fund-testimonial__author">
+                            <div class="fund-testimonial__author-image">
+                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" alt="">
+                            </div>
+                            <div class="fund-testimonial__author-text">
+                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
+                                <span class="fund-testimonial__designation">Productor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fund-testimonial">
+                        <div class="fund-testimonial__quote base-bg">
+                            Queremos expresarle lo felicidad de estar viviendo en una casa muy bonita, que gracias a Dios y a la ayuda de ustedes, ya tenemos una vivienda permanente.
+                        </div>
+                        <div class="fund-testimonial__author">
+                            <div class="fund-testimonial__author-image">
+                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-128.png" alt="">
+                            </div>
+                            <div class="fund-testimonial__author-text">
+                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
+                                <span class="fund-testimonial__designation">Productor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fund-testimonial">
+                        <div class="fund-testimonial__quote base-bg">
+                            Queremos agradecerles por el apoyo y colaboración que han realizado con nuestra comunidad con la aprobación del proyecto y ejecución para las construcciones.
+                        </div>
+                        <div class="fund-testimonial__author">
+                            <div class="fund-testimonial__author-image">
+                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-128.png" alt="">
+                            </div>
+                            <div class="fund-testimonial__author-text">
+                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
+                                <span class="fund-testimonial__designation">Productor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
