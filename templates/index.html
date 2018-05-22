@@ -20,6 +20,8 @@
                     <div class="blog-post__thumbnail-wrap">
                         {% thumbnail nota.foto "380x250" crop="center" as im %}
                             <img src="{{im.url}}" alt="blog">
+                        {% empty %}
+                            <img src="http://via.placeholder.com/380x250" alt="blog">
                         {% endthumbnail %}
                         <div class="blog-post__like-comment">
                             <span><i class="fa fa-comments"></i>22 Comentarios</span>
@@ -28,7 +30,7 @@
                         </div>
                     </div>
                     <div class="blog-post__text-content">
-                        <h4 class="blog-post__title heading-label-four"><a href="#">{{nota.titulo}}</a></h4>
+                        <h4 class="blog-post__title heading-label-four"><a href="{% url "detalle-notas" nota.slug %}">{{nota.titulo}}</a></h4>
                         <div class="blog-post__meta-info">
                             <span class="small-text"><i class="fa fa-user base-color"></i>{{nota.user.userprofile.contraparte.siglas}}</span>
                             <span class="small-text"><i class="fa fa-calendar base-color"></i>{{nota.fecha}}</span>
@@ -52,74 +54,30 @@
                     <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
                 </div>
                 <div class="upcommig-event-carousel wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
-                    <div class="upcomming-event">
+                    {% for evento in eventos %}
+                        <div class="upcomming-event">
                         <div class="upcomming-event__image-wrap">
-                            <img src="http://cafodca.org/uploads/fotos/IMG_1027.380x250.JPG" class="upcomming-event__image" alt="event">
+                            {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                <img class="upcomming-event__image" src="{{im.url}}" alt="event">
+                            {% empty %}
+                                <img class="upcomming-event__image" src="http://via.placeholder.com/380x250" alt="event">
+                            {% endthumbnail %}
                             <div class="upcomming-event__date">
                                 <i class="fa fa-calendar"></i>
-                                <span>21 MAY</span>
+                                <span>{{evento.inicio|date:"d N"}}</span>
                             </div>
                         </div>
                         <div class="upcomming-event__text-content">
-                            <h4 class="upcomming-event__title"><a href="#">Validación de plataforma CAFOD</a></h4>
+                            <h4 class="upcomming-event__title"><a href="#">{{evento.evento}}</a></h4>
                             <div class="upcomming-event__meta-info">
-                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
-                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
+                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>{{evento.hora_inicio|time:"P"}} - {{evento.hora_fin|time:"P"}}  </span>
+                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>{{evento.lugar}}</span>
                             </div>
-                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
+                            <p>{{evento.descripcion|truncatewords:"18"|safe|striptags}}</p>
                         </div>
                     </div><!--/.upcomming-event-->
-                    <div class="upcomming-event">
-                        <div class="upcomming-event__image-wrap">
-                            <img src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" class="upcomming-event__image" alt="event">
-                            <div class="upcomming-event__date">
-                                <i class="fa fa-calendar"></i>
-                                <span>21 MAY</span>
-                            </div>
-                        </div>
-                        <div class="upcomming-event__text-content">
-                            <h4 class="upcomming-event__title"><a href="#">Capacitación sobre Doctrina Social</a></h4>
-                            <div class="upcomming-event__meta-info">
-                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
-                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
-                            </div>
-                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
-                        </div>
-                    </div><!--/.upcomming-event-->
-                    <div class="upcomming-event">
-                        <div class="upcomming-event__image-wrap">
-                            <img src="http://cafodca.org/uploads/fotos/IMG_0897.380x250.JPG" class="upcomming-event__image" alt="event">
-                            <div class="upcomming-event__date">
-                                <i class="fa fa-calendar"></i>
-                                <span>21 MAY</span>
-                            </div>
-                        </div>
-                        <div class="upcomming-event__text-content">
-                            <h4 class="upcomming-event__title"><a href="#">Reuniòn de Junta Directiva</a></h4>
-                            <div class="upcomming-event__meta-info">
-                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
-                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
-                            </div>
-                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
-                        </div>
-                    </div><!--/.upcomming-event-->
-                    <div class="upcomming-event">
-                        <div class="upcomming-event__image-wrap">
-                            <img src="http://cafodca.org/uploads/fotos/J23_3110.640x480.JPG" class="upcomming-event__image" alt="event">
-                            <div class="upcomming-event__date">
-                                <i class="fa fa-calendar"></i>
-                                <span>21 MAY</span>
-                            </div>
-                        </div>
-                        <div class="upcomming-event__text-content">
-                            <h4 class="upcomming-event__title"><a href="#">Taller de Genero y Violencia</a></h4>
-                            <div class="upcomming-event__meta-info">
-                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>9.00 AM - 11.00 PM  </span>
-                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>Hotel Las Mercedes</span>
-                            </div>
-                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones</p>
-                        </div>
-                    </div><!--/.upcomming-event-->
+                    {% endfor %}
+                    
                 </div>
             </div>
             <div class="col-md-5">
@@ -320,15 +278,20 @@
             </div>
         </div>
         <div class="row row-eq-rs-height">
+            {% for org in contrapartes %}
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".2s">
                     <div class="fund-volunteer__photo-wrap">
-                        <img src="https://objects-us-west-1.dream.io/monchitonet/wp-content/uploads/2014/01/simas.png" class="img-circle fund-volunteer__photo" alt="volunteer">
+                        {% thumbnail org.logo "120x120" crop="center" as im %}
+                                <img class="img-circle fund-volunteer__photo" src="{{im.url}}" alt="volunteer">
+                            {% empty %}
+                                <img class="img-circle fund-volunteer__photo" src="http://via.placeholder.com/120x120" alt="volunteer">
+                            {% endthumbnail %}
                     </div>
                     <div class="fund-volunteer__text-content">
-                        <h3 class="fund-volunteer__name">SIMAS</h3>
+                        <h3 class="fund-volunteer__name">{{org.siglas}}</h3>
                         <div class="section-heading-separator section-heading-separator--small"></div>
-                        <p>SIMAS es una asociación civil sin fines de lucro comprometida en la construcción de formas de vida  democrática y sostenible para el mundo rural. </p>
+                        {{org.generalidades|safe|truncatewords:"15"}}
                         <ul class="list-inline round-social-icons mb30">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -338,44 +301,8 @@
                     </div>
                 </div><!--/.fund-volunteer-->
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".4s">
-                    <div class="fund-volunteer__photo-wrap">
-                        <img  src="/static/images/nuevo/logo3.png" class="img-circle fund-volunteer__photo" alt="volunteer">
-                    </div>
-                    <div class="fund-volunteer__text-content">
-                        <h3 class="fund-volunteer__name">ASDENIC</h3>
-                        <div class="section-heading-separator section-heading-separator--small"></div>
-                        <p>ASDENIC fue fundada en 1990, es un organismo de desarrollo local, con personería jurídica otorgada por la Asamblea Nacional de la República de Nicaragua.</p>
-                        <ul class="list-inline round-social-icons mb30">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                        <a href="#" class="btn">Leer más</a>
-                    </div>
-                </div><!--/.fund-volunteer-->
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".6s">
-                    <div class="fund-volunteer__photo-wrap">
-                        <img  src="/static/images/nuevo/UNAG.jpg" class="img-circle fund-volunteer__photo" alt="volunteer">
-                    </div>
-                    <div class="fund-volunteer__text-content">
-                        <h3 class="fund-volunteer__name">UNAG</h3>
-                        <div class="section-heading-separator section-heading-separator--small"></div>
-                        <p>UNAG es uno de los gremios agropecuarios más grandes del país, el que reúne a los pequeños y medianos productores y ganaderos</p>
-                        <ul class="list-inline round-social-icons mb30">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                        <a href="#" class="btn">Leer más</a>
-                    </div>
-                </div><!--/.fund-volunteer-->
-            </div>
+            {% endfor %}
+            
         </div>
     </div>
 </section>

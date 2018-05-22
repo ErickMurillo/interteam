@@ -37,6 +37,6 @@ urlpatterns = [
     path('', notas.index),
     path('notas/', include('notas.urls')),
     # path('contrapartes/', include('contrapartes.urls')),
-    # path('agendas/', include('agendas.urls')),
+    path('eventos/', include('agendas.urls')),
     path('foros/', include('foros.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

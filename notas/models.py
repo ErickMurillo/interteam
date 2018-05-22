@@ -8,6 +8,7 @@ from django.template.defaultfilters import slugify
 # from south.modelsinspector import add_introspection_rules
 from ckeditor_uploader.fields import RichTextUploadingField
 from sorl.thumbnail import ImageField
+from taggit_autosuggest.managers import TaggableManager
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
@@ -21,6 +22,7 @@ class Notas(models.Model):
 	contenido = RichTextUploadingField()
 	fotos = fields.GenericRelation(Imagen)
 	adjuntos = fields.GenericRelation(Documentos)
+	tags = TaggableManager("Tags",help_text='Separar elementos con "," ', blank=True)
 
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 

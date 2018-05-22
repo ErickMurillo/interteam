@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'taggit',
     'taggit_autosuggest',
+    'el_pagination',
 ]
 
 SITE_ID = 1

@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/static/css/magnific-popup.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="/static/css/select2.min.css">
+    <!-- Countdown css-->
+   <link rel="stylesheet" href="/static/css/jquery.countdown.css">
     <!-- REVOLUTION SLIDER STYLES -->
     <link rel="stylesheet" type="text/css" href="/static/css/settings.css">
     <link rel="stylesheet" type="text/css" href="/static/css/layers.css">
@@ -57,9 +59,14 @@
                     </div>
                     <div class="col-sm-6 col-xs-6 text-right text-xs-center">
                         <ul class="footer-menu text-xs-center">
-                            <li><a href="/accounts/login/"><i class="fa fa-user"></i> Usuario</a></li>
+                          {% if user.is_authenticated %}
+                          <li><a href="/accounts/profile/"><i class="fa fa-user"></i> {{user.get_full_name|default:user.username}}</a></li>
+                          {% else %}
+                          <li><a href="/accounts/login/"><i class="fa fa-user"></i> Iniciar sesion</a></li>
+                          {% endif %}
+                            
                             <!-- <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li> -->
-                            <li><a href="#"><i class="fa fa-power-off"></i> Salir</a></li>
+                            <li><a href="/accounts/logout/"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,8 +102,8 @@
                     </div>
                     <nav id="easy-menu">
                         <ul class="menu-list">
-                            <li><a href="blog.html">Noticias</a></li>
-                            <li><a href="events.html">Eventos</a></li>
+                            <li><a href="/notas/">Noticias</a></li>
+                            <li><a href="/eventos/">Eventos</a></li>
                             <li><a href="causes.html">Contrapartes</a></li>
                             <li><a href="index.html">Galeria <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown">
@@ -119,8 +126,8 @@
         <div class="mobile-inner">
             <span class="mobile-menu-close"><i class="icon-icomooon-close"></i></span>
             <ul class="menu-accordion">
-                <li><a href="blog.html">Noticias</a></li>
-                <li><a href="events.html">Eventos</a></li>
+                <li><a href="/notas/">Noticias</a></li>
+                <li><a href="/eventos/">Eventos</a></li>
                 <li><a href="causes.html">Contrapartes</a>
                 <li><a href="causes.html" class="has-submenu">Galeria<i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown">
@@ -349,7 +356,14 @@
     <script src="/static/js/revolution/extensions/revolution.extension.navigation.min.js"></script>
     <script src="/static/js/revolution/extensions/revolution.extension.slideanims.min.js"></script>
     <script src="/static/js/revolution-active.js"></script>
+    <!-- == Counter == -->
+    <script src="/static/js/jquery.waypoints.min.js"></script>
+    <script src="/static/js/jquery.counterup.min.js"></script>
+    <!-- == Countdown == -->
+    <script src="/static/js/jquery.plugin.js"></script>
+    <script src="/static/js/jquery.countdown.min.js"></script>
     <!-- == custom Js File == -->
     <script src="/static/js/custom.js"></script>
+    {% block extra_js %}{% endblock extra_js %}
     </body>
 </html>

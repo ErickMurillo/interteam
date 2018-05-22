@@ -152,36 +152,23 @@
                         </div>
                         <div class="widget__text-content">
                             <div class="upcomming-event-carousel" id="upcomming-event-carousel">
-                                <div class="upcomming-event-carousel__item">
+                                {% for evento in eventos %}
+                                    <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/IMG_1027.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Validación de plataforma CAFOD</h4></a>
+                                        <a href="#">
+                                            {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
+                                            {% empty %}
+                                            <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                            {% endthumbnail %}
+                                        <h4 class="upcomming-event-carousel__title">{{evento.evento}}</h4></a>
 
                                     </div>
                                     <div class="event-counter">
-                                        <div id="event-counter-one" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
+                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
                                     </div>
                                 </div><!--/.upcomming-event-carousel__item-->
-                                <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Capacitación sobre Doctrina Social</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-two" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
-                                <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/IMG_0897.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Reuniòn de Junta Directiva</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-three" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -239,17 +226,10 @@
                         <div class="widget__heading">
                             <h4 class="widget__title">TAG</h4>
                         </div>
-                        <div class="widget__text-content">
-                            <a href="#">acciones</a>
-                            <a href="#">agricultura</a>
-                            <a href="#">agua</a>
-                            <a href="#">cambio climatico</a>
-                            <a href="#">clima</a>
-                            <a href="#">cultivo</a>
-                            <a href="#">derechos</a>
-                            <a href="#">energia</a>
-                            <a href="#">familias</a>
-                            <a href="#">igualdad</a>
+                        <div class="widget__text-content"> 
+                            {% for tag in nota.tags.all %}
+                                <a href="#">{{ tag.name }}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </aside>

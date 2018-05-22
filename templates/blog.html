@@ -1,7 +1,22 @@
 {% extends "base.html" %}
+{% load thumbnail %}
+{% load el_pagination_tags %}
 
 {% block content %}
-    <div class="banner-area banner-area--blog all-text-white text-center">
+<style type="text/css">
+.fund-pagination span {
+    height: 40px;
+    display: inline-block;
+    width: 40px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 100%;
+    color: #1e3042;
+    margin-right: 15px;
+}
+</style>
+<div class="banner-area banner-area--blog all-text-white text-center">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -19,10 +34,16 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="row row-eq-rs-height">
-                    <div class="col-sm-6 col-xs-12">
+                    {% paginate 6 notas_list %}
+                    {% for nota in notas_list %}
+                        <div class="col-sm-6 col-xs-12">
                         <div class="blog-post">
                             <div class="blog-post__thumbnail-wrap">
-                                <img src="http://cafodca.org/uploads/fotos/descarga.380x250.jpg" alt="blog">
+                                {% thumbnail nota.foto "380x250" crop="center" as im %}
+                                    <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="">
+                                {% empty %}
+                                <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                {% endthumbnail %}
                                 <div class="blog-post__like-comment">
                                     <span><i class="fa fa-comments"></i>22 Comentarios</span>
                                     <span>|</span>
@@ -30,126 +51,23 @@
                                 </div>
                             </div>
                             <div class="blog-post__text-content">
-                                <h4 class="blog-post__title heading-label-four"><a href="#">Oficial de Proyectos visita fincas agro ecológicas en Honduras</a></h4>
+                                <h4 class="blog-post__title heading-label-four"><a href="{% url "detalle-notas" nota.slug %}">{{nota.titulo}}</a></h4>
                                 <div class="blog-post__meta-info">
-                                    <span class="small-text"><i class="fa fa-user base-color"></i>Organización</span>
-                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 Abril 2018</span>
+                                    <span class="small-text"><i class="fa fa-user base-color"></i>{{nota.user.userprofile.contraparte.siglas}}</span>
+                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>{{nota.fecha}}</span>
                                 </div>
-                                <p>El oficial de Proyectos de la agencia de cooperación Cafod, en Nicaragua, Winston Berríos y Darío Keller  investigador de cafod de la oficina principal en Londres... </p>
-                                <a href="#" class="btn">Leer más</a>
+                                <p>{{nota.contenido|safe|truncatewords:20}}</p>
+                                <a href="{% url "detalle-notas" nota.slug %}" class="btn">Leer más</a>
                             </div>
                         </div><!--/.blog-post-->
                     </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="blog-post">
-                            <div class="blog-post__thumbnail-wrap">
-                                <img src="http://cafodca.org/uploads/fotos/keller_1.380x250.jpg" alt="blog">
-                                <div class="blog-post__like-comment">
-                                    <span><i class="fa fa-comments"></i>22 Comentarios</span>
-                                    <span>|</span>
-                                    <span><i class="fa fa-eye"></i>105 Vistas</span>
-                                </div>
-                            </div>
-                            <div class="blog-post__text-content">
-                                <h4 class="blog-post__title heading-label-four"><a href="#">Encuentro Regional del Programa Medios de Vida Sostenible - CAFOD</a></h4>
-                                <div class="blog-post__meta-info">
-                                    <span class="small-text"><i class="fa fa-user base-color"></i>Organización</span>
-                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 Abril 2018</span>
-                                </div>
-                                <p>Los días 10 y 11 de abril, se llevó a cabo en Siguatepeque, Honduras el Encuentro Regional de Medios de Vida Sostenible con Adaptación al Cambio Climático... </p>
-                                <a href="#" class="btn">Leer más</a>
-                            </div>
-                        </div><!--/.blog-post-->
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="blog-post">
-                            <div class="blog-post__thumbnail-wrap">
-                                <img src="http://cafodca.org/uploads/fotos/IMG_20180408_111712.380x250.jpg" alt="blog">
-                                <div class="blog-post__like-comment">
-                                    <span><i class="fa fa-comments"></i>22 Comentarios</span>
-                                    <span>|</span>
-                                    <span><i class="fa fa-eye"></i>105 Vistas</span>
-                                </div>
-                            </div>
-                            <div class="blog-post__text-content">
-                                <h4 class="blog-post__title heading-label-four"><a href="#">Pobladores afirman que no permitirán proyectos mineros</a></h4>
-                                <div class="blog-post__meta-info">
-                                    <span class="small-text"><i class="fa fa-user base-color"></i>Organización</span>
-                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 Abril 2018</span>
-                                </div>
-                                <p>Varios representantes de organizaciones populares de las comunidades de Toyos, El Aguacate, Las Delicias, Guaymas, Catrachos y otras del municipio... </p>
-                                <a href="#" class="btn">Leer más</a>
-                            </div>
-                        </div><!--/.blog-post-->
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="blog-post">
-                            <div class="blog-post__thumbnail-wrap">
-                                <img src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" alt="blog">
-                                <div class="blog-post__like-comment">
-                                    <span><i class="fa fa-comments"></i>22 Comentarios</span>
-                                    <span>|</span>
-                                    <span><i class="fa fa-eye"></i>105 Vistas</span>
-                                </div>
-                            </div>
-                            <div class="blog-post__text-content">
-                                <h4 class="blog-post__title heading-label-four"><a href="#">Mujeres de León identifican sus derechos</a></h4>
-                                <div class="blog-post__meta-info">
-                                    <span class="small-text"><i class="fa fa-user base-color"></i>Organización</span>
-                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 Abril 2018</span>
-                                </div>
-                                <p>El pasado 23 de marzo, dio inicio en el Reparto Utrecht del municipio de León el Plan de Formación de Género con la participación de 38 mujeres y 8 hombres... </p>
-                                <a href="#" class="btn">Leer más</a>
-                            </div>
-                        </div><!--/.blog-post-->
-                    </div>
-                    <!-- <div class="col-sm-6 col-xs-12">
-                        <div class="blog-post">
-                            <div class="blog-post__thumbnail-wrap">
-                                <img src="http://cafodca.org/uploads/fotos/descarga.380x250.jpg" alt="blog">
-                                <div class="blog-post__like-comment">
-                                    <span><i class="fa fa-comments"></i>22 Comentarios</span>
-                                    <span>|</span>
-                                    <span><i class="fa fa-eye"></i>105 Vistas</span>
-                                </div>
-                            </div>
-                            <div class="blog-post__text-content">
-                                <h4 class="blog-post__title heading-label-four"><a href="#">Oficial de Proyectos visita fincas agro ecológicas en Honduras</a></h4>
-                                <div class="blog-post__meta-info">
-                                    <span class="small-text"><i class="fa fa-user base-color"></i>Organización</span>
-                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 Abril 2018</span>
-                                </div>
-                                <p>El oficial de Proyectos de la agencia de cooperación Cafod, en Nicaragua, Winston Berríos y Darío Keller  investigador de cafod de la oficina principal en Londres... </p>
-                                <a href="#" class="btn">Leer más</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="blog-post">
-                            <div class="blog-post__thumbnail-wrap">
-                                <img src="http://cafodca.org/uploads/fotos/keller_1.380x250.jpg" alt="blog">
-                                <div class="blog-post__like-comment">
-                                    <span><i class="fa fa-comments"></i>22 Comentarios</span>
-                                    <span>|</span>
-                                    <span><i class="fa fa-eye"></i>105 Vistas</span>
-                                </div>
-                            </div>
-                            <div class="blog-post__text-content">
-                                <h4 class="blog-post__title heading-label-four"><a href="#">Encuentro Regional del Programa Medios de Vida Sostenible - CAFOD</a></h4>
-                                <div class="blog-post__meta-info">
-                                    <span class="small-text"><i class="fa fa-user base-color"></i>Organización</span>
-                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 Abril 2018</span>
-                                </div>
-                                <p>Los días 10 y 11 de abril, se llevó a cabo en Siguatepeque, Honduras el Encuentro Regional de Medios de Vida Sostenible con Adaptación al Cambio Climático... </p>
-                                <a href="#" class="btn">Leer más</a>
-                            </div>
-                        </div>
-                    </div> -->
+                    {% endfor %}
                 </div>
                 <div class="fund-pagination mb30">
-                    <a href="#" class="active">1</a>
+                    {% show_pages %}
+                    <!--<a href="#" class="active">1</a>
                     <a href="#">2</a>
-                    <a href="#" class="next">Siguiente</a>
+                    <a href="#" class="next">Siguiente</a>-->
                 </div>
             </div>
             <div class="col-md-4">
@@ -164,36 +82,23 @@
                         </div>
                         <div class="widget__text-content">
                             <div class="upcomming-event-carousel" id="upcomming-event-carousel">
-                                <div class="upcomming-event-carousel__item">
+                                {% for evento in eventos %}
+                                    <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/IMG_1027.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Validación de plataforma CAFOD</h4></a>
+                                        <a href="#">
+                                            {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
+                                            {% empty %}
+                                            <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                            {% endthumbnail %}
+                                        <h4 class="upcomming-event-carousel__title">{{evento.evento}}</h4></a>
 
                                     </div>
                                     <div class="event-counter">
-                                        <div id="event-counter-one" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
+                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
                                     </div>
                                 </div><!--/.upcomming-event-carousel__item-->
-                                <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Capacitación sobre Doctrina Social</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-two" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
-                                <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/IMG_0897.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Reuniòn de Junta Directiva</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-three" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -213,7 +118,7 @@
 
                         </div>
                     </div>
-                    <div class="widget widget--tags">
+                    <!--<div class="widget widget--tags">
                         <div class="widget__heading">
                             <h4 class="widget__title">TAG</h4>
                         </div>
@@ -229,7 +134,7 @@
                             <a href="#">familias</a>
                             <a href="#">igualdad</a>
                         </div>
-                    </div>
+                    </div>-->
                 </aside>
             </div>
         </div>
@@ -253,5 +158,4 @@
     </div>
 </div> -->
 {% endblock content %}
-
 
