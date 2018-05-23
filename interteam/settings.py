@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'contrapartes',
     'foros',
     'agendas',
+    'publicaciones',
 
     'ckeditor',
     'ckeditor_uploader',
@@ -102,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-ni'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Managua'
 
 USE_I18N = True
 

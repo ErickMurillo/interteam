@@ -8,6 +8,7 @@ from django.template import RequestContext
 from .models import *
 from agendas.models import *
 from contrapartes.models import *
+from publicaciones.models import *
 from .forms import *
 # from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -26,6 +27,8 @@ def index(request,template='index.html'):
     eventos = Agendas.objects.filter(publico=True).order_by('-inicio','-hora_inicio')[:4]
     paises = Pais.objects.all()
     contrapartes = Contraparte.objects.all()
+
+    publicaciones = Publicacion.objects.order_by('-id')[:3]
 
     return render(request, template, locals())
 

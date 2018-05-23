@@ -43,11 +43,15 @@
                         </div>
                         <div class="fund-event__main">
                             <div class="fund-event__image-content">
-                                <div class="fund-event__image-wrap">
-                                    <img src="http://cafodca.org/uploads/fotos/IMG_1027.380x250.JPG" class="fund-event__image" alt="">
+                                <div class="fund-event__image-wrap"> 
+                                    {% thumbnail nota.foto "380x250" crop="center" as im %}
+                                    <img class="fund-event__image" src="{{im.url}}" alt="">
+                                    {% empty %}
+                                    <img class="fund-event__image" src="http://via.placeholder.com/380x250" alt="">
+                                    {% endthumbnail %}
                                 </div>
                                 <div class="fund-event__text-content">
-                                    <h4 class="fund-event__title"><a href="#">{{evento.evento}}</a></h4>
+                                    <h4 class="fund-event__title"><a href="{% url "agenda-detail" evento.slug %}">{{evento.evento}}</a></h4>
                                     <div class="fund-event__time">
                                         <i class="fa fa-calendar fund-event__icon base-color"></i>{{evento.hora_inicio|time:"f A"}} - {{evento.hora_fin|time:"f A"}}
                                     </div>
@@ -56,7 +60,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p>Se presentará plataforma en Honduras y se aprovechará el momento para capacitar a las organizaciones en el manejo y uso de la plataforma para construcción colectiva de conocimiento.</p>
+                            {{evento.descripcion|safe|truncatewords:"35"}}
                         </div>
                     </div><!--/.fund-event-->
                     {% endfor %}
@@ -78,36 +82,23 @@
                         </div>
                         <div class="widget__text-content">
                             <div class="upcomming-event-carousel" id="upcomming-event-carousel">
-                                <div class="upcomming-event-carousel__item">
+                                {% for evento in prox_eventos %}
+                                    <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/IMG_1027.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Validación de plataforma CAFOD</h4></a>
+                                        <a href="#">
+                                            {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
+                                            {% empty %}
+                                            <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                            {% endthumbnail %}
+                                        <h4 class="upcomming-event-carousel__title">{{evento.evento}}</h4></a>
 
                                     </div>
                                     <div class="event-counter">
-                                        <div id="event-counter-one" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
+                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
                                     </div>
                                 </div><!--/.upcomming-event-carousel__item-->
-                                <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Capacitación sobre Doctrina Social</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-two" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
-                                <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="#"><img class="event-thumbnail" src="http://cafodca.org/uploads/fotos/IMG_0897.380x250.JPG" alt="up">
-                                        <h4 class="upcomming-event-carousel__title">Reuniòn de Junta Directiva</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-three" class="musica-counter-active" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -116,70 +107,30 @@
                             <h4 class="widget__title">ÚLTIMAS <span class="base-color">NOTICIAS</span></h4>
                         </div>
                         <div class="widget__text-content">
+                            {% for ultima_nota in ultimas_notas %}
                             <div class="widget-latest-causes">
                                 <div class="widget-latest-causes__image-wrap">
-                                    <a href="#"><img class="widget-latest-causes__thubnail" src="http://cafodca.org/uploads/fotos/descarga.380x250.jpg" alt=""></a>
+                                    <a href="{% url "detalle-notas" ultima_nota.slug %}">
+                                        {% thumbnail ultima_nota.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="">
+                                        {% empty %}
+                                        <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                        {% endthumbnail %}
+                                    </a>
                                 </div>
                                 <div class="widget-latest-causes__text-content">
-                                    <h4 class="widget-latest-causes__title"><a href="#">Visitas a Proyectos agro ecológicas.</a></h4>
+                                    <h4 class="widget-latest-causes__title"><a href="{% url "detalle-notas" ultima_nota.slug %}">{{ultima_nota.titulo}}</a></h4>
                                     <div class="widget-latest-causes__admin small-text">
                                         <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
-                                        <a href="#">Organización</a>
+                                        <a href="#">{{ultima_nota.user.userprofile.contraparte.siglas}}</a>
                                     </div>
                                     <div class="widget-latest-causes__time text-mute">
-                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> 25 Abril 2018</span>
+                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> {{ultima_nota.fecha}}</span>
 
                                     </div>
                                 </div>
                             </div><!--/.widget-latest-causes-->
-                            <div class="widget-latest-causes">
-                                <div class="widget-latest-causes__image-wrap">
-                                    <a href="#"><img class="widget-latest-causes__thubnail" src="http://cafodca.org/uploads/fotos/descarga.380x250.jpg" alt=""></a>
-                                </div>
-                                <div class="widget-latest-causes__text-content">
-                                    <h4 class="widget-latest-causes__title"><a href="#">Encuentro Regional Medios de Vida Sostenible</a></h4>
-                                    <div class="widget-latest-causes__admin small-text">
-                                        <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
-                                        <a href="#">Organización</a>
-                                    </div>
-                                    <div class="widget-latest-causes__time text-mute">
-                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> 25 Abril 2018</span>
-
-                                    </div>
-                                </div>
-                            </div><!--/.widget-latest-causes-->
-                            <div class="widget-latest-causes">
-                                <div class="widget-latest-causes__image-wrap">
-                                    <a href="#"><img class="widget-latest-causes__thubnail" src="http://cafodca.org/uploads/fotos/IMG_20180408_111712.380x250.jpg" alt=""></a>
-                                </div>
-                                <div class="widget-latest-causes__text-content">
-                                    <h4 class="widget-latest-causes__title"><a href="#">Pobladores   no permitirán proyectos mineros</a></h4>
-                                    <div class="widget-latest-causes__admin small-text">
-                                        <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
-                                        <a href="#">Organización</a>
-                                    </div>
-                                    <div class="widget-latest-causes__time text-mute">
-                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> 25 Abril 2018</span>
-
-                                    </div>
-                                </div>
-                            </div><!--/.widget-latest-causes-->
-                            <div class="widget-latest-causes">
-                                <div class="widget-latest-causes__image-wrap">
-                                    <a href="#"><img class="widget-latest-causes__thubnail" src="http://cafodca.org/uploads/fotos/foto_taller_mujeres_2.380x250.JPG" alt=""></a>
-                                </div>
-                                <div class="widget-latest-causes__text-content">
-                                    <h4 class="widget-latest-causes__title"><a href="#">Mujeres de León identifican sus derechos</a></h4>
-                                    <div class="widget-latest-causes__admin small-text">
-                                        <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
-                                        <a href="#">Organización</a>
-                                    </div>
-                                    <div class="widget-latest-causes__time text-mute">
-                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> 25 Abril 2018</span>
-
-                                    </div>
-                                </div>
-                            </div><!--/.widget-latest-causes-->
+                            {% endfor %}
                         </div>
                     </div>
                 </aside>

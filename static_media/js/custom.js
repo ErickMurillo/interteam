@@ -250,7 +250,7 @@
 			dataValueDay = $(musicaEventId).attr('data-value-day'),
 			dataValueZone = $(musicaEventId).attr('data-value-zone');
             $(musicaEventId).countdown({
-				labels: ['Years', 'Months', 'Weeks', 'Days', 'Hours', 'Mins', 'Secs'],
+				labels: ['Años', 'Meses', 'Semanas', 'Días', 'Horas', 'Mins', 'Secs'],
 		        until: $.countdown.UTCDate(dataValueZone, dataValueYear, dataValueMonth, dataValueDay),
 		        format: 'dHMS',
 		        padZeroes: true
