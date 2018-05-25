@@ -23,6 +23,7 @@ class Notas(models.Model):
 	fotos = fields.GenericRelation(Imagen)
 	adjuntos = fields.GenericRelation(Documentos)
 	tags = TaggableManager("Tags",help_text='Separar elementos con "," ', blank=True)
+	vistas = models.IntegerField(editable=False,default=0)
 
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 

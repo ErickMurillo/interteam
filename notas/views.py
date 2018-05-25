@@ -56,6 +56,8 @@ def lista_notas(request,template='blog.html'):
 
 def detalle_notas(request, slug, template='blog-details.html'):
     nota = get_object_or_404(Notas, slug=slug)
+    nota.vistas = nota.vistas + 1
+    nota.save() 
     ultimas_notas = Notas.objects.exclude(slug = slug).order_by('-fecha','-id')[:4]
     hoy = datetime.date.today()
     eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
