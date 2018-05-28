@@ -73,6 +73,9 @@
                         </div><!--/.blog-post-->
                     </div>
                     {% endfor %}
+                    {% if not notas_list %}
+                        <p>No hay resultados</p>
+                    {% endif %}
                 </div>
                 <div class="fund-pagination mb30">
                     {% show_pages %}
@@ -119,12 +122,9 @@
                         </div>
                         <div class="widget__text-content">
                             <ul>
-                                <li><a href="#" class="pdr10">Cambio climatico</a><span class="post-count">4</span></li>
-                                <li><a href="#" class="pdr10">Economia Solidaria</a><span class="post-count">7</span></li>
-                                <li><a href="#" class="pdr10">Educación</a><span class="post-count">5</span></li>
-                                <li><a href="#" class="pdr10">Medios de vida</a><span class="post-count">3</span></li>
-                                <li><a href="#" class="pdr10">Minería</a><span class="post-count">2</span></li>
-                                <li><a href="#" class="pdr10">Promotoria rural </a><span class="post-count">2</span></li>
+                                {% for x,y in dic_temas.items %}
+                                    <li><a href="{% url "filtro-temas" x %}" class="pdr10">{{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
                             </ul>
 
                         </div>

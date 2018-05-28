@@ -22,68 +22,66 @@ from django.contrib.sites.models import Site
 
 def index(request,template='index.html'):
 
-    notas = Notas.objects.all().order_by('-fecha','-id')[:6]
-    notas2 = Notas.objects.all().order_by('-fecha','-id')[1:9]
-    eventos = Agendas.objects.filter(publico=True).order_by('-inicio','-hora_inicio')[:4]
-    paises = Pais.objects.all()
-    contrapartes = Contraparte.objects.all()
+	notas = Notas.objects.all().order_by('-fecha','-id')[:6]
+	notas2 = Notas.objects.all().order_by('-fecha','-id')[1:9]
+	eventos = Agendas.objects.filter(publico=True).order_by('-inicio','-hora_inicio')[:4]
+	paises = Pais.objects.all()
+	contrapartes = Contraparte.objects.all()
 
-    publicaciones = Publicacion.objects.order_by('-id')[:3]
+	publicaciones = Publicacion.objects.order_by('-id')[:3]
 
-    return render(request, template, locals())
+	return render(request, template, locals())
 
 def logout_page(request):
   logout(request)
   return HttpResponseRedirect('/')
 
 def lista_notas(request,template='blog.html'):
-    notas_list = Notas.objects.all().order_by('-fecha','-id')
-    hoy = datetime.date.today()
-    eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
-    paises = Pais.objects.all()
+	notas_list = Notas.objects.all().order_by('-fecha','-id')
+	hoy = datetime.date.today()
+	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
+	paises = Pais.objects.all()
 
-    paginator = Paginator(notas_list, 4)
-
-    page = request.GET.get('page')
-    try:
-        notas = paginator.page(page)
-    except PageNotAnInteger:
-        notas = paginator.page(1)
-    except EmptyPage:
-        notas = paginator.page(paginator.num_pages)
-
-    return render(request, template, locals())
+	return render(request, template, locals())
 
 def detalle_notas(request, slug, template='blog-details.html'):
-    nota = get_object_or_404(Notas, slug=slug)
-    nota.vistas = nota.vistas + 1
-    nota.save() 
-    ultimas_notas = Notas.objects.exclude(slug = slug).order_by('-fecha','-id')[:4]
-    hoy = datetime.date.today()
-    eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
-    dic_temas = {}
-    for tema in Temas.objects.all():
-        count = Notas.objects.filter(temas = tema).count()
-        dic_temas[tema] = count
-    print(dic_temas)
+	nota = get_object_or_404(Notas, slug=slug)
+	nota.vistas = nota.vistas + 1
+	nota.save() 
+	ultimas_notas = Notas.objects.exclude(slug = slug).order_by('-fecha','-id')[:4]
+	hoy = datetime.date.today()
+	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
 
-    if request.method == 'POST':
-        form = ComentarioForm(request.POST)
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Notas.objects.filter(temas = tema).count()
+		dic_temas[tema] = count
 
-        if form.is_valid():
-            form_uncommited = form.save(commit=False)
-            form_uncommited.user = request.user
-            form_uncommited.nota = nota
-            form_uncommited.save()
 
-        return HttpResponseRedirect('/notas/%d/#cmt%d' % (nota.id,form.instance.id) )
+	if request.method == 'POST':
+		form = ComentarioForm(request.POST)
 
-    else:
-        form = ComentarioForm()
+		if form.is_valid():
+			form_uncommited = form.save(commit=False)
+			form_uncommited.user = request.user
+			form_uncommited.nota = nota
+			form_uncommited.save()
 
-    return render(request, template, locals()) 
+		return HttpResponseRedirect('/notas/%d/#cmt%d' % (nota.id,form.instance.id) )
+
+	else:
+		form = ComentarioForm()
+
+	return render(request, template, locals()) 
 
 def filtro_temas(request, temas, template='blog.html'):
-    notas_list = Notas.objects.filter(temas__nombre = temas).order_by('-fecha','-id')
+	notas_list = Notas.objects.filter(temas__nombre = temas).order_by('-fecha','-id')
+	hoy = datetime.date.today()
+	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
 
-    return render(request, template, locals()) 
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Notas.objects.filter(temas = tema).count()
+		dic_temas[tema] = count
+
+	return render(request, template, locals()) 
