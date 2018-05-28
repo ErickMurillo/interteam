@@ -9,19 +9,34 @@ from django.template.defaultfilters import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from sorl.thumbnail import ImageField
 from taggit_autosuggest.managers import TaggableManager
+from embed_video.fields import EmbedVideoField
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
 # Create your models here.
+class Temas(models.Model):
+	nombre = models.CharField(max_length=250)
+
+	class Meta: 
+		verbose_name_plural = 'Temas'
+		verbose_name = 'Tema'
+
+	def __str__(self):
+		return self.nombre
+
+TIPO_CHOICES = ((1,'Foto'),(2,'Video'))
 
 class Notas(models.Model):
 	titulo = models.CharField(max_length=200)
+	tipo = models.IntegerField(choices=TIPO_CHOICES)
 	foto = ImageField(upload_to='notas/',null=True, blank=True)
+	video = EmbedVideoField('Video (url)',null=True, blank=True)
 	slug = models.SlugField(max_length=200,editable=False)
 	fecha = models.DateField('Fecha de publicación', auto_now_add=True)
 	contenido = RichTextUploadingField()
 	fotos = fields.GenericRelation(Imagen)
 	adjuntos = fields.GenericRelation(Documentos)
+	temas = models.ManyToManyField(Temas)
 	tags = TaggableManager("Tags",help_text='Separar elementos con "," ', blank=True)
 	vistas = models.IntegerField(editable=False,default=0)
 

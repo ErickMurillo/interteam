@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'taggit',
     'taggit_autosuggest',
     'el_pagination',
+    'embed_video',
 ]
 
 SITE_ID = 1

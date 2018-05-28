@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load el_pagination_tags %}
+{% load embed_video_tags %} 
 
 {% block content %}
 <style type="text/css">
@@ -85,7 +86,7 @@
                                 {% for evento in prox_eventos %}
                                     <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="#">
+                                        <a href="{% url "agenda-detail" evento.slug %}">
                                             {% thumbnail evento.foto "380x250" crop="center" as im %}
                                             <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
                                             {% empty %}
@@ -111,11 +112,21 @@
                             <div class="widget-latest-causes">
                                 <div class="widget-latest-causes__image-wrap">
                                     <a href="{% url "detalle-notas" ultima_nota.slug %}">
-                                        {% thumbnail ultima_nota.foto "380x250" crop="center" as im %}
-                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="">
-                                        {% empty %}
-                                        <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
-                                        {% endthumbnail %}
+                                        {% if ultima_nota.tipo == 1 %}
+                                            {% thumbnail ultima_nota.foto "380x250" crop="center" as im %}
+                                                <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+                                            {% empty %}   
+                                              <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                            {% endthumbnail %}
+                                          {% elif ultima_nota.tipo == 2 %}
+                                            {% video ultima_nota.video as my_video %}
+                                                {% thumbnail my_video.thumbnail "380x250" crop="center" as im %}
+                                                  <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+                                                {% empty %}   
+                                                  <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                                {% endthumbnail %}
+                                            {% endvideo %}
+                                          {% endif %}
                                     </a>
                                 </div>
                                 <div class="widget-latest-causes__text-content">

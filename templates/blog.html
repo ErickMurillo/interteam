@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load el_pagination_tags %}
+{% load embed_video_tags %}
 
 {% block content %}
 <style type="text/css">
@@ -39,11 +40,21 @@
                         <div class="col-sm-6 col-xs-12">
                         <div class="blog-post">
                             <div class="blog-post__thumbnail-wrap">
-                                {% thumbnail nota.foto "380x250" crop="center" as im %}
-                                    <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="">
-                                {% empty %}
-                                <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
-                                {% endthumbnail %}
+                                {% if nota.tipo == 1 %}
+                                    {% thumbnail nota.foto "380x250" crop="center" as im %}
+                                        <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">
+                                    {% empty %}   
+                                      <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                    {% endthumbnail %}
+                                  {% elif nota.tipo == 2 %}
+                                    {% video nota.video as my_video %}
+                                        {% thumbnail my_video.thumbnail "380x250" crop="center" as im %}
+                                          <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+                                        {% empty %}   
+                                          <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                        {% endthumbnail %}
+                                    {% endvideo %}
+                                  {% endif %}
                                 <div class="blog-post__like-comment">
                                     <span><i class="fa fa-comments"></i>22 Comentarios</span>
                                     <span>|</span>
@@ -85,7 +96,7 @@
                                 {% for evento in eventos %}
                                     <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="#">
+                                        <a href="{% url "agenda-detail" evento.slug %}">
                                             {% thumbnail evento.foto "380x250" crop="center" as im %}
                                             <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
                                             {% empty %}

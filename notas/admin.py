@@ -26,3 +26,4 @@ class NotasAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Notas, NotasAdmin)
+admin.site.register(Temas)

@@ -61,6 +61,11 @@ def detalle_notas(request, slug, template='blog-details.html'):
     ultimas_notas = Notas.objects.exclude(slug = slug).order_by('-fecha','-id')[:4]
     hoy = datetime.date.today()
     eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
+    dic_temas = {}
+    for tema in Temas.objects.all():
+        count = Notas.objects.filter(temas = tema).count()
+        dic_temas[tema] = count
+    print(dic_temas)
 
     if request.method == 'POST':
         form = ComentarioForm(request.POST)
@@ -75,5 +80,10 @@ def detalle_notas(request, slug, template='blog-details.html'):
 
     else:
         form = ComentarioForm()
+
+    return render(request, template, locals()) 
+
+def filtro_temas(request, temas, template='blog.html'):
+    notas_list = Notas.objects.filter(temas__nombre = temas).order_by('-fecha','-id')
 
     return render(request, template, locals()) 
