@@ -347,16 +347,17 @@
             </div>
             <div class="col-md-6">
                 <div class="about-us-text-content mb30">
-                    <h4>PROPÓSITO</h4>
-                    <p>El Clúster “Seguridad alimentaria y generación de ingresos" esta conformado por más de 20 organizaciones copartes establecidas en la zona seca central en el norte de Nicaragua, de los departamentos Madriz, Las Segovias, Jinotega, Matagalpa y Estelí.</p>
-                    <p>El Clúster tiene como propósito desarrollar soluciones conjuntas para la seguridad alimentaria. Se promueve el intercambiaron conocimientos y experiencias, además de desarrollarse nuevos conceptos y proyectos, donde las familias campesinas son el grupo meta de enlace para todas las organizaciones.</p>
-                    <!-- <ul class="fund-arrow-left-list pdb10">
-                        <li>1.  La adaptación al cambio climático y la generación de perspectivas en los negocios de las familias campesinas.</li>
-                        <li>2.  El incremento de los ingresos familiares en los negocios de familias campesinas de la zona.</li>
-                        <li>3.  El fortalecimiento de los gremios y organizaciones que apoyan a los negocios de familias campesinas en la zona seca</li>
-                    </ul> -->
+                  {% load flatpages %}
+                  {% get_flatpages as flatpages %}
+                    {% for page in flatpages %}
+                      {% if page.url == '/proposito/' %}
+                          <h4>{{page.title}}</h4>
+                          <p>{{page.content|safe|truncatewords:'90'}}</p>
                   
-                    <a href="#" class="btn base-bg">Leer más</a>
+                          <a href="{{page.url}}" class="btn base-bg">Leer más</a>
+                      {% endif %} 
+                  {% endfor %}
+                    
                 </div>
             </div>
         </div>
