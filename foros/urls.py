@@ -17,7 +17,6 @@ urlpatterns = [
     # re_path(r'^borrar/(?P<id>\d+)/$', borrar_foro, name='borrar-foro'),
     # re_path(r'^ver/(?P<foro_id>\d+)/$', ver_foro, name='ver-foro'),
     # re_path(r'^ver_comentario/(?P<aporte_id>\d+)/$', comentario_foro, name='cometario-foro'),
-    re_path(r'^perfil/$', perfil, name='ver-perfil'),
     # re_path(r'^privado/nota/$', notas_personales, name='notas-personales'),
     # re_path(r'^privado/agenda/$', agenda_personales, name='agenda-personales'),
     # re_path(r'^privado/documento/$', documento, name='documentos'),
