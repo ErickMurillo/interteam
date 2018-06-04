@@ -8,6 +8,7 @@ from utils import *
 # from south.modelsinspector import add_introspection_rules
 from ckeditor_uploader.fields import RichTextUploadingField
 import datetime
+from django.core.validators import MaxLengthValidator
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
@@ -88,3 +89,10 @@ class Mensajero(models.Model):
 
     def __str__(self):
         return u'%s - %s ' % (self.fecha, self.mensaje)
+
+# class Ocupacion(models.Model):
+#     nombre 
+# class Opiniones(models.Model):
+#     nombre = models.CharField(max_length=250)
+#     opinion = models.TextField(validators=[MaxLengthValidator(500)])
+#     tipo = 
