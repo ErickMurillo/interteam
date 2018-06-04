@@ -1,4 +1,26 @@
 /*nuevo*/
+.btn-small-special{
+  padding: 5px 10px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    border-radius: 3px !important;
+    min-width: 40px !important;
+}
+.btn-danger {
+    color: #fff !important;
+    background-color: #d9534f !important;
+    border-color: #d43f3a !important;
+}
+.btn-success {
+    color: #fff !important;
+    background-color: #5cb85c !important;
+    border-color: #4cae4c !important;
+}
+.btn-info {
+    color: #fff !important;
+    background-color: #5bc0de !important;
+    border-color: #46b8da !important;
+}
 .simulacion{
   position: relative;
   top: -45px;
@@ -279,17 +301,17 @@ ul.social-btn li a {
 .text-faded {
     color: rgba(255, 255, 255, 0.7);
 }
+.info-publi{
+  font-size: 16px;
 
-/*------------------------------------------------------------------
-	Template Name:	The Fund
-    Template URI:
-    Description ::
-    Author:
-    Author URI:
-    License:
-    License URI:
-    Version: 1.0
-    */
+}
+.info-publi label{
+  font-weight: bold;
+}
+.info-publi div{
+  margin-bottom: 10px;
+}
+
 /*
     ========================================================================
     Index
@@ -3996,7 +4018,6 @@ hr {
   display: flex;
   width: 100%;
   position: relative;
-  margin-top: -20%;
   margin-bottom: 30px;
 }
 
@@ -4008,7 +4029,7 @@ hr {
 }
 
 .main-contact .contact-form {
-  width: 60%;
+  width: 100%;
   background: #fff;
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
   padding: 45px 30px;

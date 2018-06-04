@@ -7,8 +7,6 @@ from sorl.thumbnail import ImageField
 from utils import *
 # from south.modelsinspector import add_introspection_rules
 from ckeditor_uploader.fields import RichTextUploadingField
-import datetime
-from django.core.validators import MaxLengthValidator
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
@@ -53,6 +51,7 @@ class Contraparte(models.Model):
     sitio_web = models.URLField(blank=True, null=True)
     rss = models.CharField(max_length=200,blank=True, null=True)
     font_color = ColorField(blank=True,unique=True)
+    slug = models.SlugField(max_length=200,editable=False)
 
     class Meta:
         verbose_name_plural = "Contrapartes"
@@ -63,6 +62,10 @@ class Contraparte(models.Model):
 
     def get_absolute_url(self):
         return '/contrapartes/%d/' % (self.id,)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nombre)
+        return super(Contraparte, self).save(*args, **kwargs)
 
 class UserProfile(models.Model):
     # This field is required.
@@ -89,10 +92,3 @@ class Mensajero(models.Model):
 
     def __str__(self):
         return u'%s - %s ' % (self.fecha, self.mensaje)
-
-# class Ocupacion(models.Model):
-#     nombre 
-# class Opiniones(models.Model):
-#     nombre = models.CharField(max_length=250)
-#     opinion = models.TextField(validators=[MaxLengthValidator(500)])
-#     tipo = 

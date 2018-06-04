@@ -39,4 +39,7 @@ urlpatterns = [
     # path('contrapartes/', include('contrapartes.urls')),
     path('eventos/', include('agendas.urls')),
     path('foros/', include('foros.urls')),
+    path('publicaciones/', notas.publicaciones),
+    path('organizaciones/', notas.organizaciones),
+    path('organizaciones/<slug>', notas.detalle_organizacion, name='detalle-organizacion'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

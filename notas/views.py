@@ -85,3 +85,18 @@ def filtro_temas(request, temas, template='blog.html'):
 		dic_temas[tema] = count
 
 	return render(request, template, locals()) 
+
+def publicaciones(request, template='biblioteca.html'):
+	object_list = Publicacion.objects.order_by('-id')
+
+	return render(request, template, locals())
+
+def organizaciones(request, template='organizaciones.html'):
+	object_list = Contraparte.objects.order_by('nombre')
+
+	return render(request, template, locals())
+
+def detalle_organizacion(request, slug, template='detalle_org.html'):
+	object = get_object_or_404(Contraparte, slug=slug)
+
+	return render(request, template, locals())

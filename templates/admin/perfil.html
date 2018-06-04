@@ -11,23 +11,26 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900%7COpen+Sans:300,400,600,700,800" rel="stylesheet">
     <!-- Font Awesome css-->
-    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- Bootsrap css-->
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Magnific Popup-->
-    <link rel="stylesheet" href="/static/css/magnific-popup.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="/static/css/select2.min.css">
+    <link rel="stylesheet" href="css/select2.min.css">
     <!-- Countdown css-->
-   <link rel="stylesheet" href="/static/css/jquery.countdown.css">
+   <link rel="stylesheet" href="css/jquery.countdown.css">
     <!-- Animate css-->
-    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="css/animate.css">
     <!-- Style-->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Color Swhicher css-->
-	<link data-style="color-style" rel="stylesheet" href="/static/css/color-blue.css">
+	<link data-style="color-style" rel="stylesheet" href="css/color-blue.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
     <!-- Modernizr-->
     <script src="js/modernizr-2.8.3.min.js"></script>
+
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -353,65 +356,6 @@
                             </div>
                             
                         </div>
-                        <!-- <div class="blog-details-top mb40">
-                            <div class="blog-details-top__text-content">
-                                <a href="#" class="btn special-btn"><span class="fa fa-pencil base-color "></span> Redactar</a>
-                                <h3 class="blog-details__title ">Noticias de la organización</h3>
-                                <hr>
-                               
-                                
-                                <div class="row row-eq-rs-height">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="blog-post wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".2s">
-                                            <div class="blog-post__thumbnail-wrap">
-                                                <img src="images/blog/blog-1.jpg" alt="blog" width="100%">
-                                                <div class="blog-post__like-comment">
-                                                    <span><i class="fa fa-comments"></i>22 Comment</span>
-                                                    <span>|</span>
-                                                    <span><i class="fa fa-thumbs-up"></i>105 Likes</span>
-                                                </div>
-                                            </div>
-                                            <div class="blog-post__text-content">
-                                                <h4 class="blog-post__title heading-label-four"><a href="#">EDUCATION FOR CHILDREN</a></h4>
-                                                <div class="blog-post__meta-info">
-                                                    <span class="small-text"><i class="fa fa-user base-color"></i>Admin</span>
-                                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 January</span>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adip it scing elit, sed do eiusmod tempor incididu duut ut labore et dolore </p>
-
-                                                <a href="#" class="btn"><span class="fa fa-pencil base-color"></span> Editar</a>
-                                                <a href="#" class="btn"><span class="fa fa-eraser base-color"></span> Eliminar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="blog-post wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".4s">
-                                            <div class="blog-post__thumbnail-wrap">
-                                                <img src="images/blog/blog-2.jpg" alt="blog" width="100%">
-                                                <div class="blog-post__like-comment">
-                                                    <span><i class="fa fa-comments"></i>22 Comment</span>
-                                                    <span>|</span>
-                                                    <span><i class="fa fa-thumbs-up"></i>105 Likes</span>
-                                                </div>
-                                            </div>
-                                            <div class="blog-post__text-content">
-                                                <h4 class="blog-post__title heading-label-four"><a href="#">EDUCATION FOR CHILDREN</a></h4>
-                                                <div class="blog-post__meta-info">
-                                                    <span class="small-text"><i class="fa fa-user base-color"></i>Admin</span>
-                                                    <span class="small-text"><i class="fa fa-calendar base-color"></i>25 January</span>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adip it scing elit, sed do eiusmod tempor incididu duut ut labore et dolore </p>
-                                                <a href="#" class="btn"><span class="fa fa-pencil base-color"></span> Editar</a>
-                                                <a href="#" class="btn"><span class="fa fa-eraser base-color"></span> Eliminar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-                                
-                            </div>
-                        </div> -->
 
 
 
@@ -500,31 +444,49 @@
         </div>
         <a href="#" id="toTop" class="cd-top"><i class="fa fa-angle-up"></i></a>
     </footer>
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Eliminar Noticia</h4>
+                </div>
+                <div class="modal-body">
+                    La nota "Nombre de la noticia" se eliminara permanentemente.
+                    ¿Esta seguro que desea eliminar la nota?
+                </div>
+                <div class="modal-footer">
+
+                    <a type="button" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- // End Footer  -->
     <!-- == jQuery Librery == -->
-    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
     <!-- == Bootsrap js File == -->
-    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- == mixitup == -->
-    <script src="/static/js/mixitup.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
     <!-- == Select 2 == -->
-    <script src="/static/js/select2.min.js"></script>
+    <script src="js/select2.min.js"></script>
     <!-- == Select 2 == -->
-    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script src="js/jquery.colorbox-min.js"></script>
     <!-- == Slick == -->
-    <script src="/static/js/slick.min.js"></script>
+    <script src="js/slick.min.js"></script>
     <!-- == Counter == -->
-    <script src="/static/js/jquery.waypoints.min.js"></script>
-    <script src="/static/js/jquery.counterup.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
     <!-- == Countdown == -->
-    <script src="/static/js/jquery.plugin.js"></script>
-    <script src="/static/js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.plugin.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
     <!-- == Google Maps == -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBjaOVpxq-vyWE7EOrUjmYsDdxRSrlar08"></script>
-    <script src="/static/js/jquery.mapit.min.js"></script>
-    <script src="/static/js/map-init.js"></script>
+    <script src="js/jquery.mapit.min.js"></script>
+    <script src="js/map-init.js"></script>
     <!-- == custom Js File == -->
-    <script src="/static/js/custom.js"></script>
+    <script src="js/custom.js"></script>
     <script>
   
 
@@ -541,6 +503,18 @@ $(function() {
     
 
     
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example, #example2').dataTable( {
+            "order": [[ 3, "desc" ]],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            }
+        } );
+    } );
 </script>
     </body>
 </html>
