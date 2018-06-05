@@ -7,6 +7,7 @@ from sorl.thumbnail import ImageField
 from utils import *
 # from south.modelsinspector import add_introspection_rules
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.template.defaultfilters import slugify
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 

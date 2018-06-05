@@ -257,9 +257,9 @@
                 <div class="text-center pdb35 wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
                     <ul class="list-inline filter-options">
                         <li><a href="#!" class="filter-options__item filter btn active" data-filter=".all">Todos</a></li>
-                        <li><a href="#!" class="filter-options__item filter btn" data-filter=".charity">Ingreso</a></li>
-                        <li><a href="#!" class="filter-options__item filter btn" data-filter=".children">Clima</a></li>
-                        <li><a href="#!" class="filter-options__item filter btn" data-filter=".natureal">Alimentación</a></li>
+                        {% for x in galerias.keys %}
+                          <li><a href="#!" class="filter-options__item filter btn" data-filter=".{{x.id}}">{{x}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -267,54 +267,21 @@
         <div class="row wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
             <div class="col-md-12">
                 <div class="row row-eq-height" id="mixitup-grid">
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
+
+                    {% for x,y in galerias.items %}
+                      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix {{x.id}} all" style="display: inline-block;" data-bound="">
                         <a class="gallery-item pr  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="/static/images/home/popup/gallery-1.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/d3/0f/d30f53ca6f12700df74c476809a26d21.jpg" style="display: inline;">
+
+                            {% thumbnail y.0.portada "300x160" crop="center" as im %}
+                                <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline;" alt="">
+                            {% empty %}
+                                <img class="gallery-item__photo lazy" src="http://via.placeholder.com/300x160" style="display: inline;" alt="">
+                            {% endthumbnail %}
+
                             <div class="loader loder-hide"></div>
                         </a><!--/.portfolio-item-->
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity children natureal" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".4s" href="/static/images/home/popup/gallery-2.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/da/7c/da7c0c8cb1cebdb241d3de43d6d49abf.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all children natureal" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".6s" href="/static/images/home/popup/gallery-3.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/af/5a/af5a49a57fbc612c60bd0c0c84798b8d.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity children" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".8s" href="/static/images/home/popup/gallery-4.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/a6/e1/a6e1e3e931ea08a763661391f1146fe0.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all children natureal" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="/static/images/home/popup/gallery-5.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/cb/e6/cbe60a152bd6d67f81bae74b12fb5ada.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity children" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".4s" href="/static/images/home/popup/gallery-6.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/e1/1a/e11ae8bf1e2e8dc923c5a9ae62340ee3.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".6s" href="/static/images/home/popup/gallery-7.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/52/95/5295f788e3bf58d8726f20a2087e1ac9.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all children natureal" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".8s" href="/static/images/home/popup/gallery-8.jpg">
-                            <img class="gallery-item__photo lazy" src="http://www.simas.org.ni/media/cache/d9/a0/d9a0f7b72a19b0b3d5407a710abfd91b.jpg" style="display: inline;">
-                            <div class="loader loder-hide"></div>
-                        </a><!--/.portfolio-item-->
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

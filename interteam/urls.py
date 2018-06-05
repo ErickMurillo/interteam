@@ -36,7 +36,7 @@ urlpatterns = [
                             name='password-change'),
     path('', notas.index),
     path('notas/', include('notas.urls')),
-    # path('contrapartes/', include('contrapartes.urls')),
+    path('contrapartes/', include('contrapartes.urls')),
     path('eventos/', include('agendas.urls')),
     path('foros/', include('foros.urls')),
     path('publicaciones/', notas.publicaciones),
