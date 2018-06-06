@@ -39,6 +39,7 @@ urlpatterns = [
     path('contrapartes/', include('contrapartes.urls')),
     path('eventos/', include('agendas.urls')),
     path('foros/', include('foros.urls')),
+    path('galerias/', include('galerias.urls')),
     path('publicaciones/', notas.publicaciones),
     path('organizaciones/', notas.organizaciones),
     path('organizaciones/<slug>', notas.detalle_organizacion, name='detalle-organizacion'),

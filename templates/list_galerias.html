@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load el_pagination_tags %}
+
+{% block content %}
+<style type="text/css">
+.fund-pagination span {
+    height: 40px;
+    display: inline-block;
+    width: 40px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 100%;
+    color: #1e3042;
+    margin-right: 15px;
+}
+</style>
+<div class="banner-area banner-area--blog all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">GALERIA</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li>Galerias imagenes </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>	
+
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="row">
+            <form class="form-horizontal" action='.' method='GET'>
+                  <select name="tematica" class="form-control">
+                    <option value="">------</option>
+                    {% for tema in tematicas %}
+                        <option value="{{tema.id}}">{{tema}}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="submit" class="btn btn-success">Consultar</button>
+                </form>
+            <div class="col-md-8">
+                <div class="row row-eq-rs-height">
+                	{% paginate 6 object_list %}
+                	{% for object in object_list %}
+            			{% thumbnail object.portada "380x250" crop="center" as im %}
+                            <img src="{{im.url}}" class="" alt="">
+                        {% empty %}   
+                          <img src="http://via.placeholder.com/380x250" class="" alt="">
+                        {% endthumbnail %}
+                		<a href="{% url 'detalle-galerias-img' object.id %}">{{object.titulo}}</a>
+                	{% endfor %}
+                </div>
+            </div>
+            <div class="fund-pagination mb30">
+                {% show_pages %} 
+            </div>
+        </div>
+    </div>
+</div>	
+{% endblock content %}

@@ -37,8 +37,6 @@ def index(request,template='index.html'):
 		galeria = GaleriaImagenes.objects.filter(tematica = x).order_by('-id')[:2]
 		galerias[x] = galeria
 
-	print(galerias)
-
 	return render(request, template, locals())
 
 def logout_page(request):
@@ -50,6 +48,11 @@ def lista_notas(request,template='blog.html'):
 	hoy = datetime.date.today()
 	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
 	paises = Pais.objects.all()
+
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Notas.objects.filter(temas = tema).count()
+		dic_temas[tema] = count
 
 	return render(request, template, locals())
 
