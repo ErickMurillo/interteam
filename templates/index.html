@@ -382,90 +382,28 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="fund-testimonial-carousel">
+                  {% for opinion in opiniones %}
                     <div class="fund-testimonial">
                         <div class="fund-testimonial__quote base-bg">
-                            Gracias en nombre de cada uno de los que disfrutaron de su ayuda y por las sonrisas que en medio del desastre ustedes nos ayudaron a arrancar a nuestros hermanos.
+                            {{opinion.opinion}}
                         </div>
                         <div class="fund-testimonial__author">
                             <div class="fund-testimonial__author-image">
-                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" alt="">
+                                {% thumbnail opinion.foto "128x128" crop="center" as im %}
+                                    <img class="" src="{{im.url}}" alt="">
+                                {% empty %}
+                                    <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-128.png" alt="">
+                                {% endthumbnail %}
+                                
                             </div>
                             <div class="fund-testimonial__author-text">
-                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
-                                <span class="fund-testimonial__designation">Productor</span>
+                                <h4 class="fund-testimonial__author-name">{{opinion.nombre|upper}}</h4>
+                                <span class="fund-testimonial__designation">{{opinion.ocupacion}}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="fund-testimonial">
-                        <div class="fund-testimonial__quote base-bg">
-                            Queremos expresarle lo felicidad de estar viviendo en una casa muy bonita, que gracias a Dios y a la ayuda de ustedes, ya tenemos una vivienda permanente.
-                        </div>
-                        <div class="fund-testimonial__author">
-                            <div class="fund-testimonial__author-image">
-                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-128.png" alt="">
-                            </div>
-                            <div class="fund-testimonial__author-text">
-                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
-                                <span class="fund-testimonial__designation">Productor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fund-testimonial">
-                        <div class="fund-testimonial__quote base-bg">
-                            Queremos agradecerles por el apoyo y colaboración que han realizado con nuestra comunidad con la aprobación del proyecto y ejecución para las construcciones.
-                        </div>
-                        <div class="fund-testimonial__author">
-                            <div class="fund-testimonial__author-image">
-                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-128.png" alt="">
-                            </div>
-                            <div class="fund-testimonial__author-text">
-                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
-                                <span class="fund-testimonial__designation">Productor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fund-testimonial">
-                        <div class="fund-testimonial__quote base-bg">
-                            Gracias en nombre de cada uno de los que disfrutaron de su ayuda y por las sonrisas que en medio del desastre ustedes nos ayudaron a arrancar a nuestros hermanos.
-                        </div>
-                        <div class="fund-testimonial__author">
-                            <div class="fund-testimonial__author-image">
-                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" alt="">
-                            </div>
-                            <div class="fund-testimonial__author-text">
-                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
-                                <span class="fund-testimonial__designation">Productor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fund-testimonial">
-                        <div class="fund-testimonial__quote base-bg">
-                            Queremos expresarle lo felicidad de estar viviendo en una casa muy bonita, que gracias a Dios y a la ayuda de ustedes, ya tenemos una vivienda permanente.
-                        </div>
-                        <div class="fund-testimonial__author">
-                            <div class="fund-testimonial__author-image">
-                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-128.png" alt="">
-                            </div>
-                            <div class="fund-testimonial__author-text">
-                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
-                                <span class="fund-testimonial__designation">Productor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fund-testimonial">
-                        <div class="fund-testimonial__quote base-bg">
-                            Queremos agradecerles por el apoyo y colaboración que han realizado con nuestra comunidad con la aprobación del proyecto y ejecución para las construcciones.
-                        </div>
-                        <div class="fund-testimonial__author">
-                            <div class="fund-testimonial__author-image">
-                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/7_avatar-128.png" alt="">
-                            </div>
-                            <div class="fund-testimonial__author-text">
-                                <h4 class="fund-testimonial__author-name">JOSÉ ROCHA</h4>
-                                <span class="fund-testimonial__designation">Productor</span>
-                            </div>
-                        </div>
-                    </div>
+                  {% endfor %}
+                    
                 </div>
             </div>
         </div>

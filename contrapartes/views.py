@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
+from notas.models import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -24,4 +25,28 @@ def editar_contraparte(request, slug, template='admin/editar_contraparte.html'):
 
 	return render(request, template, locals())
 
+@login_required
+def notas_contraparte(request, template='admin/notaadmin.html'):
+	object_list = Notas.objects.filter(user_id = request.user.id)
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Notas.objects.filter(temas = tema).count()
+		dic_temas[tema] = count
+
+	return render(request, template, locals())
+
+@login_required
+def filtro_temas_contra(request, temas, template='admin/notaadmin.html'):
+	object_list = Notas.objects.filter(user_id = request.user.id,temas__nombre = temas)
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Notas.objects.filter(temas = tema).count()
+		dic_temas[tema] = count
+
+	return render(request, template, locals())
+
+@login_required
+def eliminar_notas_contraparte(request, slug):
+	nota = Notas.objects.filter(slug = slug).delete()
+	return HttpResponseRedirect('/contrapartes/notas/')
 

@@ -48,6 +48,19 @@
                         </div>
                     </div>
                     {{nota.contenido|safe}}
+
+                    <!--<h3>Imagenes</h3>
+                    {% for img in nota.fotos.all %}
+                        {% thumbnail img.foto "280x150" crop="center" as im %}
+                            <img src="{{im.url}}" alt="blog" >  
+                        {% endthumbnail %}
+                    {% endfor %}
+                    <br>
+                    <h3>Adjuntos</h3>
+                    {% for doc in nota.adjuntos.all %}
+                        <p><a href="/media/{{doc.adjunto}}">{{doc.nombre_doc}}</a></p>
+                    {% endfor %}-->
+
                     <br/><br/>
                     
                     <div class="social-icons ">
@@ -59,12 +72,12 @@
 
                         </ul>
                     </div>
-                    <div class="blog-details-bottom mt40">
+                    <!--<div class="blog-details-bottom mt40">
                         <div class="blog-details-navigation mt35 mb50">
                             <a href="#" class="previous-post">Anterior Noticia </a>
                             <a href="#" class="next-post pull-right" >Siguiente Noticia</a>
                         </div>
-                    </div>
+                    </div>-->
 <!--                         <div class="author-info">
                         <div class="author-info__image-wrap">
                             <img src="images/blog/author.jpg" class="img-circle" alt="">
