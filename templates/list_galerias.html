@@ -23,7 +23,7 @@
                 <h1 class="page-title">GALERIA</h1>
                 <ul class="fund-breadcumb">
                     <li><a href="/">Inicio</a> </li>
-                    <li>Galerias imagenes </li>
+                    <li>Galerias {% if request.path == '/galerias/imagenes/' %}imagenes{%else%}videos{% endif %} </li>
                 </ul>
             </div>
         </div>
@@ -51,7 +51,7 @@
                         {% empty %}   
                           <img src="http://via.placeholder.com/380x250" class="" alt="">
                         {% endthumbnail %}
-                		<a href="{% url 'detalle-galerias-img' object.id %}">{{object.titulo}}</a>
+                		<a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{%else%}{% url 'detalle-galerias-video' object.id %}{% endif %}">{{object.titulo}}</a>
                 	{% endfor %}
                 </div>
             </div>
