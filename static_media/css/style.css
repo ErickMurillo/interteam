@@ -311,7 +311,22 @@ ul.social-btn li a {
 .info-publi div{
   margin-bottom: 10px;
 }
+.gallery-costum {
+  border-radius: 0 !important;
 
+}
+.gallery-costum .blog-post__thumbnail-wrap{
+  border-radius: 0 !important;
+
+}
+.gallery-costum .blog-post__text-content{
+  padding: 10px;
+}
+.gallery-item-no {
+    border: 5px solid #fff;
+    margin-bottom: 30px;
+    display: block;
+}
 /*
     ========================================================================
     Index

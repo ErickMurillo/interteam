@@ -7,11 +7,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-title">GALERIA</h1>
+                <h1 class="page-title">{{object.titulo}}</h1>
                 <ul class="fund-breadcumb">
                     <li><a href="/">Inicio</a> </li>
                     <li><a href="/galerias/imagenes/">Galerias imagenes</a> </li>
-                    <li>Galeria</li>
+
                 </ul>
             </div>
         </div>
@@ -20,96 +20,23 @@
 
 <div class="main-content section-padding">
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-            	<div class="col-md-12">
-            		<h1>{{object.titulo}}</h1>
-            		{% thumbnail object.portada "380x250" crop="center" as im %}
-                    <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
-                    {% empty %}
-                    <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
-                    {% endthumbnail %}
-                    <h3>Tematica: {{object.tematica}}</h3>
-            	</div>
-            	<div class="col-md-12">
-            		{% for galeria in object.imagenes_set.all %}
-           				{% thumbnail galeria.imagen "380x250" crop="center" as im %}
-	                    <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="">
-	                    {% endthumbnail %}
-            		{% endfor %}
-            	</div>
-            </div>
-            <div class="col-md-4">
-                <aside class="sidebar">
-                    <div class="widget">
-                        <div class="widget__heading">
-                            <h4 class="widget__title">PRÓXIMOS <span class="base-color">EVENTOS</span></h4>
-                        </div>
-                        <div class="widget__text-content">
-                            <div class="upcomming-event-carousel" id="upcomming-event-carousel">
-                                {% for evento in eventos %}
-                                    <div class="upcomming-event-carousel__item">
-                                    <div class="image text-center">
-                                        <a href="{% url "agenda-detail" evento.slug %}">
-                                            {% thumbnail evento.foto "380x250" crop="center" as im %}
-                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
-                                            {% empty %}
-                                            <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
-                                            {% endthumbnail %}
-                                        <h4 class="upcomming-event-carousel__title">{{evento.evento}}</h4></a>
-
-                                    </div>
-                                    <div class="event-counter">
-                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
-                                    </div>
-                                </div><!--/.upcomming-event-carousel__item-->
-                                {% endfor %}
-                            </div>
-                        </div>
+        <div class="row wow " >
+            <div class="col-md-12">
+                <div class="row row-eq-height" id="mixitup-grid">
+                    {% for galeria in object.imagenes_set.all %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
+                        
+                        <a class="gallery-item pr  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="{{im.url}}">
+                            {% thumbnail galeria.imagen "380x250" crop="center" as im %}
+                                <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline;">
+                             {% endthumbnail %}
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                       
                     </div>
-                    
-                    <div class="widget">
-                        <div class="widget__heading">
-                            <h4 class="widget__title">ÚLTIMAS <span class="base-color">NOTICIAS</span></h4>
-                        </div>
-                        <div class="widget__text-content">
-                            {% for ultima_nota in ultimas_notas %}
-                            <div class="widget-latest-causes">
-                                <div class="widget-latest-causes__image-wrap">
-                                    <a href="{% url "detalle-notas" ultima_nota.slug %}">
-                                        {% if ultima_nota.tipo == 1 %}
-                                            {% thumbnail ultima_nota.foto "380x250" crop="center" as im %}
-                                                <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
-                                            {% empty %}   
-                                              <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
-                                            {% endthumbnail %}
-                                          {% elif ultima_nota.tipo == 2 %}
-                                            {% video ultima_nota.video as my_video %}
-                                                {% thumbnail my_video.thumbnail "380x250" crop="center" as im %}
-                                                  <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
-                                                {% empty %}   
-                                                  <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
-                                                {% endthumbnail %}
-                                            {% endvideo %}
-                                          {% endif %}
-                                    </a>
-                                </div>
-                                <div class="widget-latest-causes__text-content">
-                                    <h4 class="widget-latest-causes__title"><a href="{% url "detalle-notas" ultima_nota.slug %}">{{ultima_nota.titulo}}</a></h4>
-                                    <div class="widget-latest-causes__admin small-text">
-                                        <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
-                                        <a href="#">{{ultima_nota.user.userprofile.contraparte.siglas}}</a>
-                                    </div>
-                                    <div class="widget-latest-causes__time text-mute">
-                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> {{ultima_nota.fecha}}</span>
+                    {% endfor %}
 
-                                    </div>
-                                </div>
-                            </div><!--/.widget-latest-causes-->
-                            {% endfor %}
-                        </div>
-                    </div>
-                </aside>
+                </div>
             </div>
         </div>
     </div>

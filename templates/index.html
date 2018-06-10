@@ -270,7 +270,7 @@
 
                     {% for x,y in galerias.items %}
                       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix {{x.id}} all" style="display: inline-block;" data-bound="">
-                        <a class="gallery-item pr  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="#">
+                        <a href="http://127.0.0.1:8000/galerias/imagenes/2/" class="gallery-item-no pr  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="#">
 
                             {% thumbnail y.0.portada "300x160" crop="center" as im %}
                                 <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline;" alt="">
