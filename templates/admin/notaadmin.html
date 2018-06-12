@@ -49,7 +49,7 @@
                                             <td>{{nota.fecha}}</td>
                                             <td>{{nota.user}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
+                                                <a href="{% url 'editar-nota' nota.slug %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
                                             </td>
                                             <td>
                                                 <a data-toggle="modal" href='#modal-id-{{nota.id}}' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>

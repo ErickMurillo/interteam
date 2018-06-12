@@ -145,13 +145,13 @@
         <div class="row">
             <div class="btn-group btn-group-justified">
                 <div class="btn-group ">
-                    <a href="/accounts/profile/" type="button" class="btn btn-nav">
+                    <a href="/accounts/profile/" type="button" class="btn btn-nav {% if '/accounts/profile/' in request.path %}active{% endif %}">
                         <span class="fa fa-user"></span>
                         <p>Perfil</p>
                     </a>
                 </div>
                 <div class="btn-group">
-                    <a href="/contrapartes/notas/" type="button" class="btn btn-nav">
+                    <a href="/contrapartes/notas/" type="button" class="btn btn-nav {% if '/contrapartes/notas/' in request.path %}active{% endif %}">
                         <span class="fa fa-file-text-o"></span>
                         <p>Notas</p>
                     </a>
@@ -307,16 +307,16 @@
 <script>
 
 
-    var activeEl = 0;
-$(function() {
-var items = $('.btn-nav');
-$( items[activeEl] ).addClass('active');
-$( ".btn-nav" ).click(function() {
-    $( items[activeEl] ).removeClass('active');
-    $( this ).addClass('active');
-    activeEl = $( ".btn-nav" ).index( this );
-});
-});
+//     var activeEl = 0;
+// $(function() {
+// var items = $('.btn-nav');
+// $( items[activeEl] ).addClass('active');
+// $( ".btn-nav" ).click(function() {
+//     $( items[activeEl] ).removeClass('active');
+//     $( this ).addClass('active');
+//     activeEl = $( ".btn-nav" ).index( this );
+// });
+// });
 
 
 

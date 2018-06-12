@@ -40,14 +40,14 @@
                 <aside class="sidebar">
                     <div class="widget widget--category">
                         <div class="widget__heading">
-                            <h4 class="widget__title">TEMAS FOROS</h4>
+                            <h4 class="widget__title">TEMAS</h4>
                         </div>
                         <div class="widget__text-content">
                             <ul class="filter-options">
-                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">4</span></li>
-                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".economia"><i class="fa fa-tags"></i> Economia </a><span class="post-count">7</span></li>
-                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".educación"><i class="fa fa-tags"></i> Educación</a><span class="post-count">5</span></li>
-                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".mineria"><i class="fa fa-tags"></i> Minería</a><span class="post-count">3</span></li>
+                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_galerias}}</span></li>
+                                {% for x,y in dic_temas.items %}
+                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
                                
                             </ul>
 
@@ -61,10 +61,10 @@
                 
                 <div class="row row-eq-height" id="mixitup-grid">
 
-                    {% paginate 6 object_list %}
+                    {% paginate 8 object_list %}
                     {% for object in object_list %}
 
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mix mix todos economia" style="display: inline-block;" data-bound="">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mix mix todos {{object.tematica.id}}" style="display: inline-block;" data-bound="">
                             <div class="blog-post gallery-costum">
                                 <div class="blog-post__thumbnail-wrap">
                                     {% thumbnail object.portada "380x250" crop="center" as im %}
@@ -80,8 +80,7 @@
                                 <div class="blog-post__text-content">
                                     <h4 class="blog-post__title heading-label-four"><a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{%else%}{% url 'detalle-galerias-video' object.id %}{% endif %}">{{object.titulo}}</a></h4>
                                     <div class="blog-post__meta-info">
-                                        <span class="small-text"><i class="fa fa-tags base-color"></i>Economia</span>
-                                        <span class="small-text"><i class="fa fa-tags base-color"></i>Educación</span>
+                                        <span class="small-text"><i class="fa fa-tags base-color"></i>{{object.tematica}}</span>
                                     </div>
                                 </div>
                             </div><!--/.blog-post-->

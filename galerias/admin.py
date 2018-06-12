@@ -18,4 +18,4 @@ class GaleriaVideosAdmin(admin.ModelAdmin):
 
 admin.site.register(GaleriaImagenes, GaleriaImagenesAdmin)
 admin.site.register(GaleriaVideos, GaleriaVideosAdmin)
-admin.site.register(Tematica)
+# admin.site.register(Tematica)

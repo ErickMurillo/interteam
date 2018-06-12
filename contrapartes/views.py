@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from notas.models import *
+from notas.forms import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -42,6 +43,21 @@ def filtro_temas_contra(request, temas, template='admin/notaadmin.html'):
 	for tema in Temas.objects.all():
 		count = Notas.objects.filter(temas = tema).count()
 		dic_temas[tema] = count
+
+	return render(request, template, locals())
+
+@login_required
+def editar_nota(request, slug, template='admin/editar_nota.html'):
+	object = get_object_or_404(Notas, slug=slug)
+	if request.method == 'POST':
+		form = NotasForms(request.POST, request.FILES, instance=object)
+		if form.is_valid():
+			form_uncommited = form.save()
+			form_uncommited.user = request.user
+			form_uncommited.save()
+			return HttpResponseRedirect('/contrapartes/notas/')
+	else:
+		form = NotasForms(instance=object)
 
 	return render(request, template, locals())
 
