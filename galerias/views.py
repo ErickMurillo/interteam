@@ -9,12 +9,12 @@ from agendas.models import *
 
 def lista_galerias_img(request,template='list_galerias.html'):
 	object_list = GaleriaImagenes.objects.order_by('-id')
-	tematicas = Tematica.objects.order_by('nombre')
-	if request.GET.get('tematica'):
-		x = request.GET['tematica']
-		object_list = GaleriaImagenes.objects.filter(tematica = x).order_by('-id')
-	else:
-		object_list = GaleriaImagenes.objects.order_by('-id')
+
+	count_galerias = GaleriaImagenes.objects.all().count()
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = GaleriaImagenes.objects.filter(tematica = tema).count()
+		dic_temas[tema] = count
 
 	return render(request, template, locals())
 
@@ -26,19 +26,18 @@ def detalle_galerias_img(request,id, template='detalle_galeria.html'):
 
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Notas.objects.filter(temas = tema).count()
+		count = GaleriaImagenes.objects.filter(tematica = tema).count()
 		dic_temas[tema] = count
 
 	return render(request, template, locals())
 
 def lista_galerias_videos(request,template='list_galerias.html'):
 	object_list = GaleriaVideos.objects.order_by('-id')
-	tematicas = Tematica.objects.order_by('nombre')
-	if request.GET.get('tematica'):
-		x = request.GET['tematica']
-		object_list = GaleriaVideos.objects.filter(tematica = x).order_by('-id')
-	else:
-		object_list = GaleriaVideos.objects.order_by('-id')
+	count_galerias = GaleriaVideos.objects.all().count()
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = GaleriaVideos.objects.filter(tematica = tema).count()
+		dic_temas[tema] = count
 
 	return render(request, template, locals())
 

@@ -20,13 +20,13 @@
 
 <div class="main-content section-padding">
     <div class="container">
-        <div class="row wow " >
+        <div class="row wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
             <div class="col-md-12">
                 <div class="row row-eq-height" id="mixitup-grid">
                     {% for galeria in object.imagenes_set.all %}
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
                         
-                        <a class="gallery-item pr  wow fadeInUpSmd cboxElement" data-wow-duration="1.5s" data-wow-delay=".2s" href="{{im.url}}">
+                        <a class="gallery-item cboxElement" href="{{im.url}}">
                             {% thumbnail galeria.imagen "380x250" crop="center" as im %}
                                 <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline;">
                              {% endthumbnail %}

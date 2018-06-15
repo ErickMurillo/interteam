@@ -12,12 +12,9 @@
                         </div>
                         <div class="widget__text-content">
                             <ul>
-                                <li><a href="#" class="pdr10"><i class="fa fa-tags"></i> Cambio climatico</a><span class="post-count">4</span></li>
-                                <li><a href="#" class="pdr10"><i class="fa fa-tags"></i> Economia Solidaria</a><span class="post-count">7</span></li>
-                                <li><a href="#" class="pdr10"><i class="fa fa-tags"></i> Educación</a><span class="post-count">5</span></li>
-                                <li><a href="#" class="pdr10"><i class="fa fa-tags"></i> Medios de vida</a><span class="post-count">3</span></li>
-                                <li><a href="#" class="pdr10"><i class="fa fa-tags"></i> Minería</a><span class="post-count">2</span></li>
-                                <li><a href="#" class="pdr10"><i class="fa fa-tags"></i> Promotoria rural </a><span class="post-count">2</span></li>
+                                {% for x,y in dic_temas.items %}
+                                    <li><a href="{% url "filtro-temas-contra" x %}" class="pdr10">{{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
                             </ul>
 
                         </div>
@@ -46,101 +43,45 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for nota in object_list %}
                                         <tr>
-                                            <td>Oficial de Proyectos visita fincas agro ecológicas en Honduras</td>
-                                            <td>01/06/2018</td>
-                                            <td>Pablo Garcia</td>
+                                            <td>{{nota.titulo}}</td>
+                                            <td>{{nota.fecha}}</td>
+                                            <td>{{nota.user}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
+                                                <a href="{% url 'editar-nota' nota.slug %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
                                             </td>
                                             <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
+                                                <a data-toggle="modal" href='#modal-id-{{nota.id}}' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Encuentro Regional del Programa Medios de Vida Sostenible - CAFOD</td>
-                                            <td>02/06/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pobladores afirman que no permitirán proyectos mineros</td>
-                                            <td>03/06/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mujeres de León identifican sus derechos</td>
-                                            <td>04/06/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Oficial de Proyectos visita fincas agro ecológicas en Honduras</td>
-                                            <td>05/06/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Encuentro Regional del Programa Medios de Vida Sostenible - CAFOD</td>
-                                            <td>06/06/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pobladores afirman que no permitirán proyectos mineros</td>
-                                            <td>01/05/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mujeres de León identifican sus derechos</td>
-                                            <td>02/05/2018</td>
-                                            <td>Pablo Garcia</td>
-                                            <td>
-                                                <a href="#" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
-                                            </td>
-                                            <td>
-                                                <a data-toggle="modal" href='#modal-id' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
-                                            </td>
-                                        </tr>
+                                        <div class="modal fade" id="modal-id-{{nota.id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Eliminar Noticia</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        La nota "{{nota.titulo}}" se eliminara permanentemente.
+                                                        ¿Esta seguro que desea eliminar la nota?
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <a type="button" class="btn btn-danger" href="{% url 'eliminar-notas-contraparte' nota.slug %}">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="blog-details-top mb40">
+                    <!--<div class="blog-details-top mb40">
                         <div class="blog-details-top__text-content">
                             <a href="#" class="btn special-btn"><span class="fa fa-pencil base-color "></span> Nuevo evento</a>
                             <h3 class="blog-details__title ">Eventos de la organización</h3>
@@ -250,7 +191,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
 
 

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'agendas',
     'publicaciones',
     'galerias',
+    'opiniones',
 
     'ckeditor',
     'ckeditor_uploader',

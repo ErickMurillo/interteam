@@ -16,6 +16,6 @@ urlpatterns = [
     path('<slug>/', detalle_notas, name='detalle-notas'),
     path('filtro/temas/<temas>/', filtro_temas, name='filtro-temas'),
     # path('crear/$', crear_nota, name="crear-nota"),
-    # path('editar/(?P<id>\d+)/$', editar_nota, name='editar-nota'),
+    # path('editar/<slug>/', editar_nota, name='editar-nota'),
     # path('borrar/(?P<id>\d+)/$', borrar_nota, name='borrar-nota'),
     ]

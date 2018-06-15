@@ -10,6 +10,7 @@ from agendas.models import *
 from contrapartes.models import *
 from publicaciones.models import *
 from galerias.models import *
+from opiniones.models import *
 from .forms import *
 # from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -36,6 +37,9 @@ def index(request,template='index.html'):
 	for x in Tematica.objects.all():
 		galeria = GaleriaImagenes.objects.filter(tematica = x).order_by('-id')[:2]
 		galerias[x] = galeria
+
+	#opiniones
+	opiniones = Opiniones.objects.order_by('-id')
 
 	return render(request, template, locals())
 
