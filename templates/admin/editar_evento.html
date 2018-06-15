@@ -1,0 +1,15 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="main-content prueba">
+    <div class="container ">
+        <div class="row stickem-container prueba">
+        	<form action="." method="POST" enctype="multipart/form-data">{% csrf_token %}
+				{{form.media}}
+				{{form.as_p}}
+				<input type="submit" name="Actualizar" value="Actualizar">
+			</form>
+		</div>
+    </div>
+</div>
+{% endblock content %}
