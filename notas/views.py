@@ -34,9 +34,10 @@ def index(request,template='index.html'):
 
 	#galerias
 	galerias = {}
-	for x in Tematica.objects.all():
+	for x in Temas.objects.all():
 		galeria = GaleriaImagenes.objects.filter(tematica = x).order_by('-id')[:2]
-		galerias[x] = galeria
+		if galeria.exists():
+			galerias[x] = galeria
 
 	#opiniones
 	opiniones = Opiniones.objects.order_by('-id')
