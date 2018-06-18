@@ -4,9 +4,7 @@
 <div class="main-content prueba">
     <div class="container ">
         <div class="row stickem-container prueba">
-
         	<section>
-
                     <div class="blog-details-top mb40">
                         <div class="blog-details-top__text-content">
 				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
@@ -16,7 +14,22 @@
 									
 									<h4 class="blog-details__title">Redes</h4>
 									<hr>
-									{{formset.as_p}}
+									<div class="row">
+									{{ formset.management_form }}
+
+									{% for red in formset %}
+										<div class="col-md-4">
+											{% if red.errors %}
+												{{red.errors}}
+											{% endif %}
+											
+											{{red.id}}
+											{{red.opcion}}
+											{{red.url}}
+											Eliminar: {{red.DELETE}}
+										</div>
+									{% endfor %}
+									</div>
 								</div>
 								<input type="submit" name="Editar" value="Actualizar">
 							</form>
