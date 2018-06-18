@@ -74,28 +74,35 @@
                         </div>-->
                     </div>
                     <ul class="social-btn">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                    	{% for red in contraparte.redes_set.all %}
+                    		<li>
+                            <a href="{{red.url}}">
+                                <i class="{% if red.opcion == 'Sitio web' %}
+                                                fa fa-globe
+                                            {% elif red.opcion == 'Facebook' %}
+                                                fa fa-facebook
+                                            {% elif red.opcion == 'Twitter' %}
+                                                fa fa-twitter
+                                            {% elif red.opcion == 'Youtube' %}
+                                                fa fa-youtube
+                                            {% elif red.opcion == 'Google+' %}
+                                                fa fa-google
+                                            {% elif red.opcion == 'Instagram' %}
+                                                fa fa-instagram
+                                            {% elif red.opcion == 'Linkedin' %}
+                                                fa fa-linkedin
+                                            {% elif red.opcion == 'Flickr' %}
+                                                fa fa-flickr
+                                            {% elif red.opcion == 'Pinterest' %}
+                                                fa fa-pinterest
+                                            {% elif red.opcion == 'Vimeo' %}
+                                                fa fa-vimeo
+                                            {% elif red.opcion == 'Otra' %}
+                                                fa fa-link
+                                            {% endif %}" aria-hidden="true" target="_blank"></i>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-google-plus" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                        </li>
-
-
+                    	{% endfor %}
                     </ul>
                     
                 </aside>    

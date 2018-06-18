@@ -19,7 +19,7 @@ class NotasAdmin(admin.ModelAdmin):
 	#	    "all": ("css/custom.css",)
 	#	}
 
-	inlines = [ImagenInline, DocumentosInline, ]
+	#inlines = [ImagenInline, DocumentosInline, ]
 	list_display = ['__str__','fecha','user']
 	list_filter = ['user','fecha']
 	date_hierarchy = 'fecha'

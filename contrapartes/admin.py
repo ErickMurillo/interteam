@@ -3,8 +3,13 @@ from .models import *
 from ckeditor.widgets import CKEditorWidget
 from contrapartes.forms import *
 
+class RedesInline(admin.TabularInline):
+	model = Redes
+	extra = 1
+
 class ContraparteAdmin(admin.ModelAdmin):
-	form = ContraparteForms
+#	form = ContraparteForms
+	inlines = [RedesInline,]
     #class Media:
     #    js = ['../files/js/tiny_mce/tiny_mce.js',
     #          '../files/js/editores/textareas.js',]

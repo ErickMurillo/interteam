@@ -4,6 +4,7 @@
 <div class="main-content prueba">
     <div class="container ">
         <div class="row stickem-container prueba">
+<<<<<<< HEAD
         	<section>
 
                     <div class="blog-details-top mb40">
@@ -16,6 +17,19 @@
 						</div>
 					</div>
 			</section>
+=======
+        	<form action="." method="POST" enctype="multipart/form-data">{% csrf_token %}
+				{{ form.media }}
+				{{form.as_p}}
+
+				<div>
+					<hr>
+					<h3>Redes</h3>
+					{{formset.as_p}}
+				</div>
+				<input type="submit" name="Editar" value="Actualizar">
+			</form>
+>>>>>>> f3986ef2bafded8648d2c198a2241ca5c2ec95b4
 		</div>
     </div>
 </div>
