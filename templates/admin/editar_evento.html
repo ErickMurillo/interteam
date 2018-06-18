@@ -21,10 +21,26 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/static/css/jquery.timepicker.min.css">
+{% endblock extra_head %}
+
 {% block extra_js %}
-	<script type="text/javascript">
-		
-		$( "input, select" ).addClass( "form-control" );
-		$( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
-	</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/static/js/jquery.timepicker.min.js"></script>
+
+<script type="text/javascript">
+	$( "input, select" ).addClass( "form-control" );
+	$( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
+</script>
+
+<script>
+  $( function() {
+    $( "#id_inicio" ).datepicker({ dateFormat: 'dd/mm/yy' });
+    $('#id_hora_inicio').timepicker({ 'timeFormat': 'H:i:s' });
+    $('#id_hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
+  } );
+  </script>
 {% endblock extra_js %}
