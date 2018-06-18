@@ -49,8 +49,8 @@ class Contraparte(models.Model):
     generalidades = RichTextUploadingField(blank=True, null=True)
     contacto = models.CharField(max_length=200,blank=True, null=True)
     telefono = models.CharField(max_length=200, blank=True, null=True)
-    sitio_web = models.URLField(blank=True, null=True)
-    rss = models.CharField(max_length=200,blank=True, null=True)
+    #sitio_web = models.URLField(blank=True, null=True)
+    #rss = models.CharField(max_length=200,blank=True, null=True)
     font_color = ColorField(blank=True,unique=True)
     slug = models.SlugField(max_length=200,editable=False)
 
@@ -67,6 +67,19 @@ class Contraparte(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nombre)
         return super(Contraparte, self).save(*args, **kwargs)
+        
+REDES_CHOICES = (('Sitio web','Sitio web'),('Facebook','Facebook'),('Twitter','Twitter'),('Youtube','Youtube'),
+					('Google+','Google+'),('Instagram','Instagram'),('Linkedin','Linkedin'),
+					('Flickr','Flickr'),('Pinterest','Pinterest'),('Vimeo','Vimeo'),('Otra','Otra'),)
+
+class Redes(models.Model):
+	organizacion = models.ForeignKey(Contraparte,on_delete=models.DO_NOTHING)
+	opcion = models.CharField(max_length=25,choices=REDES_CHOICES)
+	url = models.URLField()
+
+	class Meta:
+		verbose_name = 'Red'
+		verbose_name_plural = 'Redes'
 
 class UserProfile(models.Model):
     # This field is required.

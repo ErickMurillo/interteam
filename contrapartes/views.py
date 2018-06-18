@@ -8,23 +8,40 @@ from agendas.forms import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
+from django.forms import inlineformset_factory
 
 # Create your views here.
 @login_required
+def perfil_editar(request,template='admin/editar_user.html'):
+	if request.method == 'POST':
+		form = UserForm(request.POST, instance=request.user)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/accounts/profile/')
+	else:
+		form = UserForm(instance=request.user)
+
+	return render(request, template, locals())
+
+@login_required
 def editar_contraparte(request, slug, template='admin/editar_contraparte.html'):
 	contra = get_object_or_404(Contraparte, slug=slug)
+	FormSetInit = inlineformset_factory(Contraparte, Redes, form=RedesFrom,extra=11,max_num=11)
 
 	if request.method == 'POST':
-		form = ContraparteForms(data=request.POST, 
-								instance=contra, 
-								files=request.FILES)
-		if form.is_valid():
+		form = ContraparteForms(data=request.POST,instance=contra,files=request.FILES)
+		formset = FormSetInit(request.POST,request.FILES,instance=contra)
+
+		if form.is_valid() and formset.is_valid():
 			form_uncommited = form.save(commit=False)
 			form_uncommited.user = request.user
 			form_uncommited.save()
+
+			formset.save()
 			return HttpResponseRedirect('/accounts/profile/')
 	else:
 		form = ContraparteForms(instance=contra)
+		formset = FormSetInit(instance=contra)
 
 	return render(request, template, locals())
 

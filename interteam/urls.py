@@ -18,6 +18,7 @@ from django.urls import path
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 from notas import views as notas
+from contrapartes import views as contra
 from foros.views import *
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,13 +28,14 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('taggit_autosuggest/', include('taggit_autosuggest.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
-    path('accounts/login/', auth_views.login),
-    path('accounts/profile/',perfil,name='perfil'),
-    path('accounts/logout/', notas.logout_page),
-    path('password_change/',auth_views.password_change,
-                            {'template_name': 'registration/password_change_form.html',
-                            'post_change_redirect': '/foros/perfil/'},
-                            name='password-change'),
+    path('accounts/login/', auth_views.login, name='login'),
+    path('accounts/profile/', perfil, name='perfil'),
+    path('accounts/profile/editar/', contra.perfil_editar, name='perfil_editar'),
+    path('accounts/logout/', notas.logout_page, name='logout'),
+    path('accounts/password_reset/', auth_views.password_reset, name='password_reset'),
+    path('accounts/password_reset/done/', auth_views.password_reset_done, name='password_reset_done'),
+    path('accounts/reset/<uidb64>/<token>/', auth_views.password_reset_confirm, name='password_reset_confirm'),
+    path('accounts/reset/done/', auth_views.password_reset_complete, name='password_reset_complete'),
     path('', notas.index),
     path('notas/', include('notas.urls')),
     path('contrapartes/', include('contrapartes.urls')),

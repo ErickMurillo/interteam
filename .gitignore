@@ -101,3 +101,5 @@ ENV/
 # mypy
 .mypy_cache/
 *.sqlite3
+
+/sent_enails
