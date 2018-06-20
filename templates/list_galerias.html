@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load el_pagination_tags %}
+{% load embed_video_tags %}
 
 {% block content %}
 <style type="text/css">
@@ -67,18 +68,29 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mix mix todos {{object.tematica.id}}" style="display: inline-block;" data-bound="">
                             <div class="blog-post gallery-costum">
                                 <div class="blog-post__thumbnail-wrap">
-                                    {% thumbnail object.portada "380x250" crop="center" as im %}
-                                        <a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{%else%}{% url 'detalle-galerias-video' object.id %}{% endif %}">
-                                            <img src="{{im.url}}" class="" alt="" width="100%">
-                                        </a>
-                                    {% empty %}   
-                                        <a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{%else%}{% url 'detalle-galerias-video' object.id %}{% endif %}">
-                                            <img src="http://via.placeholder.com/380x250" class="" alt="">
-                                        </a>
-                                    {% endthumbnail %}
+                                	{% if object.portada %}
+	                                	{% thumbnail object.portada "410x250" crop="center" as im %}
+	                                        <a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">
+	                                            <img src="{{im.url}}" class="" alt="" width="100%">
+	                                        </a>
+	                                    {% empty %}   
+	                                        <a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">
+	                                            <img src="http://via.placeholder.com/410x250" class="" alt="">
+	                                        </a>
+	                                    {% endthumbnail %}
+                                	{% else %}
+                                		{% video object.url as my_video %}
+	                                        {% thumbnail my_video.thumbnail "410x250" crop="center" as im %}
+	                                          <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+	                                        {% empty %}   
+	                                          <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+	                                        {% endthumbnail %}
+	                                    {% endvideo %}
+                                	{% endif %}
+                                    
                                 </div>
                                 <div class="blog-post__text-content">
-                                    <h4 class="blog-post__title heading-label-four"><a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{%else%}{% url 'detalle-galerias-video' object.id %}{% endif %}">{{object.titulo}}</a></h4>
+                                    <h4 class="blog-post__title heading-label-four"><a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">{{object.titulo}}</a></h4>
                                     <div class="blog-post__meta-info">
                                         <span class="small-text"><i class="fa fa-tags base-color"></i>{{object.tematica}}</span>
                                     </div>

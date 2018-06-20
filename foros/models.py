@@ -98,10 +98,10 @@ class Foros(models.Model):
 	memoria = models.DateField('Propuesta entrega de memoria')
 	contenido = RichTextUploadingField()
 	contraparte = models.ForeignKey(User,on_delete=models.DO_NOTHING)
-	documentos = fields.GenericRelation(Documentos)
-	fotos = fields.GenericRelation(Imagen)
-	video = fields.GenericRelation(Videos)
-	audio = fields.GenericRelation(Audios)
+	#documentos = fields.GenericRelation(Documentos)
+	#fotos = fields.GenericRelation(Imagen)
+	#video = fields.GenericRelation(Videos)
+	#audio = fields.GenericRelation(Audios)
 
 	class Meta:
 		verbose_name_plural = "Foros"

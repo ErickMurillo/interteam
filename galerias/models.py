@@ -32,7 +32,7 @@ class Imagenes(models.Model):
 
 class GaleriaVideos(models.Model):
 	titulo = models.CharField(max_length=200)
-	portada = ImageField(upload_to='galerias/')
+	url = EmbedVideoField()
 	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)
 
 	def __str__(self):
@@ -41,8 +41,3 @@ class GaleriaVideos(models.Model):
 	class Meta:
 		verbose_name = 'Galería videos'
 		verbose_name_plural = 'Galerías videos'
-
-class Videos(models.Model):
-	video = models.ForeignKey(GaleriaVideos,on_delete=models.DO_NOTHING)
-	titulo = models.CharField(max_length=200)
-	url = EmbedVideoField()

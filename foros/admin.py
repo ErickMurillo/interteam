@@ -21,12 +21,10 @@ class AudiosInline(GenericTabularInline):
     extra = 1
 
 class ForoAdmin(admin.ModelAdmin):
-    inlines = [DocumentosInline, ImagenInline, 
-              VideosInline, AudiosInline]
-    form = ForosForm
-    list_display = ['nombre','creacion','contraparte',
-                    '__documento__','__fotos__', '__video__',
-                    '__audio__']
+    #inlines = [DocumentosInline, ImagenInline, 
+    #         VideosInline, AudiosInline]
+   # form = ForosForm
+    list_display = ['nombre','creacion','contraparte']
     date_hierarchy = 'creacion'
 
 class AportesAdmin(admin.ModelAdmin):
@@ -41,12 +39,12 @@ class AportesAdmin(admin.ModelAdmin):
 
 class ComentariosAdmin(admin.ModelAdmin):
     list_display = ('fecha', 'usuario', 'aporte')
-    form = ComentarioForm
+    #form = ComentarioForm
 
 admin.site.register(Foros, ForoAdmin)
 admin.site.register(Aportes, AportesAdmin)
 admin.site.register(Comentarios, ComentariosAdmin)
-admin.site.register(Documentos)
-admin.site.register(Imagen)
-admin.site.register(Videos)
-admin.site.register(Audios)
+#admin.site.register(Documentos)
+#admin.site.register(Imagen)
+#admin.site.register(Videos)
+#admin.site.register(Audios)

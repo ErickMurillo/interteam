@@ -1,0 +1,53 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="main-content prueba">
+    <div class="container ">
+        <div class="row stickem-container prueba">
+        	<section>
+                    <div class="blog-details-top mb40">
+                        <div class="blog-details-top__text-content">
+                                <h3 class="blog-details__title">{{discusion.nombre}}</h3>
+                                <hr>
+                                <p>{{discusion.contenido|safe}}</p>
+
+                                <div class="blog-details-top__text-content">
+                                    <div class="blog-details__meta">
+                                        <!--<div class="blog-details__meta-item"><i class="fa fa-building pdr5"></i></div>-->
+                                        <div class="blog-details__meta-item base-color"><i class="fa fa-hourglass-end pdr5"></i>Apertura: {{discusion.apertura|date:'d/F/o'}}</div>
+                                        <div class="blog-details__meta-item base-color"><i class="fa fa-hourglass-end pdr5"></i>Cierre: {{discusion.cierre|date:'d/F/o'}}</div>
+                                        <div class="blog-details__meta-item"><i class="fa fa-skype pdr5"></i>Reunión skype: {{discusion.fecha_skype|date:'d/F/o'}}</div>
+                                        
+                                        <div class="blog-details__meta-item"><i class="fa fa-comments-o pdr5"></i>{{discusion.aportes_set.all.count}}</div>
+                                        <div class="blog-details__meta-item"><i class="fa fa-file-text-o pdr5"></i>Memoria: {{discusion.memoria|date:'d/F/o'}}</div>
+                            	</div>
+                        	</div>	
+                        </div>
+					</div>
+			</section>
+			<section>
+				<h3>APORTES</h3>
+				{% for aporte in aportes %}
+					{{aporte.contenido|safe}} - {{aporte.fecha}} - {{aporte.user.get_full_name|default:aporte.user.username}}
+
+					<h5>Comentarios</h5>
+					{% for coment in aporte.comentarios_set.all %}
+						{{coment.fecha}} - {{coment.comentario|safe}} - {{coment.usuario.get_full_name|default:coment.usuario.username}}
+					{% endfor %}
+					<br>
+				<a href="">Agregar comentario</a>
+				<hr>
+				{% endfor %}
+			</section>
+			<section>
+				<h3>AGREGAR APORTE A ESTE FORO</h3>
+				<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+					{{form.media}}
+					{{form.contenido}}
+					<input type="submit" name="Guardar" value="Guardar">
+				</form>
+			</section>
+		</div>
+    </div>
+</div>
+{% endblock content %}

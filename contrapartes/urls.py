@@ -13,4 +13,13 @@ urlpatterns = [
 	path('eventos/nuevo/', nuevo_evento_contraparte, name='nuevo-evento-contraparte'),
 	path('eventos/eliminar/<slug>', eliminar_evento_contraparte, name='eliminar-evento-contraparte'),
 	path('eventos/editar/<slug>/', editar_evento, name='editar-evento'),
+	path('foros/', list_foros, name='list-foros'),
+	path('foros/eliminar/<id>', eliminar_foro, name='eliminar-foro'),
+	path('foros/editar/<id>/', editar_foro, name='editar-foro'),
+	path('foros/ver/<id>/', ver_foro, name='ver-foro'),
+	path('foros/agregar/',agregar_foro, name='agregar-foro'),
+	path('publicaciones/', publicaciones_contraparte, name='publicaciones-contraparte'),
+	path('publicaciones/eliminar/<id>', eliminar_publicacion, name='eliminar-publicacion'),
+	path('publicaciones/editar/<id>/', editar_publicacion, name='editar-publicacion'),
+	path('publicaciones/agregar/',agregar_publicacion, name='agregar-publicacion'),
 ]
