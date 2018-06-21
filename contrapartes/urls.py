@@ -24,4 +24,11 @@ urlpatterns = [
 	path('publicaciones/eliminar/<id>', eliminar_publicacion, name='eliminar-publicacion'),
 	path('publicaciones/editar/<id>/', editar_publicacion, name='editar-publicacion'),
 	path('publicaciones/agregar/',agregar_publicacion, name='agregar-publicacion'),
+	path('galerias/', galerias_contraparte, name='galerias-contraparte'),
+	path('galerias/imagenes/eliminar/<id>', eliminar_galeria_img, name='eliminar-galeria-img'),
+	path('galerias/imagenes/nueva/', agregar_galeria_img, name='nueva-galerias-contraparte'),
+	path('galerias/imagenes/editar/<id>/', editar_galeria_img, name='editar-galeria-img'),
+	path('galerias/videos/nuevo/', agregar_galeria_vid, name='nueva-galerias-vid'),
+	path('galerias/videos/eliminar/<id>', eliminar_video, name='eliminar-video'),
+	path('galerias/videos/editar/<id>/', editar_video, name='editar-video'),
 ]

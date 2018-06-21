@@ -8,6 +8,8 @@ from agendas.forms import *
 from foros.forms import *
 from publicaciones.models import *
 from publicaciones.forms import *
+from galerias.models import *
+from galerias.forms import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse 
 from django.shortcuts import get_object_or_404, redirect
@@ -267,3 +269,96 @@ def eliminar_aporte(request, id):
 	foro = aporte.foro.id
 	aporte.delete()
 	return redirect('ver-foro', id=foro)
+
+#galerias
+@login_required
+def galerias_contraparte(request, template='admin/list_galerias.html'):
+	object_list_img = GaleriaImagenes.objects.filter(user = request.user.id).order_by('-id')
+	object_list_vid = GaleriaVideos.objects.filter(user = request.user.id).order_by('-id')
+
+	return render(request, template, locals())
+
+@login_required
+def eliminar_galeria_img(request, id):
+	img = GaleriaImagenes.objects.filter(id = id).delete()
+	return HttpResponseRedirect('/contrapartes/galerias/')
+
+@login_required
+def agregar_galeria_img(request, template='admin/galeria_img.html'):
+	FormSetInit = inlineformset_factory(GaleriaImagenes, Imagenes, form=ImagenesForm,extra=12,max_num=12)
+	if request.method == 'POST':
+		form = GaleriaImagenesForm(request.POST, request.FILES)
+		formset = FormSetInit(request.POST,request.FILES)
+		if form.is_valid() and formset.is_valid():
+			galeria = form.save(commit=False)
+			galeria.user = request.user
+			galeria.save()
+
+			instances = formset.save(commit=False)
+			for instance in instances:
+				instance.imagenes = galeria
+				instance.save()
+			formset.save_m2m()
+
+			return HttpResponseRedirect('/contrapartes/galerias/')
+	else:
+		form = GaleriaImagenesForm()
+		formset = FormSetInit()
+
+	return render(request, template, locals())
+
+@login_required
+def editar_galeria_img(request, id, template='admin/galeria_img.html'):
+	object = get_object_or_404(GaleriaImagenes, id=id)
+	FormSetInit = inlineformset_factory(GaleriaImagenes, Imagenes, form=ImagenesForm,extra=12,max_num=12)
+	if request.method == 'POST':
+		form = GaleriaImagenesForm(data=request.POST,instance=object,files=request.FILES)
+		formset = FormSetInit(request.POST,request.FILES,instance=object)
+
+		if form.is_valid() and formset.is_valid():
+			form_uncommited = form.save(commit=False)
+			form_uncommited.save()
+
+			formset.save()
+			return HttpResponseRedirect('/contrapartes/galerias/')
+	else:
+		form = GaleriaImagenesForm(instance=object)
+		formset = FormSetInit(instance=object)
+
+	return render(request, template, locals())
+
+@login_required
+def agregar_galeria_vid(request, template='admin/nueva_galeria_vid.html'):
+	if request.method == 'POST':
+		form = GaleriaVideosForm(request.POST, request.FILES)
+		if form.is_valid():
+			publi = form.save(commit=False)
+			publi.user = request.user
+			publi.save()
+
+			return HttpResponseRedirect('/contrapartes/galerias/')
+	else:
+		form = GaleriaVideosForm()
+
+	return render(request, template, locals())
+
+@login_required
+def eliminar_video(request, id):
+	img = GaleriaVideos.objects.filter(id = id).delete()
+	return HttpResponseRedirect('/contrapartes/galerias/')
+
+@login_required
+def editar_video(request, id, template='admin/nueva_galeria_vid.html'):
+	object = get_object_or_404(GaleriaVideos, id=id)
+	if request.method == 'POST':
+		form = GaleriaVideosForm(request.POST, request.FILES, instance=object)
+		if form.is_valid():
+			form_uncommited = form.save()
+			form_uncommited.user = request.user
+			form_uncommited.save()
+			
+			return HttpResponseRedirect('/contrapartes/galerias/')
+	else:
+		form = GaleriaVideosForm(instance=object)
+
+	return render(request, template, locals())
