@@ -27,8 +27,15 @@
 			</section>
 			<section>
 				<h3>APORTES</h3>
+				<hr>
 				{% for aporte in aportes %}
 					{{aporte.contenido|safe}} - {{aporte.fecha}} - {{aporte.user.get_full_name|default:aporte.user.username}}
+
+					{% if request.user == discusion.contraparte %}
+						<a href="{% url 'editar-aporte' aporte.id %}">editar aporte</a>
+						<a href="{% url 'eliminar-aporte' aporte.id %}">eliminar aporte</a>
+					{% endif %}
+					
 
 					<h5>Comentarios</h5>
 					{% for coment in aporte.comentarios_set.all %}
@@ -39,14 +46,19 @@
 				<hr>
 				{% endfor %}
 			</section>
-			<section>
+
+			{% now 'd/F/o' as current_date %}
+			{% if current_date <= discusion.cierre|date:'d/F/o' and  current_date >= discusion.apertura|date:'d/F/o' %}
+	    	<section>
 				<h3>AGREGAR APORTE A ESTE FORO</h3>
 				<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
 					{{form.media}}
 					{{form.contenido}}
 					<input type="submit" name="Guardar" value="Guardar">
 				</form>
-			</section>
+			</section> 
+        	{% endif %} 
+			
 		</div>
     </div>
 </div>

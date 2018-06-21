@@ -245,3 +245,25 @@ def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
 		form = PublicacionForm()
 
 	return render(request, template, locals())
+
+@login_required
+def editar_aporte(request, id, template='admin/editar_aporte.html'):
+	object = get_object_or_404(Aportes, id=id)
+	if request.method == 'POST':
+		form = AporteForm(request.POST, request.FILES, instance=object)
+		if form.is_valid():
+			form_uncommited = form.save()
+			form_uncommited.user = request.user
+			form_uncommited.save()
+			return redirect('ver-foro', id=object.foro.id)
+	else:
+		form = AporteForm(instance=object)
+
+	return render(request, template, locals())
+
+@login_required
+def eliminar_aporte(request, id):
+	aporte = Aportes.objects.get(id = id)
+	foro = aporte.foro.id
+	aporte.delete()
+	return redirect('ver-foro', id=foro)

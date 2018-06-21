@@ -34,6 +34,13 @@
                         <div class="blog-details-top mb40">
                             <div class="blog-details-top__text-content">
                                 <h3 class="blog-details__title"><a href="{% url 'ver-foro' foro.id %}">{{foro.nombre}}</a></h3>
+
+                                {% now 'd/F/o' as current_date %}
+	                                {% if current_date <= foro.cierre|date:'d/F/o' and  current_date >= foro.apertura|date:'d/F/o' %}
+	                                	Activo 
+	                                	{% else %}
+	                                	Inactivo
+                                	{% endif %} 
                                 <hr>
                                 <p>{{foro.contenido|safe|truncatewords:'70'}}</p>
 
