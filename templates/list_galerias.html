@@ -45,9 +45,14 @@
                         </div>
                         <div class="widget__text-content">
                             <ul class="filter-options">
-                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_galerias}}</span></li>
+                                <li><a href="{% if '/galerias/imagenes/' in request.path %}/galerias/imagenes/{% else %}/galerias/videos/{% endif %}" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_galerias}}</span></li>
                                 {% for x,y in dic_temas.items %}
-                                <li><a href="#" class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
+                                <li><a href="{% if '/galerias/imagenes/' in request.path %}
+                                                {% url 'filtro_temas_img' x.id %}
+                                            {% else %}
+                                                {% url 'filtro_temas_vid' x.id %}
+                                            {% endif %}
+                                " class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
                                 {% endfor %}
                                
                             </ul>

@@ -41,15 +41,24 @@ def lista_galerias_videos(request,template='list_galerias.html'):
 
 	return render(request, template, locals())
 
-def detalle_galerias_video(request,id, template='detalle_galeria_video.html'):
-	object = get_object_or_404(GaleriaVideos, id = id)
-	ultimas_notas = Notas.objects.order_by('-fecha','-id')[:4]
-	hoy = datetime.date.today()
-	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
+def filtro_temas_img(request,tema,template='list_galerias.html'):
+	object_list = GaleriaImagenes.objects.filter(tematica = tema).order_by('-id')
 
+	count_galerias = GaleriaImagenes.objects.all().count()
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Notas.objects.filter(temas = tema).count()
+		count = GaleriaImagenes.objects.filter(tematica = tema).count()
+		dic_temas[tema] = count
+
+	return render(request, template, locals())
+
+def filtro_temas_vid(request,tema,template='list_galerias.html'):
+	object_list = GaleriaVideos.objects.filter(tematica = tema).order_by('-id')
+
+	count_galerias = GaleriaVideos.objects.all().count()
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = GaleriaVideos.objects.filter(tematica = tema).count()
 		dic_temas[tema] = count
 
 	return render(request, template, locals())
