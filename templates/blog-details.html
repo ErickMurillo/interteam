@@ -157,12 +157,14 @@
                     </div> -->
                     <div class="leave-comment pdt50 mt20 mb30">
                         <h3 class="leave-comment__title text-uppercase">Comentar Noticias</h3>
-                        <form class="leave-comment__form mt40">
+                        {% load disqus_tags %}
+                        {% disqus_show_comments %}
+                        <!--<form class="leave-comment__form mt40">
                             <div class="input-group">
                                 <textarea class="input-group__textarea form-control" placeholder="Mensaje" rows="8" cols="80"></textarea>
                             </div>
                             <input type="submit" class="btn base-bg" value="Comentar"/>
-                        </form>
+                        </form>-->
                     </div>
                 </div>
             </div>
