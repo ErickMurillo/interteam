@@ -25,38 +25,66 @@
                         </div>
 					</div>
 			</section>
-			<section>
-				<h3>APORTES</h3>
-				<hr>
-				{% for aporte in aportes %}
-					{{aporte.contenido|safe}} - {{aporte.fecha}} - {{aporte.user.get_full_name|default:aporte.user.username}}
+			<seccion>
+				<div class="comments-wrap pdt50 mt45">
+                    <h3 class="comments-title">5 APORTES</h3>
+                    <hr>
+                    {% for aporte in aportes %}
+                    	<div class="single-comment-wrap">
+	                        <div class="single-comment">
+	                            <div class="single-comment__image">
+	                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" class="img-circle" alt="" width="60px">
+	                            </div>
+	                            <div class="single-comment__text-content">
+	                                <h4 class="single-comment__name">{{aporte.user.get_full_name|default:aporte.user.username}}</h4>
+	                                <a href="#" class="single-comment__reply-button base-color">Comentar</a>
+	                                <em class="single-comment__time-ago"> {{aporte.fecha}}</em>
+	                                <p>{{aporte.contenido|safe}}</p>
+	                                <div>
+		                            	{% if request.user == discusion.contraparte %}
+											<a class="btn btn-success btn-small-special" href="{% url 'editar-aporte' aporte.id %}"><i class="fa fa-pencil"></i></a>
+											<a class="btn btn-danger btn-small-special" href="{% url 'eliminar-aporte' aporte.id %}"><i class="fa fa-trash"></i></a>
 
-					{% if request.user == discusion.contraparte %}
-						<a href="{% url 'editar-aporte' aporte.id %}">editar aporte</a>
-						<a href="{% url 'eliminar-aporte' aporte.id %}">eliminar aporte</a>
-					{% endif %}
-					
-
-					<h5>Comentarios</h5>
-					{% for coment in aporte.comentarios_set.all %}
-						{{coment.fecha}} - {{coment.comentario|safe}} - {{coment.usuario.get_full_name|default:coment.usuario.username}}
-					{% endfor %}
-					<br>
-				<a href="">Agregar comentario</a>
-				<hr>
-				{% endfor %}
-			</section>
-
-			{% now 'd/F/o' as current_date %}
-			{% if current_date <= discusion.cierre|date:'d/F/o' and  current_date >= discusion.apertura|date:'d/F/o' %}
-	    	<section>
-				<h3>AGREGAR APORTE A ESTE FORO</h3>
-				<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
-					{{form.media}}
-					{{form.contenido}}
-					<input type="submit" name="Guardar" value="Guardar">
-				</form>
-			</section> 
+										{% endif %}
+		                            </div>
+		                            <br>
+	                            </div>
+	                            
+	                        </div>
+							{% for coment in aporte.comentarios_set.all %}
+								<div class="single-comment-wrap">
+		                            <div class="single-comment">
+		                                <div class="single-comment__image">
+		                                    <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" class="img-circle" alt="" width="60px">
+		                                </div>
+		                                <div class="single-comment__text-content">
+		                                    <h4 class="single-comment__name">{{coment.usuario.get_full_name|default:coment.usuario.username}}</h4>
+		                                    <!-- <a href="#" class="single-comment__reply-button base-color">Responder</a> -->
+		                                    <em class="single-comment__time-ago">{{coment.fecha}}</em>
+		                                    <p>{{coment.comentario|safe}}</p>
+		                                </div>
+		                            </div>
+		                        </div>
+							{% endfor %}
+	                    </div><!--/.single-comment-wrap-->
+                    {% endfor %}
+                </div>
+                <div class="leave-comment pdt50 mt20 mb30">
+                	{% now 'd/F/o' as current_date %}
+					{% if current_date <= discusion.cierre|date:'d/F/o' and  current_date >= discusion.apertura|date:'d/F/o' %}
+                    <h3 class="leave-comment__title text-uppercase">Nuevo aporte</h3>
+					<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								{{form.media}}
+								{{form.contenido}}
+							</div>
+							
+						</div>
+						<input type="submit" class="btn" name="Guardar" value="Guardar">
+					</form>
+                </div>
+			</seccion>	
         	{% endif %} 
 			
 		</div>

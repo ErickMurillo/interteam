@@ -221,6 +221,7 @@
         rel:'group4',
         slideshow:false,
         transition:"fade",
+        maxWidth: "1000px",
         onOpen:function(){
             $('body').addClass('popup-open');
         },

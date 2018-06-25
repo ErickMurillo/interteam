@@ -28,7 +28,8 @@
                         
                         <a class="gallery-item cboxElement" href="/media/{{galeria.imagen}}">
                             {% thumbnail galeria.imagen "380x250" crop="center" as im %}
-                                <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline;">
+                                <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline; " >
+                                <script type="text/javascript"></script>
                              {% endthumbnail %}
                             <div class="loader loder-hide"></div>
                         </a><!--/.portfolio-item-->
