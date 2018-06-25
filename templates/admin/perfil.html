@@ -1,0 +1,181 @@
+{% extends "admin/base_admin.html" %}
+{% load thumbnail %}
+
+{% block content %}
+<div class="main-content prueba">
+    <div class="container ">
+        <div class="row stickem-container prueba">
+            <div class="col-md-3" >
+                <aside class="sidebar sidebar-profile stickem">
+                    <div class="profile ">
+
+                        <div class="image-wrap profile-image">
+                            <a href="{% url 'editar-contraparte' contraparte.slug %}" class="btn special-btn btn-small"><span class="fa fa-pencil base-color "></span></a>
+                            {% thumbnail contraparte.logo "260x240" crop="center" as im %}
+                                <img src="{{im.url}}" alt="" width="100%">
+                            {% empty %}   
+                              <img src="http://via.placeholder.com/260x240" alt="" width="100%">
+                            {% endthumbnail %}
+
+                        </div>
+
+                        <div class="profile-name">
+                            <div class="contact-address">
+                                <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-map-marker contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="contact-title base-color">País</div>
+                                        {{contraparte.pais}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+
+                                {% if contraparte.fundacion %}
+                                    <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-calendar contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Fundación</div>
+                                        {{contraparte.fundacion}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
+                                
+                                {% if contraparte.telefono %}
+                                    <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-phone contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Teléfono</div>
+                                         {{contraparte.telefono}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
+
+                                {% if contraparte.sitio_web %}
+                                <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-map-marker contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Website</div>
+                                        {{contraparte.sitio_web}}<br/>
+                                        
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!--<div class="profile-name">
+                            <ul>
+                                <li><i class="fa fa-map-marker pdr5"></i> Pais:  Nicaragua <img src="https://www.citel.oas.org/es/SiteAssets/Paginas/SistemaTIC/countries/images/bandera-nicaragua.png" alt="" height="15px"></li>
+                                <li><i class="fa fa-building pdr5"></i> Año de fundación: 1990</li>
+                                <li><i class="fa fa-envelope pdr5"></i> Contacto: info@correo.com</li>
+                                <li><i class="fa fa-phone pdr5"></i> Teléfono: 2222 2222</li>
+                                <li><i class="fa fa-globe pdr5"></i> Web: www.simas.org.ni</li>
+                            </ul>
+                             <h1 class="text-center">SIMAS</h1>
+                            <h5 class="text-center">Servicio de Información Mesoamericano sobre Agricultura Sostenible</h5> 
+                        </div>-->
+                    </div>
+                    <ul class="social-btn">
+                    	{% for red in contraparte.redes_set.all %}
+                    		<li>
+                            <a href="{{red.url}}">
+                                <i class="{% if red.opcion == 'Sitio web' %}
+                                                fa fa-globe
+                                            {% elif red.opcion == 'Facebook' %}
+                                                fa fa-facebook
+                                            {% elif red.opcion == 'Twitter' %}
+                                                fa fa-twitter
+                                            {% elif red.opcion == 'Youtube' %}
+                                                fa fa-youtube
+                                            {% elif red.opcion == 'Google+' %}
+                                                fa fa-google
+                                            {% elif red.opcion == 'Instagram' %}
+                                                fa fa-instagram
+                                            {% elif red.opcion == 'Linkedin' %}
+                                                fa fa-linkedin
+                                            {% elif red.opcion == 'Flickr' %}
+                                                fa fa-flickr
+                                            {% elif red.opcion == 'Pinterest' %}
+                                                fa fa-pinterest
+                                            {% elif red.opcion == 'Vimeo' %}
+                                                fa fa-vimeo
+                                            {% elif red.opcion == 'Otra' %}
+                                                fa fa-link
+                                            {% endif %}" aria-hidden="true" target="_blank"></i>
+                            </a>
+                        </li>
+                    	{% endfor %}
+                    </ul>
+                    
+                </aside>    
+            </div>
+            <div class="col-md-9">
+                <section>
+                    <div class="blog-details-top mb40">
+                        <div class="blog-details-top__text-content">
+                            <h3 class="blog-details__title">{{contraparte.nombre}} - {{contraparte.siglas}}</h3>
+                            <hr>
+                            <p>{{contraparte.generalidades|safe}}</p>
+
+                            <h3>Temas</h3>
+                            <p>{{contraparte.temas|safe}}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="blog-details-top mb40">
+                        <div class="blog-details-top__text-content">
+                            <h3 class="blog-details__title">Estadísticas</h3>
+                            <hr>
+                            <div class="row">
+                            <div class="col-lg-3 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-file-text-o fa-fw fa-3x"></i></div></a>
+                                        <div class="circle-tile-content dark-blue">
+                                            <div class="circle-tile-description text-faded"> Noticias</div>
+                                            <div class="circle-tile-number text-faded ">265</div>
+                                            <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#"><div class="circle-tile-heading red"><i class="fa fa-calendar fa-fw fa-3x"></i></div></a>
+                                        <div class="circle-tile-content red">
+                                            <div class="circle-tile-description text-faded"> Eventos </div>
+                                            <div class="circle-tile-number text-faded ">52</div>
+                                            <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#"><div class="circle-tile-heading orange"><i class="fa fa-film fa-fw fa-3x"></i></div></a>
+                                        <div class="circle-tile-content orange">
+                                            <div class="circle-tile-description text-faded"> Multimedia </div>
+                                            <div class="circle-tile-number text-faded ">300</div>
+                                            <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#"><div class="circle-tile-heading purple"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+                                        <div class="circle-tile-content purple">
+                                            <div class="circle-tile-description text-faded"> Prticipación Foros </div>
+                                            <div class="circle-tile-number text-faded ">10</div>
+                                            <a class="circle-tile-footer" href="#">Ver <i class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </div>
+                        
+                    </div>
+
+
+
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

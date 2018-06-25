@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load el_pagination_tags %}
+{% load embed_video_tags %}
+
+{% block content %}
+<style type="text/css">
+.fund-pagination span {
+    height: 40px;
+    display: inline-block;
+    width: 40px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid #cccccc;
+    border-radius: 100%;
+    color: #1e3042;
+    margin-right: 15px;
+}
+.filter-options > li > a.active:before {
+    bottom: -7px;
+    opacity: 0;
+}
+</style>
+<div class="banner-area banner-area--blog all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">GALERIA</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li>Galerias {% if request.path == '/galerias/imagenes/' %}imagenes{%else%}videos{% endif %} </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>	
+<div class="main-content section-padding">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-3" >
+                <aside class="sidebar">
+                    <div class="widget widget--category">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">TEMAS</h4>
+                        </div>
+                        <div class="widget__text-content">
+                            <ul class="filter-options">
+                                <li><a href="{% if '/galerias/imagenes/' in request.path %}/galerias/imagenes/{% else %}/galerias/videos/{% endif %}" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_galerias}}</span></li>
+                                {% for x,y in dic_temas.items %}
+                                <li><a href="{% if '/galerias/imagenes/' in request.path %}
+                                                {% url 'filtro_temas_img' x.id %}
+                                            {% else %}
+                                                {% url 'filtro_temas_vid' x.id %}
+                                            {% endif %}
+                                " class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
+                               
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    
+                </aside>    
+            </div>
+            <div class="col-md-9">
+                
+                <div class="row row-eq-height" id="mixitup-grid">
+
+                    {% paginate 8 object_list %}
+                    {% for object in object_list %}
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mix mix todos {{object.tematica.id}}" style="display: inline-block;" data-bound="">
+                            <div class="blog-post gallery-costum">
+                                <div class="blog-post__thumbnail-wrap">
+                                	{% if object.portada %}
+	                                	{% thumbnail object.portada "410x250" crop="center" as im %}
+	                                        <a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">
+	                                            <img src="{{im.url}}" class="" alt="" width="100%">
+	                                        </a>
+	                                    {% empty %}   
+	                                        <a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">
+	                                            <img src="http://via.placeholder.com/410x250" class="" alt="">
+	                                        </a>
+	                                    {% endthumbnail %}
+                                	{% else %}
+                                		{% video object.url as my_video %}
+	                                        {% thumbnail my_video.thumbnail "410x250" crop="center" as im %}
+	                                          <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+	                                        {% empty %}   
+	                                          <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+	                                        {% endthumbnail %}
+	                                    {% endvideo %}
+                                	{% endif %}
+                                    
+                                </div>
+                                <div class="blog-post__text-content">
+                                    <h4 class="blog-post__title heading-label-four"><a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">{{object.titulo}}</a></h4>
+                                    <div class="blog-post__meta-info">
+                                        <span class="small-text"><i class="fa fa-tags base-color"></i>{{object.tematica}}</span>
+                                    </div>
+                                </div>
+                            </div><!--/.blog-post-->
+                        </div>
+
+                        
+                    {% endfor %}
+                </div>
+                <div class="fund-pagination mb30">
+                    {% show_pages %} 
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+            <!-- <form class="form-horizontal" action='.' method='GET'>
+                  <select name="tematica" class="form-control">
+                    <option value="">------</option>
+                    {% for tema in tematicas %}
+                        <option value="{{tema.id}}">{{tema}}</option>
+                    {% endfor %}
+                  </select>
+                  <button type="submit" class="btn btn-success">Consultar</button>
+                </form> -->
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block content %}
+<div class="banner-area banner-area--blog all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">{{object.titulo}}</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="/galerias/imagenes/">Galerias imagenes</a> </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="row wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+            <div class="col-md-12">
+                <div class="row row-eq-height" id="mixitup-grid">
+                    {% for galeria in object.imagenes_set.all %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
+                        
+                        <a class="gallery-item cboxElement" href="/media/{{galeria.imagen}}">
+                            {% thumbnail galeria.imagen "380x250" crop="center" as im %}
+                                <img class="gallery-item__photo lazy" src="{{im.url}}" style="display: inline;">
+                             {% endthumbnail %}
+                            <div class="loader loder-hide"></div>
+                        </a><!--/.portfolio-item-->
+                       
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

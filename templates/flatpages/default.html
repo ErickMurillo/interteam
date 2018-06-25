@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="blog-section section-padding ash-white-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h2 class="section-title wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">{{flatpage.title}}</h2>
+                    <div class="section-heading-separator wow fadeInUpXsd" data-wow-duration="1.1s" data-wow-delay=".1s"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+            	<p>{{flatpage.content|safe}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

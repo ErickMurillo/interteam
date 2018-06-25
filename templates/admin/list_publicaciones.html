@@ -1,0 +1,23 @@
+{% extends "admin/base_admin.html" %}
+{% load thumbnail %}
+
+{% block content %}
+<div class="main-content section-padding">
+    <div class="container">
+    	<a href="/contrapartes/publicaciones/agregar/">Agregar</a>	
+        <div class="row">
+			{% for publicacion in object_list %}
+			<div class="col-sm-6 col-xs-12">
+					{{publicacion.titulo}}<a href="{% url 'editar-publicacion' publicacion.id %}">editar</a> <a href="{% url 'eliminar-publicacion' publicacion.id %}">eliminar</a>
+					{% thumbnail publicacion.imagen "380x250" crop="center" as im %}
+			            <img src="{{im.url}}" alt="blog" width="100%">  
+			        {% empty %}   
+			          <img src="http://via.placeholder.com/380x250" alt="blog details" width="100%">
+			        {% endthumbnail %}
+			</div>	
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block content %}  
+<div class="banner-area banner-area--blog all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">ÚLTIMAS NOTICIAS</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="blog.html">Últimas noticias</a> </li>
+                    <li>Noticia</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-details">
+                    <div class="blog-details-top mb40">
+                        <div class="blog-details-image mb10">
+                            {% if nota.tipo == 1 %}
+                            {% thumbnail nota.foto "640x480" crop="center" as im %}
+                                <img src="{{im.url}}" alt="blog" width="100%">  
+                            {% empty %}   
+                              <img src="http://via.placeholder.com/640x480" alt="blog details" width="100%">
+                            {% endthumbnail %}
+                          {% elif nota.tipo == 2 %}
+                            {% video nota.video as my_video %}
+                                {% video my_video '750x485' %}
+                            {% endvideo %}
+                          {% endif %}
+                        </div>
+                        <div class="blog-details-top__text-content">
+                            <h3 class="blog-details__title">{{nota.titulo}}</h3>
+                            <div class="blog-details__meta">
+                                <div class="blog-details__meta-item base-color"><i class="fa fa-calendar pdr5"></i>{{nota.fecha}}</div>
+                                <div class="blog-details__meta-item"><i class="fa fa-building pdr5"></i>{{nota.user.userprofile.contraparte.siglas}}</div>
+                                <div class="blog-details__meta-item"><i class="fa fa-user pdr5"></i>{{nota.user}}</div>
+                                <div class="blog-details__meta-item"><i class="fa fa-comments-o pdr5"></i>5</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {{nota.contenido|safe}}
+
+                    <!--<h3>Imagenes</h3>
+                    {% for img in nota.fotos.all %}
+                        {% thumbnail img.foto "280x150" crop="center" as im %}
+                            <img src="{{im.url}}" alt="blog" >  
+                        {% endthumbnail %}
+                    {% endfor %}
+                    <br>
+                    <h3>Adjuntos</h3>
+                    {% for doc in nota.adjuntos.all %}
+                        <p><a href="/media/{{doc.adjunto}}">{{doc.nombre_doc}}</a></p>
+                    {% endfor %}-->
+
+                    <br/><br/>
+                    
+                    <div class="social-icons ">
+                        <span>Compartir : </span>
+                        <ul class="list-inline pdl20">
+                            <li><a href="#"><i class="fa fa-facebook"></i> </a> </li>
+                            <li><a href="#"><i class="fa fa-twitter"></i> </a> </li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i> </a> </li>
+
+                        </ul>
+                    </div>
+                    <!--<div class="blog-details-bottom mt40">
+                        <div class="blog-details-navigation mt35 mb50">
+                            <a href="#" class="previous-post">Anterior Noticia </a>
+                            <a href="#" class="next-post pull-right" >Siguiente Noticia</a>
+                        </div>
+                    </div>-->
+<!--                         <div class="author-info">
+                        <div class="author-info__image-wrap">
+                            <img src="images/blog/author.jpg" class="img-circle" alt="">
+                        </div>
+                        <div class="author-info__text-content">
+                            <h5 class="author-info__name base-color">John Joe</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec justo the fringilla, laoreet mauris vitae, fringilla elit. Curabitur semper tristique nisi, at leo ornare rutrum. Proin lacinia the vulputate urna,</p>
+                        </div>
+                    </div> -->
+                    <!-- <div class="comments-wrap pdt50 mt45">
+                        <h3 class="comments-title">5 COMMENTS</h3>
+                        <div class="single-comment-wrap">
+                            <div class="single-comment">
+                                <div class="single-comment__image">
+                                    <img src="images/blog/comment1.jpg" class="img-circle" alt="">
+                                </div>
+                                <div class="single-comment__text-content">
+                                    <h4 class="single-comment__name">Ibrahim ibn al-Walid</h4>
+                                    <a href="#" class="single-comment__reply-button base-color">Reply</a>
+                                    <em class="single-comment__time-ago">23 minutes</em>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec justo fringilla, laoreet mauris vitae, fringilla elit. Curabitur semper tristique nisi, at ultricies leo ornare rutrum. Proin laci vulputate urna, non pharetra ligula finibus nec. Vestibulum id mattis risus.</p>
+                                </div>
+                            </div>
+                            <div class="single-comment-wrap">
+                                <div class="single-comment">
+                                    <div class="single-comment__image">
+                                        <img src="images/blog/comment2.jpg" class="img-circle" alt="">
+                                    </div>
+                                    <div class="single-comment__text-content">
+                                        <h4 class="single-comment__name">Ibrahim ibn al-Walid</h4>
+                                        <a href="#" class="single-comment__reply-button base-color">Reply</a>
+                                        <em class="single-comment__time-ago">18 minutes</em>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec justo fringilla, laoreet mauris vitae, fringilla elit. Curabitur semper tristique nisi, at ultricies leo ornare rutrum. Proin laci vulputate urna, non pharetra ligula finibus nec. Vestibulum id mattis risus.</p>
+                                    </div>
+                                </div>
+                                <div class="single-comment-wrap">
+                                    <div class="single-comment">
+                                        <div class="single-comment__image">
+                                            <img src="images/blog/comment3.jpg" class="img-circle" alt="">
+                                        </div>
+                                        <div class="single-comment__text-content">
+                                            <h4 class="single-comment__name">Admin</h4>
+                                            <a href="#" class="single-comment__reply-button base-color">Reply</a>
+                                            <em class="single-comment__time-ago">16 minutes</em>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec justo fringilla, laoreet mauris vitae, fringilla elit. Curabitur semper tristique nisi, at ultricies leo ornare rutrum. Proin laci vulputate urna, non pharetra ligula finibus nec. Vestibulum id mattis risus.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-comment-wrap">
+                            <div class="single-comment">
+                                <div class="single-comment__image">
+                                    <img src="images/blog/comment1.jpg" class="img-circle" alt="">
+                                </div>
+                                <div class="single-comment__text-content">
+                                    <h4 class="single-comment__name">Admin</h4>
+                                    <a href="#" class="single-comment__reply-button base-color">Reply</a>
+                                    <em class="single-comment__time-ago">23 Days</em>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec justo fringilla, laoreet mauris vitae, fringilla elit. Curabitur semper tristique nisi, at ultricies leo ornare rutrum. Proin laci vulputate urna, non pharetra ligula finibus nec. Vestibulum id mattis risus.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-comment-wrap">
+                            <div class="single-comment">
+                                <div class="single-comment__image">
+                                    <img src="images/blog/comment4.jpg" class="img-circle" alt="">
+                                </div>
+                                <div class="single-comment__text-content">
+                                    <h4 class="single-comment__name">Uthman ibn Affan</h4>
+                                    <a href="#" class="single-comment__reply-button base-color">Reply</a>
+                                    <em class="single-comment__time-ago">Nov, 23, 2013</em>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec justo fringilla, laoreet mauris vitae, fringilla elit. Curabitur semper tristique nisi, at ultricies leo ornare rutrum. Proin laci vulputate urna, non pharetra ligula finibus nec. Vestibulum id mattis risus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="leave-comment pdt50 mt20 mb30">
+                        <h3 class="leave-comment__title text-uppercase">Comentar Noticias</h3>
+                        {% load disqus_tags %}
+                        {% disqus_show_comments %}
+                        <!--<form class="leave-comment__form mt40">
+                            <div class="input-group">
+                                <textarea class="input-group__textarea form-control" placeholder="Mensaje" rows="8" cols="80"></textarea>
+                            </div>
+                            <input type="submit" class="btn base-bg" value="Comentar"/>
+                        </form>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <aside class="sidebar">
+                    <div class="widget">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">PRÓXIMOS <span class="base-color">EVENTOS</span></h4>
+                        </div>
+                        <div class="widget__text-content">
+                            <div class="upcomming-event-carousel" id="upcomming-event-carousel">
+                                {% for evento in eventos %}
+                                    <div class="upcomming-event-carousel__item">
+                                    <div class="image text-center">
+                                        <a href="{% url "agenda-detail" evento.slug %}">
+                                            {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
+                                            {% empty %}
+                                            <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                            {% endthumbnail %}
+                                        <h4 class="upcomming-event-carousel__title">{{evento.evento}}</h4></a>
+
+                                    </div>
+                                    <div class="event-counter">
+                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
+                                    </div>
+                                </div><!--/.upcomming-event-carousel__item-->
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget widget--category">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">TEMAS</h4>
+                        </div>
+                        <div class="widget__text-content">
+                            <ul>
+                                {% for x,y in dic_temas.items %}
+                                    <li><a href="{% url "filtro-temas" x %}" class="pdr10">{{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
+                                
+                            </ul>
+
+                        </div>
+                    </div>
+                    
+                    <div class="widget">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">ÚLTIMAS <span class="base-color">NOTICIAS</span></h4>
+                        </div>
+                        <div class="widget__text-content">
+                            {% for ultima_nota in ultimas_notas %}
+                            <div class="widget-latest-causes">
+                                <div class="widget-latest-causes__image-wrap">
+                                    <a href="{% url "detalle-notas" ultima_nota.slug %}">
+                                        {% if ultima_nota.tipo == 1 %}
+                                            {% thumbnail ultima_nota.foto "380x250" crop="center" as im %}
+                                                <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+                                            {% empty %}   
+                                              <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                            {% endthumbnail %}
+                                          {% elif ultima_nota.tipo == 2 %}
+                                            {% video ultima_nota.video as my_video %}
+                                                {% thumbnail my_video.thumbnail "380x250" crop="center" as im %}
+                                                  <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">  
+                                                {% empty %}   
+                                                  <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                                {% endthumbnail %}
+                                            {% endvideo %}
+                                          {% endif %}
+                                    </a>
+                                </div>
+                                <div class="widget-latest-causes__text-content">
+                                    <h4 class="widget-latest-causes__title"><a href="{% url "detalle-notas" ultima_nota.slug %}">{{ultima_nota.titulo}}</a></h4>
+                                    <div class="widget-latest-causes__admin small-text">
+                                        <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
+                                        <a href="#">{{ultima_nota.user.userprofile.contraparte.siglas}}</a>
+                                    </div>
+                                    <div class="widget-latest-causes__time text-mute">
+                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> {{ultima_nota.fecha}}</span>
+
+                                    </div>
+                                </div>
+                            </div><!--/.widget-latest-causes-->
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="widget widget--tags">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">TAG</h4>
+                        </div>
+                        <div class="widget__text-content"> 
+                            {% for tag in nota.tags.all %}
+                                <a href="#">{{ tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+   
+{% endblock content %}

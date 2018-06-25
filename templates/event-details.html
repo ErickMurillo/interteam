@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+<div class="banner-area banner-area--events all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">Eventos</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="/eventos/">Lista Eventos</a> </li>
+                    <li><a href="#">Evento</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="event-detial-wrap">
+                    <div class="image-wrap mb40">
+                        {% thumbnail evento.foto "640x480" crop="center" as im %}
+                        <img class="img-round" src="{{im.url}}" alt="" width="100%">
+                        {% empty %}
+                        <img class="img-round" src="http://via.placeholder.com/640x480" alt="" width="100%">
+                        {% endthumbnail %}
+                    </div>
+                    <h3 class="pdb10">{{evento.evento}}</h3>
+                    {{evento.descripcion|safe}}
+                    <ul class="event-detail-meta nv-color">
+                        <li>
+                            <span class="event-detail-meta__title"><i class="fa fa-calendar base-color icon"></i> Horario del evento</span>
+                            <span class="desc">{{evento.inicio}} {{evento.hora_inicio|time:"f A"}} - {{evento.hora_fin|time:"f A"}}</span>
+                        </li>
+                        <li>
+                            <span class="event-detail-meta__title"><i class="fa fa-map-marker base-color icon"></i> Lugar</span>
+                            <span class="desc">{{evento.lugar}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="event-details-counter-wrap mt50 mb30">
+                    <div class="event-counter">
+                        <div id="event-counter-four" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
+                    </div>
+                    <div class="buy-ticket all-text-white">
+                        <a href="#" class="btn base-bg">Confirmar Participación</a>
+                    </div>
+                </div>
+                <!--<div>
+                    <p>Tras la realización de seis Foros Territoriales y un Foro Académico, se llevó a cabo el Foro Nacional “Sector Privado en la Agenda de Desarrollo Sostenible de Nicaragua”, con el objetivo de enfrentar los desafíos ambientales que enfrentamos como sociedad, involucrando a distintos sectores, entre ellos a las cámaras empresariales, a la iglesia y a la sociedad civil.</p>
+                    <p>El foro se realizó gracias al apoyo de la Embajada de Alemania en Nicaragua y el organismo internacional CAFOD, contando con la participación de líderes y lideresas empresariales, representantes de universidades y de la iglesia católica. </p>
+                </div>-->
+                <!--<div class="event-shedule-wrap pdt15">
+                    <h3>AGENDA DEL EVENTO</h3>
+                    <div class="event-shedules mt40">
+                        <div class="event-shedule">
+                            <div class="event-shedule__time">
+                                9:00 - 10:00 AM
+                            </div>
+                            <div class="event-shedule__text-content">
+                                <h5 class="event-shedule__title">Apertura</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div class="event-shedule">
+                            <div class="event-shedule__time">
+                                9:00 - 10:00 AM
+                            </div>
+                            <div class="event-shedule__text-content">
+                                <h5 class="event-shedule__title">Presentacion de avances</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div class="event-shedule">
+                            <div class="event-shedule__time">
+                                9:00 - 10:00 AM
+                            </div>
+                            <div class="event-shedule__text-content">
+                                <h5 class="event-shedule__title">Refrigerio</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-details-location-wrap mt40 pdt50">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="location-text-content mb30">
+                                <h3>INFORMACIÓN DE CONTACTO</h3>
+                                
+                                <ul>
+                                    <li><span class="loc-icon"><i class="fa fa-map-marker base-color"></i></span>Managua, Hotel Las Mercedes, </li>
+                                    <li><span class="loc-icon"><i class="fa fa-phone base-color"></i></span>+505 22 56 0789 - +505 5678 9099</li>
+                                    <li><span class="loc-icon"><i class="fa fa-ticket base-color"></i></span>correo@correo.com - correo@correo.com</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div id="mapContainer"></div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="blog-details-navigation mt25 pdb30">
+                    <a href="#" class="previous-post">Anterior Evento</a>
+                    <a href="#" class="next-post pull-right">Siguiente Evento</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <aside class="sidebar">
+                    <form class="search-form widget">
+                        <input type="search" placeholder="Buscar" class="form-control search-form__input" />
+                        <button type="submit" class="search-form__submit"><i class="fa fa-search base-color"></i> </button>
+                    </form>
+                    <div class="widget">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">PRÓXIMOS <span class="base-color">EVENTOS</span></h4>
+                        </div>
+                        <div class="widget__text-content">
+                            <div class="upcomming-event-carousel" id="upcomming-event-carousel">
+                                {% for evento in prox_eventos %}
+                                    <div class="upcomming-event-carousel__item">
+                                    <div class="image text-center">
+                                        <a href="#">
+                                            {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
+                                            {% empty %}
+                                            <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                            {% endthumbnail %}
+                                        <h4 class="upcomming-event-carousel__title">{{evento.evento}}</h4></a>
+
+                                    </div>
+                                    <div class="event-counter">
+                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
+                                    </div>
+                                </div><!--/.upcomming-event-carousel__item-->
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">ÚLTIMAS <span class="base-color">NOTICIAS</span></h4>
+                        </div>
+                       <div class="widget__text-content">
+                            {% for ultima_nota in ultimas_notas %}
+                            <div class="widget-latest-causes">
+                                <div class="widget-latest-causes__image-wrap">
+                                    <a href="{% url "detalle-notas" ultima_nota.slug %}">
+                                        {% thumbnail ultima_nota.foto "380x250" crop="center" as im %}
+                                            <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="">
+                                        {% empty %}
+                                        <img class="widget-latest-causes__thubnail" src="http://via.placeholder.com/380x250" alt="">
+                                        {% endthumbnail %}
+                                    </a>
+                                </div>
+                                <div class="widget-latest-causes__text-content">
+                                    <h4 class="widget-latest-causes__title"><a href="{% url "detalle-notas" ultima_nota.slug %}">{{ultima_nota.titulo}}</a></h4>
+                                    <div class="widget-latest-causes__admin small-text">
+                                        <i class="base-color fa fa-user widget-latest-causes__admin-icon"></i>
+                                        <a href="#">{{ultima_nota.user.userprofile.contraparte.siglas}}</a>
+                                    </div>
+                                    <div class="widget-latest-causes__time text-mute">
+                                        <span class="small-text"><i class="fa fa-calendar base-color"></i> {{ultima_nota.fecha}}</span>
+
+                                    </div>
+                                </div>
+                            </div><!--/.widget-latest-causes-->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
