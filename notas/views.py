@@ -12,6 +12,8 @@ from publicaciones.models import *
 from galerias.models import *
 from opiniones.models import *
 from .forms import *
+from biblioteca.models import *
+from configuracion.models import *
 # from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # import thread
@@ -41,6 +43,9 @@ def index(request,template='index.html'):
 
 	#opiniones
 	opiniones = Opiniones.objects.order_by('-id')
+
+	#banner
+	banners = BannerIndex.objects.all()
 
 	return render(request, template, locals())
 
@@ -104,7 +109,11 @@ def filtro_temas(request, temas, template='blog.html'):
 	return render(request, template, locals()) 
 
 def publicaciones(request, template='publicaciones.html'):
-	object_list = Publicacion.objects.order_by('-id')
+	if request.GET.get('query'):
+		search_query = request.GET['query']
+		object_list = Publicacion.objects.filter(titulo__icontains = search_query).order_by('-id')
+	else:
+		object_list = Publicacion.objects.order_by('-id')
 
 	return render(request, template, locals())
 
@@ -116,4 +125,8 @@ def organizaciones(request, template='organizaciones.html'):
 def detalle_organizacion(request, slug, template='detalle_org.html'):
 	object = get_object_or_404(Contraparte, slug=slug)
 
+	return render(request, template, locals())
+
+def biblioteca_list(request, template='biblioteca.html'):
+	object_list = Archivos.objects.order_by('-id')
 	return render(request, template, locals())

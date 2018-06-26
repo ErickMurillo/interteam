@@ -27,7 +27,7 @@
 			</section>
 			<seccion>
 				<div class="comments-wrap pdt50 mt45">
-                    <h3 class="comments-title">5 APORTES</h3>
+                    <h3 class="comments-title">{{discusion.aportes_set.all.count}} APORTES</h3>
                     <hr>
                     {% for aporte in aportes %}
                     	<div class="single-comment-wrap">
@@ -44,7 +44,6 @@
 		                            	{% if request.user == discusion.contraparte %}
 											<a class="btn btn-success btn-small-special" href="{% url 'editar-aporte' aporte.id %}"><i class="fa fa-pencil"></i></a>
 											<a class="btn btn-danger btn-small-special" href="{% url 'eliminar-aporte' aporte.id %}"><i class="fa fa-trash"></i></a>
-
 										{% endif %}
 		                            </div>
 		                            <br>
