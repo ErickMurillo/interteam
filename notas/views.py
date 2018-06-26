@@ -103,7 +103,7 @@ def filtro_temas(request, temas, template='blog.html'):
 
 	return render(request, template, locals()) 
 
-def publicaciones(request, template='biblioteca.html'):
+def publicaciones(request, template='publicaciones.html'):
 	object_list = Publicacion.objects.order_by('-id')
 
 	return render(request, template, locals())
