@@ -1,0 +1,38 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="main-content">
+        <div class="container ">
+            <div class="row stickem-container prueba">
+                <section>
+                    <div class="blog-details-top mb40 main-contact">
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                      
+                                        <select class="form-control input-group__input">
+                                            <option>Destinatario</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" placeholder="Asunto" class="input-group__input form-control" />
+                            </div>
+                            <div class="input-group">
+                                <textarea class="input-group__textarea form-control" placeholder="Mensaje" rows="8" cols="80"></textarea>
+                            </div>
+                            <input type="submit" class="btn base-bg" value="Enviar">
+
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
