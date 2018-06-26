@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'taggit_autosuggest',
     'el_pagination',
     'embed_video',
-    # 'disqus',
+    'disqus',
 ]
 
 SITE_ID = 1
