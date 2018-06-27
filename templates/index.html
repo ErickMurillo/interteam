@@ -3,6 +3,14 @@
 {% load embed_video_tags %}
 
 {% block content %}
+<style type="text/css">
+    .rev_slider .tp-caption, .rev_slider .caption{
+
+        background: rgba(0, 0, 0, 0.5);
+        padding: 15px !important;
+    }
+
+</style>
 <div class="slider-area">
 
         <div data-scroll-index="0" id="rev_slider_1052_1_wrapper" class="all-text-white rev_slider_wrapper fullscreen-container" data-alias="web-product-dark122" data-source="gallery">
@@ -14,53 +22,56 @@
                <li data-index="rs-294{{banner.id}}" data-transition="fade" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="1500"  data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" >
                    <!-- MAIN IMAGE -->
                    
-                    {% thumbnail banner.imagen "720x440" as im %}
+                    {% thumbnail banner.imagen "1920x940" as im %}
                         <img src="{{im.url}}" alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                     {% endthumbnail %}
                    
-                   <!-- LAYERS 1-->
-                   <div class="tp-caption tp-resizeme"
-                        id="slide-294{{banner.id}}-layer-7"
-                       data-x="['middle','middle','middle','middle']"
-                       data-hoffset="['-237','-217',0,'0']"
-                       data-y="['middle','middle','middle','middle']"
-                       data-voffset="['-60','-60','-60','-60']"
-                       data-fontsize="['48','48','48','30']"
-                       data-lineheight="['60','60','50','30']"
-                       data-width="['710','710','none','none']"
-                       data-height="none"
-                       data-whitespace="wrap"
-                       data-type="text"
-                       data-responsive_offset="on"
-                       data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]'
-                       data-textAlign="['left','left','center','center']"
-                       data-paddingtop="[0,0,0,0]"
-                       data-paddingright="[0,0,0,0]"
-                       data-paddingbottom="[0,0,0,0]"
-                       data-paddingleft="[0,0,0,0]"
-                       ><span class="slider-title">{{banner.titulo}}</span></div>
-                   <!-- LAYER NR. 2 -->
-                   <div class="tp-caption tp-resizeme slider-sub-heading-wrap"
-                       id="slide-294{{banner.id}}-layer-10"
-                       data-x="['middle','middle','middle','middle']"
-                       data-hoffset="['-237','-217',0,'0']"
-                       data-y="['middle','middle','middle','middle']"
-                       data-voffset="['40','40','40','20']"
-                       data-fontsize="['20','20','20','20']"
-                       data-lineheight="['24','24','24','24']"
-                       data-width="['710','710','510','300']"
-                       data-height="none"
-                       data-whitespace="wrap"
-                       data-type="text"
-                       data-responsive_offset="on"
-                       data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1250,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]'
-                       data-textAlign="['left','left','center','center']"
-                       data-paddingtop="[0,0,0,0]"
-                       data-paddingright="[0,0,0,0]"
-                       data-paddingbottom="[0,0,0,0]"
-                       data-paddingleft="[0,0,0,0]">
-                       <span class="slider-sub-heading">{{banner.texto}}</span></div>
-                   <!-- LAYER NR. 3 -->
+                   <div class="texto-banner">
+                       <!-- LAYERS 1-->
+                       <div class="tp-caption tp-resizeme"
+                            id="slide-294{{banner.id}}-layer-7"
+                           data-x="['middle','middle','middle','middle']"
+                           data-hoffset="['-237','-217',0,'0']"
+                           data-y="['middle','middle','middle','middle']"
+                           data-voffset="['-60','-60','-60','-60']"
+                           data-fontsize="['48','48','48','30']"
+                           data-lineheight="['60','60','50','30']"
+                           data-width="['710','710','none','none']"
+                           data-height="none"
+                           data-whitespace="wrap"
+                           data-type="text"
+                           data-responsive_offset="on"
+                           data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1000,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]'
+                           data-textAlign="['left','left','center','center']"
+                           data-paddingtop="[0,0,0,0]"
+                           data-paddingright="[0,0,0,0]"
+                           data-paddingbottom="[0,0,0,0]"
+                           data-paddingleft="[0,0,0,0]"
+                           ><span class="slider-title">{{banner.titulo}}</span>
+                       </div>
+                       <!-- LAYER NR. 2 -->
+                       <div class="tp-caption tp-resizeme slider-sub-heading-wrap"
+                           id="slide-294{{banner.id}}-layer-10"
+                           data-x="['middle','middle','middle','middle']"
+                           data-hoffset="['-237','-217',0,'0']"
+                           data-y="['middle','middle','middle','middle']"
+                           data-voffset="['40','40','40','20']"
+                           data-fontsize="['20','20','20','20']"
+                           data-lineheight="['24','24','24','24']"
+                           data-width="['710','710','510','300']"
+                           data-height="none"
+                           data-whitespace="wrap"
+                           data-type="text"
+                           data-responsive_offset="on"
+                           data-frames='[{"from":"x:-50px;opacity:0;","speed":1000,"to":"o:1;","delay":1250,"ease":"Power2.easeOut"},{"delay":"wait","speed":1500,"to":"opacity:0;","ease":"Power4.easeIn"}]'
+                           data-textAlign="['left','left','center','center']"
+                           data-paddingtop="[0,0,0,0]"
+                           data-paddingright="[0,0,0,0]"
+                           data-paddingbottom="[0,0,0,0]"
+                           data-paddingleft="[0,0,0,0]">
+                           <span class="slider-sub-heading">{{banner.texto}}</span>
+                       </div>
+                   </div>
                    
 
                </li>
@@ -116,7 +127,7 @@
        </div><!-- END REVOLUTION SLIDER -->
     </div>
    <div class="body-overlay"></div>
-  <section class="blog-section section-padding ash-white-bg">
+<section class="blog-section section-padding ash-white-bg">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -303,16 +314,16 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="about-us-carousel mb30">
-                    {% for img in imagenes_prop %}
-                      <div>
-                        {% thumbnail img.imagen "750x400" crop="center" as im %}
-                            <img src="{{im.url}}" alt="">
-                        {% endthumbnail %}
-                        
+                    <div>
+                        <img src="http://www.simas.org.ni/media/cache/f5/66/f566a2ace586ed303e9da62ed3212624.jpg" alt="">
                     </div>
-                    {% endfor %}
-                    
+                    <div>
+                        <img src="http://www.simas.org.ni/media/cache/8d/a1/8da118cb266a5dce1919f23614a69244.jpg" alt="">
                     </div>
+                    <div>
+                        <img src="http://www.simas.org.ni/media/cache/ee/6c/ee6c7fb21d4ed1519c9be6e22aad0081.jpg" alt="">
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="about-us-text-content mb30">
