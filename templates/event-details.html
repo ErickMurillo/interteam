@@ -56,57 +56,35 @@
                 <div class="event-shedule-wrap pdt15">
                     <h3>AGENDA DEL EVENTO</h3>
                     <div class="event-shedules mt40">
-                        <div class="event-shedule">
+                        {% for agenda in evento.agendaevento_set.all %}
+                           <div class="event-shedule">
                             <div class="event-shedule__time">
-                                9:00 - 10:00 AM
+                                {{agenda.hora_inicio|time:"f"}} - {{agenda.hora_fin|time:"f A"}}
                             </div>
                             <div class="event-shedule__text-content">
-                                <h5 class="event-shedule__title">Apertura</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua.</p>
+                                <h5 class="event-shedule__title">{{agenda.actividad}}</h5>
+                                <p>{{agenda.descripcion}}</p>
                             </div>
-                        </div>
-                        <div class="event-shedule">
-                            <div class="event-shedule__time">
-                                9:00 - 10:00 AM
-                            </div>
-                            <div class="event-shedule__text-content">
-                                <h5 class="event-shedule__title">Presentacion de avances</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                        <div class="event-shedule">
-                            <div class="event-shedule__time">
-                                9:00 - 10:00 AM
-                            </div>
-                            <div class="event-shedule__text-content">
-                                <h5 class="event-shedule__title">Refrigerio</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua.</p>
+                        </div> 
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="event-details-location-wrap mt40 pdt50">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="location-text-content mb30">
+                                <h3>DOCUMENTOS</h3>
+                                
+                                <ul>
+                                    {% for doc in evento.adjunto.all %}
+                                        <li><span class="loc-icon"><i class="fa fa-file base-color"></i></span><a href="/media/{{doc.adjunto}}/" download>{{doc.nombre_doc}}</a></li>
+                                    {% endfor %}
+                                    
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--<div class="event-details-location-wrap mt40 pdt50">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="location-text-content mb30">
-                                <h3>INFORMACIÓN DE CONTACTO</h3>
-                                
-                                <ul>
-                                    <li><span class="loc-icon"><i class="fa fa-map-marker base-color"></i></span>Managua, Hotel Las Mercedes, </li>
-                                    <li><span class="loc-icon"><i class="fa fa-phone base-color"></i></span>+505 22 56 0789 - +505 5678 9099</li>
-                                    <li><span class="loc-icon"><i class="fa fa-ticket base-color"></i></span>correo@correo.com - correo@correo.com</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div id="mapContainer"></div>
-                        </div>
-                    </div>
-                </div>-->
-                <!--<div class="blog-details-navigation mt25 pdb30">
-                    <a href="#" class="previous-post">Anterior Evento</a>
-                    <a href="#" class="next-post pull-right">Siguiente Evento</a>
-                </div>-->
             </div>
             <div class="col-md-4">
                 <aside class="sidebar">

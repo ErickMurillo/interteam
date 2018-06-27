@@ -11,6 +11,27 @@
 				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
 								{{form.media}}
 								{{form.as_p}}
+
+                <h4 class="blog-details__title">Agenda</h4>
+                  <hr>
+                  <div class="row">
+                  {{ formset.management_form }}
+                  {% for agenda in formset %}
+                    <div class="col-md-6">
+                      {% if agenda.errors %}
+                        {{agenda.errors}}
+                      {% endif %}
+                      
+                      {{agenda.id}}
+                      {{agenda.actividad}}
+                      {{agenda.hora_inicio}}
+                      {{agenda.hora_fin}}
+                      {{agenda.descripcion}}
+                      Eliminar: {{agenda.DELETE}}
+                    </div>
+                  {% endfor %}
+                  </div>
+
 								<input type="submit" name="Actualizar" value="Actualizar">
 							</form>
 						</div>
