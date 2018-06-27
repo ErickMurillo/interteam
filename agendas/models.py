@@ -39,3 +39,10 @@ class Agendas(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.evento)
         return super(Agendas, self).save(*args, **kwargs)
+
+class AgendaEvento(models.Model):
+    evento = models.ForeignKey(Agendas,on_delete=models.DO_NOTHING)
+    actividad = models.CharField(max_length=200)
+    hora_inicio = models.TimeField('Hora inicio')
+    hora_fin = models.TimeField('Hora fin')
+    descripcion = models.CharField(max_length=600)

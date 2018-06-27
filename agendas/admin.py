@@ -28,8 +28,12 @@ class DocumentosInline(GenericTabularInline):
     model = Documentos
     extra = 1
 
+class AgendaEventoInline(admin.TabularInline):
+    model = AgendaEvento
+    extra = 1
+
 class AgendasAdmin(admin.ModelAdmin):
-    inlines = [DocumentosInline,]
+    inlines = [AgendaEventoInline,DocumentosInline]
     # form = AgendaForm
     #class Media:
     #    js = ['../files/js/tiny_mce/tiny_mce.js',
