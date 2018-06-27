@@ -176,8 +176,8 @@ CKEDITOR_CONFIGS = {
 
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 DISQUS_API_KEY = 'rZ2AINHqiAOGEAkPOnH3i91zOzLGw8mP38SUY2hIQezO8h60XbkYM0pe4rCyCHWT'
 DISQUS_WEBSITE_SHORTNAME = 'http-cluster-nicaragua-net'
