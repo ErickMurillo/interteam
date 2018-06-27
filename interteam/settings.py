@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'publicaciones',
     'galerias',
     'opiniones',
+    'biblioteca',
+    'configuracion',
 
     'ckeditor',
     'ckeditor_uploader',
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'taggit_autosuggest',
     'el_pagination',
     'embed_video',
-    # 'disqus',
+    #'disqus',
 ]
 
 SITE_ID = 1

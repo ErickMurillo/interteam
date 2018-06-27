@@ -9,13 +9,18 @@
            <!-- START REVOLUTION SLIDER 5.3.0.2 fullscreen mode -->
                <div id="rev_slider_1052_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.3.0.2">
            <ul> <!-- SLIDE  -->
-               <li data-index="rs-2946" data-transition="fade" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="1500"  data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" >
+            {% for banner in banners %}
+              
+               <li data-index="rs-294{{banner.id}}" data-transition="fade" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="1500"  data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" >
                    <!-- MAIN IMAGE -->
-                   <img src="/static/images/nuevo/banner1.jpg" alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                   
+                    {% thumbnail banner.imagen "720x440" as im %}
+                        <img src="{{im.url}}" alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                    {% endthumbnail %}
                    
                    <!-- LAYERS 1-->
                    <div class="tp-caption tp-resizeme"
-                        id="slide-2946-layer-7"
+                        id="slide-294{{banner.id}}-layer-7"
                        data-x="['middle','middle','middle','middle']"
                        data-hoffset="['-237','-217',0,'0']"
                        data-y="['middle','middle','middle','middle']"
@@ -33,10 +38,10 @@
                        data-paddingright="[0,0,0,0]"
                        data-paddingbottom="[0,0,0,0]"
                        data-paddingleft="[0,0,0,0]"
-                       ><span class="slider-title">Seguridad <br/>Alimentaria</span></div>
+                       ><span class="slider-title">{{banner.titulo}}</span></div>
                    <!-- LAYER NR. 2 -->
                    <div class="tp-caption tp-resizeme slider-sub-heading-wrap"
-                       id="slide-2946-layer-10"
+                       id="slide-294{{banner.id}}-layer-10"
                        data-x="['middle','middle','middle','middle']"
                        data-hoffset="['-237','-217',0,'0']"
                        data-y="['middle','middle','middle','middle']"
@@ -54,16 +59,14 @@
                        data-paddingright="[0,0,0,0]"
                        data-paddingbottom="[0,0,0,0]"
                        data-paddingleft="[0,0,0,0]">
-                       <span class="slider-sub-heading">Nuestra comida debería ser nuestra medicina y   <br/>nuestra medicina debería ser nuestra comida. </span></div>
+                       <span class="slider-sub-heading">{{banner.texto}}</span></div>
                    <!-- LAYER NR. 3 -->
                    
 
                </li>
-               <li data-index="rs-2947" data-transition="fade" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="1500"  data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" >
-                   <!-- MAIN IMAGE -->
+               {% endfor %}
+               <!--<li data-index="rs-2947" data-transition="fade" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="1500"  data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" >
                    <img src="/static/images/nuevo/banner1.jpg" alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-                   
-                   <!-- LAYERS 1-->
                    <div class="tp-caption tp-resizeme"
                         id="slide-2947-layer-7"
                        data-x="['middle','middle','middle','middle']"
@@ -84,7 +87,7 @@
                        data-paddingbottom="[0,0,0,0]"
                        data-paddingleft="[0,0,0,0]"
                        ><span class="slider-title">Seguridad <br/>Alimentaria</span></div>
-                   <!-- LAYER NR. 2 -->
+
                    <div class="tp-caption tp-resizeme slider-sub-heading-wrap"
                        id="slide-2947-layer-10"
                        data-x="['middle','middle','middle','middle']"
@@ -105,9 +108,8 @@
                        data-paddingbottom="[0,0,0,0]"
                        data-paddingleft="[0,0,0,0]">
                        <span class="slider-sub-heading">Nuestra comida debería ser nuestra medicina y   <br/>nuestra medicina debería ser nuestra comida. </span></div>
-                   <!-- LAYER NR. 3 -->
                    
-               </li>
+               </li>-->
            </ul>
            <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>  
          </div>
@@ -149,7 +151,7 @@
                         <div class="blog-post__like-comment">
                             <span><i class="fa fa-comments"></i>22 Comentarios</span>
                             <span>|</span>
-                            <span><i class="fa fa-eye"></i>105 Vistas</span>
+                            <span><i class="fa fa-eye"></i>{{nota.vistas}} Vistas</span>
                         </div>
                     </div>
                     <div class="blog-post__text-content">
@@ -191,7 +193,7 @@
                             </div>
                         </div>
                         <div class="upcomming-event__text-content">
-                            <h4 class="upcomming-event__title"><a href="#">{{evento.evento}}</a></h4>
+                            <h4 class="upcomming-event__title"><a href="{% url "agenda-detail" evento.slug %}">{{evento.evento}}</a></h4>
                             <div class="upcomming-event__meta-info">
                                 <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>{{evento.hora_inicio|time:"P"}} - {{evento.hora_fin|time:"P"}}  </span>
                                 <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>{{evento.lugar}}</span>
@@ -356,11 +358,37 @@
                         <div class="section-heading-separator section-heading-separator--small"></div>
                         {{org.generalidades|safe|truncatewords:"15"}}
                         <ul class="list-inline round-social-icons mb30">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                          {% for red in org.redes_set.all %}
+                          <li><a href="{{red.url}}">
+                                <i class="{% if red.opcion == 'Sitio web' %}
+                                                fa fa-globe
+                                            {% elif red.opcion == 'Facebook' %}
+                                                fa fa-facebook
+                                            {% elif red.opcion == 'Twitter' %}
+                                                fa fa-twitter
+                                            {% elif red.opcion == 'Youtube' %}
+                                                fa fa-youtube
+                                            {% elif red.opcion == 'Google+' %}
+                                                fa fa-google
+                                            {% elif red.opcion == 'Instagram' %}
+                                                fa fa-instagram
+                                            {% elif red.opcion == 'Linkedin' %}
+                                                fa fa-linkedin
+                                            {% elif red.opcion == 'Flickr' %}
+                                                fa fa-flickr
+                                            {% elif red.opcion == 'Pinterest' %}
+                                                fa fa-pinterest
+                                            {% elif red.opcion == 'Vimeo' %}
+                                                fa fa-vimeo
+                                            {% elif red.opcion == 'Otra' %}
+                                                fa fa-link
+                                            {% endif %}" aria-hidden="true" target="_blank"></i>
+                            </a>
+                          </li>
+                          {% endfor %}
+                            
                         </ul>
-                        <a href="#" class="btn">Leer más</a>
+                        <a href="{% url "detalle-organizacion" org.slug %}" class="btn">Leer más</a>
                     </div>
                 </div><!--/.fund-volunteer-->
             </div>

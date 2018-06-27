@@ -17,18 +17,15 @@
                                     <thead>
                                         <tr>
                                             <th>Publicación</th>
-                                            <th>Usuario</th>
                                             <th>Descarga</th>
-                                            
-                                            <th></th>
-                                            <th></th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     	{% for publicacion in object_list %}
                                 		<tr>
                                             <td>{{publicacion.titulo}}</td>
-                                            <td>falta</td>
                                             <td>
                                             	 <a href="" class="btn btn-info btn-small-special"><span class="fa fa-download"></span></a>
                                             </td>

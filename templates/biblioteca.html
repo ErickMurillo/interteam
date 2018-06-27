@@ -20,10 +20,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-title">Publicaciones</h1>
+                <h1 class="page-title">Biblioteca virtual</h1>
                 <ul class="fund-breadcumb">
                     <li><a href="/">Inicio</a> </li>
-                    <li><a href="#">Lista de publicaciones</a> </li>
+                    <li><a href="#">Biblioteca</a> </li>
                 </ul>
             </div>
         </div>
@@ -31,8 +31,7 @@
 </div>
 <div class="main-content section-padding">
     <div class="container">
-        <div class="row list-publicaciones"> 
-
+        <div class="row"> 
         {% paginate 6 object_list %}
         {% for object in object_list %}
              <div class="col-md-4 col-sm-12">
@@ -62,6 +61,3 @@
     </div>
 </div>
 {% endblock content %}
-
-
-

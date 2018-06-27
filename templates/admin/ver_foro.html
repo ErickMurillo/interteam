@@ -27,7 +27,7 @@
 			</section>
 			<seccion>
 				<div class="comments-wrap pdt50 mt45">
-                    <h3 class="comments-title">5 APORTES</h3>
+                    <h3 class="comments-title">{{discusion.aportes_set.all.count}} APORTES</h3>
                     <hr>
                     {% for aporte in aportes %}
                     	<div class="single-comment-wrap">
@@ -37,14 +37,13 @@
 	                            </div>
 	                            <div class="single-comment__text-content">
 	                                <h4 class="single-comment__name">{{aporte.user.get_full_name|default:aporte.user.username}}</h4>
-	                                <a href="#" class="single-comment__reply-button base-color">Comentar</a>
+	                                <a data-toggle="modal" href='#modal-id' class="single-comment__reply-button base-color">Comentar</a>
 	                                <em class="single-comment__time-ago"> {{aporte.fecha}}</em>
 	                                <p>{{aporte.contenido|safe}}</p>
 	                                <div>
 		                            	{% if request.user == discusion.contraparte %}
 											<a class="btn btn-success btn-small-special" href="{% url 'editar-aporte' aporte.id %}"><i class="fa fa-pencil"></i></a>
 											<a class="btn btn-danger btn-small-special" href="{% url 'eliminar-aporte' aporte.id %}"><i class="fa fa-trash"></i></a>
-
 										{% endif %}
 		                            </div>
 		                            <br>
@@ -89,5 +88,23 @@
 			
 		</div>
     </div>
+</div>
+
+<div class="modal fade" id="modal-id">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Comentar</h4>
+			</div>
+			<div class="modal-body">
+				aqui va el ck editor
+			</div>
+			<div class="modal-footer">
+				
+				<button type="button" class="btn btn-primary">Comentar</button>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock content %}
