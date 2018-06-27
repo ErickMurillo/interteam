@@ -303,16 +303,16 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="about-us-carousel mb30">
-                    <div>
-                        <img src="http://www.simas.org.ni/media/cache/f5/66/f566a2ace586ed303e9da62ed3212624.jpg" alt="">
+                    {% for img in imagenes_prop %}
+                      <div>
+                        {% thumbnail img.imagen "750x400" crop="center" as im %}
+                            <img src="{{im.url}}" alt="">
+                        {% endthumbnail %}
+                        
                     </div>
-                    <div>
-                        <img src="http://www.simas.org.ni/media/cache/8d/a1/8da118cb266a5dce1919f23614a69244.jpg" alt="">
+                    {% endfor %}
+                    
                     </div>
-                    <div>
-                        <img src="http://www.simas.org.ni/media/cache/ee/6c/ee6c7fb21d4ed1519c9be6e22aad0081.jpg" alt="">
-                    </div>
-                </div>
             </div>
             <div class="col-md-6">
                 <div class="about-us-text-content mb30">

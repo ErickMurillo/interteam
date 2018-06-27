@@ -47,6 +47,9 @@ def index(request,template='index.html'):
 	#banner
 	banners = BannerIndex.objects.all()
 
+	#banner porposito
+	imagenes_prop = BannerProposito.objects.order_by('id')
+
 	return render(request, template, locals())
 
 def logout_page(request):
