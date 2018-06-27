@@ -31,15 +31,8 @@
 </div>
 <div class="main-content section-padding">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-12">
-                <form class="search-form widget" action="." method="GET">
-                    <input id="query" type="search" name="query" placeholder="Buscar" class="form-control search-form__input" {% if search_query %}value="{{search_query}}"{% endif %}>
-                    <button type="submit" class="search-form__submit"><i class="fa fa-search base-color"></i> </button>
-                </form>
-            </div>
-        </div>
-        <div class="row"> 
+        <div class="row list-publicaciones"> 
+
         {% paginate 6 object_list %}
         {% for object in object_list %}
              <div class="col-md-4 col-sm-12">
