@@ -11,7 +11,7 @@
 
                         <div class="image-wrap profile-image">
                             <a href="{% url 'editar-contraparte' contraparte.slug %}" class="btn special-btn btn-small"><span class="fa fa-pencil base-color "></span></a>
-                            {% thumbnail contraparte.logo "260x240" crop="center" as im %}
+                            {% thumbnail contraparte.logo "260x240" crop="center" format='PNG' as im %}
                                 <img src="{{im.url}}" alt="" width="100%">
                             {% empty %}   
                               <img src="http://via.placeholder.com/260x240" alt="" width="100%">

@@ -37,7 +37,7 @@
             <div class="col-md-4 col-sm-12">
                 <div class="fund-volunteer text-center wow fadeInUpSmd" data-wow-duration="1.5s" data-wow-delay=".2s">
                     <div class="fund-volunteer__photo-wrap">
-                        {% thumbnail object.logo "120x120" crop="center" as im %}
+                        {% thumbnail object.logo "120x120" crop="center" format='PNG' as im %}
                             <img src="{{im.url}}" class="img-circle fund-volunteer__photo" alt="volunteer">
                         {% empty %}   
                           <img src="http://via.placeholder.com/120x120" class="img-circle fund-volunteer__photo" alt="volunteer">

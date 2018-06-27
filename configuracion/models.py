@@ -14,3 +14,12 @@ class BannerIndex(models.Model):
 	def __str__(self):
 		return self.titulo
 
+class BannerProposito(models.Model):
+	imagen = ImageField(upload_to='banner-proposito/',help_text='340x180')
+
+	class Meta:
+		verbose_name = 'Banner proposito'
+		verbose_name_plural = 'Banner proposito'
+
+	def __str__(self):
+		return 'Imagen %s' % (self.id)
