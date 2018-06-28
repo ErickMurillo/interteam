@@ -221,20 +221,15 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 	aportes = Aportes.objects.filter(foro = id).order_by('-id')
 	if request.method == 'POST':
 		form = AporteForm(request.POST)
-		form_comentario = ComentarioForm(request.POST, request.FILES)
 		if form.is_valid():
 			aporte = form.save(commit=False)
 			aporte.foro = discusion
 			aporte.user = request.user
 			aporte.save()
 			return redirect('ver-foro', id=discusion.id)
-
-		if form_comentario.is_valid():
-			return redirect('ver-foro', id=discusion.id)
 	else:
 		form = AporteForm()
-		form_comentario = AporteForm()
-		
+
 	return render(request, template, locals())
 
 @login_required
@@ -317,6 +312,46 @@ def eliminar_aporte(request, id):
 	aporte.delete()
 	return redirect('ver-foro', id=foro)
 
+@login_required
+def agregar_comentario(request, id, template='admin/comentario.html'):
+	object = get_object_or_404(Aportes, id=id)
+	if request.method == 'POST':
+		form = ComentarioForm(request.POST, request.FILES)
+		if form.is_valid():
+			form_uncommited = form.save(commit=False)
+			form_uncommited.aporte = object
+			form_uncommited.usuario = request.user
+			form_uncommited.save()
+
+			return redirect('ver-foro', id=object.foro.id)
+	else:
+		form = ComentarioForm()
+
+	return render(request, template, locals())
+
+@login_required
+def editar_comentario(request, id, template='admin/comentario.html'):
+	object = get_object_or_404(Comentarios, id=id)
+	if request.method == 'POST':
+		form = ComentarioForm(request.POST, request.FILES,instance=object)
+		if form.is_valid():
+			form_uncommited = form.save()
+			form_uncommited.aporte = object.aporte
+			form_uncommited.usuario = request.user
+			form_uncommited.save()
+
+			return redirect('ver-foro', id=object.aporte.foro.id)
+	else:
+		form = ComentarioForm(instance=object)
+
+	return render(request, template, locals())
+
+@login_required
+def eliminar_comentario(request, id):
+	comentario = Comentarios.objects.get(id = id)
+	foro = comentario.aporte.foro.id
+	comentario.delete()
+	return redirect('ver-foro', id=foro)
 #galerias
 @login_required
 def galerias_contraparte(request, template='admin/list_galerias.html'):
