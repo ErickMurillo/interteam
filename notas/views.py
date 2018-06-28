@@ -130,9 +130,5 @@ def detalle_organizacion(request, slug, template='detalle_org.html'):
 
 	return render(request, template, locals())
 
-def biblioteca_list(request, template='biblioteca.html'):
-	object_list = Archivos.objects.order_by('-id')
-	return render(request, template, locals())
-
 def contacto(request, template='contacto.html'):
 	return render(request, template, locals())

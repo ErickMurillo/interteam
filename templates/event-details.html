@@ -57,7 +57,7 @@
                 <div class="event-shedule-wrap pdt15">
                     <h3>AGENDA DEL EVENTO</h3>
                     <div class="event-shedules mt40">
-                        {% for agenda in evento.agendaevento_set.all %}
+                        {% for agenda in evento.agendaevento_set.all|dictsort:"hora_inicio" %}
                            <div class="event-shedule">
                             <div class="event-shedule__time">
                                 {{agenda.hora_inicio|time:"f"}} - {{agenda.hora_fin|time:"f A"}}

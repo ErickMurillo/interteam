@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+	{{object.titulo}}
+	{% thumbnail object.imagen "360x390" crop="center" as im %}
+        <img src="{{im.url}}" class="our-causes__image" alt="">
+    {% empty %}   
+      <img src="http://via.placeholder.com/360x390" class="our-causes__image" alt="">
+    {% endthumbnail %}
+	 {{object.autor}}
+	 {{object.editorial}}
+	 {{object.lugar}}
+	 {{object.fecha_publicacion}}
+	 {% if object.isbn %}
+	 	{{object.isbn}}
+	 {% endif %}
+	 
+	 {{object.numero_paginas}}
+	 {{object.tematica}}
+	 {{object.resumen|safe}}
+	 <a href="/media/{{object.archivo}}" download>Descargar</a>
+{% endblock content %}

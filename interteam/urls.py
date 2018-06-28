@@ -45,6 +45,6 @@ urlpatterns = [
     path('publicaciones/', notas.publicaciones),
     path('organizaciones/', notas.organizaciones),
     path('organizaciones/<slug>', notas.detalle_organizacion, name='detalle-organizacion'),
-    path('biblioteca/', notas.biblioteca_list, name='list_biblioteca'),
+    path('biblioteca/', include('biblioteca.urls')),
     path('contacto/', notas.contacto, name='contacto'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

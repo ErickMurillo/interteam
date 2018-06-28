@@ -47,7 +47,7 @@
 
                         <div class="our-causes__text-content text-center">
 
-                            <h4 class=" our-causes__title"><a data-toggle="modal" href='/media/media/{{object.archivo}}' download>{{object.titulo}}</a></h4>
+                            <h4 class=" our-causes__title"><a data-toggle="modal" href='{% url 'biblioteca-detail' object.slug %}'>{{object.titulo}}</a></h4>
                         </div>
                     </div>
                 </div>
