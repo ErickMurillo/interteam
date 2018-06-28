@@ -209,7 +209,7 @@
                                 <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>{{evento.hora_inicio|time:"P"}} - {{evento.hora_fin|time:"P"}}  </span>
                                 <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>{{evento.lugar}}</span>
                             </div>
-                            <p>{{evento.descripcion|truncatewords:"18"|safe|striptags}}</p>
+                            <p>{{evento.descripcion|truncatechars:135|safe|striptags}}</p>
                         </div>
                     </div><!--/.upcomming-event-->
                     {% endfor %}
@@ -314,15 +314,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="about-us-carousel mb30">
+                  {% for banner in imagenes_prop %}
                     <div>
-                        <img src="http://www.simas.org.ni/media/cache/f5/66/f566a2ace586ed303e9da62ed3212624.jpg" alt="">
+                        {% thumbnail banner.imagen "750x400" crop="center" as im %}
+                            <img src="{{im.url}}" alt="">
+                        {% endthumbnail %}
                     </div>
-                    <div>
-                        <img src="http://www.simas.org.ni/media/cache/8d/a1/8da118cb266a5dce1919f23614a69244.jpg" alt="">
-                    </div>
-                    <div>
-                        <img src="http://www.simas.org.ni/media/cache/ee/6c/ee6c7fb21d4ed1519c9be6e22aad0081.jpg" alt="">
-                    </div>
+                  {% endfor %}
                 </div>
             </div>
             <div class="col-md-6">

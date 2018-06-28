@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{evento.descripcion|safe|truncatewords:"35"}}
+                            {{evento.descripcion|safe|truncatechars:270}}
                         </div>
                     </div><!--/.fund-event-->
                     {% endfor %}
