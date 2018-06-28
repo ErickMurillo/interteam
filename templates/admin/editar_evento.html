@@ -4,53 +4,59 @@
 <div class="main-content prueba">
     <div class="container ">
         <div class="row stickem-container prueba">
-          <section>
+            <section>
 
-                    <div class="blog-details-top mb40">
-                        <div class="blog-details-top__text-content">
-                  <form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
-                {{form.media}}
-                {{form.as_p}}
+                <div class="blog-details-top mb40">
+                    <div class="blog-details-top__text-content">
+                        <form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+                            {{form.media}}
+                            {{form.as_p}}
 
-                <h4 class="blog-details__title">Agenda</h4>
-                          <hr>
-                          <div class="row">
-                          {{ formset.management_form }}
-                          {% for agenda in formset %}
-                            <div class="col-md-6">
-                              {% if agenda.errors %}
-                                {{agenda.errors}}
-                              {% endif %}
-                              
-                              {{agenda.id}}
-                              Actividad: {{agenda.actividad}}
-                              Hora inicio: {{agenda.hora_inicio}}
-                              Hora fin: {{agenda.hora_fin}}
-                              Descripción: {{agenda.descripcion}}
-                              Eliminar: {{agenda.DELETE}}
+                            <h4 class="blog-details__title">Agenda</h4>
+                            <hr>
+                            <div class="row">
+                                {{ formset.management_form }}
+                                {% for agenda in formset %}
+                                <div class="col-sm-12 col-md-6 form-group">
+                                    {% if agenda.errors %}
+                                    {{agenda.errors}}
+                                    {% endif %}
+
+                                    {{agenda.id}}
+                                    <label>Actividad:</label> {{agenda.actividad}}
+                                    <label>Hora inicio:</label> {{agenda.hora_inicio}}
+                                    <br>
+                                    <br>
+                                    <label>Hora fin:</label> {{agenda.hora_fin}}
+                                    <label>Descripción:</label> {{agenda.descripcion}}
+                                    <label>Eliminar:</label> {{agenda.DELETE}}
+                                    <hr>
+                                </div>
+                                {% endfor %}
                             </div>
-                          {% endfor %}
-                          </div>
 
-                         <h4 class="blog-details__title">Agenda</h4>
-                          <hr>
-                          <div class="row">
-                            {{ formset2.management_form }}
-                            {{formset2.media}}
-                            {% for doc in formset2 %}
-                            <div class="col-md-4">
-                              {{doc.id}}
-                              Nombre: {{doc.nombre_doc}}
-                              Documento: {{doc.adjunto}}
+                            <h4 class="blog-details__title">Agenda</h4>
+                            <hr>
+                            <div class="row">
+                                {{ formset2.management_form }}
+                                {{formset2.media}}
+                                {% for doc in formset2 %}
+                                <div class="col-md-4 form-group">
+                                    {{doc.id}}
+                                    <label>Nombre:</label> {{doc.nombre_doc}}
+                                    <br>
+                                    <label>Documento:</label> {{doc.adjunto}}
+                                    <br>
+                                    <hr>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
-                          </div>
-                <input type="submit" name="Editar" value="Editar">
-              </form>
-            </div>
-          </div>
-      </section>
-    </div>
+                            <input type="submit" name="Editar" value="Editar">
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 </div>
 {% endblock content %}
