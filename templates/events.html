@@ -45,7 +45,7 @@
                         <div class="fund-event__main">
                             <div class="fund-event__image-content">
                                 <div class="fund-event__image-wrap"> 
-                                    {% thumbnail nota.foto "380x250" crop="center" as im %}
+                                    {% thumbnail evento.foto "380x250" crop="center" as im %}
                                     <img class="fund-event__image" src="{{im.url}}" alt="">
                                     {% empty %}
                                     <img class="fund-event__image" src="http://via.placeholder.com/380x250" alt="">
