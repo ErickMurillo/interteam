@@ -4,41 +4,53 @@
 <div class="main-content prueba">
     <div class="container ">
         <div class="row stickem-container prueba">
-        	<section>
+          <section>
 
                     <div class="blog-details-top mb40">
                         <div class="blog-details-top__text-content">
-				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
-								{{form.media}}
-								{{form.as_p}}
+                  <form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+                {{form.media}}
+                {{form.as_p}}
 
                 <h4 class="blog-details__title">Agenda</h4>
-                  <hr>
-                  <div class="row">
-                  {{ formset.management_form }}
-                  {% for agenda in formset %}
-                    <div class="col-md-6">
-                      {% if agenda.errors %}
-                        {{agenda.errors}}
-                      {% endif %}
-                      
-                      {{agenda.id}}
-                      {{agenda.actividad}}
-                      {{agenda.hora_inicio}}
-                      {{agenda.hora_fin}}
-                      {{agenda.descripcion}}
-                      Eliminar: {{agenda.DELETE}}
-                    </div>
-                  {% endfor %}
-                  </div>
+                          <hr>
+                          <div class="row">
+                          {{ formset.management_form }}
+                          {% for agenda in formset %}
+                            <div class="col-md-6">
+                              {% if agenda.errors %}
+                                {{agenda.errors}}
+                              {% endif %}
+                              
+                              {{agenda.id}}
+                              Actividad: {{agenda.actividad}}
+                              Hora inicio: {{agenda.hora_inicio}}
+                              Hora fin: {{agenda.hora_fin}}
+                              Descripción: {{agenda.descripcion}}
+                              Eliminar: {{agenda.DELETE}}
+                            </div>
+                          {% endfor %}
+                          </div>
 
-								<input type="submit" name="Actualizar" value="Actualizar">
-							</form>
-						</div>
-					</div>
-			</section>
-
-		</div>
+                         <h4 class="blog-details__title">Agenda</h4>
+                          <hr>
+                          <div class="row">
+                            {{ formset2.management_form }}
+                            {{formset2.media}}
+                            {% for doc in formset2 %}
+                            <div class="col-md-4">
+                              {{doc.id}}
+                              Nombre: {{doc.nombre_doc}}
+                              Documento: {{doc.adjunto}}
+                            </div>
+                            {% endfor %}
+                          </div>
+                <input type="submit" name="Editar" value="Editar">
+              </form>
+            </div>
+          </div>
+      </section>
+    </div>
     </div>
 </div>
 {% endblock content %}
@@ -53,8 +65,9 @@
 <script src="/static/js/jquery.timepicker.min.js"></script>
 
 <script type="text/javascript">
-	$( "input, select" ).addClass( "form-control" );
-	$( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
+  
+  $( "input, select" ).addClass( "form-control" );
+  $( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
 </script>
 
 <script>
@@ -62,6 +75,12 @@
     $( "#id_inicio" ).datepicker({ dateFormat: 'dd/mm/yy' });
     $('#id_hora_inicio').timepicker({ 'timeFormat': 'H:i:s' });
     $('#id_hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
+
+    for (var i=0; i<=11; i++) {
+      $('#id_agendaevento_set-'+i+'-hora_inicio').timepicker({ 'timeFormat': 'H:i:s' });
+      $('#id_agendaevento_set-'+i+'-hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
+  }
+
   } );
-  </script>
+</script>
 {% endblock extra_js %}

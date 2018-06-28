@@ -20,5 +20,5 @@ class AgendaEventoForm(forms.ModelForm):
 
 class DocuForm(forms.ModelForm):
     class Meta:
-    	model = Documentos
-    	exclude = ('content_type', 'object_id', 'content_object',)
+    	model = DocumentosEvento
+    	fields = '__all__'

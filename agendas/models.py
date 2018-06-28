@@ -42,14 +42,14 @@ class Agendas(models.Model):
         return super(Agendas, self).save(*args, **kwargs)
 
 class AgendaEvento(models.Model):
-    evento = models.ForeignKey(Agendas,on_delete=models.DO_NOTHING)
+    evento = models.ForeignKey(Agendas,on_delete=models.CASCADE)
     actividad = models.CharField(max_length=200)
     hora_inicio = models.TimeField('Hora inicio')
     hora_fin = models.TimeField('Hora fin')
     descripcion = models.CharField(max_length=600)
 
 class DocumentosEvento(models.Model):
-    evento = models.ForeignKey(Agendas,on_delete=models.DO_NOTHING)
+    evento = models.ForeignKey(Agendas,on_delete=models.CASCADE)
     nombre_doc = models.CharField("Nombre",max_length=200)
     adjunto = models.FileField("Adjunto",upload_to=get_file_path)
 

@@ -115,12 +115,13 @@ def eventos_contraparte(request, template='admin/list_eventos.html'):
 @login_required
 def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 	FormSetInit = inlineformset_factory(Agendas,AgendaEvento,form=AgendaEventoForm,extra=12,max_num=12)
-	# FormSetInit2 = inlineformset_factory(Agendas,Documentos,form=DocuForm,extra=12,max_num=12)
+	FormSetInit2 = inlineformset_factory(Agendas,DocumentosEvento,form=DocuForm,extra=6,max_num=6)
+
 	if request.method == 'POST':
 		form = AgendaForm(request.POST, request.FILES)
 		formset = FormSetInit(request.POST,request.FILES)
 		formset2 = FormSetInit2(request.POST,request.FILES)
-		if form.is_valid() and formset.is_valid():
+		if form.is_valid() and formset.is_valid() and formset2.is_valid():
 			evento = form.save(commit=False)
 			evento.user = request.user
 			evento.save()
@@ -130,33 +131,59 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 				instance.evento = evento
 				instance.save()
 			formset.save_m2m()
-			# formset2.save()
+			
+			instances2 = formset2.save(commit=False)
+			for instance2 in instances2:
+				instance2.evento = evento
+				instance2.save()
+			formset2.save_m2m()
 
 			return HttpResponseRedirect('/contrapartes/eventos/')
 	else:
 		form = AgendaForm()
 		formset = FormSetInit()
-		# formset2 = FormSetInit2()
+		formset2 = FormSetInit2()
 
 	return render(request, template, locals())
 
 @login_required
 def eliminar_evento_contraparte(request, slug):
-	evento = Agendas.objects.filter(slug = slug).delete()
+	evento = Agendas.objects.get(slug = slug).delete()
 	return HttpResponseRedirect('/contrapartes/eventos/')
 
 @login_required
 def editar_evento(request, slug, template='admin/editar_evento.html'):
 	object = get_object_or_404(Agendas, slug=slug)
+	FormSetInit = inlineformset_factory(Agendas,AgendaEvento,form=AgendaEventoForm,extra=12,max_num=12)
+	FormSetInit2 = inlineformset_factory(Agendas,DocumentosEvento,form=DocuForm,extra=6,max_num=6)
+
 	if request.method == 'POST':
-		form = AgendaForm(request.POST, request.FILES, instance=object)
-		if form.is_valid():
-			form_uncommited = form.save()
-			form_uncommited.user = request.user
-			form_uncommited.save()
+		form = AgendaForm(request.POST, request.FILES,instance=object)
+		formset = FormSetInit(request.POST,request.FILES,instance=object)
+		formset2 = FormSetInit2(request.POST,request.FILES,instance=object)
+
+		if form.is_valid() and formset.is_valid() and formset2.is_valid():
+			evento = form.save(commit=False)
+			evento.user = request.user
+			evento.save()
+
+			instances = formset.save(commit=False)
+			for instance in instances:
+				instance.evento = evento
+				instance.save()
+			formset.save_m2m()
+			
+			instances2 = formset2.save(commit=False)
+			for instance2 in instances2:
+				instance2.evento = evento
+				instance2.save()
+			formset2.save_m2m()
+
 			return HttpResponseRedirect('/contrapartes/eventos/')
 	else:
 		form = AgendaForm(instance=object)
+		formset = FormSetInit(instance=object)
+		formset2 = FormSetInit2(instance=object)
 
 	return render(request, template, locals())
 
@@ -194,14 +221,20 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 	aportes = Aportes.objects.filter(foro = id).order_by('-id')
 	if request.method == 'POST':
 		form = AporteForm(request.POST)
+		form_comentario = ComentarioForm(request.POST, request.FILES)
 		if form.is_valid():
 			aporte = form.save(commit=False)
 			aporte.foro = discusion
 			aporte.user = request.user
 			aporte.save()
 			return redirect('ver-foro', id=discusion.id)
+
+		if form_comentario.is_valid():
+			return redirect('ver-foro', id=discusion.id)
 	else:
 		form = AporteForm()
+		form_comentario = AporteForm()
+		
 	return render(request, template, locals())
 
 @login_required
@@ -216,6 +249,7 @@ def agregar_foro(request, template='admin/nuevo_foro.html'):
 			return HttpResponseRedirect('/contrapartes/foros/')
 	else:
 		form = ForosForm()
+		form_comentario = ComentarioForm()
 
 	return render(request, template, locals())
 

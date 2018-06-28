@@ -31,6 +31,20 @@
 				                    </div>
 				                  {% endfor %}
 				                  </div>
+
+				                 <h4 class="blog-details__title">Agenda</h4>
+				                  <hr>
+				                  <div class="row">
+				                  	{{ formset2.management_form }}
+				                  	{{formset2.media}}
+				                  	{% for doc in formset2 %}
+				                  	<div class="col-md-4">
+				                  		{{doc.id}}
+				                  		Nombre: {{doc.nombre_doc}}
+				                  		Documento: {{doc.adjunto}}
+				                  	</div>
+				                  	{% endfor %}
+				                  </div>
 								<input type="submit" name="Guardar" value="Guardar">
 							</form>
 						</div>
@@ -40,10 +54,33 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/static/css/jquery.timepicker.min.css">
+{% endblock extra_head %}
+
 {% block extra_js %}
-	<script type="text/javascript">
-		
-		$( "input, select" ).addClass( "form-control" );
-		$( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
-	</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/static/js/jquery.timepicker.min.js"></script>
+
+<script type="text/javascript">
+	
+	$( "input, select" ).addClass( "form-control" );
+	$( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
+</script>
+
+<script>
+  $( function() {
+    $( "#id_inicio" ).datepicker({ dateFormat: 'dd/mm/yy' });
+    $('#id_hora_inicio').timepicker({ 'timeFormat': 'H:i:s' });
+    $('#id_hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
+
+    for (var i=0; i<=11; i++) {
+    	$('#id_agendaevento_set-'+i+'-hora_inicio').timepicker({ 'timeFormat': 'H:i:s' });
+	    $('#id_agendaevento_set-'+i+'-hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
+	}
+
+  } );
+</script>
 {% endblock extra_js %}
