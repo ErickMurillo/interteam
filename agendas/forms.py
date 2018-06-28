@@ -13,6 +13,11 @@ class AgendaForm(forms.ModelForm):
     	model = Agendas
     	exclude = ('user',)
 
+class AgendaEventoForm(forms.ModelForm):
+    class Meta:
+    	model = AgendaEvento
+    	fields = '__all__'
+
 class DocuForm(forms.ModelForm):
     class Meta:
     	model = Documentos

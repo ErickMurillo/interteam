@@ -1,13 +1,14 @@
 # -*- coding: UTF-8 -*-
 
 from django.db import models
-from foros.models import Documentos
+# from foros.models import Documentos
 from django.contrib.contenttypes import fields
 from django.contrib.auth.models import User
 # from south.modelsinspector import add_introspection_rules
 from ckeditor_uploader.fields import RichTextUploadingField
 from sorl.thumbnail import ImageField
 from django.template.defaultfilters import slugify
+from utils import *
 
 # add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
@@ -23,7 +24,7 @@ class Agendas(models.Model):
     hora_fin = models.TimeField('Hora fin')
     lugar = models.CharField(max_length=250)
     publico = models.BooleanField()
-    adjunto = fields.GenericRelation(Documentos)
+    # adjunto = fields.GenericRelation(Documentos)
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     slug = models.SlugField(max_length=200,editable=False)
 
@@ -39,3 +40,23 @@ class Agendas(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.evento)
         return super(Agendas, self).save(*args, **kwargs)
+
+class AgendaEvento(models.Model):
+    evento = models.ForeignKey(Agendas,on_delete=models.DO_NOTHING)
+    actividad = models.CharField(max_length=200)
+    hora_inicio = models.TimeField('Hora inicio')
+    hora_fin = models.TimeField('Hora fin')
+    descripcion = models.CharField(max_length=600)
+
+class DocumentosEvento(models.Model):
+    evento = models.ForeignKey(Agendas,on_delete=models.DO_NOTHING)
+    nombre_doc = models.CharField("Nombre",max_length=200)
+    adjunto = models.FileField("Adjunto",upload_to=get_file_path)
+
+    fileDir = 'documentos/'
+
+    class Meta:
+        verbose_name_plural = "Documentos"
+
+    def __str__(self):
+        return self.nombre_doc

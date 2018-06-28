@@ -171,7 +171,7 @@
                             <span class="small-text"><i class="fa fa-user base-color"></i>{{nota.user.userprofile.contraparte.siglas}}</span>
                             <span class="small-text"><i class="fa fa-calendar base-color"></i>{{nota.fecha}}</span>
                         </div>
-                        <p>{{nota.contenido|safe|truncatewords:20}} </p>
+                        <p>{{nota.contenido|safe|truncatechars:150}} </p>
                         <a href="{% url "detalle-notas" nota.slug %}" class="btn">Leer más</a>
                     </div>
                 </div><!--/.blog-post-->

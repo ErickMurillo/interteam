@@ -24,12 +24,16 @@ class FlatPageAdmin(FlatPageAdminOld):
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)
 
-class DocumentosInline(GenericTabularInline):
-    model = Documentos
+class DocumentosEventoInline(admin.TabularInline):
+    model = DocumentosEvento
+    extra = 1
+
+class AgendaEventoInline(admin.TabularInline):
+    model = AgendaEvento
     extra = 1
 
 class AgendasAdmin(admin.ModelAdmin):
-    inlines = [DocumentosInline,]
+    inlines = [AgendaEventoInline,DocumentosEventoInline]
     # form = AgendaForm
     #class Media:
     #    js = ['../files/js/tiny_mce/tiny_mce.js',

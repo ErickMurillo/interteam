@@ -114,16 +114,29 @@ def eventos_contraparte(request, template='admin/list_eventos.html'):
 
 @login_required
 def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
+	FormSetInit = inlineformset_factory(Agendas,AgendaEvento,form=AgendaEventoForm,extra=12,max_num=12)
+	# FormSetInit2 = inlineformset_factory(Agendas,Documentos,form=DocuForm,extra=12,max_num=12)
 	if request.method == 'POST':
 		form = AgendaForm(request.POST, request.FILES)
-		if form.is_valid():
-			nota = form.save(commit=False)
-			nota.user = request.user
-			nota.save()
+		formset = FormSetInit(request.POST,request.FILES)
+		formset2 = FormSetInit2(request.POST,request.FILES)
+		if form.is_valid() and formset.is_valid():
+			evento = form.save(commit=False)
+			evento.user = request.user
+			evento.save()
+
+			instances = formset.save(commit=False)
+			for instance in instances:
+				instance.evento = evento
+				instance.save()
+			formset.save_m2m()
+			# formset2.save()
 
 			return HttpResponseRedirect('/contrapartes/eventos/')
 	else:
 		form = AgendaForm()
+		formset = FormSetInit()
+		# formset2 = FormSetInit2()
 
 	return render(request, template, locals())
 
