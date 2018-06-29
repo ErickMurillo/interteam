@@ -107,7 +107,7 @@
                                 {% for evento in dic_eventos.keys %}
                                     <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="#">
+                                        <a href="{% url 'agenda-detail' evento.slug %}">
                                             {% thumbnail evento.foto "380x250" crop="center" as im %}
                                             <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
                                             {% empty %}
