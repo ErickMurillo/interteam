@@ -249,38 +249,7 @@
             $('body').removeClass('popup-open');
         }
     });
-    /** =====================================
-    * Counter
-    * =====================================***/
-    if( $('.counter-item__count').length){
-        $('.counter-item__count').counterUp({
-            delay: 10,
-            time: 3000
-        });
-    }
-    /** =====================================
-    * Event Countdown
-    * =====================================***/
-    function musicaEvents() {
-        var musicaEvent = $('.musica-counter-active');
-        var len = musicaEvent.length;
-        for (var i = 0; i < len; i++) {
-            var musicaEventId = '#' + musicaEvent[i].id,
-            dataValueYear = $(musicaEventId).attr('data-value-year'),
-			dataValueMonth = $(musicaEventId).attr('data-value-month'),
-			dataValueDay = $(musicaEventId).attr('data-value-day'),
-			dataValueZone = $(musicaEventId).attr('data-value-zone');
-            $(musicaEventId).countdown({
-				labels: ['Años', 'Meses', 'Semanas', 'Días', 'Horas', 'Mins', 'Secs'],
-		        until: $.countdown.UTCDate(dataValueZone, dataValueYear, dataValueMonth, dataValueDay),
-		        format: 'dHMS',
-		        padZeroes: true
-		    });
-        }
-    }
-    if ($('.musica-counter-active').length) {
-        musicaEvents();
-    }
+
     /*** =====================================
     * Upcomming Event Carusel
     * ==================================== ***/

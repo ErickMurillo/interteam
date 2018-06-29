@@ -100,11 +100,13 @@
                                     </div>
                                     <div class="event-counter">
                                         <!--<div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>-->
-                                        <div id="prox-eventos-{{forloop.counter}}">
-                                            <span class="days">0</span><span> días</span>
-                                            <span class="hours">0</span><span> horas</span>
-                                            <span class="minutes">0</span><span> minutos</span>
-                                            <span class="seconds">0</span><span> segundos</span>
+                                        <div  class="" >
+                                            <span class="countdown-row countdown-show4 " id="prox-eventos-{{forloop.counter}}">
+                                                <span class="countdown-section"><span class="countdown-amount days">0</span><span class="countdown-period">Días</span></span>
+                                                <span class="countdown-section"><span class="countdown-amount hours">0</span><span class="countdown-period">horas</span></span>
+                                                <span class="countdown-section"><span class="countdown-amount minutes">0</span><span class="countdown-period">minutos</span></span>
+                                                <span class="countdown-section"><span class="countdown-amount seconds">0</span><span class="countdown-period">segundos</span></span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div><!--/.upcomming-event-carousel__item-->
