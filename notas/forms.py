@@ -6,9 +6,13 @@ from foros.models import *
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from taggit_autosuggest.managers import TaggableManager
+from embed_video.fields import EmbedVideoField
+from sorl.thumbnail import ImageField
 
 class NotasForms(forms.ModelForm):
 	contenido = forms.CharField(widget=CKEditorUploadingWidget())
+	foto = forms.ImageField(required=False)
+	video = forms.URLField(required=False)
 	titulo = forms.CharField(widget=forms.TextInput(attrs={'class':'span7','rel':"tooltip", 'title':"Tratar de redactar títulos resumidos"}))
 	class Meta:
 		model = Notas

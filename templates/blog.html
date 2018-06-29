@@ -17,6 +17,10 @@
     color: #1e3042;
     margin-right: 15px;
 }
+
+.blog-post__like-comment a {
+    color: #fff;
+}
 </style>
 <div class="banner-area banner-area--blog all-text-white text-center">
     <div class="container">
@@ -58,7 +62,8 @@
                                   {% endif %}
                                 <div class="blog-post__like-comment">
                                     <span><i class="fa fa-comments"></i>
-                                    {% disqus_num_replies %} <a href="{{ nota.get_absolute_url }}#disqus_thread" data-disqus-identifier="{{ nota.slug }}"></a> 
+                                    {% set_disqus_identifier object.id %}
+                                    <a href="/notas/{{ nota.slug }}#disqus_thread" data-disqus-identifier="{{ object.id }}">{% disqus_num_replies %}</a>
                                     </span>
                                     <span>|</span>
                                     <span><i class="fa fa-eye"></i>{{nota.vistas}} Vistas</span>
@@ -99,10 +104,10 @@
                         </div>
                         <div class="widget__text-content">
                             <div class="upcomming-event-carousel" id="upcomming-event-carousel">
-                                {% for evento in eventos %}
+                                {% for evento in dic_eventos.keys %}
                                     <div class="upcomming-event-carousel__item">
                                     <div class="image text-center">
-                                        <a href="{% url "agenda-detail" evento.slug %}">
+                                        <a href="#">
                                             {% thumbnail evento.foto "380x250" crop="center" as im %}
                                             <img class="widget-latest-causes__thubnail" src="{{im.url}}" alt="up">
                                             {% empty %}
@@ -112,7 +117,13 @@
 
                                     </div>
                                     <div class="event-counter">
-                                        <div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>
+                                        <!--<div id="event-counter-{{forloop.counter}}" class="musica-counter-active" data-value-year="{{evento.inicio|date:"o"}}" data-value-month="{{evento.inicio|date:"n"}}" data-value-day="{{evento.inicio|date:"j"}}" data-value-zone="+10" ></div>-->
+                                        <div id="prox-eventos-{{forloop.counter}}">
+                                            <span class="days">0</span><span> días</span>
+                                            <span class="hours">0</span><span> horas</span>
+                                            <span class="minutes">0</span><span> minutos</span>
+                                            <span class="seconds">0</span><span> segundos</span>
+                                        </div>
                                     </div>
                                 </div><!--/.upcomming-event-carousel__item-->
                                 {% endfor %}
@@ -172,4 +183,19 @@
     </div>
 </div> -->
 {% endblock content %}
+
+{% block extra_js %}
+{% for v in dic_eventos.values %}
+<script type="text/javascript">
+    var timer{{forloop.counter}} = new Timer();
+    timer{{forloop.counter}}.start({countdown: true, startValues: {days: {{v.0}},hours: {{v.1}}}, precision: 'seconds'});
+    timer{{forloop.counter}}.addEventListener('secondsUpdated', function (e) {
+        $('#prox-eventos-{{forloop.counter}} .days').html(timer{{forloop.counter}}.getTimeValues().days);
+        $('#prox-eventos-{{forloop.counter}} .hours').html(timer{{forloop.counter}}.getTimeValues().hours);
+        $('#prox-eventos-{{forloop.counter}} .minutes').html(timer{{forloop.counter}}.getTimeValues().minutes);
+        $('#prox-eventos-{{forloop.counter}} .seconds').html(timer{{forloop.counter}}.getTimeValues().seconds);
+    });
+</script>
+{% endfor %}
+{% endblock extra_js %}
 
