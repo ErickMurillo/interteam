@@ -53,8 +53,11 @@
                                 </div>
                                 <div class="fund-event__text-content">
                                     <h4 class="fund-event__title"><a href="{% url "agenda-detail" evento.slug %}">{{evento.evento}}</a></h4>
+                                    <div class="fund-event__time date-hidden">
+                                        <i class="fa fa-calendar fund-event__icon base-color"></i>{{evento.inicio|date:"d N Y"}}
+                                    </div>
                                     <div class="fund-event__time">
-                                        <i class="fa fa-calendar fund-event__icon base-color"></i>{{evento.hora_inicio|time:"f A"}} - {{evento.hora_fin|time:"f A"}}
+                                        <i class="fa fa-clock-o fund-event__icon base-color"></i>{{evento.hora_inicio|time:"f A"}} - {{evento.hora_fin|time:"f A"}}
                                     </div>
                                     <div class="fund-event__address">
                                         <i class="fa fa-map-marker fund-event__icon base-color"></i>{{evento.lugar}}

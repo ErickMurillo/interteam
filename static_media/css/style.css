@@ -80,10 +80,15 @@ ul.social-btn li {
     margin: 5px;
     width: 35px;
     height: 35px;
-    opacity: 0.2;
     border-radius: 100%;
     display: inline-block;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 114, 1);
+}
+ul.social-btn li:hover{
+  background: rgba(0,0,0,0.2);
+}
+ul.social-btn li:hover a{
+ color: rgb(0, 114, 1);
 }
 ul.social-btn li a {
     width: 100%;
@@ -392,6 +397,17 @@ ul.social-btn li a {
 .portlet .tabbable-line > .tab-content {
   padding-bottom: 0;
 }
+.alto-title{
+  height: 48px;
+}
+.date-hidden{display: none;}
+.rev_slider .tp-caption, .rev_slider .caption{
+    white-space: inherit !important;
+
+    background: rgba(0, 0, 0, 0.5);
+    /*padding: 15px !important;*/
+}
+
 /*
     ========================================================================
     Index
@@ -4721,3 +4737,29 @@ hr {
 /* -----------------------------------
 **  End Preloader
 -------------------------------------*/
+@media only screen and (max-width : 560px) {
+  .fund-event__date{display: none}
+  .fund-event__image{
+    margin-top: 0px ;
+    border-radius: 12px;
+  }
+  .fund-event__image-content{
+    display: block;
+  }
+  .fund-event__image-wrap{
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+  }
+  .fund-event__main p{
+    padding: 10px;
+  }
+  .date-hidden{
+    display: block;
+  }
+}
+@media only screen and (max-width : 777px) {
+.rev_slider .tp-caption, .rev_slider .caption{
+display: none;
+}
+}

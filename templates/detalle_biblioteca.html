@@ -2,22 +2,95 @@
 {% load thumbnail %}
 
 {% block content %}
-	{{object.titulo}}
-	{% thumbnail object.imagen "360x390" crop="center" as im %}
-        <img src="{{im.url}}" class="our-causes__image" alt="">
-    {% empty %}   
-      <img src="http://via.placeholder.com/360x390" class="our-causes__image" alt="">
-    {% endthumbnail %}
-	 {{object.autor}}
-	 {{object.editorial}}
-	 {{object.lugar}}
-	 {{object.fecha_publicacion}}
-	 {% if object.isbn %}
-	 	{{object.isbn}}
-	 {% endif %}
-	 
-	 {{object.numero_paginas}}
-	 {{object.tematica}}
-	 {{object.resumen|safe}}
-	 <a href="/media/{{object.archivo}}" download>Descargar</a>
+<div class="banner-area banner-area--blog all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">Biblioteca virtual</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="/biblioteca/">Biblioteca</a> </li>
+                    <li>Documento</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="row wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+        	<div class="col-xs-12 col-md-4">
+        		{% thumbnail object.imagen "360x390" crop="center" as im %}
+			        <img class="img-thumbnail" src="{{im.url}}" class="our-causes__image" alt="" width="100%">
+			    {% empty %}   
+			      <img class="img-thumbnail" src="http://via.placeholder.com/360x390" class="our-causes__image" alt="" width="100%">
+			    {% endthumbnail %}
+			    <br>
+			    <br>
+			    <div class="all-text-white">
+                     <a href="/media/{{object.archivo}}" class="btn base-bg btn-lg btn-block" >Descargar Documento</a>
+                </div>
+                <br>
+
+        	</div>
+        	<div class="col-xs-12 col-md-8">
+        		<div class="panel panel-success">
+        			<div class="panel-body">
+        				<h3 class=" base-color">
+        					{{object.titulo}}
+        				</h3>
+        				
+        				<h4>
+        					Por: <span class="base-color">{{object.autor}}</span>
+        				</h4>
+        				<h3>Resumen:</h3>
+        				<hr>
+        				<div>
+        					<p>{{object.resumen|safe}}</p>
+        					<h3>Detalles:</h3>
+        					<hr>
+        					<div class="table-responsive">
+        						<table class="table table-hover table-striped">
+        							<tbody>
+        								<tr>
+        									<td>Editorial</td>
+        									<td>{{object.editorial}}</td>
+        								</tr>
+        								<tr>
+        									<td>Lugar</td>
+        									<td>{{object.lugar}}</td>
+        								</tr>
+        								<tr>
+        									<td>Fecha de publicación</td>
+        									<td>{{object.fecha_publicacion}}</td>
+        								</tr>
+        								<tr>
+        									<td>isbn</td>
+        									<td>
+        										{% if object.isbn %}
+													{{object.isbn}}
+												{% endif %}
+        									</td>
+        								</tr>
+        								<tr>
+        									<td>No. Páginas</td>
+        									<td>{{object.numero_paginas}} páginas</td>
+        								</tr>
+        								<tr>
+        									<td>Temas</td>
+        									<td>{{object.tematica}}</td>
+        								</tr>
+        							</tbody>
+        						</table>
+        					</div>
+        				</div>
+        				
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}

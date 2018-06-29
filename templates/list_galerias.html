@@ -25,10 +25,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-title">GALERIA</h1>
+                <h1 class="page-title">GALERÍA</h1>
                 <ul class="fund-breadcumb">
                     <li><a href="/">Inicio</a> </li>
-                    <li>Galerias {% if request.path == '/galerias/imagenes/' %}imagenes{%else%}videos{% endif %} </li>
+                    <li>Galería de {% if request.path == '/galerias/imagenes/' %}imágenes{%else%}videos{% endif %} </li>
                 </ul>
             </div>
         </div>
@@ -96,9 +96,9 @@
                                 </div>
                                 <div class="blog-post__text-content">
                                     {% if object.portada %}
-                                        <h4 class="blog-post__title heading-label-four"><a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">{{object.titulo}}</a></h4>
+                                        <h4 class="blog-post__title heading-label-four alto-title"><a href="{% if request.path == '/galerias/imagenes/' %}{% url 'detalle-galerias-img' object.id %}{% endif %}">{{object.titulo}}</a></h4>
                                     {% else %}
-                                        <h4 class="blog-post__title heading-label-four"><a data-toggle="modal" href='#modal-id-{{object.id}}'>{{object.titulo}}</a></h4>
+                                        <h4 class="blog-post__title heading-label-four alto-title"><a data-toggle="modal" href='#modal-id-{{object.id}}'>{{object.titulo}}</a></h4>
                                         <div class="modal fade" id="modal-id-{{object.id}}">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">

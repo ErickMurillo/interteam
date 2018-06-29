@@ -240,7 +240,8 @@
         rel:'group4',
         slideshow:false,
         transition:"fade",
-        maxWidth: "1000px",
+        maxWidth: "90%",
+        maxHeight: "90%",
         onOpen:function(){
             $('body').addClass('popup-open');
         },
