@@ -67,6 +67,13 @@ def lista_notas(request,template='blog.html'):
 		count = Notas.objects.filter(temas = tema).count()
 		dic_temas[tema] = count
 
+	dic_eventos = {}
+	for prox_event in eventos:
+		delta = datetime.datetime(year=prox_event.inicio.year,month=prox_event.inicio.month,day=prox_event.inicio.day,minute=prox_event.hora_inicio.minute) - datetime.datetime.now()
+		days = delta.days
+		hours = delta.seconds/3600
+		dic_eventos[prox_event] = days,hours
+
 	return render(request, template, locals())
 
 def detalle_notas(request, slug, template='blog-details.html'):
@@ -81,6 +88,13 @@ def detalle_notas(request, slug, template='blog-details.html'):
 	for tema in Temas.objects.all():
 		count = Notas.objects.filter(temas = tema).count()
 		dic_temas[tema] = count
+
+	dic_eventos = {}
+	for prox_event in eventos:
+		delta = datetime.datetime(year=prox_event.inicio.year,month=prox_event.inicio.month,day=prox_event.inicio.day,minute=prox_event.hora_inicio.minute) - datetime.datetime.now()
+		days = delta.days
+		hours = delta.seconds/3600
+		dic_eventos[prox_event] = days,hours
 
 
 	if request.method == 'POST':

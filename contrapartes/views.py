@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse 
 from django.shortcuts import get_object_or_404, redirect
 from django.forms import inlineformset_factory
+from django.core.mail import send_mail, EmailMultiAlternatives
 
 # Create your views here.
 @login_required
@@ -70,7 +71,26 @@ def redactar_notas_contraparte(request, template='admin/redactar_notaadmin.html'
 			nota.save()
 			form.save_m2m()
 
-			return HttpResponseRedirect('/contrapartes/notas/')
+			try:
+				subject, from_email = 'Nueva nota', 'cluster.nicaragua@gmail.com'
+				text_content = 'Se ha ingresado una nueva nota al sitio, para revisar la nota \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/notas/'+ nota.slug + '/'
+
+				html_content = 'Se ha ingresado una nueva nota al sitio, para revisar la nota \n' + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/notas/'+ nota.slug + '/'
+
+				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+				return HttpResponseRedirect('/contrapartes/notas/')
+			except:
+				pass
 	else:
 		form = NotasForms()
 
@@ -138,7 +158,27 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 				instance2.save()
 			formset2.save_m2m()
 
-			return HttpResponseRedirect('/contrapartes/eventos/')
+			try:
+				subject, from_email = 'Nuevo evento', 'cluster.nicaragua@gmail.com'
+				text_content = 'Se ha ingresado un nuevo evento al sitio, para revisar el evento \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/eventos/'+ evento.slug + '/'
+
+				html_content = 'Se ha ingresado un nuevo evento al sitio, para revisar el evento \n' + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/eventos/'+ evento.slug + '/'
+
+				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+				return HttpResponseRedirect('/contrapartes/eventos/')
+			except:
+				pass
+
 	else:
 		form = AgendaForm()
 		formset = FormSetInit()
@@ -226,12 +266,35 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 			aporte.foro = discusion
 			aporte.user = request.user
 			aporte.save()
-			return redirect('ver-foro', id=discusion.id)
+
+			try:
+				subject, from_email = 'Nuevo aporte al foro ' + discusion.nombre, 'cluster.nicaragua@gmail.com'
+				text_content = 'Se ha ingresado un nuevo aporte al foro ' + discusion.nombre +', para revisar el aporte \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(discusion.id) + '/'
+
+				html_content = 'Se ha ingresado un nuevo aporte al foro ' + discusion.nombre +', para revisar el aporte \n' + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(discusion.id) + '/'
+
+				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+
+				return redirect('ver-foro', id=discusion.id)
+			except:
+				pass
+
 	else:
 		form = AporteForm()
 
 	return render(request, template, locals())
 
+import sys
 @login_required
 def agregar_foro(request, template='admin/nuevo_foro.html'):
 	if request.method == 'POST':
@@ -241,10 +304,29 @@ def agregar_foro(request, template='admin/nuevo_foro.html'):
 			foro.contraparte = request.user
 			foro.save()
 
-			return HttpResponseRedirect('/contrapartes/foros/')
+			try:
+				subject, from_email = 'Nuevo foro', 'cluster.nicaragua@gmail.com'
+				text_content = 'Se ha ingresado un nuevo foro al sitio, para revisar el foro \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(foro.id) + '/'
+
+				html_content = 'Se ha ingresado un nuevo foro al sitio, para revisar el foro \n' + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(foro.id) + '/'
+
+				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+				return HttpResponseRedirect('/contrapartes/foros/')
+			except:
+				pass
+
 	else:
 		form = ForosForm()
-		form_comentario = ComentarioForm()
 
 	return render(request, template, locals())
 
@@ -323,7 +405,28 @@ def agregar_comentario(request, id, template='admin/comentario.html'):
 			form_uncommited.usuario = request.user
 			form_uncommited.save()
 
-			return redirect('ver-foro', id=object.foro.id)
+			try:
+				subject, from_email = 'Nuevo comentario al foro ' + object.foro.nombre, 'cluster.nicaragua@gmail.com'
+				text_content = 'Se ha ingresado un nuevo comentario al foro ' + object.foro.nombre +', para revisar el comentario \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(object.foro.id) + '/'
+
+				html_content = 'Se ha ingresado un nuevo comentario al foro ' + object.foro.nombre +', para revisar el comentario \n' + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(object.foro.id) + '/'
+
+				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+
+				return redirect('ver-foro', id=object.foro.id)
+			except:
+				pass
+
 	else:
 		form = ComentarioForm()
 
