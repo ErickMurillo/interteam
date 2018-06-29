@@ -65,14 +65,14 @@
         									<td>Fecha de publicación</td>
         									<td>{{object.fecha_publicacion}}</td>
         								</tr>
+                                        {% if object.isbn %}
         								<tr>
         									<td>isbn</td>
         									<td>
-        										{% if object.isbn %}
-													{{object.isbn}}
-												{% endif %}
+												{{object.isbn}}
         									</td>
         								</tr>
+                                        {% endif %}
         								<tr>
         									<td>No. Páginas</td>
         									<td>{{object.numero_paginas}} páginas</td>
