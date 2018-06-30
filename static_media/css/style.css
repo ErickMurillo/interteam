@@ -407,6 +407,12 @@ ul.social-btn li a {
     background: rgba(0, 0, 0, 0.5);
     /*padding: 15px !important;*/
 }
+.texto_nota img{
+  max-width: 100%;
+}
+.fund-arrow-left-list {
+    padding-left: 15px;
+}
 
 /*
     ========================================================================

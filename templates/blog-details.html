@@ -40,17 +40,20 @@
                         </div>
                         <div class="blog-details-top__text-content">
                             <h3 class="blog-details__title">{{nota.titulo}}</h3>
-                            <div class="blog-details__meta">
-                                <div class="blog-details__meta-item base-color"><i class="fa fa-calendar pdr5"></i>{{nota.fecha}}</div>
-                                <div class="blog-details__meta-item"><i class="fa fa-building pdr5"></i>{{nota.user.userprofile.contraparte.siglas}}</div>
-                                <div class="blog-details__meta-item"><i class="fa fa-user pdr5"></i>{{nota.user}}</div>
-                                <div class="blog-details__meta-item"><i class="fa fa-comments-o pdr5"></i><a href="{{ object.get_absolute_url }}#disqus_thread" data-disqus-identifier="{{ object.id }}"></a>
-                                {% disqus_num_replies %}</div>
+                            <ul class="list-inline">
+                                <li class="blog-details__meta-item base-color"><i class="fa fa-calendar pdr5"></i>{{nota.fecha}}</li>
+                                <li class="blog-details__meta-item"><i class="fa fa-building pdr5"></i>{{nota.user.userprofile.contraparte.siglas}}</li>
+                                <li class="blog-details__meta-item"><i class="fa fa-user pdr5"></i>{{nota.user}}</li>
+                                <li class="blog-details__meta-item"><i class="fa fa-comments-o pdr5"></i><a href="{{ object.get_absolute_url }}#disqus_thread" data-disqus-identifier="{{ object.id }}"></a>
+                                {% disqus_num_replies %}</li>
                                 
-                            </div>
+                            </ul>
                         </div>
                     </div>
-                    {{nota.contenido|safe}}
+                    <div class="texto_nota">
+                        {{nota.contenido|safe}}
+                    </div>
+                    
 
                     <!--<h3>Imagenes</h3>
                     {% for img in nota.fotos.all %}
@@ -292,6 +295,9 @@
         $('#prox-eventos-{{forloop.counter}} .minutes').html(timer{{forloop.counter}}.getTimeValues().minutes);
         $('#prox-eventos-{{forloop.counter}} .seconds').html(timer{{forloop.counter}}.getTimeValues().seconds);
     });
+</script>
+<script type="text/javascript">
+    $( "ul" ).addClass( "fund-arrow-left-list" );
 </script>
 {% endfor %}
 {% endblock extra_js %}
