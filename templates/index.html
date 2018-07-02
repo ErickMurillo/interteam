@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load embed_video_tags %}
+{% load disqus_tags %}
 
 {% block content %}
+<style type="text/css">
+  .blog-post__like-comment a {
+    color: #fff;
+}
+</style>
 
 <div class="slider-area">
 
@@ -153,7 +159,8 @@
                       {% endif %}
                         
                         <div class="blog-post__like-comment">
-                            <span><i class="fa fa-comments"></i>22 Comentarios</span>
+                            <span><i class="fa fa-comments"></i>{% set_disqus_identifier object.id %}
+                                    <a href="/notas/{{ nota.slug }}#disqus_thread" data-disqus-identifier="{{ object.id }}">{% disqus_num_replies %}</a></span>
                             <span>|</span>
                             <span><i class="fa fa-eye"></i>{{nota.vistas}} Vistas</span>
                         </div>

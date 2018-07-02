@@ -81,7 +81,7 @@ def redactar_notas_contraparte(request, template='admin/redactar_notaadmin.html'
 								'diríjase a la siguiente dirección: \n' + \
 								'http://cluster-nicaragua.net/notas/'+ nota.slug + '/'
 
-				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 				msg.attach_alternative(html_content, "text/html")
@@ -168,7 +168,7 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 								'diríjase a la siguiente dirección: \n' + \
 								'http://cluster-nicaragua.net/eventos/'+ evento.slug + '/'
 
-				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 				msg.attach_alternative(html_content, "text/html")
@@ -277,7 +277,7 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 								'diríjase a la siguiente dirección: \n' + \
 								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(discusion.id) + '/'
 
-				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 				msg.attach_alternative(html_content, "text/html")
@@ -314,7 +314,7 @@ def agregar_foro(request, template='admin/nuevo_foro.html'):
 								'diríjase a la siguiente dirección: \n' + \
 								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(foro.id) + '/'
 
-				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 				msg.attach_alternative(html_content, "text/html")
@@ -415,7 +415,7 @@ def agregar_comentario(request, id, template='admin/comentario.html'):
 								'diríjase a la siguiente dirección: \n' + \
 								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(object.foro.id) + '/'
 
-				list_mail = User.objects.exclude(id = request.user.id).values_list('email',flat=True)
+				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 				msg.attach_alternative(html_content, "text/html")

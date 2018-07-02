@@ -19,7 +19,7 @@ class ContraparteForms(forms.ModelForm):
 	telefono = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Formato ### - ######## "}))
 	#sitio_web = forms.URLField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Con este formato http://www.dominio.com "}))
 	# rss = forms.CharField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Dirección rss de contenido sindicado"}))
-	font_color = forms.CharField(required=False, widget=ColorPickerWidget, label="Color")
+	#font_color = forms.CharField(required=False, widget=ColorPickerWidget, label="Color")
 
 	class Meta:
 		model = Contraparte

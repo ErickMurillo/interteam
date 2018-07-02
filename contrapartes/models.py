@@ -51,12 +51,12 @@ class Contraparte(models.Model):
     telefono = models.CharField(max_length=200, blank=True, null=True)
     #sitio_web = models.URLField(blank=True, null=True)
     #rss = models.CharField(max_length=200,blank=True, null=True)
-    font_color = ColorField(blank=True,unique=True)
+    #font_color = ColorField(blank=True,unique=True)
     slug = models.SlugField(max_length=200,editable=False)
 
     class Meta:
         verbose_name_plural = "Contrapartes"
-        unique_together = ("font_color", "nombre")
+        #unique_together = ("font_color", "nombre")
 
     def __str__(self):
         return self.nombre
