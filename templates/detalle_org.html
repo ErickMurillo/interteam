@@ -56,6 +56,16 @@
                                     </div>
                                 </div><!--/.contact-address-item-->
                                 {% endif %}
+
+                                {% if object.contacto %}
+                                    <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-address-book contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Contacto</div>
+                                        {{object.contacto}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
                                 
                                 {% if object.telefono %}
                                 	<div class="contact-address-item">

@@ -44,6 +44,16 @@
                                     </div>
                                 </div><!--/.contact-address-item-->
                                 {% endif %}
+
+                                {% if contraparte.contacto %}
+                                    <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-address-book contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Contacto</div>
+                                        {{contraparte.contacto}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
                                 
                                 {% if contraparte.telefono %}
                                     <div class="contact-address-item">
