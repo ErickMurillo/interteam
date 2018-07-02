@@ -4,6 +4,37 @@
 {% load disqus_tags %}
 {% set_disqus_identifier object.id %}
 
+{% block extr_head %}
+<meta property="og:title" content="{{nota.titulo}}" />
+<meta property="og:type" content="article" />
+{% if nota.foto %}
+    <meta property="og:image" content="http://cluster-nicaragua.net/media/{{nota.foto}}">
+{% elif nota.video %}
+    {% video nota.video as video %}
+        <meta property="og:image" content="{{video.thumbnail}}">
+    {% endvideo %}
+{% endif %}
+
+<meta property="og:image:width" content="300" />
+<meta property="og:image:height" content="300" />
+<meta property="og:description" content="{{nota.contenido|striptags}}" />
+<meta property="og:url" content="http://cluster-nicaragua.net{{request.path}}" />
+<meta property="og:locale" content="es_ES" />
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{nota.titulo|truncatechars:70}}">
+<meta name="twitter:description" content="{{nota.contenido|striptags|truncatechars:200}}">
+{% if nota.foto %}
+    <meta name="twitter:image" content="http://cluster-nicaragua.net/media/{{nota.foto}}">
+{% elif nota.video %}
+    {% video nota.video as video %}
+        <meta property="twitter:image" content="{{video.thumbnail}}">
+    {% endvideo %}
+{% endif %}
+<meta name="twitter:domain" content="http://cluster-nicaragua.net">
+{% endblock extr_head %}
+
 {% block content %}  
 <div class="banner-area banner-area--blog all-text-white text-center">
     <div class="container">
@@ -72,9 +103,9 @@
                     <div class="social-icons ">
                         <span>Compartir : </span>
                         <ul class="list-inline pdl20">
-                            <li><a href="#"><i class="fa fa-facebook"></i> </a> </li>
-                            <li><a href="#"><i class="fa fa-twitter"></i> </a> </li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i> </a> </li>
+                            <li><a href="http://www.facebook.com/sharer.php?u=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-facebook"></i> </a> </li>
+                            <li><a href="http://twitter.com/intent/tweet?url=http://cluster-nicaragua.net{{request.path}}&amp;text={{nota.titulo}}" target="_blank"><i class="fa fa-twitter"></i> </a> </li>
+                            <li><a href="https://plus.google.com/share?url=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-google-plus"></i> </a> </li>
 
                         </ul>
                     </div>
