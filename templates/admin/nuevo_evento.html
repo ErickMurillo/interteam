@@ -17,20 +17,24 @@
                             <div class="row">
                                 {{ formset.management_form }}
                                 {% for agenda in formset %}
-                                <div class="col-sm-12 col-md-6 form-group">
+                                <div class="col-sm-12 col-md-12 form-group">
+                                    <h5>Nueva actividad</h5>
                                     {% if agenda.errors %}
                                     {{agenda.errors}}
                                     {% endif %}
 
                                     {{agenda.id}}
-                                    <label>Actividad:</label> {{agenda.actividad}}
-                                    <label>Hora inicio:</label> {{agenda.hora_inicio}}
+                                    <label>Actividad:</label> 
+                                    {{agenda.actividad}}
+                                    <label>Hora inicio:</label> 
+                                    {{agenda.hora_inicio}}
+                                    <label>Hora fin:</label> 
+                                    {{agenda.hora_fin}}
+                                    <label>Descripción:</label> 
+                                    {{agenda.descripcion}}
                                     <br>
-                                    <br>
-                                    <label>Hora fin:</label> {{agenda.hora_fin}}
-                                    <label>Descripción:</label> {{agenda.descripcion}}
-                                    <label>Eliminar:</label> {{agenda.DELETE}}
-                                    <hr>
+                                    <label>Eliminar:</label> 
+                                    {{agenda.DELETE}}
                                 </div>
                                 {% endfor %}
                             </div>
@@ -41,9 +45,11 @@
                                 {{ formset2.management_form }}
                                 {{formset2.media}}
                                 {% for doc in formset2 %}
-                                <div class="col-md-4 form-group">
+                                <div class="col-sm-12  col-md-6 form-group">
+                                    <h5>Nueva documento</h5>
                                     {{doc.id}}
                                     <label>Nombre:</label> {{doc.nombre_doc}}
+                                    <br>
                                     <br>
                                     <label>Documento:</label> {{doc.adjunto}}
                                     <br>
