@@ -22,6 +22,7 @@ import operator
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
+from django.db.models import Q
 
 
 def index(request,template='index.html'):
@@ -57,7 +58,14 @@ def logout_page(request):
   return HttpResponseRedirect('/')
 
 def lista_notas(request,template='blog.html'):
-	notas_list = Notas.objects.all().order_by('-fecha','-id')
+	if request.GET.get('buscar'):
+		q = request.GET['buscar']
+		notas_list = Notas.objects.filter(Q(titulo__icontains = q) | 
+										Q(contenido__icontains = q) |
+										Q(temas__nombre__icontains = q)).order_by('-fecha','-id')
+	else:
+		notas_list = Notas.objects.all().order_by('-fecha','-id')
+
 	hoy = datetime.date.today()
 	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
 	paises = Pais.objects.all()
@@ -126,9 +134,9 @@ def filtro_temas(request, temas, template='blog.html'):
 	return render(request, template, locals()) 
 
 def publicaciones(request, template='publicaciones.html'):
-	if request.GET.get('query'):
-		search_query = request.GET['query']
-		object_list = Publicacion.objects.filter(titulo__icontains = search_query).order_by('-id')
+	if request.GET.get('buscar'):
+		q = request.GET['buscar']
+		object_list = Publicacion.objects.filter(titulo__icontains = q).order_by('-id')
 	else:
 		object_list = Publicacion.objects.order_by('-id')
 

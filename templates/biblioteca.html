@@ -31,6 +31,14 @@
 </div>
 <div class="main-content section-padding">
     <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form class="search-form widget" action='.' method='GET'>
+                    <input type="search" placeholder="Buscar" name="buscar" class="form-control search-form__input" {% if q %}value="{{q}}"{% endif %} />
+                    <button type="submit" class="search-form__submit"><i class="fa fa-search base-color"></i> </button>
+                </form>
+            </div>
+        </div>
         <div class="row"> 
         {% paginate 6 object_list %}
         {% for object in object_list %}
@@ -53,7 +61,9 @@
                 </div>
             </div>                  
         {% endfor %}                   
-            
+        {% if not object_list %}
+            <p>No hay resultados</p>
+        {% endif %}
         </div>
         <div class="fund-pagination mb30">
             {% show_pages %}

@@ -3,10 +3,18 @@ from .models import *
 from notas.models import *
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 import datetime
+from django.db.models import Q
 
 # Create your views here.
 def list_eventos(request,template='events.html'):
-	eventos = Agendas.objects.filter(publico = True).order_by('inicio')
+	if request.GET.get('buscar'):
+		q = request.GET['buscar']
+		eventos = Agendas.objects.filter(Q(evento__icontains = q) |
+										Q(descripcion__icontains = q) |
+										Q(lugar__icontains = q), publico = True).order_by('inicio')
+	else:
+		eventos = Agendas.objects.filter(publico = True).order_by('inicio')
+
 	hoy = datetime.date.today()
 	prox_eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
 	ultimas_notas = Notas.objects.order_by('-fecha','-id')[:4]

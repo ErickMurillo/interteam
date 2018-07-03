@@ -94,8 +94,8 @@
             </div>
             <div class="col-md-4">
                 <aside class="sidebar">
-                    <form class="search-form widget">
-                        <input type="search" placeholder="Buscar" class="form-control search-form__input" />
+                    <form class="search-form widget" action='.' method='GET'>
+                        <input type="search" placeholder="Buscar" name="buscar" class="form-control search-form__input" {% if q %}value="{{q}}"{% endif %} />
                         <button type="submit" class="search-form__submit"><i class="fa fa-search base-color"></i> </button>
                     </form>
                     <div class="widget">
