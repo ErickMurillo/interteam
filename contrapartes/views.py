@@ -558,12 +558,13 @@ import sys
 def mensajes(request, template='admin/mensajes.html'):
 	if request.method == 'POST':
 		form = MensajeForm(request.POST, request.FILES)
+		form.fields['user'].queryset = User.objects.exclude(id=request.user.id)
+
 		if form.is_valid():
 			form_uncommited = form.save(commit=False)
 			form_uncommited.usuario = request.user
 			form_uncommited.save()
 			form.save_m2m()
-
 
 			try:
 				subject, from_email = 'Nuevo mensaje ','cluster.nicaragua@gmail.com'
@@ -587,9 +588,9 @@ def mensajes(request, template='admin/mensajes.html'):
 			except:
 				pass
 			
-			
 	else:
 		form  = MensajeForm()
+		form.fields['user'].queryset = User.objects.exclude(id=request.user.id)
 		enviado = 0
 
 	return render(request, template, locals())
