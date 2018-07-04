@@ -19,13 +19,17 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 # Create your views here.
 @login_required
 def perfil_editar(request,template='admin/editar_user.html'):
+	object = get_object_or_404(UserProfile, user=request.user)
 	if request.method == 'POST':
 		form = UserForm(request.POST, instance=request.user)
-		if form.is_valid():
+		form_avatar = UserProfileForm(request.POST,files=request.FILES,instance=object)
+		if form.is_valid() and form_avatar.is_valid():
 			form.save()
+			form_avatar.save()
 			return HttpResponseRedirect('/accounts/profile/')
 	else:
 		form = UserForm(instance=request.user)
+		form_avatar = UserProfileForm(instance=object)
 
 	return render(request, template, locals())
 
@@ -57,7 +61,8 @@ def notas_contraparte(request, template='admin/notaadmin.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = Notas.objects.filter(temas = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals())
 
@@ -545,5 +550,46 @@ def editar_video(request, id, template='admin/nueva_galeria_vid.html'):
 			return HttpResponseRedirect('/contrapartes/galerias/')
 	else:
 		form = GaleriaVideosForm(instance=object)
+
+	return render(request, template, locals())
+
+import sys
+@login_required
+def mensajes(request, template='admin/mensajes.html'):
+	if request.method == 'POST':
+		form = MensajeForm(request.POST, request.FILES)
+		if form.is_valid():
+			form_uncommited = form.save(commit=False)
+			form_uncommited.usuario = request.user
+			form_uncommited.save()
+			form.save_m2m()
+
+
+			try:
+				subject, from_email = 'Nuevo mensaje ','cluster.nicaragua@gmail.com'
+				text_content = 'Enviado por ' + str(form_uncommited.usuario) + '\n'  + \
+								str(form_uncommited.mensaje)
+
+
+				html_content = 'Enviado por ' + str(form_uncommited.usuario) + '\n'  + \
+								str(form_uncommited.mensaje)
+
+				list_mail = []
+				for user in form_uncommited.user.all():
+					list_mail.append(user.email)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+
+			except:
+				pass
+			
+			
+	else:
+		form  = MensajeForm()
+		enviado = 0
 
 	return render(request, template, locals())

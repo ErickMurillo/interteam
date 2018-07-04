@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'el_pagination',
     'embed_video',
     'disqus',
+    'crispy_forms',
 ]
 
 SITE_ID = 1

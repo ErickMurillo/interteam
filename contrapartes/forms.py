@@ -16,6 +16,7 @@ class ContraparteForms(forms.ModelForm):
 	nombre = forms.CharField(widget=forms.TextInput(attrs={'class':'span7','rel':"tooltip", 'title':"Nombre completo de la contraparte"}))
 	fundacion = forms.CharField(widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Año en que fue fundada la organización"}))
 	contacto = forms.CharField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Nombre completo de la persona de contacto"}))
+	correo = forms.CharField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Correo de la persona de contacto"}))
 	telefono = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Formato ### - ######## "}))
 	#sitio_web = forms.URLField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Con este formato http://www.dominio.com "}))
 	# rss = forms.CharField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Dirección rss de contenido sindicado"}))
@@ -36,8 +37,8 @@ class UserProfileForm(ModelForm):
 		fields = ('avatar',)
 
 class MensajeForm(forms.ModelForm):
-	user = forms.ModelMultipleChoiceField(queryset = User.objects.order_by('username'),
-										  widget = forms.CheckboxSelectMultiple())
+	user = forms.ModelMultipleChoiceField(queryset = User.objects.order_by('username'))
+	mensaje = forms.CharField(widget=CKEditorUploadingWidget())
 	class Meta:
 		#widgets = {'user': forms.CheckboxSelectMultiple}
 		model = Mensajero

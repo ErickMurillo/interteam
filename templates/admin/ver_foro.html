@@ -1,4 +1,5 @@
 {% extends "admin/base_admin.html" %}
+{% load thumbnail %}
 
 {% block content %}
 <div class="main-content prueba">
@@ -33,7 +34,12 @@
                     	<div class="single-comment-wrap">
 	                        <div class="single-comment">
 	                            <div class="single-comment__image">
-	                                <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" class="img-circle" alt="" width="60px">
+	                            	{% thumbnail aporte.user.userprofile.avatar "128x128" crop="center" as im %}
+		                                <img src="{{im.url}}" class="img-circle" alt="" width="60px">
+		                            {% empty %}   
+		                              <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/2_avatar-128.png" class="img-circle" alt="" width="60px">
+		                            {% endthumbnail %}
+	                                
 	                            </div>
 	                            <div class="single-comment__text-content">
 	                                <h4 class="single-comment__name">{{aporte.user.get_full_name|default:aporte.user.username}}</h4>
@@ -41,7 +47,7 @@
 	                                <em class="single-comment__time-ago"> {{aporte.fecha}}</em>
 	                                <p>{{aporte.contenido|safe}}</p>
 	                                <div>
-		                            	{% if request.user == discusion.contraparte %}
+		                            	{% if request.user == aporte.user %}
 											<a class="btn btn-success btn-small-special" href="{% url 'editar-aporte' aporte.id %}"><i class="fa fa-pencil"></i></a>
 											<a class="btn btn-danger btn-small-special" href="{% url 'eliminar-aporte' aporte.id %}"><i class="fa fa-trash"></i></a>
 										{% endif %}
@@ -54,7 +60,11 @@
 								<div class="single-comment-wrap">
 		                            <div class="single-comment">
 		                                <div class="single-comment__image">
-		                                    <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/4_avatar-128.png" class="img-circle" alt="" width="60px">
+		                                    {% thumbnail coment.usuario.userprofile.avatar "128x128" crop="center" as im %}
+				                                <img src="{{im.url}}" class="img-circle" alt="" width="60px">
+				                            {% empty %}   
+				                              <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/2_avatar-128.png" class="img-circle" alt="" width="60px">
+				                            {% endthumbnail %}
 		                                </div>
 		                                <div class="single-comment__text-content">
 		                                    <h4 class="single-comment__name">{{coment.usuario.get_full_name|default:coment.usuario.username}}</h4>
@@ -62,7 +72,7 @@
 		                                    <em class="single-comment__time-ago">{{coment.fecha}}</em>
 		                                    <p>{{coment.comentario|safe}}</p>
 		                                    <div>
-		                                    	{% if request.user == discusion.contraparte %}
+		                                    	{% if request.user == coment.usuario %}
 													<a class="btn btn-success btn-small-special" href="{% url 'editar-comentario' coment.id %}"><i class="fa fa-pencil"></i></a>
 													<a class="btn btn-danger btn-small-special" href="{% url 'eliminar-comentario' coment.id %}"><i class="fa fa-trash"></i></a>
 												{% endif %}

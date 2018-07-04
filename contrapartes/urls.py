@@ -34,4 +34,6 @@ urlpatterns = [
 	path('galerias/videos/nuevo/', agregar_galeria_vid, name='nueva-galerias-vid'),
 	path('galerias/videos/eliminar/<id>', eliminar_video, name='eliminar-video'),
 	path('galerias/videos/editar/<id>/', editar_video, name='editar-video'),
+	path('mensajes/', mensajes, name='mensajes'),
+
 ]

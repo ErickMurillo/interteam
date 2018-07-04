@@ -48,6 +48,7 @@ class Contraparte(models.Model):
     temas = RichTextUploadingField(blank=True, null=True)
     generalidades = RichTextUploadingField(blank=True, null=True)
     contacto = models.CharField(max_length=200,blank=True, null=True)
+    correo = models.EmailField(blank=True, null=True)
     telefono = models.CharField(max_length=200, blank=True, null=True)
     #sitio_web = models.URLField(blank=True, null=True)
     #rss = models.CharField(max_length=200,blank=True, null=True)
@@ -99,10 +100,10 @@ class UserProfile(models.Model):
         return '/usuario/%d/' % (self.user.id)
 
 class Mensajero(models.Model):
-    user = models.ManyToManyField(User)
+    user = models.ManyToManyField(User,related_name='Destinatarios')
     fecha = models.DateField(auto_now_add=True)
     mensaje = RichTextUploadingField()
-    usuario = models.CharField(max_length=200,blank=True, null=True)
+    usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,related_name='Usuario')
 
     def __str__(self):
         return u'%s - %s ' % (self.fecha, self.mensaje)

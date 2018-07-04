@@ -14,7 +14,8 @@ def lista_galerias_img(request,template='list_galerias.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = GaleriaImagenes.objects.filter(tematica = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals())
 
@@ -27,7 +28,8 @@ def detalle_galerias_img(request,id, template='detalle_galeria.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = GaleriaImagenes.objects.filter(tematica = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals())
 
@@ -37,7 +39,8 @@ def lista_galerias_videos(request,template='list_galerias.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = GaleriaVideos.objects.filter(tematica = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals())
 
@@ -48,7 +51,8 @@ def filtro_temas_img(request,tema,template='list_galerias.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = GaleriaImagenes.objects.filter(tematica = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals())
 
@@ -59,6 +63,7 @@ def filtro_temas_vid(request,tema,template='list_galerias.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = GaleriaVideos.objects.filter(tematica = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals())

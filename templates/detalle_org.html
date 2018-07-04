@@ -76,6 +76,16 @@
                                     </div>
                                 </div><!--/.contact-address-item-->
                                 {% endif %}
+                                
+                                {% if object.correo %}
+                                    <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-envelope-open contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Correo</div>
+                                         {{object.correo}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
 
                                 {% if object.sitio_web %}
                                 <div class="contact-address-item">

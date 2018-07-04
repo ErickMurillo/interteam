@@ -65,6 +65,16 @@
                                 </div><!--/.contact-address-item-->
                                 {% endif %}
 
+                                {% if contraparte.correo %}
+                                    <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-envelope-open contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Correo</div>
+                                         {{contraparte.correo}}
+                                    </div>
+                                </div><!--/.contact-address-item-->
+                                {% endif %}
+
                                 {% if contraparte.sitio_web %}
                                 <div class="contact-address-item">
                                     <span class="icon-wrap base-color border-color"><i class="fa fa-map-marker contact-icon"></i></span>

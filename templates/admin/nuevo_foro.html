@@ -1,16 +1,16 @@
 {% extends "admin/base_admin.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="main-content prueba">
     <div class="container ">
         <div class="row stickem-container prueba">
         	<section>
-
                     <div class="blog-details-top mb40">
                         <div class="blog-details-top__text-content">
 				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
 								{{form.media}}
-								{{form.as_p}}
+								{{form|crispy}}
 								<input type="submit" name="Guardar" value="Guardar">
 							</form>
 						</div>

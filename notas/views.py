@@ -73,7 +73,8 @@ def lista_notas(request,template='blog.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = Notas.objects.filter(temas = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	dic_eventos = {}
 	for prox_event in eventos:
@@ -95,7 +96,8 @@ def detalle_notas(request, slug, template='blog-details.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = Notas.objects.filter(temas = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	dic_eventos = {}
 	for prox_event in eventos:
@@ -129,7 +131,8 @@ def filtro_temas(request, temas, template='blog.html'):
 	dic_temas = {}
 	for tema in Temas.objects.all():
 		count = Notas.objects.filter(temas = tema).count()
-		dic_temas[tema] = count
+		if count != 0:
+			dic_temas[tema] = count
 
 	return render(request, template, locals()) 
 

@@ -4769,3 +4769,8 @@ hr {
 display: none;
 }
 }
+
+/*form-control*/
+.form-inline .control-group {
+    padding-bottom: 18px;
+}
