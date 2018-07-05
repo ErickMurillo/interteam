@@ -4766,7 +4766,10 @@ hr {
 }
 @media only screen and (max-width : 777px) {
 .rev_slider .tp-caption, .rev_slider .caption{
-display: none;
+  white-space: nowrap !important;
+}
+.slider-sub-heading-wrap{
+  display: none !important;
 }
 }
 
