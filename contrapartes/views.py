@@ -553,7 +553,6 @@ def editar_video(request, id, template='admin/nueva_galeria_vid.html'):
 
 	return render(request, template, locals())
 
-import sys
 @login_required
 def mensajes(request, template='admin/mensajes.html'):
 	if request.method == 'POST':
@@ -592,5 +591,33 @@ def mensajes(request, template='admin/mensajes.html'):
 		form  = MensajeForm()
 		form.fields['user'].queryset = User.objects.exclude(id=request.user.id)
 		enviado = 0
+
+	return render(request, template, locals())
+
+@login_required
+def estadisticas(request, template='admin/estadisticas.html'):
+	dic_notas = {}
+	dic_foros = {}
+	dic_aportes = {}
+	dic_coment = {}
+	list_resumen = []
+	for org in Contraparte.objects.all():
+		conteo = Notas.objects.filter(user__userprofile__contraparte = org).count()
+		dic_notas[org.siglas] = conteo
+
+		conteo_foros = Foros.objects.filter(contraparte__userprofile__contraparte = org).count()
+		dic_foros[org.siglas] = conteo_foros
+
+		conteo_aportes = Aportes.objects.filter(user__userprofile__contraparte = org).count()
+		dic_aportes[org.siglas] = conteo_aportes
+
+		conteo_coment = Comentarios.objects.filter(usuario__userprofile__contraparte = org).count()
+		dic_coment[org.siglas] = conteo_coment
+
+		conteo_img = GaleriaImagenes.objects.filter(user__userprofile__contraparte = org).count()
+		conteo_vid = GaleriaVideos.objects.filter(user__userprofile__contraparte = org).count()
+		conteo_publi = Publicacion.objects.filter(usuario__userprofile__contraparte = org).count()
+
+		list_resumen.append((org.siglas,conteo,conteo_foros,conteo_aportes,conteo_coment,conteo_img,conteo_vid,conteo_publi))
 
 	return render(request, template, locals())

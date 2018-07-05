@@ -1,0 +1,180 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="main-content">
+        <div class="container ">
+            <div class="row stickem-container prueba">
+                <section>
+                    <div class="blog-details-top mb40 main-contact">
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                                <div class="col-sm-12">
+                                	<div id="container_foros" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                                <div class="col-sm-12">
+                                	<div id="container_aportes" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                                <div class="col-sm-12">
+                                	<div id="container_coment" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                                <div class="col-md-12">
+                                	<h3 class="blog-details__title ">Estadisticas</h3>
+                           			<hr>
+	                            	<div class="table-responsive">
+		                                <table class="table table-hover" id="example2"  style="width:100%">
+		                                    <thead>
+		                                        <tr>
+		                                            <th>Organizacion</th>
+		                                            <th>Notas</th>
+		                                            <th>Foros</th>
+		                                            <th>Eventos</th>
+		                                            <th>Comentarios</th>
+		                                            <th>Galerias Imagenes</th>
+		                                            <th>Galerias Videos</th>
+		                                            <th>Publicaciones</th>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                    	{% for object in list_resumen %}
+		                                		<tr>
+		                                            <td>{{object.0}}</td>
+		                                            <td>{{object.1}}</td>
+		                                            <td>{{object.2}}</td>
+		                                            <td>{{object.3}}</td>
+		                                            <td>{{object.4}}</td>
+		                                            <td>{{object.5}}</td>
+		                                            <td>{{object.6}}</td>
+		                                            <td>{{object.7}}</td>
+		                                        </tr>
+		                                    	{% endfor %}
+		                                    </tbody>
+		                                </table>
+                            		</div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script type="text/javascript">
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Notas por Organización'
+    },
+    xAxis: {
+        categories: ['Notas',]
+    },
+    credits: {
+        enabled: false
+    },
+    yAxis: {
+        title: {
+            text: 'Valores'
+        }
+    },
+    series: [
+    {% for k,v in dic_notas.items %}
+    {
+        name: '{{k}}',
+        data: [{{v}}]
+    },
+    {% endfor %} ]
+});
+
+Highcharts.chart('container_foros', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Foros aperturados por Organización'
+    },
+    xAxis: {
+        categories: ['Foros',]
+    },
+    credits: {
+        enabled: false
+    },
+    yAxis: {
+        title: {
+            text: 'Valores'
+        }
+    },
+    series: [
+    {% for k,v in dic_foros.items %}
+    {
+        name: '{{k}}',
+        data: [{{v}}]
+    },
+    {% endfor %} ]
+});
+
+Highcharts.chart('container_aportes', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Aportes a los foros por Organización'
+    },
+    xAxis: {
+        categories: ['Aportes',]
+    },
+    credits: {
+        enabled: false
+    },
+    yAxis: {
+        title: {
+            text: 'Valores'
+        }
+    },
+    series: [
+    {% for k,v in dic_aportes.items %}
+    {
+        name: '{{k}}',
+        data: [{{v}}]
+    },
+    {% endfor %} ]
+});
+
+Highcharts.chart('container_coment', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Comentarios a los aportes por Organización'
+    },
+    xAxis: {
+        categories: ['Comentarios',]
+    },
+    credits: {
+        enabled: false
+    },
+    yAxis: {
+        title: {
+            text: 'Valores'
+        }
+    },
+    series: [
+    {% for k,v in dic_coment.items %}
+    {
+        name: '{{k}}',
+        data: [{{v}}]
+    },
+    {% endfor %} ]
+});
+</script>
+{% endblock extra_js %}
