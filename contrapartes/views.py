@@ -614,10 +614,11 @@ def estadisticas(request, template='admin/estadisticas.html'):
 		conteo_coment = Comentarios.objects.filter(usuario__userprofile__contraparte = org).count()
 		dic_coment[org.siglas] = conteo_coment
 
+		conteo_eventos = Agendas.objects.filter(user__userprofile__contraparte = org).count()
 		conteo_img = GaleriaImagenes.objects.filter(user__userprofile__contraparte = org).count()
 		conteo_vid = GaleriaVideos.objects.filter(user__userprofile__contraparte = org).count()
 		conteo_publi = Publicacion.objects.filter(usuario__userprofile__contraparte = org).count()
 
-		list_resumen.append((org.siglas,conteo,conteo_foros,conteo_aportes,conteo_coment,conteo_img,conteo_vid,conteo_publi))
+		list_resumen.append((org.siglas,conteo,conteo_eventos,conteo_foros,conteo_aportes,conteo_coment,conteo_img,conteo_vid,conteo_publi))
 
 	return render(request, template, locals())
