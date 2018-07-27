@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='publicacion',
             name='tematica',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='notas.Temas'),
+            field=models.ForeignKey(default=2, on_delete=django.db.models.deletion.DO_NOTHING, to='notas.Temas'),
             preserve_default=False,
         ),
     ]
