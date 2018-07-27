@@ -34,16 +34,12 @@
 </div>
 <div class="main-content section-padding">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row list-publicaciones"> 
+            <div class="col-md-3" >
                 <form class="search-form widget" action='.' method='GET'>
                     <input type="search" placeholder="Buscar" name="buscar" class="form-control search-form__input" {% if q %}value="{{q}}"{% endif %} />
                     <button type="submit" class="search-form__submit"><i class="fa fa-search base-color"></i> </button>
                 </form>
-            </div>
-        </div>
-        <div class="row"> 
-            <div class="col-md-3" >
                 <aside class="sidebar">
                     <div class="widget widget--category">
                         <div class="widget__heading">
@@ -67,7 +63,7 @@
             <div class="col-md-9">
                 {% paginate 6 object_list %}
                 {% for object in object_list %}
-                     <div class="col-md-6 col-sm-12">
+                     <div class="col-md-4 col-sm-12">
                         <div class="div">
                             <div class="our-causes">
                                 <div class="our-causes__image-wrap">
@@ -80,7 +76,7 @@
 
                                 <div class="our-causes__text-content text-center">
 
-                                    <h4 class=" our-causes__title"><a data-toggle="modal" href='{% url 'biblioteca-detail' object.slug %}'>{{object.titulo}}</a></h4>
+                                    <h5 class=" our-causes__title"><a data-toggle="modal" href='{% url 'biblioteca-detail' object.slug %}'>{{object.titulo}}</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -89,11 +85,12 @@
                 {% if not object_list %}
                     <p>No hay resultados</p>
                 {% endif %}
+                <div class="fund-pagination mb30">
+                    {% show_pages %}
+                </div>
                 </div>
         </div>
-        <div class="fund-pagination mb30">
-            {% show_pages %}
-        </div>
+        
     </div>
 </div>
 {% endblock content %}

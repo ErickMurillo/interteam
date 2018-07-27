@@ -119,6 +119,11 @@ ul.social-btn li a {
 .publicacion-carousel .our-causes__title, .list-publicaciones .our-causes__title{
   height: 48px;
   max-height: 50px;
+  margin-top: 0px;
+
+}
+.list-publicaciones .our-causes__text-content{
+    padding:10px ;
 }
 /**perfil**/
 .btn-nav {
