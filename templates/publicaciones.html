@@ -15,6 +15,9 @@
     color: #1e3042;
     margin-right: 15px;
 }
+.filter-options > li > a:before {
+    content: none;
+}
 </style>
 <div class="banner-area banner-area--events all-text-white text-center">
     <div class="container">
@@ -40,31 +43,54 @@
             </div>
         </div>
         <div class="row list-publicaciones"> 
-        {% paginate 6 object_list %}
-        {% for object in object_list %}
-             <div class="col-md-4 col-sm-12">
-                <div class="div">
-                    <div class="our-causes">
-                        <div class="our-causes__image-wrap">
-                            {% thumbnail object.imagen "360x390" crop="center" as im %}
-                                <img src="{{im.url}}" class="our-causes__image" alt="">
-                            {% empty %}   
-                              <img src="http://via.placeholder.com/360x390" class="our-causes__image" alt="">
-                            {% endthumbnail %}
+            <div class="col-md-3" >
+                <aside class="sidebar">
+                    <div class="widget widget--category">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">TEMAS</h4>
                         </div>
+                        <div class="widget__text-content">
+                            <ul class="filter-options">
+                                <li><a href="/publicaciones/" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_publi}}</span></li>
+                                {% for x,y in dic_temas.items %}
+                                <li><a href="{% url 'filtro-temas-publi' x %}" class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
+                               
+                            </ul>
 
-                        <div class="our-causes__text-content text-center">
 
-                            <h4 class=" our-causes__title"><a data-toggle="modal" href='/media/media/{{object.archivo}}' download>{{object.titulo}}</a></h4>
                         </div>
                     </div>
-                </div>
-            </div>                  
-        {% endfor %}  
-        {% if not object_list %}
-            <p>No hay resultados</p>             
-        {% endif %}                 
-            
+                    
+                </aside>    
+            </div>
+            <div class="col-md-9">
+                {% paginate 6 object_list %}
+                {% for object in object_list %}
+                     <div class="col-md-6 col-sm-12">
+                        <div class="div">
+                            <div class="our-causes">
+                                <div class="our-causes__image-wrap">
+                                    {% thumbnail object.imagen "360x390" crop="center" as im %}
+                                        <img src="{{im.url}}" class="our-causes__image" alt="">
+                                    {% empty %}   
+                                      <img src="http://via.placeholder.com/360x390" class="our-causes__image" alt="">
+                                    {% endthumbnail %}
+                                </div>
+
+                                <div class="our-causes__text-content text-center">
+
+                                    <h4 class=" our-causes__title"><a data-toggle="modal" href='/media/media/{{object.archivo}}' target="_blank">{{object.titulo}}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                {% endfor %}  
+                {% if not object_list %}
+                    <p>No hay resultados</p>             
+                {% endif %} 
+            </div>
+                        
         </div>
         <div class="fund-pagination mb30">
             {% show_pages %}

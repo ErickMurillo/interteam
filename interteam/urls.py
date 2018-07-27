@@ -43,6 +43,7 @@ urlpatterns = [
     path('foros/', include('foros.urls')),
     path('galerias/', include('galerias.urls')),
     path('publicaciones/', notas.publicaciones),
+    path('publicaciones/filtro/tema/<tema>', notas.filtro_temas_publi, name='filtro-temas-publi'),
     path('organizaciones/', notas.organizaciones),
     path('organizaciones/<slug>', notas.detalle_organizacion, name='detalle-organizacion'),
     path('biblioteca/', include('biblioteca.urls')),

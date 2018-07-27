@@ -143,6 +143,24 @@ def publicaciones(request, template='publicaciones.html'):
 	else:
 		object_list = Publicacion.objects.order_by('-id')
 
+	count_publi = Publicacion.objects.all().count()
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Publicacion.objects.filter(tematica = tema).count()
+		if count != 0:
+			dic_temas[tema] = count
+
+	return render(request, template, locals())
+
+def filtro_temas_publi(request, tema, template='publicaciones.html'):
+	object_list = Publicacion.objects.filter(tematica__nombre = tema).order_by('-id')
+
+	count_publi = Publicacion.objects.all().count()
+	dic_temas = {}
+	for tema in Temas.objects.all():
+		count = Publicacion.objects.filter(tematica = tema).count()
+		if count != 0:
+			dic_temas[tema] = count
 	return render(request, template, locals())
 
 def organizaciones(request, template='organizaciones.html'):

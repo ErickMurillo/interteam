@@ -1,12 +1,14 @@
 from django.db import models
 from sorl.thumbnail import ImageField
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+from notas.models import * 
 
 # Create your models here.
 class Publicacion(models.Model):
 	titulo = models.CharField(max_length=250)
 	imagen = ImageField(upload_to='publicaciones/img/',null=True, blank=True)
 	archivo = models.FileField(upload_to='publicaciones/archivos/')
+	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)
 	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,editable=False)
 
 	def __str__(self):
