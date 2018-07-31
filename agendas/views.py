@@ -47,3 +47,25 @@ def detail_evento(request,slug,template="event-details.html"):
 	hours = delta.seconds/3600
 
 	return render(request, template, locals())
+
+def confirmar_evento(request, id):
+	correo = User.objects.get(id = id)
+	try:
+		subject, from_email = 'Confirmación de participación en evento', 'cluster.nicaragua@gmail.com'
+		text_content = 'El usuario '+ +' de la Organización '+ +' \n'  + \
+						'ha confirmado la participacion en el evento: '+ +''
+
+		html_content = 'El usuario '+ +' de la Organización '+ +' \n'  + \
+						'ha confirmado la participacion en el evento: '+ +''
+
+		list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+		msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+		msg.attach_alternative(html_content, "text/html")
+		msg.send()
+
+		enviado = 1
+	except:
+		pass
+
+	return HttpResponseRedirect('/')

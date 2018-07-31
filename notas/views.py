@@ -134,6 +134,13 @@ def filtro_temas(request, temas, template='blog.html'):
 		if count != 0:
 			dic_temas[tema] = count
 
+	dic_eventos = {}
+	for prox_event in eventos:
+		delta = datetime.datetime(year=prox_event.inicio.year,month=prox_event.inicio.month,day=prox_event.inicio.day,minute=prox_event.hora_inicio.minute) - datetime.datetime.now()
+		days = delta.days
+		hours = delta.seconds/3600
+		dic_eventos[prox_event] = days,hours
+
 	return render(request, template, locals()) 
 
 def publicaciones(request, template='publicaciones.html'):

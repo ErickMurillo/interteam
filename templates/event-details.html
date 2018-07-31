@@ -42,6 +42,8 @@
                         </li>
                     </ul>
                 </div>
+                {% now 'd/F/o' as current_date %}
+                {% if evento.inicio|date:'d/F/o' <= current_date and request.user.is_authenticated %}
                 <div class="event-details-counter-wrap mt50 mb30">
                     <div class="event-counter" >
                         <div  class="musica-counter-active is-countdown" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10">
@@ -54,9 +56,10 @@
                         </div>
                     </div>
                     <div class="buy-ticket all-text-white">
-                        <a href="#" class="btn base-bg">Confirmar Participación</a>
+                        <a href="{% url 'confirmar-evento' request.user.id %}" class="btn base-bg">Confirmar Participación</a>
                     </div>
                 </div>
+                {% endif %}
                 <!--<div>
                     <p>Tras la realización de seis Foros Territoriales y un Foro Académico, se llevó a cabo el Foro Nacional “Sector Privado en la Agenda de Desarrollo Sostenible de Nicaragua”, con el objetivo de enfrentar los desafíos ambientales que enfrentamos como sociedad, involucrando a distintos sectores, entre ellos a las cámaras empresariales, a la iglesia y a la sociedad civil.</p>
                     <p>El foro se realizó gracias al apoyo de la Embajada de Alemania en Nicaragua y el organismo internacional CAFOD, contando con la participación de líderes y lideresas empresariales, representantes de universidades y de la iglesia católica. </p>
