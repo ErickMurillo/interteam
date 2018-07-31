@@ -6,7 +6,7 @@ from .views import *
 urlpatterns = [
 	path('', list_eventos, name='list_eventos'),
 	path('<slug>/', detail_evento,name='agenda-detail'),
-	path('confirmar/<id>/', confirmar_evento, name='confirmar-evento'),
+	path('confirmar/<slug>/', confirmar_evento, name='confirmar-evento'),
 	# path('crear/', crear_agenda, name="crear-agenda"),
 	# re_path(r'^editar/(?P<id>\d+)/$', editar_agenda, name='editar-agenda'),
 	# re_path(r'^borrar/(?P<id>\d+)/$', borrar_agenda, name='borrar-agenda'),

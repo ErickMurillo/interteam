@@ -4,6 +4,8 @@ from notas.models import *
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 import datetime
 from django.db.models import Q
+from agendas.models import *
+from django.http import HttpResponseRedirect, HttpResponse 
 
 # Create your views here.
 def list_eventos(request,template='events.html'):
@@ -48,23 +50,24 @@ def detail_evento(request,slug,template="event-details.html"):
 
 	return render(request, template, locals())
 
-def confirmar_evento(request, id):
-	correo = User.objects.get(id = id)
+def confirmar_evento(request, slug):
+	user = UserProfile.objects.get(user__id = request.user.id)
+	evento = Agendas.objects.get(slug = slug)
+	list_mail = evento.user.email
 	try:
 		subject, from_email = 'Confirmación de participación en evento', 'cluster.nicaragua@gmail.com'
-		text_content = 'El usuario '+ +' de la Organización '+ +' \n'  + \
-						'ha confirmado la participacion en el evento: '+ +''
+		text_content = 'El usuario '+ user.user.username +' de la Organización '+ user.contraparte +' \n'  + \
+						'ha confirmado la participación en el evento: '+ +''
 
-		html_content = 'El usuario '+ +' de la Organización '+ +' \n'  + \
-						'ha confirmado la participacion en el evento: '+ +''
-
-		list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+		html_content = 'El usuario '+ user.user.username +' de la Organización '+ user.contraparte +' \n'  + \
+						'ha confirmado la participación en el evento: '+ evento.evento +''
 
 		msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 		msg.attach_alternative(html_content, "text/html")
 		msg.send()
 
 		enviado = 1
+		return redirect('agenda-detail', slug=slug)
 	except:
 		pass
 
