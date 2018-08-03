@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 {% now 'd/F/o' as current_date %}
-                {% if evento.inicio|date:'d/F/o' <= current_date and request.user.is_authenticated %}
+                {% if evento.inicio|date:'d/F/o' >= current_date %}
                 <div class="event-details-counter-wrap mt50 mb30">
                     <div class="event-counter" >
                         <div  class="musica-counter-active is-countdown" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10">
@@ -55,9 +55,12 @@
                             </span>
                         </div>
                     </div>
-                    <div class="buy-ticket all-text-white">
+                    {% if request.user.is_authenticated %}
+                       <div class="buy-ticket all-text-white">
                         <a href="{% url 'confirmar-evento' evento.slug %}" class="btn base-bg">Confirmar Participación</a>
-                    </div>
+                    </div> 
+                    {% endif %}
+                    
                 </div>
                 {% endif %}
                 <!--<div>

@@ -6,6 +6,7 @@ import datetime
 from django.db.models import Q
 from agendas.models import *
 from django.http import HttpResponseRedirect, HttpResponse 
+from django.core.mail import send_mail, EmailMultiAlternatives
 
 # Create your views here.
 def list_eventos(request,template='events.html'):
@@ -50,25 +51,28 @@ def detail_evento(request,slug,template="event-details.html"):
 
 	return render(request, template, locals())
 
+import sys
 def confirmar_evento(request, slug):
 	user = UserProfile.objects.get(user__id = request.user.id)
 	evento = Agendas.objects.get(slug = slug)
-	list_mail = evento.user.email
+	email = evento.user.email
+	list_mail = []
+	list_mail.append(email)
 	try:
 		subject, from_email = 'Confirmación de participación en evento', 'cluster.nicaragua@gmail.com'
-		text_content = 'El usuario '+ user.user.username +' de la Organización '+ user.contraparte +' \n'  + \
-						'ha confirmado la participación en el evento: '+ +''
+		text_content = 'El usuario '+ user.user.username +' de la Organización '+ str(user.contraparte) +' \n'  + \
+						'ha confirmado la participación en el evento: "'+ evento.evento +'"'
 
-		html_content = 'El usuario '+ user.user.username +' de la Organización '+ user.contraparte +' \n'  + \
-						'ha confirmado la participación en el evento: '+ evento.evento +''
+		html_content = 'El usuario '+ user.user.username +' de la Organización '+ str(user.contraparte) +' \n'  + \
+						'ha confirmado la participación en el evento: "'+ evento.evento +'"'
 
 		msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 		msg.attach_alternative(html_content, "text/html")
 		msg.send()
 
 		enviado = 1
-		return redirect('agenda-detail', slug=slug)
+		# return redirect('agenda-detail', slug=slug)
 	except:
 		pass
 
-	return HttpResponseRedirect('/')
+	return redirect('agenda-detail', slug=slug)
