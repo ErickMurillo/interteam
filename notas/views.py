@@ -29,7 +29,8 @@ def index(request,template='index.html'):
 
 	notas = Notas.objects.all().order_by('-fecha','-id')[:6]
 	notas2 = Notas.objects.all().order_by('-fecha','-id')[1:9]
-	eventos = Agendas.objects.filter(publico=True).order_by('-inicio','-hora_inicio')[:4]
+	hoy = datetime.date.today()
+	eventos = Agendas.objects.filter(inicio__gte = hoy,publico=True).order_by('-inicio','-hora_inicio')[:4]
 	paises = Pais.objects.all()
 	contrapartes = Contraparte.objects.all()
 

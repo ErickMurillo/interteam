@@ -11,7 +11,7 @@
                         <div class="blog-details-top__text-content">
 				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
 								{{form.media}}
-								{% crispy form %}
+								{{form|crispy}}
 								<input type="submit" name="Guardar" value="Guardar">
 							</form>
 						</div>

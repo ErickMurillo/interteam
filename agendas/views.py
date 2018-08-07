@@ -13,9 +13,9 @@ def list_eventos(request,template='events.html'):
 		q = request.GET['buscar']
 		eventos = Agendas.objects.filter(Q(evento__icontains = q) |
 										Q(descripcion__icontains = q) |
-										Q(lugar__icontains = q), publico = True).order_by('inicio')
+										Q(lugar__icontains = q), publico = True).order_by('-inicio','-hora_inicio')
 	else:
-		eventos = Agendas.objects.filter(publico = True).order_by('inicio')
+		eventos = Agendas.objects.filter(publico = True).order_by('-inicio','-hora_inicio')
 
 	hoy = datetime.date.today()
 	prox_eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
