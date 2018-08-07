@@ -50,7 +50,7 @@
         <div class="top-bar base-bg">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 col-xs-6 text-left text-xs-center">
+                    <div class="col-sm-4 col-xs-6 text-left text-xs-center">
                         <!-- <div class="top-bar__contact">
                             <i class="fa fa-envelope"></i> <span class="pdl5">correo@correo.com</span>
                             <span class="pdl15 pdr15">|</span>
@@ -65,11 +65,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xs-6 text-right text-xs-center">
+                    <div class="col-sm-8 col-xs-6 text-right text-xs-center">
                         <ul class="footer-menu text-xs-center">
                             <li><a href="#"><i class="fa fa-user"></i> {{request.user.get_full_name|default:request.user.username}}</a></li>
                             <li><a href="/accounts/profile/editar/">Editar perfil</a></li>
                             <li><a href="/contrapartes/estadisticas/"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
+                            <li><a href="/static/Manual_de_usuario_Cluster_SA_y_generación_ingresos.pdf" target="_blank">Manual</a></li>
                             <li><a href="/accounts/logout/"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                     </div>
