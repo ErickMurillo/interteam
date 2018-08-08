@@ -42,8 +42,8 @@
                         </li>
                     </ul>
                 </div>
-                {% now 'd/F/o' as current_date %}
-                {% if evento.inicio|date:'d/F/o' >= current_date %}
+                {% now "Y-m-d" as current_date %}
+                {% if evento.inicio|date:"Y-m-d" >= current_date %}
                 <div class="event-details-counter-wrap mt50 mb30">
                     <div class="event-counter" >
                         <div  class="musica-counter-active is-countdown" data-value-year="2018" data-value-month="9" data-value-day="28" data-value-zone="+10">

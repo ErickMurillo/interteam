@@ -60,7 +60,7 @@ def notas_contraparte(request, template='admin/notaadmin.html'):
 	object_list = Notas.objects.filter(user_id = request.user.id)
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Notas.objects.filter(temas = tema).count()
+		count = Notas.objects.filter(temas = tema,user = request.user).count()
 		if count != 0:
 			dic_temas[tema] = count
 

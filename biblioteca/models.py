@@ -6,6 +6,11 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from notas.models import *
 
 # Create your models here.
+class Categoria(models.Model):
+	nombre = models.CharField(max_length=250)
+	def __str__(self):
+		return u'%s' % self.nombre
+
 class Archivos(models.Model):
 	titulo = models.CharField(max_length=250)
 	imagen = ImageField(upload_to='biblioteca/img/',null=True, blank=True)
@@ -16,6 +21,7 @@ class Archivos(models.Model):
 	isbn = models.CharField(max_length=250,null=True,blank=True)
 	numero_paginas = models.IntegerField()
 	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)
+	categoria = models.ForeignKey(Categoria,on_delete=models.DO_NOTHING,null=True,blank=True)
 	resumen = RichTextUploadingField()
 	archivo = models.FileField(upload_to='biblioteca/archivos/')
 	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,editable=False)

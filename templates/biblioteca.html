@@ -58,7 +58,24 @@
                         </div>
                     </div>
                     
-                </aside>    
+                </aside>  
+                <aside class="sidebar">
+                    <div class="widget widget--category">
+                        <div class="widget__heading">
+                            <h4 class="widget__title">CATEGORÍAS</h4>
+                        </div>
+                        <div class="widget__text-content">
+                            <ul class="filter-options">
+                                <li><a href="/biblioteca/" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_publi}}</span></li>
+                                {% for x,y in dic_cat.items %}
+                                <li><a href="{% url 'filtro-categoria-biblioteca' x %}" class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
+                                {% endfor %}
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </aside>   
             </div>
             <div class="col-md-9">
                 {% paginate 6 object_list %}

@@ -70,7 +70,12 @@
                             <li><a href="#"><i class="fa fa-user"></i> {{request.user.get_full_name|default:request.user.username}}</a></li>
                             <li><a href="/accounts/profile/editar/">Editar perfil</a></li>
                             <li><a href="/contrapartes/estadisticas/"><i class="fa fa-bar-chart"></i> Estadisticas</a></li>
-                            <li><a href="/static/Manual_de_usuario_Cluster_SA_y_generación_ingresos.pdf" target="_blank">Manual</a></li>
+                            {% if request.user.is_superuser %}
+                                <li><a href="/static/Manual_de_usuario_Cluster_SA_y_generación_ingresos.pdf" target="_blank">Manual</a></li>
+                            {% else %}
+                                <li><a href="/static/Manual_de_usuario_Cluster_SA_y_generación_ingresos_v2.pdf" target="_blank">Manual</a></li>
+                            {% endif %}
+                            
                             <li><a href="/accounts/logout/"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                     </div>

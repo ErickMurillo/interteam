@@ -75,12 +75,13 @@
                         <ul class="footer-menu text-xs-center">
                           {% if user.is_authenticated %}
                           <li><a href="/accounts/profile/"><i class="fa fa-user"></i> {{user.get_full_name|default:user.username}}</a></li>
+                          <li><a href="/accounts/logout/"><i class="fa fa-power-off"></i> Salir</a></li>
                           {% else %}
                           <li><a href="/accounts/login/"><i class="fa fa-user"></i> Iniciar sesión</a></li>
                           {% endif %}
                             
                             <!-- <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li> -->
-                            <li><a href="/accounts/logout/"><i class="fa fa-power-off"></i> Salir</a></li>
+                            
                         </ul>
                     </div>
                 </div>
