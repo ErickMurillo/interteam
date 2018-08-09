@@ -36,8 +36,15 @@ class UserProfileForm(ModelForm):
 		model = UserProfile
 		fields = ('avatar',)
 
+from django.forms import ModelMultipleChoiceField
+
+class UserModelMultipleChoiceField(ModelMultipleChoiceField):
+	def label_from_instance(self, obj):
+		user_profile = UserProfile.objects.get(user = obj)
+		return "%s - %s" % (obj.username,user_profile.contraparte.siglas)
+
 class MensajeForm(forms.ModelForm):
-	user = forms.ModelMultipleChoiceField(queryset = User.objects.order_by('username'))
+	user = UserModelMultipleChoiceField(queryset = User.objects.order_by('username'))
 	mensaje = forms.CharField(widget=CKEditorUploadingWidget())
 	class Meta:
 		#widgets = {'user': forms.CheckboxSelectMultiple}

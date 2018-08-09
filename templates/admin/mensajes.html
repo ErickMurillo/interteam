@@ -1,5 +1,9 @@
 {% extends "admin/base_admin.html" %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="/static/css/select2.min.css" type="text/css"/>
+{% endblock extra_head %}
+
 {% block content %}
     <div class="main-content">
         <div class="container ">
@@ -16,13 +20,6 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                       
-                                        <!--<select class="form-control input-group__input">
-                                            <option>Destinatario</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>-->
                                         <h5>Destinatarios</h5>
                                         {{form.user}}
                                     </div>
@@ -48,8 +45,9 @@
 {% endblock content %}
 
 {% block extra_js %}
- <script type="text/javascript">
-  
-  $( ".form-group #id_user" ).addClass( "form-control input-group__input" );
+<script type="text/javascript" src="/static/js/select2.min.js"></script>
+<script type="text/javascript">
+  $(".form-group #id_user").addClass( "form-control input-group__input" );
+  $('.form-group #id_user').select2();
 </script>   
 {% endblock extra_js %}
