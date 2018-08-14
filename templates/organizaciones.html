@@ -46,7 +46,7 @@
                     <div class="fund-volunteer__text-content">
                         <h3 class="fund-volunteer__name">{{object.siglas}}</h3>
                         <div class="section-heading-separator section-heading-separator--small"></div>
-                        <p>{{object.generalidades|safe|truncatewords:"15"}}</p>
+                        <p>{{object.generalidades|safe|striptags|truncatechars:130}}</p>
                         <a href="{% url "detalle-organizacion" object.slug %}" class="btn">Leer más</a>
                     </div>
                 </div><!--/.fund-volunteer-->
