@@ -49,6 +49,8 @@ def detail_evento(request,slug,template="event-details.html"):
 	days = delta.days
 	hours = delta.seconds/3600
 
+	agenda_evento = AgendaEvento.objects.filter(evento = evento).order_by('fecha','hora_inicio')
+
 	return render(request, template, locals())
 
 import sys

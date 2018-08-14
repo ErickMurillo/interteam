@@ -74,11 +74,11 @@
                     <p>Tras la realización de seis Foros Territoriales y un Foro Académico, se llevó a cabo el Foro Nacional “Sector Privado en la Agenda de Desarrollo Sostenible de Nicaragua”, con el objetivo de enfrentar los desafíos ambientales que enfrentamos como sociedad, involucrando a distintos sectores, entre ellos a las cámaras empresariales, a la iglesia y a la sociedad civil.</p>
                     <p>El foro se realizó gracias al apoyo de la Embajada de Alemania en Nicaragua y el organismo internacional CAFOD, contando con la participación de líderes y lideresas empresariales, representantes de universidades y de la iglesia católica. </p>
                 </div>-->
-                {% if evento.agendaevento_set.all %}
+                {% if agenda_evento %}
                 <div class="event-shedule-wrap pdt15">
                     <h3>AGENDA DEL EVENTO</h3>
                     <div class="event-shedules mt40">
-                        {% for agenda in evento.agendaevento_set.all|dictsort:"fecha"|dictsort:"hora_inicio" %}
+                        {% for agenda in agenda_evento %}
                            <div class="event-shedule">
                             <div class="event-shedule__time">
                                 {% if evento.final %}<h6>{{agenda.fecha|date:"j F"}}</h6>{% endif %}
