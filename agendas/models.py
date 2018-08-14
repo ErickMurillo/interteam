@@ -19,7 +19,7 @@ class Agendas(models.Model):
     foto = ImageField(upload_to='eventos/',null=True, blank=True)
     descripcion = RichTextUploadingField()
     inicio = models.DateField('Fecha de Inicio')
-    # final = models.DateField('Fecha de Finalización')
+    final = models.DateField('Fecha de Finalización',null=True, blank=True)
     hora_inicio = models.TimeField('Hora inicio')
     hora_fin = models.TimeField('Hora fin')
     lugar = models.CharField(max_length=250)
@@ -44,6 +44,7 @@ class Agendas(models.Model):
 class AgendaEvento(models.Model):
     evento = models.ForeignKey(Agendas,on_delete=models.CASCADE)
     actividad = models.CharField(max_length=200)
+    fecha = models.DateField()
     hora_inicio = models.TimeField('Hora inicio')
     hora_fin = models.TimeField('Hora fin')
     descripcion = models.CharField(max_length=600)

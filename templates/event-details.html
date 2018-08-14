@@ -34,7 +34,14 @@
                     <ul class="event-detail-meta nv-color">
                         <li>
                             <span class="event-detail-meta__title"><i class="fa fa-calendar base-color icon"></i> Horario del evento</span>
-                            <span class="desc">{{evento.inicio}} {{evento.hora_inicio|time:"f A"}} - {{evento.hora_fin|time:"f A"}}</span>
+                            <span class="desc">
+                                {% if not evento.final %} {# same month and day #}
+                                    {{ evento.inicio|date:"j F, Y" }}
+                                {% else %}
+                                    {{ evento.inicio|date:"j F" }} - {{ evento.final|date:"j F, Y" }}
+                                {% endif %}
+
+                            | {{evento.hora_inicio|time:"f A"}} - {{evento.hora_fin|time:"f A"}}</span>
                         </li>
                         <li>
                             <span class="event-detail-meta__title"><i class="fa fa-map-marker base-color icon"></i> Lugar</span>
@@ -71,10 +78,11 @@
                 <div class="event-shedule-wrap pdt15">
                     <h3>AGENDA DEL EVENTO</h3>
                     <div class="event-shedules mt40">
-                        {% for agenda in evento.agendaevento_set.all|dictsort:"hora_inicio" %}
+                        {% for agenda in evento.agendaevento_set.all|dictsort:"fecha"|dictsort:"hora_inicio" %}
                            <div class="event-shedule">
                             <div class="event-shedule__time">
-                                {{agenda.hora_inicio|time:"f"}} - {{agenda.hora_fin|time:"f A"}}
+                                {% if evento.final %}<h6>{{agenda.fecha|date:"j F"}}</h6>{% endif %}
+                                <h6>{{agenda.hora_inicio|time:"f"}} - {{agenda.hora_fin|time:"f A"}}</h6>
                             </div>
                             <div class="event-shedule__text-content">
                                 <h5 class="event-shedule__title">{{agenda.actividad}}</h5>

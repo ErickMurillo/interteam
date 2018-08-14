@@ -25,7 +25,7 @@ class GaleriaImagenes(models.Model):
 		verbose_name_plural = 'Galerías imagenes'
 
 class Imagenes(models.Model):
-	imagenes = models.ForeignKey(GaleriaImagenes,on_delete=models.DO_NOTHING)
+	imagenes = models.ForeignKey(GaleriaImagenes,on_delete=models.CASCADE)
 	nombre = models.CharField(max_length=200)
 	imagen = ImageField(upload_to='galerias/')
 
