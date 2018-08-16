@@ -366,7 +366,7 @@
                     <div class="fund-volunteer__text-content">
                         <h3 class="fund-volunteer__name">{{org.siglas}}</h3>
                         <div class="section-heading-separator section-heading-separator--small"></div>
-                        {{org.generalidades|safe|truncatewords:"15"}}
+                        {{org.generalidades|safe|striptags|truncatewords:"15"}}
                         <ul class="list-inline round-social-icons mb30">
                           {% for red in org.redes_set.all %}
                           <li><a href="{{red.url}}">
