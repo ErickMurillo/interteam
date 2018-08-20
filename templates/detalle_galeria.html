@@ -25,8 +25,6 @@
                 <div class="row row-eq-height" id="mixitup-grid">
                     {% for galeria in object.imagenes_set.all %}
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
-                        
-                        
                             {% thumbnail galeria.imagen "800" crop="center" as im %}
                                 <a class="gallery-item cboxElement" title="{{galeria.nombre}}" href="{{im.url}}">
                              {% endthumbnail %}
