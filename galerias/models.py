@@ -26,7 +26,7 @@ class GaleriaImagenes(models.Model):
 
 class Imagenes(models.Model):
 	imagenes = models.ForeignKey(GaleriaImagenes,on_delete=models.CASCADE)
-	nombre = models.CharField(max_length=200)
+	nombre = models.CharField(max_length=100)
 	imagen = ImageField(upload_to='galerias/')
 
 ############

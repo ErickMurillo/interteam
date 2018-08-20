@@ -27,8 +27,8 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mix all charity natureal" style="display: inline-block;" data-bound="">
                         
                         
-                            {% thumbnail galeria.imagen "780" crop="center" as im %}
-                                <a class="gallery-item cboxElement" href="{{im.url}}">
+                            {% thumbnail galeria.imagen "800" crop="center" as im %}
+                                <a class="gallery-item cboxElement" title="{{galeria.nombre}}" href="{{im.url}}">
                              {% endthumbnail %}
                             <!--<a class="gallery-item cboxElement" href="/media/{{galeria.imagen}}">-->
                             {% thumbnail galeria.imagen "380x250" crop="center" as im %}
@@ -45,4 +45,8 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}
+
+{% block extra_js %}
+{% endblock extra_js %}
