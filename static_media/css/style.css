@@ -3414,7 +3414,7 @@ hr {
 #cboxTitle {
   margin-top: -25px;
   position: absolute;
-  right: 0;
+  right: -10px;
 }
 
 #cboxLoadingOverlay,
