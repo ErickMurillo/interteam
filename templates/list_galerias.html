@@ -39,6 +39,10 @@
         <div class="row">
             <div class="col-md-3" >
                 <aside class="sidebar">
+                    <form class="search-form widget" action='.' method='GET'>
+                        <input type="search" placeholder="Buscar" name="buscar" class="form-control search-form__input" {% if q %}value="{{q}}"{% endif %} />
+                        <button type="submit" class="search-form__submit"><i class="fa fa-search base-color"></i> </button>
+                    </form>
                     <div class="widget widget--category">
                         <div class="widget__heading">
                             <h4 class="widget__title">TEMAS</h4>
@@ -117,6 +121,7 @@
                                     {% endif %}
                                     <div class="blog-post__meta-info">
                                         <span class="small-text"><i class="fa fa-tags base-color"></i>{{object.tematica}}</span>
+                                        <span class="small-text"><i class="fa fa-tags base-color"></i>{{object.user.userprofile.contraparte.siglas}}</span>
                                     </div>
                                 </div>
                             </div><!--/.blog-post-->

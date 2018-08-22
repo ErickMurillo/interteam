@@ -63,7 +63,10 @@ def lista_notas(request,template='blog.html'):
 		q = request.GET['buscar']
 		notas_list = Notas.objects.filter(Q(titulo__icontains = q) | 
 										Q(contenido__icontains = q) |
-										Q(temas__nombre__icontains = q)).order_by('-fecha','-id')
+										Q(temas__nombre__icontains = q) |
+										Q(user__userprofile__contraparte__siglas__icontains = q)).order_by('-fecha','-id')
+
+		notas_list_2 = Notas.objects.filter(Q(titulo__icontains = q)).order_by('-fecha','-id')
 	else:
 		notas_list = Notas.objects.all().order_by('-fecha','-id')
 
@@ -147,7 +150,8 @@ def filtro_temas(request, temas, template='blog.html'):
 def publicaciones(request, template='publicaciones.html'):
 	if request.GET.get('buscar'):
 		q = request.GET['buscar']
-		object_list = Publicacion.objects.filter(titulo__icontains = q).order_by('-id')
+		object_list = Publicacion.objects.filter(Q(titulo__icontains = q) | 
+										Q(usuario__userprofile__contraparte__siglas__icontains = q)).order_by('-id')
 	else:
 		object_list = Publicacion.objects.order_by('-id')
 

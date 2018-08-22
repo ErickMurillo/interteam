@@ -13,7 +13,8 @@ def list_biblioteca(request, template='biblioteca.html'):
 										Q(lugar__icontains = q) |
 										Q(isbn__icontains = q) |
 										Q(tematica__nombre__icontains = q)|
-										Q(resumen__icontains = q)).order_by('-id')
+										Q(resumen__icontains = q) |
+										Q(usuario__userprofile__contraparte__siglas__icontains = q)).order_by('-id')
 	else:
 		object_list = Archivos.objects.order_by('-id')
 
