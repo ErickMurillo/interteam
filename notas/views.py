@@ -164,6 +164,11 @@ def publicaciones(request, template='publicaciones.html'):
 
 	return render(request, template, locals())
 
+def publicacion_detalle(request, slug, template='publicacion_detalle.html'):
+	object = get_object_or_404(Publicacion, slug=slug)
+
+	return render(request, template, locals())
+
 def filtro_temas_publi(request, tema, template='publicaciones.html'):
 	object_list = Publicacion.objects.filter(tematica__nombre = tema).order_by('-id')
 

@@ -11,6 +11,62 @@
 				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
 								{{form.media}}
 								{{form|crispy}}
+								
+								<h4 class="blog-details__title">Archivos</h4>
+								<hr>
+								<div class="row">
+								{{ formset.management_form }}
+
+								{% for archivo in formset %}
+									<div class="col-md-12">
+										{% if archivo.errors %}
+											{{archivo.errors}}
+										{% endif %}
+										
+										{{archivo.id}}
+										Nombre: {{archivo.nombre}}
+										{{archivo.archivo_pdf}}
+										Eliminar: {{archivo.DELETE}}
+									</div>
+								{% endfor %}
+								</div>
+
+								<h4 class="blog-details__title">Audios</h4>
+								<hr>
+								<div class="row">
+								{{ formset2.management_form }}
+
+								{% for au in formset2 %}
+									<div class="col-md-12">
+										{% if au.errors %}
+											{{au.errors}}
+										{% endif %}
+										
+										{{au.id}}
+										Nombre: {{au.nombre}}
+										{{au.archivo_audio}}
+										Eliminar: {{au.DELETE}}
+									</div>
+								{% endfor %}
+								</div>
+								<h4 class="blog-details__title">Videos</h4>
+								<hr>
+								<div class="row">
+								{{ formset3.management_form }}
+
+								{% for vid in formset3 %}
+									<div class="col-md-6">
+										{% if vid.errors %}
+											{{vid.errors}}
+										{% endif %}
+										
+										{{vid.id}}
+										Nombre: {{vid.nombre}}
+										Url: {{vid.url}}
+										Eliminar: {{vid.DELETE}}
+									</div>
+								{% endfor %}
+								</div>
 								<input type="submit" name="Actualizar" value="Actualizar">
 							</form>
 						</div>

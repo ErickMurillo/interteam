@@ -350,30 +350,109 @@ def eliminar_publicacion(request, id):
 @login_required
 def editar_publicacion(request, id, template='admin/editar_publicacion.html'):
 	object = get_object_or_404(Publicacion, id=id)
+	FormSetInit = inlineformset_factory(Publicacion,ArchivosPublicacion,form=ArchivosPubliForm,extra=9,max_num=9)
+	FormSetInit2 = inlineformset_factory(Publicacion,AudiosPublicacion,form=AudiosPubliForm,extra=6,max_num=6)
+	FormSetInit3 = inlineformset_factory(Publicacion,VideosPublicacion,form=VideosPubliForm,extra=6,max_num=6)
+
 	if request.method == 'POST':
 		form = PublicacionForm(request.POST, request.FILES, instance=object)
-		if form.is_valid():
+		formset = FormSetInit(request.POST,request.FILES, instance=object)
+		formset2 = FormSetInit2(request.POST,request.FILES, instance=object)
+		formset3 = FormSetInit3(request.POST,request.FILES, instance=object)
+
+		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
 			form_uncommited = form.save()
 			form_uncommited.usuario = request.user
 			form_uncommited.save()
+
+			instances = formset.save(commit=False)
+			for instance in instances:
+				instance.publicacion = form_uncommited
+				instance.save()
+			formset.save_m2m()
+			
+			instances2 = formset2.save(commit=False)
+			for instance2 in instances2:
+				instance2.publicacion = form_uncommited
+				instance2.save()
+			formset2.save_m2m()
+
+			instances3 = formset3.save(commit=False)
+			for instance3 in instances3:
+				instance3.publicacion = form_uncommited
+				instance3.save()
+			formset3.save_m2m()
+
 			return HttpResponseRedirect('/contrapartes/publicaciones/')
 	else:
 		form = PublicacionForm(instance=object)
+		formset = FormSetInit(instance=object)
+		formset2 = FormSetInit2(instance=object)
+		formset3 = FormSetInit3(instance=object)
 
 	return render(request, template, locals())
 
 @login_required
 def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
+	FormSetInit = inlineformset_factory(Publicacion,ArchivosPublicacion,form=ArchivosPubliForm,extra=9,max_num=9)
+	FormSetInit2 = inlineformset_factory(Publicacion,AudiosPublicacion,form=AudiosPubliForm,extra=6,max_num=6)
+	FormSetInit3 = inlineformset_factory(Publicacion,VideosPublicacion,form=VideosPubliForm,extra=6,max_num=6)
+
 	if request.method == 'POST':
 		form = PublicacionForm(request.POST, request.FILES)
-		if form.is_valid():
+		formset = FormSetInit(request.POST,request.FILES)
+		formset2 = FormSetInit2(request.POST,request.FILES)
+		formset3 = FormSetInit3(request.POST,request.FILES)
+
+		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
 			publi = form.save(commit=False)
 			publi.usuario = request.user
 			publi.save()
 
-			return HttpResponseRedirect('/contrapartes/publicaciones/')
+			instances = formset.save(commit=False)
+			for instance in instances:
+				instance.publicacion = publi
+				instance.save()
+			formset.save_m2m()
+			
+			instances2 = formset2.save(commit=False)
+			for instance2 in instances2:
+				instance2.publicacion = publi
+				instance2.save()
+			formset2.save_m2m()
+
+			instances3 = formset3.save(commit=False)
+			for instance3 in instances3:
+				instance3.publicacion = publi
+				instance3.save()
+			formset3.save_m2m()
+
+			try:
+				subject, from_email = 'Nueva publicación', 'cluster.nicaragua@gmail.com'
+				text_content = 'Se ha ingresado una nueva publicación al sitio, para revisar la publicación \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/publicaciones/'+ publi.slug + '/'
+
+				html_content = 'Se ha ingresado una nueva publicación al sitio, para revisar la publicación \n'  + \
+								'diríjase a la siguiente dirección: \n' + \
+								'http://cluster-nicaragua.net/publicaciones/'+ publi.slug + '/'
+
+				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+				msg.attach_alternative(html_content, "text/html")
+				msg.send()
+
+				enviado = 1
+				return HttpResponseRedirect('/contrapartes/publicaciones/')
+			except:
+				pass
+			
 	else:
 		form = PublicacionForm()
+		formset = FormSetInit()
+		formset2 = FormSetInit2()
+		formset3 = FormSetInit3()
 
 	return render(request, template, locals())
 

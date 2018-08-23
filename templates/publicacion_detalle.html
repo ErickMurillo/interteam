@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block content %}
+<div class="banner-area banner-area--blog all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">Publicaciones</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="/publicaciones/">Publicaciones</a> </li>
+                    <li>Detalle</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="row wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
+        	<div class="col-xs-12 col-md-4">
+        		{% thumbnail object.imagen "360x390" crop="center" as im %}
+			        <img class="img-thumbnail" src="{{im.url}}" class="our-causes__image" alt="" width="100%">
+			    {% empty %}   
+			      <img class="img-thumbnail" src="http://via.placeholder.com/360x390" class="our-causes__image" alt="" width="100%">
+			    {% endthumbnail %}
+			    <br>
+			    <br>
+
+        	</div>
+        	<div class="col-xs-12 col-md-8">
+        		<div class="panel panel-success">
+        			<div class="panel-body">
+        				<h3 class=" base-color">
+        					{{object.titulo}}
+        				</h3>
+        				<h3>Resumen:</h3>
+        				<hr>
+        				<div>
+        					<p>{{object.resumen|safe}}</p>
+    					</div>
+
+    					{% if object.archivospublicacion_set.all %}
+						<h3>Archivos</h3><hr>
+    					<div>
+    						<ul>
+    							{% for pdf in object.archivospublicacion_set.all %}        					
+    							<li><a href="/media/{{pdf.archivo_pdf}}" target="_blank">{{pdf.nombre}}</a></li>
+    							{% endfor %}
+							</ul>
+    					</div>
+    					<br><br>
+    					{% endif %}
+    					
+    					{% if object.audiospublicacion_set.all %}
+						<h3>Audios</h3><hr>
+    					<div>
+							<ul>
+    							{% for audio in object.audiospublicacion_set.all %}        					
+    							<li><a href="/media/{{audio.archivo_audio}}" target="_blank">{{audio.nombre}}</a></li>
+    							{% endfor %}
+							</ul>
+    					</div>
+
+    					<br><br>
+    					{% endif %}
+
+    					{% if object.videospublicacion_set.all %}
+						<h3>Videos</h3><hr>
+    					<div>
+							<ul>
+    							{% for video in object.videospublicacion_set.all %}
+    							<div class="col-md-6">
+    								{% video video.url '100% x 240px' %}
+    							</div>
+    							{% endfor %}
+							</ul>
+    					</div>
+    					{% endif %}
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
