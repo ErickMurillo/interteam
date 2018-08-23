@@ -17,7 +17,6 @@
                                     <thead>
                                         <tr>
                                             <th>Publicación</th>
-                                            <th>Descarga</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -26,9 +25,6 @@
                                     	{% for publicacion in object_list %}
                                 		<tr>
                                             <td>{{publicacion.titulo}}</td>
-                                            <td>
-                                            	 <a href="" class="btn btn-info btn-small-special"><span class="fa fa-download"></span></a>
-                                            </td>
                                             
                                             <td>
                                                 <a href="{% url 'editar-publicacion' publicacion.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
