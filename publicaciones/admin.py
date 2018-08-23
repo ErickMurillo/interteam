@@ -17,8 +17,8 @@ class VideosPublicacionInline(admin.TabularInline):
 class PublicacionAdmin(admin.ModelAdmin):
 	inlines = [ArchivosPublicacionInline,AudiosPublicacionInline,VideosPublicacionInline]
 	
-	# def save_model(self,request,obj,form,change):
-	# 	obj.usuario = request.user
-	# 	obj.save()
+	def save_model(self,request,obj,form,change):
+		obj.usuario = request.user
+		obj.save()
 
 admin.site.register(Publicacion,PublicacionAdmin)

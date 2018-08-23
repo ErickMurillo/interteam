@@ -12,7 +12,7 @@ class Publicacion(models.Model):
 	# archivo = models.FileField(upload_to='publicaciones/archivos/')
 	resumen = RichTextUploadingField()
 	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)
-	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,editable=False)
 	slug = models.SlugField(max_length=250,editable=False)
 
 	def __str__(self):
