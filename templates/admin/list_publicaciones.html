@@ -13,10 +13,11 @@
                             <h3 class="blog-details__title ">Publicaciones</h3>
                             <hr>                               
                             <div class="table-responsive">
-                                <table class="table table-hover" id="example2"  style="width:100%">
+                                <table class="table table-hover" id="example"  style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Publicación</th>
+                                            <th>Temática</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -25,7 +26,7 @@
                                     	{% for publicacion in object_list %}
                                 		<tr>
                                             <td>{{publicacion.titulo}}</td>
-                                            
+                                            <td>{{publicacion.tematica}}</td>            
                                             <td>
                                                 <a href="{% url 'editar-publicacion' publicacion.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
                                             </td>
@@ -46,7 +47,7 @@
                                                     </div>
                                                     <div class="modal-footer">
 
-                                                        <a type="button" class="btn btn-danger" href="{% url 'eliminar-publicacion' publicacion.id %">Eliminar</a>
+                                                        <a type="button" class="btn btn-danger" href="{% url 'eliminar-publicacion' publicacion.id %}">Eliminar</a>
                                                     </div>
                                                 </div>
                                             </div>
