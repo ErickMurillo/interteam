@@ -241,7 +241,7 @@
 
                                         <h4 class=" our-causes__title"><a href="#">{{pub.titulo}}</a></h4>
                                         
-                                        <a href="/media/{{pub.archivo}}" class="btn" download>Descargar</a>
+                                        <a href="{% url 'publicacion-detalle' pub.slug %}" class="btn" download>Ver</a>
                                     </div>
                                     
 
