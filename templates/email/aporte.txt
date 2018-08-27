@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{aporte.user}} ha publicado un nuevo aporte en <br>
+la plataforma Cluster Nicaragua</p>
+
+<p>Fecha: {{aporte.fecha|date:"D d M Y"}} <br>
+Foro: {{aporte.foro.nombre}}</p>
+<p>Diríjase a la siguiente dirección: <br>
+http://cluster-nicaragua.net/contrapartes/foros/ver/{{aporte.foro.id}}</p>
+
+Cluster Nicaragua
+</body>
+</html>

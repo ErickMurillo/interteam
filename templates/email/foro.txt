@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{foro.contraparte}} ha publicado un nuevo foro en <br>
+la plataforma Cluster Nicaragua</p>
+
+<p>Fecha: {{foro.creacion|date:"D d M Y"}} <br>
+Título: {{foro.nombre}}</p>
+<p>Diríjase a la siguiente dirección: <br>
+http://cluster-nicaragua.net/contrapartes/foros/ver/{{foro.id}}</p>
+
+Cluster Nicaragua
+</body>
+</html>

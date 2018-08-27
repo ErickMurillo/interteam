@@ -15,6 +15,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.forms import inlineformset_factory
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 # Create your views here.
 @login_required
@@ -78,13 +79,9 @@ def redactar_notas_contraparte(request, template='admin/redactar_notaadmin.html'
 
 			try:
 				subject, from_email = 'Nueva nota', 'cluster.nicaragua@gmail.com'
-				text_content = 'Se ha ingresado una nueva nota al sitio, para revisar la nota \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/notas/'+ nota.slug
+				text_content =  render_to_string('email/nota.txt', {'nota': nota,})
 
-				html_content = 'Se ha ingresado una nueva nota al sitio, para revisar la nota \n' + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/notas/'+ nota.slug
+				html_content = render_to_string('email/nota.txt', {'nota': nota,})
 
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -165,13 +162,9 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 
 			try:
 				subject, from_email = 'Nuevo evento', 'cluster.nicaragua@gmail.com'
-				text_content = 'Se ha ingresado un nuevo evento al sitio, para revisar el evento \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/eventos/'+ evento.slug
+				text_content = render_to_string('email/evento.txt', {'evento': evento,})
 
-				html_content = 'Se ha ingresado un nuevo evento al sitio, para revisar el evento \n' + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/eventos/'+ evento.slug
+				html_content = render_to_string('email/evento.txt', {'evento': evento,})
 
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -274,13 +267,9 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 
 			try:
 				subject, from_email = 'Nuevo aporte al foro ' + discusion.nombre, 'cluster.nicaragua@gmail.com'
-				text_content = 'Se ha ingresado un nuevo aporte al foro ' + discusion.nombre +', para revisar el aporte \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(discusion.id)
+				text_content = render_to_string('email/aporte.txt', {'aporte': aporte,})
 
-				html_content = 'Se ha ingresado un nuevo aporte al foro ' + discusion.nombre +', para revisar el aporte \n' + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(discusion.id)
+				html_content = render_to_string('email/aporte.txt', {'aporte': aporte,})
 
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -299,7 +288,6 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 
 	return render(request, template, locals())
 
-import sys
 @login_required
 def agregar_foro(request, template='admin/nuevo_foro.html'):
 	if request.method == 'POST':
@@ -311,13 +299,9 @@ def agregar_foro(request, template='admin/nuevo_foro.html'):
 
 			try:
 				subject, from_email = 'Nuevo foro', 'cluster.nicaragua@gmail.com'
-				text_content = 'Se ha ingresado un nuevo foro al sitio, para revisar el foro \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(foro.id)
+				text_content = render_to_string('email/foro.txt', {'foro': foro,})
 
-				html_content = 'Se ha ingresado un nuevo foro al sitio, para revisar el foro \n' + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(foro.id)
+				html_content = render_to_string('email/foro.txt', {'foro': foro,})
 
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -429,13 +413,9 @@ def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
 
 			try:
 				subject, from_email = 'Nueva publicación', 'cluster.nicaragua@gmail.com'
-				text_content = 'Se ha ingresado una nueva publicación al sitio, para revisar la publicación \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/publicaciones/'+ publi.slug
+				text_content = render_to_string('email/publicacion.txt', {'publi': publi,})
 
-				html_content = 'Se ha ingresado una nueva publicación al sitio, para revisar la publicación \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/publicaciones/'+ publi.slug
+				html_content = render_to_string('email/publicacion.txt', {'publi': publi,})
 
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -491,13 +471,9 @@ def agregar_comentario(request, id, template='admin/comentario.html'):
 
 			try:
 				subject, from_email = 'Nuevo comentario al foro ' + object.foro.nombre, 'cluster.nicaragua@gmail.com'
-				text_content = 'Se ha ingresado un nuevo comentario al foro ' + object.foro.nombre +', para revisar el comentario \n'  + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(object.foro.id)
+				text_content = render_to_string('email/comentario.txt', {'object': form_uncommited,})
 								
-				html_content = 'Se ha ingresado un nuevo comentario al foro ' + object.foro.nombre +', para revisar el comentario \n' + \
-								'diríjase a la siguiente dirección: \n' + \
-								'http://cluster-nicaragua.net/contrapartes/foros/ver/'+ str(object.foro.id)
+				html_content = render_to_string('email/comentario.txt', {'object': form_uncommited,})
 								
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -646,12 +622,9 @@ def mensajes(request, template='admin/mensajes.html'):
 
 			try:
 				subject, from_email = 'Nuevo mensaje ','cluster.nicaragua@gmail.com'
-				text_content = 'Enviado por ' + str(form_uncommited.usuario) + '\n'  + \
-								str(form_uncommited.mensaje)
+				text_content = render_to_string('email/mensaje.txt', {'object': form_uncommited,})
 
-
-				html_content = 'Enviado por ' + str(form_uncommited.usuario) + '\n'  + \
-								str(form_uncommited.mensaje)
+				html_content = render_to_string('email/mensaje.txt', {'object': form_uncommited,})
 
 				list_mail = []
 				for user in form_uncommited.user.all():

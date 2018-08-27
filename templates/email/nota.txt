@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{nota.user}} ha publicado una nueva nota en <br>
+la plataforma Cluster Nicaragua</p>
+
+<p>Fecha: {{nota.fecha|date:"D d M Y"}} <br>
+Titulo: {{nota.titulo}}</p>
+<p>Diríjase a la siguiente dirección: <br>
+http://cluster-nicaragua.net/notas/{{nota.slug}}</p>
+
+Cluster Nicaragua
+</body>
+</html>

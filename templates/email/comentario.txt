@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{object.usuario}} ha comentado en foros en<br>
+la plataforma Cluster Nicaragua</p>
+
+<p>Fecha: {{object.fecha|date:"D d M Y"}} <br>
+Foro: {{object.aporte.foro.nombre}}</p>
+<p>Diríjase a la siguiente dirección: <br>
+http://cluster-nicaragua.net/contrapartes/foros/ver/{{object.aporte.foro.id}}</p>
+
+Cluster Nicaragua
+</body>
+</html>

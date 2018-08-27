@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{object.usuario}} ha enviado un nuevo mensaje.</p>
+
+<p>Fecha: {{object.fecha|date:"D d M Y"}}</p>
+<p>Mensaje: <br>
+{{object.mensaje|safe}}</p>
+
+Cluster Nicaragua
+</body>
+</html>

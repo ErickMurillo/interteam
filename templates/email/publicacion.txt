@@ -1,0 +1,15 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{publi.usuario}} ha ingresado una nuevo publicación en <br>
+la plataforma Cluster Nicaragua</p>
+
+Título: {{publi.titulo}}</p>
+<p>Diríjase a la siguiente dirección: <br>
+http://cluster-nicaragua.net/publicaciones/{{publi.slug}}</p>
+
+Cluster Nicaragua
+</body>
+</html>
