@@ -9,6 +9,10 @@
                     <div class="blog-details-top mb40">
                         <div class="blog-details-top__text-content">
 				        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+				        		{% if form.errors %}
+                                    {{form.errors}}
+                                {% endif %}
+
 								{{ form.media }}
 								{{form|crispy}}
 								<div>
