@@ -138,7 +138,7 @@ class Foros(models.Model):
 		return "/foros/ver/%d" % (self.id)
 
 class Aportes(models.Model):
-	foro = models.ForeignKey(Foros,on_delete=models.DO_NOTHING)
+	foro = models.ForeignKey(Foros,on_delete=models.CASCADE)
 	fecha = models.DateField(auto_now_add=True)
 	contenido = RichTextUploadingField()
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
@@ -181,7 +181,7 @@ class Comentarios(models.Model):
 	fecha = models.DateField(auto_now_add=True)
 	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	comentario = RichTextUploadingField()
-	aporte = models.ForeignKey(Aportes,on_delete=models.DO_NOTHING)
+	aporte = models.ForeignKey(Aportes,on_delete=models.CASCADE)
 
 	class Meta:
 		verbose_name_plural = "Comentarios"
