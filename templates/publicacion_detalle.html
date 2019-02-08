@@ -4,7 +4,7 @@
 
 {% block content %}
 <style>
-.panel-body ul, .panel-body ol {
+#contenido ul, #contenido ol {
      list-style: disc; 
 }
 </style>
@@ -44,7 +44,7 @@
         				</h3>
         				<h3>Resumen:</h3>
         				<hr>
-        				<div>
+        				<div id="contenido">
         					<p>{{object.resumen|safe}}</p>
     					</div>
 
