@@ -94,7 +94,7 @@
                 </div>
                 {% endif %}
                 
-                {% if evento.adjunto.all %}
+                {% if documentos %}
                    <div class="event-details-location-wrap mt40 pdt50">
                     <div class="row">
                         <div class="col-md-5">
@@ -102,7 +102,7 @@
                                 <h3>DOCUMENTOS</h3>
                                 
                                 <ul>
-                                    {% for doc in evento.adjunto.all %}
+                                    {% for doc in documentos %}
                                         <li><span class="loc-icon"><i class="fa fa-file base-color"></i></span><a href="/media/{{doc.adjunto}}/" download>{{doc.nombre_doc}}</a></li>
                                     {% endfor %}
                                     

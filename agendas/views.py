@@ -50,6 +50,7 @@ def detail_evento(request,slug,template="event-details.html"):
 	hours = delta.seconds/3600
 
 	agenda_evento = AgendaEvento.objects.filter(evento = evento).order_by('fecha','hora_inicio')
+	documentos = DocumentosEvento.objects.filter(evento = evento).order_by('id')
 
 	return render(request, template, locals())
 
