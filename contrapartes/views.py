@@ -170,7 +170,7 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
 				msg.attach_alternative(html_content, "text/html")
-				# msg.send()
+				msg.send()
 
 				enviado = 1
 				return HttpResponseRedirect('/contrapartes/eventos/')
