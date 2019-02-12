@@ -95,6 +95,7 @@
     $('#id_hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
 
     for (var i=0; i<=11; i++) {
+      $('#id_agendaevento_set-'+i+'-fecha' ).datepicker({ dateFormat: 'dd/mm/yy' });
       $('#id_agendaevento_set-'+i+'-hora_inicio').timepicker({ 'timeFormat': 'H:i:s' });
       $('#id_agendaevento_set-'+i+'-hora_fin').timepicker({ 'timeFormat': 'H:i:s' });
   }
