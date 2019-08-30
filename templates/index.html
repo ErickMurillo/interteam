@@ -192,7 +192,7 @@
                 </div>
                 <div class="upcommig-event-carousel wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
                     {% for evento in eventos %}
-                        <div class="upcomming-event">
+                      <div class="upcomming-event">
                         <div class="upcomming-event__image-wrap">
                             {% thumbnail evento.foto "380x250" crop="center" as im %}
                                 <img class="upcomming-event__image" src="{{im.url}}" alt="event">
@@ -210,11 +210,10 @@
                                 <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>{{evento.hora_inicio|time:"P"}} - {{evento.hora_fin|time:"P"}}  </span>
                                 <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>{{evento.lugar}}</span>
                             </div>
-                            <p>{{evento.descripcion|truncatechars:135|safe|striptags}}</p>
+                            <!--<p>{{evento.descripcion|truncatechars:135|safe|striptags}}</p>-->
                         </div>
                     </div><!--/.upcomming-event-->
                     {% endfor %}
-                    
                 </div>
             </div>
             <div class="col-md-5">
@@ -243,8 +242,6 @@
                                         
                                         <a href="{% url 'publicacion-detalle' pub.slug %}" class="btn">Ver</a>
                                     </div>
-                                    
-
                                 </div>
                             </div>
                             {% endfor %}
