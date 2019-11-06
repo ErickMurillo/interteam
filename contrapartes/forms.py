@@ -40,8 +40,11 @@ from django.forms import ModelMultipleChoiceField
 
 class UserModelMultipleChoiceField(ModelMultipleChoiceField):
 	def label_from_instance(self, obj):
-		user_profile = UserProfile.objects.get(user = obj)
-		return "%s - %s" % (obj.username,user_profile.contraparte.siglas)
+		try:
+			user_profile = UserProfile.objects.get(user = obj)
+			return "%s - %s" % (obj.username,user_profile.contraparte.siglas)
+		except:
+			pass	
 
 class MensajeForm(forms.ModelForm):
 	user = UserModelMultipleChoiceField(queryset = User.objects.order_by('username'))

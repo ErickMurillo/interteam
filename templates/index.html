@@ -5,8 +5,14 @@
 
 {% block content %}
 <style type="text/css">
-  .blog-post__like-comment a {
-    color: #fff;
+.blog-post__like-comment a {
+  color: #fff;
+}
+.fund-volunteer__text-content{
+  height : 300px !important;
+}
+.fund-volunteer__text-content p {
+  height : 90px !important;
 }
 </style>
 
@@ -166,7 +172,7 @@
                         </div>
                     </div>
                     <div class="blog-post__text-content">
-                        <h4 class="blog-post__title heading-label-four"><a href="{% url "detalle-notas" nota.slug %}">{{nota.titulo}}</a></h4>
+                        <h4 class="blog-post__title heading-label-four" style="height:90px !important"><a href="{% url "detalle-notas" nota.slug %}">{{nota.titulo}}</a></h4>
                         <div class="blog-post__meta-info">
                             <span class="small-text"><i class="fa fa-user base-color"></i>{{nota.user.userprofile.contraparte.siglas}}</span>
                             <span class="small-text"><i class="fa fa-calendar base-color"></i>{{nota.fecha}}</span>
@@ -362,8 +368,8 @@
                     </div>
                     <div class="fund-volunteer__text-content">
                         <h3 class="fund-volunteer__name">{{org.siglas}}</h3>
-                        <div class="section-heading-separator section-heading-separator--small"></div>
-                        {{org.generalidades|safe|striptags|truncatewords:"15"}}
+                        <div class="section-heading-separator section-heading-separator--small" ></div>
+                        <p>{{org.generalidades|safe|striptags|truncatewords:"18"}}</p>
                         <ul class="list-inline round-social-icons mb30">
                           {% for red in org.redes_set.all %}
                           <li><a href="{{red.url}}">

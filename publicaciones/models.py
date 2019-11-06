@@ -14,6 +14,8 @@ class Publicacion(models.Model):
 	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)
 	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,editable=False)
 	slug = models.SlugField(max_length=250,editable=False)
+	publicada = models.BooleanField()
+	correo_enviado = models.BooleanField(editable=False)
 
 	def __str__(self):
 		return u'%s' % self.titulo

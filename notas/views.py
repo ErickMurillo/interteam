@@ -27,8 +27,8 @@ from django.db.models import Q
 
 def index(request,template='index.html'):
 
-	notas = Notas.objects.all().order_by('-fecha','-id')[:6]
-	notas2 = Notas.objects.all().order_by('-fecha','-id')[1:9]
+	notas = Notas.objects.filter(publicada = True).order_by('-fecha','-id')[:6]
+	notas2 = Notas.objects.filter(publicada = True).order_by('-fecha','-id')[1:9]
 	hoy = datetime.date.today()
 	eventos = Agendas.objects.filter(inicio__gte = hoy,publico=True).order_by('-inicio','-hora_inicio')[:4]
 	paises = Pais.objects.all()
@@ -64,11 +64,11 @@ def lista_notas(request,template='blog.html'):
 		notas_list = Notas.objects.filter(Q(titulo__icontains = q) | 
 										Q(contenido__icontains = q) |
 										Q(temas__nombre__icontains = q) |
-										Q(user__userprofile__contraparte__siglas__icontains = q)).order_by('-fecha','-id')
+										Q(user__userprofile__contraparte__siglas__icontains = q),publicada = True).order_by('-fecha','-id')
 
-		notas_list_2 = Notas.objects.filter(Q(titulo__icontains = q)).order_by('-fecha','-id')
+		notas_list_2 = Notas.objects.filter(Q(titulo__icontains = q),publicada = True).order_by('-fecha','-id')
 	else:
-		notas_list = Notas.objects.all().order_by('-fecha','-id')
+		notas_list = Notas.objects.filter(publicada = True).order_by('-fecha','-id')
 
 	hoy = datetime.date.today()
 	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
@@ -76,7 +76,7 @@ def lista_notas(request,template='blog.html'):
 
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Notas.objects.filter(temas = tema).count()
+		count = Notas.objects.filter(publicada = True,temas = tema).count()
 		if count != 0:
 			dic_temas[tema] = count
 
@@ -93,13 +93,13 @@ def detalle_notas(request, slug, template='blog-details.html'):
 	nota = get_object_or_404(Notas, slug=slug)
 	nota.vistas = nota.vistas + 1
 	nota.save() 
-	ultimas_notas = Notas.objects.exclude(slug = slug).order_by('-fecha','-id')[:4]
+	ultimas_notas = Notas.objects.filter(publicada = True).exclude(slug = slug).order_by('-fecha','-id')[:4]
 	hoy = datetime.date.today()
 	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
 
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Notas.objects.filter(temas = tema).count()
+		count = Notas.objects.filter(temas = tema,publicada = True).count()
 		if count != 0:
 			dic_temas[tema] = count
 
@@ -151,14 +151,14 @@ def publicaciones(request, template='publicaciones.html'):
 	if request.GET.get('buscar'):
 		q = request.GET['buscar']
 		object_list = Publicacion.objects.filter(Q(titulo__icontains = q) | 
-										Q(usuario__userprofile__contraparte__siglas__icontains = q)).order_by('-id')
+										Q(usuario__userprofile__contraparte__siglas__icontains = q),publicada = True).order_by('-id')
 	else:
-		object_list = Publicacion.objects.order_by('-id')
+		object_list = Publicacion.objects.filter(publicada = True).order_by('-id')
 
-	count_publi = Publicacion.objects.all().count()
+	count_publi = Publicacion.objects.filter(publicada = True).count()
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Publicacion.objects.filter(tematica = tema).count()
+		count = Publicacion.objects.filter(tematica = tema,publicada = True).count()
 		if count != 0:
 			dic_temas[tema] = count
 
@@ -170,12 +170,12 @@ def publicacion_detalle(request, slug, template='publicacion_detalle.html'):
 	return render(request, template, locals())
 
 def filtro_temas_publi(request, tema, template='publicaciones.html'):
-	object_list = Publicacion.objects.filter(tematica__nombre = tema).order_by('-id')
+	object_list = Publicacion.objects.filter(publicada = True,tematica__nombre = tema).order_by('-id')
 
-	count_publi = Publicacion.objects.all().count()
+	count_publi = Publicacion.objects.filter(publicada = True).count()
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Publicacion.objects.filter(tematica = tema).count()
+		count = Publicacion.objects.filter(publicada = True,tematica = tema).count()
 		if count != 0:
 			dic_temas[tema] = count
 	return render(request, template, locals())

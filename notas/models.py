@@ -41,6 +41,8 @@ class Notas(models.Model):
 	vistas = models.IntegerField(editable=False,default=0)
 
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+	publicada = models.BooleanField()
+	correo_enviado = models.BooleanField(editable=False)
 
 	class Meta:
 		verbose_name_plural = "Notas"

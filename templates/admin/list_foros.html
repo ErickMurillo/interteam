@@ -30,6 +30,7 @@
                                 {% for mi_foro in mis_foros %}
                                     <li>
                                         <a class="base-color" href="{% url 'editar-foro' mi_foro.id %}">{{mi_foro.nombre}}</a><br>
+                                        <a class="btn btn-success btn-small-special" data-toggle="modal"  href="{% url 'editar-foro' mi_foro.id %}">Editar</a>
                                         <a class="btn btn-danger btn-small-special" data-toggle="modal"  href="#modal-id-falta">Eliminar</a>
                                     </li>
                                     <div class="modal fade" id="modal-id-falta">

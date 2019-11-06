@@ -18,6 +18,8 @@
                                         <tr>
                                             <th>Publicación</th>
                                             <th>Temática</th>
+                                            <th>Publicada</th>
+                                            <th>Ver</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -26,9 +28,18 @@
                                     	{% for publicacion in object_list %}
                                 		<tr>
                                             <td>{{publicacion.titulo}}</td>
-                                            <td>{{publicacion.tematica}}</td>            
+                                            <td>{{publicacion.tematica}}</td> 
+                                            <td>{% if publicacion.publicada == True %}
+                                                <span class="fa fa-check"></span>
+                                                {% else %}
+                                                <span class="fa fa-times"></span>
+                                                {% endif %}
+                                            </td>
                                             <td>
-                                                <a href="{% url 'editar-publicacion' publicacion.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
+                                                <a href="{% url 'publicacion-detalle' publicacion.slug %}" class="btn btn-info btn-small-special" target="_blank"><span class="fa fa-globe"></span></a>
+                                            </td>           
+                                            <td>
+                                                <a href="{% url 'editar-publicacion' publicacion.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil"></span></a>
                                             </td>
                                             <td>
                                                 <a data-toggle="modal" href='#modal-id-{{object.id}}' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>

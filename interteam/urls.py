@@ -23,6 +23,9 @@ from foros.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = 'Administración Cluster'
+admin.site.site_title = 'Cluster'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),

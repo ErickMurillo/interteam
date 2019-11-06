@@ -74,25 +74,29 @@ def redactar_notas_contraparte(request, template='admin/redactar_notaadmin.html'
 		if form.is_valid():
 			nota = form.save(commit=False)
 			nota.user = request.user
+			nota.correo_enviado = False
 			nota.save()
 			form.save_m2m()
 
-			try:
-				subject, from_email = 'Nueva nota', 'cluster.nicaragua@gmail.com'
-				text_content =  render_to_string('email/nota.txt', {'nota': nota,})
+			if nota.publicada == True:
+				try:
+					subject, from_email = 'Nueva nota', 'cluster.nicaragua@gmail.com'
+					text_content =  render_to_string('email/nota.txt', {'nota': nota,})
 
-				html_content = render_to_string('email/nota.txt', {'nota': nota,})
+					html_content = render_to_string('email/nota.txt', {'nota': nota,})
 
-				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
-				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
-				msg.attach_alternative(html_content, "text/html")
-				msg.send()
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
 
-				enviado = 1
-				return HttpResponseRedirect('/contrapartes/notas/')
-			except:
-				pass
+					enviado = 1
+					nota.correo_enviado = True
+					nota.save()
+					return HttpResponseRedirect('/contrapartes/notas/')
+				except:
+					pass
 	else:
 		form = NotasForms()
 
@@ -117,6 +121,26 @@ def editar_nota(request, slug, template='admin/editar_nota.html'):
 			form_uncommited = form.save()
 			form_uncommited.user = request.user
 			form_uncommited.save()
+
+			if form_uncommited.publicada == True and form_uncommited.correo_enviado == False:
+				try:
+					subject, from_email = 'Nueva nota', 'cluster.nicaragua@gmail.com'
+					text_content =  render_to_string('email/nota.txt', {'nota': form_uncommited,})
+
+					html_content = render_to_string('email/nota.txt', {'nota': form_uncommited,})
+
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
+
+					form_uncommited.correo_enviado = True
+					form_uncommited.save()
+					return HttpResponseRedirect('/contrapartes/notas/')
+				except:
+					pass
+
 			return HttpResponseRedirect('/contrapartes/notas/')
 	else:
 		form = NotasForms(instance=object)
@@ -146,6 +170,7 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 		if form.is_valid() and formset.is_valid() and formset2.is_valid():
 			evento = form.save(commit=False)
 			evento.user = request.user
+			evento.correo_enviado = False
 			evento.save()
 
 			instances = formset.save(commit=False)
@@ -160,22 +185,24 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 				instance2.save()
 			formset2.save_m2m()
 
-			try:
-				subject, from_email = 'Nuevo evento', 'cluster.nicaragua@gmail.com'
-				text_content = render_to_string('email/evento.txt', {'evento': evento,})
+			if evento.publico == True:
+				try:
+					subject, from_email = 'Nuevo evento', 'cluster.nicaragua@gmail.com'
+					text_content = render_to_string('email/evento.txt', {'evento': evento,})
 
-				html_content = render_to_string('email/evento.txt', {'evento': evento,})
+					html_content = render_to_string('email/evento.txt', {'evento': evento,})
 
-				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
-				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
-				msg.attach_alternative(html_content, "text/html")
-				msg.send()
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
 
-				enviado = 1
-				return HttpResponseRedirect('/contrapartes/eventos/')
-			except:
-				pass
+					evento.correo_enviado = True
+					evento.save()
+					return HttpResponseRedirect('/contrapartes/eventos/')
+				except:
+					pass
 
 	else:
 		form = AgendaForm()
@@ -203,6 +230,7 @@ def editar_evento(request, slug, template='admin/editar_evento.html'):
 		if form.is_valid() and formset.is_valid() and formset2.is_valid():
 			evento = form.save(commit=False)
 			evento.user = request.user
+			evento.correo_enviado = False
 			evento.save()
 
 			instances = formset.save(commit=False)
@@ -216,6 +244,25 @@ def editar_evento(request, slug, template='admin/editar_evento.html'):
 				instance2.evento = evento
 				instance2.save()
 			formset2.save_m2m()
+
+			if evento.publico == True and evento.correo_enviado == False:
+				try:
+					subject, from_email = 'Nuevo evento', 'cluster.nicaragua@gmail.com'
+					text_content = render_to_string('email/evento.txt', {'evento': evento,})
+
+					html_content = render_to_string('email/evento.txt', {'evento': evento,})
+
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
+
+					evento.correo_enviado = True
+					evento.save()
+					return HttpResponseRedirect('/contrapartes/eventos/')
+				except:
+					pass
 
 			return HttpResponseRedirect('/contrapartes/eventos/')
 	else:
@@ -277,8 +324,6 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 				msg.attach_alternative(html_content, "text/html")
 				msg.send()
 
-				enviado = 1
-
 				return redirect('ver-foro', id=discusion.id)
 			except:
 				pass
@@ -288,6 +333,8 @@ def ver_foro(request, id, template='admin/ver_foro.html'):
 
 	return render(request, template, locals())
 
+from interteam.tasks import *
+import datetime
 @login_required
 def agregar_foro(request, template='admin/nuevo_foro.html'):
 	if request.method == 'POST':
@@ -295,24 +342,34 @@ def agregar_foro(request, template='admin/nuevo_foro.html'):
 		if form.is_valid():
 			foro = form.save(commit=False)
 			foro.contraparte = request.user
+			foro.correo_enviado = False
 			foro.save()
 
-			try:
-				subject, from_email = 'Nuevo foro', 'cluster.nicaragua@gmail.com'
-				text_content = render_to_string('email/foro.txt', {'foro': foro,})
+			hoy = datetime.date.today()
+			if foro.apertura == hoy and foro.correo_enviado == False:
+				try:
+					subject, from_email = 'Nuevo foro', 'cluster.nicaragua@gmail.com'
+					text_content = render_to_string('email/foro.txt', {'foro': foro,})
 
-				html_content = render_to_string('email/foro.txt', {'foro': foro,})
+					html_content = render_to_string('email/foro.txt', {'foro': foro,})
 
-				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
-				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
-				msg.attach_alternative(html_content, "text/html")
-				msg.send()
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
 
-				enviado = 1
+					foro.correo_enviado = True
+					foro.save()
+					return HttpResponseRedirect('/contrapartes/foros/')
+				except:
+					pass
+
+			else:
+				id = foro.id
+				user = request.user.id
+				send_mail_foro.apply_async((id,user),eta=foro.apertura)
 				return HttpResponseRedirect('/contrapartes/foros/')
-			except:
-				pass
 
 	else:
 		form = ForosForm()
@@ -367,6 +424,25 @@ def editar_publicacion(request, id, template='admin/editar_publicacion.html'):
 				instance3.save()
 			formset3.save_m2m()
 
+			if form_uncommited.publicada == True and form_uncommited.correo_enviado == False:
+				try:
+					subject, from_email = 'Nueva publicación', 'cluster.nicaragua@gmail.com'
+					text_content = render_to_string('email/publicacion.txt', {'publi': form_uncommited,})
+
+					html_content = render_to_string('email/publicacion.txt', {'publi': form_uncommited,})
+
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
+
+					form_uncommited.correo_enviado = True
+					form_uncommited.save()
+					return HttpResponseRedirect('/contrapartes/publicaciones/')
+				except:
+					pass
+
 			return HttpResponseRedirect('/contrapartes/publicaciones/')
 	else:
 		form = PublicacionForm(instance=object)
@@ -391,6 +467,7 @@ def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
 		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
 			publi = form.save(commit=False)
 			publi.usuario = request.user
+			publi.correo_enviado = False
 			publi.save()
 
 			instances = formset.save(commit=False)
@@ -411,22 +488,24 @@ def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
 				instance3.save()
 			formset3.save_m2m()
 
-			try:
-				subject, from_email = 'Nueva publicación', 'cluster.nicaragua@gmail.com'
-				text_content = render_to_string('email/publicacion.txt', {'publi': publi,})
+			if publi.publicada == True and publi.correo_enviado == False:
+				try:
+					subject, from_email = 'Nueva publicación', 'cluster.nicaragua@gmail.com'
+					text_content = render_to_string('email/publicacion.txt', {'publi': publi,})
 
-				html_content = render_to_string('email/publicacion.txt', {'publi': publi,})
+					html_content = render_to_string('email/publicacion.txt', {'publi': publi,})
 
-				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
-				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
-				msg.attach_alternative(html_content, "text/html")
-				msg.send()
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
 
-				enviado = 1
-				return HttpResponseRedirect('/contrapartes/publicaciones/')
-			except:
-				pass
+					publi.correo_enviado = True
+					publi.save()
+					return HttpResponseRedirect('/contrapartes/publicaciones/')
+				except:
+					pass
 			
 	else:
 		form = PublicacionForm()
