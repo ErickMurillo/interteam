@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'opiniones',
     'biblioteca',
     'configuracion',
+    'informes',
 
     'ckeditor',
     'ckeditor_uploader',
