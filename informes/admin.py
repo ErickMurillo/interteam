@@ -1,31 +1,53 @@
 from django.contrib import admin
 from .models import *
+from django.forms import Textarea
+import nested_admin
+
 # Register your models here.
 
-class ArchivoInline(admin.TabularInline):
+class ArchivoInline(nested_admin.NestedTabularInline):
 	model = Archivo
 	extra = 1
 
-class InformeInline(admin.TabularInline):
+class InformeInline(nested_admin.NestedTabularInline):
 	model = Informe
 	extra = 1
 
-class ImagenesInline(admin.TabularInline):
+class ImagenesInline(nested_admin.NestedTabularInline):
 	model = Imagenes
 	extra = 1
 
-class VideoInline(admin.TabularInline):
+class VideoInline(nested_admin.NestedTabularInline):
 	model = Video
 	extra = 1
 
-class HistoriasExitoInline(admin.TabularInline):
+class DocumentoInline(nested_admin.NestedTabularInline):
+	model = Documento
+	extra = 1
+	formfield_overrides = {
+		models.TextField: {'widget': Textarea(attrs={'rows':6, 'cols':35})},
+	}
+
+class HistoriasExitoInline(nested_admin.NestedTabularInline):
 	model = HistoriasExito
 	extra = 1
+	formfield_overrides = {
+		models.TextField: {'widget': Textarea(attrs={'rows':6, 'cols':35})},
+	}
 
-class ProyectoAdmin(admin.ModelAdmin):
-	inlines = [ArchivoInline,InformeInline,ImagenesInline,VideoInline,HistoriasExitoInline]
+class ArchivosMonitoreoInline(nested_admin.NestedTabularInline):
+	model = ArchivosMonitoreo
+	extra = 1
+
+class MonitoreoInline(nested_admin.NestedTabularInline):
+	model = Monitoreo
+	extra = 1
+	inlines = [ArchivosMonitoreoInline,]
+
+class ProyectoAdmin(nested_admin.NestedModelAdmin):
+	inlines = [ArchivoInline,InformeInline,ImagenesInline,VideoInline,DocumentoInline,HistoriasExitoInline,MonitoreoInline]
 	readonly_fields = ('url_para_compartir',)
-
+	
 	def get_queryset(self, request):
 		if request.user.is_superuser:
 			return Proyecto.objects.all()

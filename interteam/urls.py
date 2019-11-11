@@ -31,6 +31,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('taggit_autosuggest/', include('taggit_autosuggest.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
+    path('nested_admin/', include('nested_admin.urls')),
     path('accounts/login/', auth_views.login, name='login'),
     path('accounts/profile/', perfil, name='perfil'),
     path('accounts/profile/editar/', contra.perfil_editar, name='perfil_editar'),

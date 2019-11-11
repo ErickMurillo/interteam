@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 class Publicacion(models.Model):
 	titulo = models.CharField(max_length=250)
-	imagen = ImageField(upload_to='publicaciones/img/',null=True, blank=True)
+	imagen = ImageField(upload_to='publicaciones/img/',null=True, blank=True,help_text='Tamaño recomendado: 360x390')
 	# archivo = models.FileField(upload_to='publicaciones/archivos/')
 	resumen = RichTextUploadingField()
 	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)

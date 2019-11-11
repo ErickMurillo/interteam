@@ -34,6 +34,10 @@ class Archivo(models.Model):
 	nombre = models.CharField(max_length=300)
 	archivo = models.FileField(upload_to='informes/archivos/')
 
+	class Meta:
+		verbose_name = 'Archivo proyecto'
+		verbose_name_plural = 'Archivos proyecto'
+
 REPORTE_CHOICES = (('Informe técnico','Informe técnico'),('Informe financiero','Informe financiero'))
 
 class Informe(models.Model):
@@ -59,6 +63,13 @@ class Video(models.Model):
 	nombre = models.CharField(max_length=300)
 	url = EmbedVideoField()
 
+class Documento(models.Model):
+	proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE)
+	nombre = models.CharField(max_length=300)
+	descripcion = models.TextField()
+	imagen = ImageField(upload_to='informes/imgenes/',null=True, blank=True)
+	archivo = models.FileField(upload_to='informes/documentos/')
+
 class HistoriasExito(models.Model):
 	proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE)
 	nombre = models.CharField(max_length=200)
@@ -68,3 +79,12 @@ class HistoriasExito(models.Model):
 	class Meta:
 		verbose_name = 'Historia de éxito'
 		verbose_name_plural = 'Historias de éxito'
+
+class Monitoreo(models.Model):
+	proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE)
+	nombre = models.CharField(max_length=200)
+	foto = ImageField(upload_to='informes/monitoreo/',null=True, blank=True)
+
+class ArchivosMonitoreo(models.Model):
+	monitoreo = models.ForeignKey(Monitoreo,on_delete=models.CASCADE)
+	archivo = models.FileField(upload_to='informes/monitoreo/')

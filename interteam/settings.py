@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'embed_video',
     'disqus',
     'crispy_forms',
+    'nested_admin',
 ]
 
 SITE_ID = 1
