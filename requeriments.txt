@@ -11,6 +11,7 @@ django-disqus==0.5
 django-el-pagination==3.2.4
 django-embed-video==1.1.2
 django-js-asset==1.1.0
+django-nested-admin==3.2.4
 django-taggit==0.22.2
 django-taggit-autosuggest==0.3.3
 idna==2.6
@@ -22,6 +23,7 @@ pbr==4.0.4
 Pillow==5.1.0
 pkg-resources==0.0.0
 psycopg2-binary==2.8.3
+python-monkey-business==1.0.0
 pytz==2018.4
 redis==3.3.11
 requests==2.18.4
