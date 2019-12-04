@@ -13,14 +13,14 @@ class InformeInline(nested_admin.NestedTabularInline):
 	model = Informe
 	extra = 1
 
-class ImagenesInline(nested_admin.NestedTabularInline):
-	model = Imagenes
-	extra = 1
+# class ImagenesInline(nested_admin.NestedTabularInline):
+# 	model = Imagenes
+# 	extra = 1
 
 class RangoFechaImagenesInline(nested_admin.NestedTabularInline):
 	model = RangoFechaImagenes
 	extra = 1
-	inlines = [ImagenesInline,]
+	# inlines = [ImagenesInline,]
 
 class VideoInline(nested_admin.NestedTabularInline):
 	model = Video

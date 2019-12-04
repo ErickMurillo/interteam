@@ -59,14 +59,14 @@ class RangoFechaImagenes(models.Model):
 		verbose_name = 'Fecha Imágen'
 		verbose_name_plural = 'Fecha Imágenes'
 
-class Imagenes(models.Model):
-	rango = models.ForeignKey(RangoFechaImagenes,on_delete=models.CASCADE)
-	nombre = models.CharField(max_length=300)
-	archivo = ImageField(upload_to='informes/imgenes/')
+# class Imagenes(models.Model):
+# 	rango = models.ForeignKey(RangoFechaImagenes,on_delete=models.CASCADE)
+# 	nombre = models.CharField(max_length=300)
+# 	archivo = ImageField(upload_to='informes/imgenes/')
 
-	class Meta:
-		verbose_name = 'Imágen'
-		verbose_name_plural = 'Imágenes'
+# 	class Meta:
+# 		verbose_name = 'Imágen'
+# 		verbose_name_plural = 'Imágenes'
 
 class Video(models.Model):
 	proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE)
