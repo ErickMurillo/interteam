@@ -11,6 +11,7 @@ class Proyecto(models.Model):
 	nombre = models.CharField(max_length=300)
 	fecha_inicio = models.DateField()
 	fecha_final = models.DateField()
+	banner = ImageField(upload_to='informes/banner/',help_text='1350x500',blank=True,null=True)
 	objectivos = RichTextUploadingField()
 	descripcion = RichTextUploadingField()
 	coordinador_proyecto = models.CharField(max_length=300,verbose_name='Coordinador general del proyecto')
@@ -49,8 +50,17 @@ class Informe(models.Model):
 	# nombre = models.CharField(max_length=300)
 	archivo = models.FileField(upload_to='informes/informe/')
 
-class Imagenes(models.Model):
+class RangoFechaImagenes(models.Model):
 	proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE)
+	inicio = models.DateField()
+	fin = models.DateField()
+
+	class Meta:
+		verbose_name = 'Fecha Imágen'
+		verbose_name_plural = 'Fecha Imágenes'
+
+class Imagenes(models.Model):
+	rango = models.ForeignKey(RangoFechaImagenes,on_delete=models.CASCADE)
 	nombre = models.CharField(max_length=300)
 	archivo = ImageField(upload_to='informes/imgenes/')
 
@@ -85,6 +95,14 @@ class Monitoreo(models.Model):
 	nombre = models.CharField(max_length=200)
 	foto = ImageField(upload_to='informes/monitoreo/',null=True, blank=True)
 
+	class Meta:
+		verbose_name = 'Anexo'
+		verbose_name_plural = 'Anexos'
+
 class ArchivosMonitoreo(models.Model):
 	monitoreo = models.ForeignKey(Monitoreo,on_delete=models.CASCADE)
 	archivo = models.FileField(upload_to='informes/monitoreo/')
+
+	class Meta:
+		verbose_name = 'Archivo'
+		verbose_name_plural = 'Archivos'

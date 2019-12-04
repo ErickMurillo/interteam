@@ -17,6 +17,11 @@ class ImagenesInline(nested_admin.NestedTabularInline):
 	model = Imagenes
 	extra = 1
 
+class RangoFechaImagenesInline(nested_admin.NestedTabularInline):
+	model = RangoFechaImagenes
+	extra = 1
+	inlines = [ImagenesInline,]
+
 class VideoInline(nested_admin.NestedTabularInline):
 	model = Video
 	extra = 1
@@ -45,7 +50,7 @@ class MonitoreoInline(nested_admin.NestedTabularInline):
 	inlines = [ArchivosMonitoreoInline,]
 
 class ProyectoAdmin(nested_admin.NestedModelAdmin):
-	inlines = [ArchivoInline,InformeInline,ImagenesInline,VideoInline,DocumentoInline,MonitoreoInline]
+	inlines = [ArchivoInline,InformeInline,RangoFechaImagenesInline,VideoInline,DocumentoInline,MonitoreoInline]
 	readonly_fields = ('url_para_compartir',)
 	
 	def get_queryset(self, request):
