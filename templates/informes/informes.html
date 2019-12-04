@@ -1,0 +1,7 @@
+{% extends "informes/base.html" %}
+
+{% block content %}
+	{% for informe in object_list|dictsortreversed:"fecha_informe" %}
+		{{informe.tipo_reporte}} - {{informe.inicio}} - {{informe.fin}} - <a href="/media/{{informe.archivo}}" download>Descargar</a> <br>
+	{% endfor %}
+{% endblock content %}

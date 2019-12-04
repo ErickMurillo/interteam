@@ -53,4 +53,5 @@ urlpatterns = [
     path('organizaciones/<slug>', notas.detalle_organizacion, name='detalle-organizacion'),
     path('biblioteca/', include('biblioteca.urls')),
     path('contacto/', notas.contacto, name='contacto'),
+    path('informes/', include('informes.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

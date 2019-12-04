@@ -1,0 +1,11 @@
+{% extends "informes/base.html" %}
+{% load thumbnail %}
+{% block content %}
+	{% for img in object_list|dictsortreversed:"id" %}
+		{% thumbnail img.archivo "380x250" crop="center" as im %}
+            <img src="{{im.url}}" alt="">
+        {% empty %}   
+          <img src="http://via.placeholder.com/380x250" alt="">
+        {% endthumbnail %}
+	{% endfor %}
+{% endblock content %}

@@ -14,6 +14,7 @@ class Proyecto(models.Model):
 	banner = ImageField(upload_to='informes/banner/',help_text='1350x500',blank=True,null=True)
 	objectivos = RichTextUploadingField()
 	descripcion = RichTextUploadingField()
+	imagen_descripcion = ImageField(upload_to='informes/img-descripcion/',help_text='800x600',blank=True,null=True)
 	coordinador_proyecto = models.CharField(max_length=300,verbose_name='Coordinador general del proyecto')
 	email = models.EmailField()
 	celular = models.CharField(max_length=50)

@@ -1,0 +1,71 @@
+{% extends "informes/base.html" %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block content %}
+	{{object}}
+
+	Archivos proyecto <br>
+	{% for archivo in object.archivo_set.all %}
+		{{archivo.nombre}}
+		<a href="/media/{{archivo.archivo}}" download>Descargar</a>
+	{% endfor %}
+
+	<hr>
+
+	Informes  <a href="{% url 'lista-informes' object.slug %}">ver todos</a><br>
+	{% for informe in object.informe_set.all|dictsortreversed:"fecha_informe"|slice:":6" %}
+		{{informe.tipo_reporte}} - {{informe.inicio}} - {{informe.fin}} - <a href="/media/{{informe.archivo}}" download>Descargar</a> <br>
+	{% endfor %}
+
+	<hr>
+
+	Documentos <a href="{% url 'lista-documentos' object.slug %}">ver todos</a><br>
+	{% for doc in object.documento_set.all %}
+		{% thumbnail doc.imagen "380x250" crop="center" as im %}
+            <img src="{{im.url}}" alt="">
+        {% empty %}   
+          <img src="http://via.placeholder.com/380x250" alt="">
+        {% endthumbnail %}
+        {{doc.nombre}} - {{doc.descripcion}} - <a href="/media/{{doc.archivo}}" download>Descargar</a> <br>
+	{% endfor %}
+
+	<hr>
+
+	Imagenes <a href="{% url 'imagenes' object.slug %}">ver todos</a><br>
+	{% for rango in object.rangofechaimagenes_set.all %}
+		{% for img in rango.imagenes_set.all|dictsortreversed:"id"|slice:":8" %}
+			{% thumbnail img.archivo "380x250" crop="center" as im %}
+	            <img src="{{im.url}}" alt="">
+	        {% empty %}   
+	          <img src="http://via.placeholder.com/380x250" alt="">
+	        {% endthumbnail %}
+		{% endfor %}
+	{% endfor %}
+
+	<hr>
+
+	Videos <a href="{% url 'videos' object.slug %}">ver todos</a><br>
+	{% for vid in object.video_set.all %}
+		{% video vid.url '800x600' %}
+	{% endfor %}
+
+	<hr>
+
+	Anexos <a href="{% url 'videos' object.slug %}">ver todos</a><br>
+	{% for anexo in object.monitoreo_set.all %}
+		{{anexo.nombre}} 
+		{% thumbnail anexo.foto "380x250" crop="center" as im %}
+            <img src="{{im.url}}" alt="">
+        {% empty %}   
+          <img src="http://via.placeholder.com/380x250" alt="">
+        {% endthumbnail %}
+
+		<br>
+		Archivos
+        {% for archivo in anexo.archivosmonitoreo_set.all %}
+        	Archivo-{{forloop.counter}} <a href="/media/{{archivo.archivo}}" download>Descargar</a>
+        {% endfor %}
+        <br>
+	{% endfor %}
+{% endblock content %}
