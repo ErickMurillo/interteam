@@ -1,1 +1,127 @@
-{% block content %}{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+		<meta name="description" content="Agency - Business And Agency Template" />
+	<meta property="og:title" content="Agency : Business And Agency Template" />
+	<meta property="og:description" content="Agency : Business And Agency Template" />
+	<meta property="og:image" content="dhakdhakindia.com/product/agency/" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- FAVICONS ICON -->
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+	
+	<!-- PAGE TITLE HERE -->
+	<title>Agency : Business And Agency Template </title>
+	
+	<!-- MOBILE SPECIFIC -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- STYLESHEETS -->
+	<link rel="stylesheet" type="text/css" href="/static/informes/css/plugins.css">
+	<link rel="stylesheet" type="text/css" href="/static/informes/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/informes/css/templete.css">
+	<link class="skin" rel="stylesheet" type="text/css" href="/static/informes/css/skin/skin-1.css">
+	
+	<!-- REVOLUTION SLIDER CSS -->
+	<link rel="stylesheet" type="text/css" href="/static/informes/plugins/revolution/revolution/css/settings.css">
+	<link rel="stylesheet" type="text/css" href="/static/informes/plugins/revolution/revolution/css/navigation.css">
+</head>
+<body id="bg">
+<div id="loading-area"><div class="la-anim-10"></div></div>
+<div class="page-wraper">
+
+    {% block content %}{% endblock content %}
+	<!-- Footer -->
+    <footer class="site-footer text-uppercase">
+
+        <!-- footer bottom part -->
+        <div class="footer-bottom bg-black">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-left ">
+						<span>ASDENIC © 2018. Todos los derechos reservados. Desarrollado por </span>
+						<a  href="http://www.simas.org.ni/">SIMAS</a>
+					</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer END-->
+	
+    <!-- scroll top button -->
+    <button class="scroltop fa fa-chevron-up" ></button>
+	
+</div>
+<!-- JavaScript  files ========================================= -->
+<script src="/static/informes/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
+<script src="/static/informes/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="/static/informes/plugins/bootstrap/js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="/static/informes/plugins/wow/wow.js"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="/static/informes/plugins/bootstrap-select/bootstrap-select.min.js"></script><!-- FORM JS -->
+<script src="/static/informes/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
+<script src="/static/informes/plugins/magnific-popup/magnific-popup.js"></script><!-- MAGNIFIC-POPUP JS -->
+<script src="/static/informes/plugins/imagesloaded/imagesloaded.js"></script><!-- MASONRY  -->
+<script src="/static/informes/plugins/masonry/masonry-3.1.4.js"></script><!-- MASONRY  -->
+<script src="/static/informes/plugins/masonry/masonry.filter.js"></script><!-- MASONRY  -->
+<script src="/static/informes/plugins/owl-carousel/owl.carousel.js"></script><!-- OWL  SLIDER  -->
+<script src="/static/informes/js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS  -->
+<script src="/static/informes/plugins/loading/anime.js"></script><!-- LOADING JS -->
+<script src="/static/informes/plugins/loading/anime-app.js"></script><!-- LOADING JS -->
+<script src="/static/informes/js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+<script src="/static/informes/plugins/loading/anime.js"></script><!-- Tilt Jquery -->
+<script src="/static/informes/plugins/loading/anime-app3.js"></script><!-- Tilt Jquery -->
+<!-- REVOLUTION JS FILES -->
+<script src="/static/informes/plugins/revolution/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="/static/informes/plugins/revolution/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script  src="/static/informes/js/rev.slider.js"></script>
+{% block extra_js %}{% endblock extra_js %}
+<script>
+jQuery(document).ready(function() {
+	'use strict';
+	dz_rev_slider_1();
+});	/*ready*/
+$('.doc-carusel').owlCarousel({
+    loop:true,
+    margin:5,
+    responsiveClass:true,
+    navText: ['<i class="flaticon-left-arrow"></i>', '<i class="flaticon-right-arrow"></i>'],
+    responsive:{
+        0:{
+            items:4,
+            nav:true
+        },
+        600:{
+            items:4,
+            nav:false
+        },
+        1000:{
+            items:4,
+            nav:true,
+            loop:false
+        }
+    }
+})
+</script>
+</body>
+</html>

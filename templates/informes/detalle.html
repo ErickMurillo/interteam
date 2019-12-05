@@ -3,54 +3,398 @@
 {% load embed_video_tags %}
 
 {% block content %}
-	{{object}}
+<style>
+	.tp-leftarrow{
+		display: none;
+	}
+	.tp-rightarrow{
+		display: none;
+	}
+	.section-documentos .doc-carusel .dlab-tilte{
+		height: 72px;
+	}
+	.section-documentos .doc-carusel .dlab-desc{
+		height: 84px;
+	}
+	.section-informes .icon-bx-wraper p:last-child{
+		font-size: 14px;
+	}
+</style>
+<!-- header -->
+<header class="site-header header-transparent mo-left">
 
-	Archivos proyecto <br>
-	{% for archivo in object.archivo_set.all %}
-		{{archivo.nombre}}
-		<a href="/media/{{archivo.archivo}}" download>Descargar</a>
-	{% endfor %}
+	<!-- main header -->
+	<div class="sticky-header main-bar-wraper navbar-expand-lg">
+		<div class="main-bar clearfix ">
+			<div class="container clearfix">
+				<!-- website logo -->
+				<!-- nav toggle button -->
+				<button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			   
+				<!-- main nav -->
+				<div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+					<ul class="nav navbar-nav">	
+						<li class="active"><a href="#">Inicio</a></li>
+						<li><a href="#">Proyecto</a></li>
+						<li><a href="#">Informes</a></li>
+						<li><a href="#">Anexos</a></li>
+					</ul>		
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- main header END -->
+</header>
+<!-- header END -->
 
-	<hr>
+<!-- Content -->
+<div class="page-content">
+	<!-- Slider -->
+	<div class="main-slider style-two default-banner" id="home">
+		<div class="tp-banner-container">
+			<div class="tp-banner" >
+				<div id="welcome_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="reveal-add-on36" data-source="gallery" style="background:#ffffff;padding:0px;">
+					<!-- START REVOLUTION SLIDER 5.4.7.2 fullscreen mode -->
+						<div id="welcome" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.7.2">
+					<ul>	<!-- SLIDE  -->
+						<li data-index="rs-101" data-transition="fadethroughdark" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="default"  data-thumb=""  data-rotate="0"  data-saveperformance="off"  data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+							<!-- MAIN IMAGE -->
+							{% thumbnail object.banner "1350x600" crop="center" as im %}
+								<img src="{{im.url}}"  alt=""  data-lazyload="images/portada.jpg" data-bgposition="center center" data-kenburns="on" data-duration="4000" data-ease="Power3.easeInOut" data-scalestart="150" data-scaleend="100" data-rotatestart="0" data-rotateend="0" data-blurstart="0" data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="4" class="rev-slidebg" data-no-retina>
+							{% empty %}   
+								<img src="http://via.placeholder.com/1350x500"   alt=""  data-lazyload="images/portada.jpg" data-bgposition="center center" data-kenburns="on" data-duration="4000" data-ease="Power3.easeInOut" data-scalestart="150" data-scaleend="100" data-rotatestart="0" data-rotateend="0" data-blurstart="0" data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="4" class="rev-slidebg" data-no-retina>
+							{% endthumbnail %}
+							<!-- LAYERS -->
 
-	Informes  <a href="{% url 'lista-informes' object.slug %}">ver todos</a><br>
-	{% for informe in object.informe_set.all|dictsortreversed:"fecha_informe"|slice:":6" %}
-		{{informe.tipo_reporte}} - {{informe.inicio}} - {{informe.fin}} - <a href="/media/{{informe.archivo}}" download>Descargar</a> <br>
-	{% endfor %}
+							<!-- LAYER NR. 1 -->
+							<div class="tp-caption tp-shape tp-shapewrapper ov-tp " 
+								id="slide-101-layer-14" 
+								data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
+								data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" 
+								data-width="full"
+								data-height="full"
+								data-whitespace="nowrap"
+								data-type="shape" 
+								data-basealign="slide" 
+								data-responsive_offset="off" 
+								data-responsive="off"
+								data-frames='[{"delay":10,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":1500,"frame":"999","to":"opacity:0;","ease":"Power4.easeIn"}]'
+								data-textAlign="['inherit','inherit','inherit','inherit']"
+								data-paddingtop="[0,0,0,0]"
+								data-paddingright="[0,0,0,0]"
+								data-paddingbottom="[0,0,0,0]"
+								data-paddingleft="[0,0,0,0]"
 
-	<hr>
+								style="z-index: 5;font-family:Open Sans;"> </div>
 
-	Documentos <a href="{% url 'lista-documentos' object.slug %}">ver todos</a><br>
-	{% for doc in object.documento_set.all %}
-		{% thumbnail doc.imagen "380x250" crop="center" as im %}
-            <img src="{{im.url}}" alt="">
-        {% empty %}   
-          <img src="http://via.placeholder.com/380x250" alt="">
-        {% endthumbnail %}
-        {{doc.nombre}} - {{doc.descripcion}} - <a href="/media/{{doc.archivo}}" download>Descargar</a> <br>
-	{% endfor %}
+							<!-- LAYER NR. 2 -->
+							<img class="tp-caption  " 
+								id="slide-101-layer-1" 
+								data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
+								data-y="['middle','middle','middle','middle']" data-voffset="['-90','-80','-90','-90']"
+								data-lineheight="['90','80','70','60']"
+								data-letterspacing="['-5','-5','-2','-3']"
+								data-width="none"
+								data-height="['200','100','80','50']"
+								data-whitespace="['normal','nowrap','normal','normal']"
+								src="images/logograno.png"
+								data-type="text" 
+								data-responsive_offset="off" 
+								data-responsive="off"
+								data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;","color":"#000000","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","color":"#000000","to":"opacity:0;","ease":"nothing"}]'
+								data-textAlign="['center','left','center','center']"
+								data-paddingtop="[0,0,0,0]"
+								data-paddingright="[10,10,0,0]"
+								data-paddingbottom="[10,10,0,0]"
+								data-paddingleft="[10,10,0,0]"
 
-	<hr>
+								style="z-index: 6;">
 
-	Imagenes <a href="{% url 'imagenes' object.slug %}">ver todos</a><br>
-	{% for rango in object.rangofechaimagenes_set.all %}
-		{% for img in rango.imagenes_set.all|dictsortreversed:"id"|slice:":8" %}
-			{% thumbnail img.archivo "380x250" crop="center" as im %}
-	            <img src="{{im.url}}" alt="">
-	        {% empty %}   
-	          <img src="http://via.placeholder.com/380x250" alt="">
-	        {% endthumbnail %}
-		{% endfor %}
-	{% endfor %}
+							<!-- LAYER NR. 3 -->
+							<div class="tp-caption  " 
+								id="slide-101-layer-2" 
+								data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" 
+								data-y="['middle','middle','middle','middle']" data-voffset="['50','20','20','10']" 
+								data-fontsize="['20','20','20','17']"
+								data-lineheight="['30','30','25','22']"
+								data-color="['rgba(255,255,255,0.75)','rgba(255,255,255,0.65)','rgba(255,255,255,0.65)','rgba(255,255,255,0.65)']"
+								data-width="['800','700','500','350']"
+								data-height="none"
+								data-whitespace="normal"
+					 
+								data-type="text" 
+								data-responsive_offset="off" 
+								data-responsive="off"
+								data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;","color":"#000000","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","color":"#000000","to":"opacity:0;","ease":"nothing"}]'
+								data-textAlign="['center','center','center','center']"
+								data-paddingtop="[0,0,0,0]"
+								data-paddingright="[0,0,0,0]"
+								data-paddingbottom="[0,0,0,0]"
+								data-paddingleft="[0,0,0,0]"
 
-	<hr>
+								style="z-index: 7; min-width: 640px; max-width: 640px; white-space: normal; font-size: 20px; line-height: 30px; font-weight: 400; color: rgba(255,255,255,0.75); font-family:'Montserrat',sans-serif;">
+								{{object.objectivos|safe}}
+							</div>
 
-	Videos <a href="{% url 'videos' object.slug %}">ver todos</a><br>
-	{% for vid in object.video_set.all %}
-		{% video vid.url '800x600' %}
-	{% endfor %}
+							<!-- LAYER NR. 4 -->
+							{% for archivo in object.archivo_set.all %}
+							<a class="tp-caption rev-btn   tc-btnshadow tp-rs-menulink" 
+								href="/media/{{archivo.archivo}}	" target="_blank"			 
+								id="slide-101-layer-12" 
+								data-x="['center','center','center','center']" data-hoffset="['0']" 
+								data-y="['middle','middle','middle','middle']" data-voffset="['150','140','130','130']" 
+								data-lineheight="['60','60','50','50']"
+								data-width="['280','280','200','none']"
+								data-height="none"
+								data-whitespace="nowrap"
+					 
+								data-type="button" 
+								data-actions=''
+								data-responsive_offset="off" 
+								data-responsive="off"
+								data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"x:-50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,1);"}]'
+								data-textAlign="['center','center','center','inherit']"
+								data-paddingtop="[0,0,0,0]"
+								data-paddingright="[50,50,20,20]"
+								data-paddingbottom="[0,0,0,0]"
+								data-paddingleft="[50,50,20,20]"
 
-	<hr>
+								style="z-index: 8; min-width: 280px; max-width: 280px; white-space: nowrap; font-size: 17px; line-height: 60px; font-weight: 500; color: rgba(255,255,255,1); font-family:'Montserrat',sans-serif;border-radius:30px 30px 30px 30px;outline:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;text-decoration: none;"><i class="fa-icon-cube" style="font-size:17px;margin-right:5px;"></i> 
+								{{archivo.nombre}} </a>
+							{% endfor %}
+						</li>
+					</ul>
+					<div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>	</div>
+					</div><!-- END REVOLUTION SLIDER -->     
+			</div>        
+		</div>        
+	</div>        
+	<!-- Slider END -->
+	<!-- inner page banner END -->
+	<div class="content-block">
+		<!-- Project Details -->
+		<div class="section-full content-inner about-us">
+			<div class="container">
+				<div class="row ">
+					<div class="col-lg-8 col-md-8">
+						<div class="abuot-box row wow fadeIn" data-wow-delay="0.6s">
+							<div class="col-lg-4">
+								<h2 class="box-title m-tb0">Proyecto<span class="bg-primary"></span></h2>
+								<h4 class="text-gray-dark">{{object}}</h4>
+							</div>
+							<div class="col-lg-8">
+								<p>
+									{{object.descripcion|safe}}
+								</p>
+								<!-- <a href="#" class="site-button radius-xl outline">Leer más <i class="fa fa-long-arrow-right"></i></a> -->
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 about-img wow fadeIn" data-wow-delay="0.4s">
+						{% thumbnail object.imagen_descripcion "800x600" crop="center" as im %}
+							<img src="{{im.url}}" alt="">
+						{% empty %}   
+						  <img src="http://via.placeholder.com/800x600" alt="">
+						{% endthumbnail %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Project Details End-->
+		<!-- Informes Us -->
+		<div class="section-full p-t30 bg-white section-informes">
+			<div class="container">
+				<div class="max-w600 m-auto text-center m-b30">
+					<h6 class="m-t0">Proyecto {{object}}</h6>
+					<h2 class="m-t0">Informes</h2>
+				</div>
+				<div class="row p-b50 equal-wraper2">
+					<div class="col-xl-12 col-lg-12 col-md-12 dis-tbl equal-col wow fadeInRight" data-wow-delay="0.6s">
+						<div class="dis-tbl-cell">
+							<div class="row">
+								{% for informe in object.informe_set.all|dictsortreversed:"fecha_informe"|slice:":6" %}
+								<div class="col-lg-3 col-md-6 col-sm-6 m-b30 ">
+									<a href="/media/{{informe.archivo}}" target="_blank">
+										<div class="icon-bx-wraper  left bg-gray p-10">
+											<div class="icon-sm text-primary m-b20"> <i class="fa fa-file-pdf-o"></i> </div>
+											<div class="icon-content">
+												<h5 class="dlab-tilte">{{informe.tipo_reporte}}</h5>
+												<p class="text-primary">{{informe.inicio|date:"d/m/Y"}} - {{informe.fin|date:"d/m/Y"}}</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								{% endfor %}
+							</div>
+							<div style="text-align: center;">
+								<a href="{% url 'lista-informes' object.slug %}" class="site-button radius-xl outline">Ver todos los informes <i class="fa fa-long-arrow-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Informes Us -->
+		<!-- Documentos -->
+		<div class="section-full bg-black-light content-inner section-documentos">
+			<div class="container">
+				<div class="max-w600 m-auto text-center m-b30">
+					<h6 class="m-t0 text-white">Proyecto {{object}}</h6>
+					<h2 class="m-t0 text-white">Documentos</h2>
+				</div>
+				<div class="doc-carusel owl-carousel owl-theme owl-dots-white-full owl-btn-center-lr owl-btn-3 btn-white">
+					{% for doc in object.documento_set.all %}
+					<div class="item wow zoomIn" data-wow-delay="0.2s">
+						{% thumbnail doc.imagen "250x272" crop="center" as im %}
+						<div class="dlab-box-bg m-b30 box-hover" style="background-image: url({{im.url}})">
+						{% empty %}
+						<div class="dlab-box-bg m-b30 box-hover" style="background-image: url(http://via.placeholder.com/250x272)"></div>
+						{% endthumbnail %}
+							<div class="icon-bx-wraper center p-lr20 p-tb30">
+								<div class="text-primary m-b30"> 
+									<span class="icon-cell icon-sm"><i class="ti-ruler-pencil"></i></span> 
+								</div>
+								<div class="icon-content">
+									<h5 class="dlab-tilte">{{doc.nombre}}</h5>
+									<p class="dlab-desc">{{doc.descripcion|safe|truncatechars:100}}</p>
+								</div>
+							</div>
+							<div class="icon-box-btn text-center">
+								<a href="/media/{{doc.archivo}}" target="_blank" class="site-button btn-block">Descargar</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="m-t10" style="text-align: center;">
+					<a href="{% url 'lista-documentos' object.slug %}" class="site-button radius-xl outline">Ver todos los documentos <i class="fa fa-long-arrow-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- Documentos END -->
+	
+		<!-- Imagenes -->
+		<div class="section-full bg-white p-t30 p-b30 portfolio section-galeria">
+			<div class="container-fluid">
+				<div class="max-w600 m-auto text-center m-b30">
+					<h6 class="m-t0">Proyecto {{object}}</h6>
+					<h2 class="m-t0">Galería de imágenes</h2>
+				</div>
+				<div class="site-filters clearfix center  m-b40">
+					<ul class="filters" data-toggle="buttons">
+						<li data-filter="" class="btn active">
+							<input type="radio">
+							<a href="#" class="site-button-secondry radius-sm"><span>Todas</span></a> 
+						</li>
+						<li data-filter="web" class="btn">
+							<input type="radio">
+							<a href="#" class="site-button-secondry radius-sm"><span>Monitoreo Frijol</span></a> 
+						</li>
+						<li data-filter="advertising" class="btn">
+							<input type="radio">
+							<a href="#" class="site-button-secondry radius-sm"><span>Finca diversificada</span></a> 
+						</li>
+						<li data-filter="branding" class="btn">
+							<input type="radio">
+							<a href="#" class="site-button-secondry radius-sm"><span>Desarrollo vegetativo</span></a> 
+						</li>
+
+					</ul>
+				</div>
+				<div class="clearfix">
+					<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery mfp-gallery port-style1">
+						{% for rango in object.rangofechaimagenes_set.all %}
+						{% for img in rango.imagenes_set.all|dictsortreversed:"id"|slice:":8" %}
+						<li class="web design card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
+							<div class="dlab-box dlab-gallery-box">
+								<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
+									{% thumbnail img.archivo "330x220" crop="center" as im %}
+										<a href="javascript:void(0);"> <img src="{{im.url}}"  alt=""> </a>
+									{% empty %}
+									  <a href="javascript:void(0);"> <img src="http://via.placeholder.com/330x220"  alt=""> </a>
+									{% endthumbnail %}
+									
+									<div class="overlay-bx">
+										<div class="overlay-icon align-b text-white text-left"> 
+											<div class="text-white text-left port-box">
+												<h5>{{img.nombre}}</h5>
+												<a href="/media/{{img.archivo}}" class="mfp-link portfolio-fullscreen" title="{{img.nombre}}"><i class="ti-fullscreen icon-bx-xs"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						{% endfor %}
+						{% endfor %}
+					</ul>
+					<div class="m-t20" style="text-align: center;">
+						<a href="{% url 'imagenes' object.slug %}" class="site-button radius-xl outline">Ver todos las imagenes <i class="fa fa-long-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Imagenes End -->
+		<!-- videos Form -->
+		<div class="section-full content-inner-2 bg-black">
+			<div class="container">
+				<div class="max-w600 m-auto text-center m-b30">
+					<h6 class="m-t0 text-white">Proyecto {{object}}</h6>
+					<h2 class="m-t0 text-white">Galería de Videos</h2>
+				</div>
+				<div class="row equal-wraper3">
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<ul class="nav nav-tabs nav_videos row" role="tablist">
+							{% for vid in object.video_set.all %}
+							<li class=" col-lg-12 col-md-12 col-sm-6 col-xs-12 p-0">
+								<a class="{% if forloop.first %}active{% endif %}" href="#video{{vid.id}}" aria-controls="video" role="tab" data-toggle="tab">
+									<div class="row  p-b5 p-t5 p-l5">
+										<div class="col-lg-5 col-md-5 col-sm-5 col-xs-4">
+										
+											{% video vid.url as my_video %}
+												{% thumbnail my_video.thumbnail "256x144" crop='center' as im %}
+													<img class="img-fullwidth" src="{{im.url}}" alt="{{video.titulo}}">
+												{% endthumbnail %}
+											{% endvideo %}
+										</div>
+										<div class="title-video col-lg-7 col-md-7 col-sm-7 col-xs-8">
+											<p class="">
+												{{vid.nombre}}
+											</p>
+										</div>
+									</div>
+								</a>
+							</li>
+							{% endfor %}
+						</ul>
+						<div class="m-t20">
+							<a href="{% url 'videos' object.slug %}" class="site-button radius-xl outline">Ver todos las Videos <i class="fa fa-long-arrow-right"></i></a>
+						</div>
+					</div>
+					<!-- Tab panes -->
+					<div class="tab-content col-lg-8 equal-col wow zoomInRight" data-wow-delay="0.8s">
+						{% for vid in object.video_set.all %}
+						<div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="video{{vid.id}}">
+							{% comment %} {% video vid.url '650x415' %} {% endcomment %}
+							{% video vid.url as mivideo %}
+							<iframe src="{{mivideo.url}}" frameborder="0" id="iframe{{forloop.counter}}"></iframe>
+							{% endvideo %}
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!-- videos Form END -->
+	</div>
+</div>
+<!-- Content END -->
 
 	Anexos <a href="{% url 'videos' object.slug %}">ver todos</a><br>
 	{% for anexo in object.monitoreo_set.all %}
@@ -69,3 +413,11 @@
         <br>
 	{% endfor %}
 {% endblock content %}
+{% block extra_js %}
+<script>
+	$('.nav_videos li a').on('click', function() {
+		var id_iframe = $('.tab-pane.active iframe').attr('id');
+		document.getElementById(id_iframe).src += '';
+	});
+</script>
+{% endblock extra_js %}
