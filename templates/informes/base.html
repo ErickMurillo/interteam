@@ -2,22 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
-		<meta name="description" content="Agency - Business And Agency Template" />
-	<meta property="og:title" content="Agency : Business And Agency Template" />
-	<meta property="og:description" content="Agency : Business And Agency Template" />
-	<meta property="og:image" content="dhakdhakindia.com/product/agency/" />
-	<meta name="format-detection" content="telephone=no">
-	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
 	<!-- FAVICONS ICON -->
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+	<link rel="shortcut icon" type="image/png" href="/static/images/logos/favicon.png"/>
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Agency : Business And Agency Template </title>
+	<title>{{object}}</title>
 	
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,8 +30,46 @@
 <body id="bg">
 <div id="loading-area"><div class="la-anim-10"></div></div>
 <div class="page-wraper">
-
-    {% block content %}{% endblock content %}
+	<!-- header -->
+	<header class="site-header header-transparent mo-left">
+		<!-- main header -->
+		<div class="sticky-header main-bar-wraper navbar-expand-lg">
+			<div class="main-bar clearfix ">
+				<div class="container clearfix">
+					<!-- website logo -->
+					<!-- nav toggle button -->
+					<button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+					
+					<!-- main nav -->
+					<div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+						{% comment %} <ul class="nav navbar-nav">	
+							<li><a href="/">Proyecto</a></li>
+							<li><a href="{% url 'lista-informes' object.slug %}">Informes</a></li>
+							<li><a href="{% url 'lista-documentos' object.slug %}">Documentos</a></li>
+							<li><a href="#">Galerías<i class="fa fa-chevron-down"></i></a>
+								<ul class="sub-menu">
+									<li><a href="{% url 'imagenes' object.slug %}" class="dez-page">Imágenes</a></li>
+									<li><a href="{% url 'videos' object.slug %}" class="dez-page">Videos</a></li>
+								</ul>	
+							</li>
+							<li><a href="{% url 'videos' object.slug %}">Anexos</a></li>
+						</ul>		 {% endcomment %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- main header END -->
+	</header>
+	<!-- header END -->
+	<!-- Content -->
+	<div class="page-content">
+		{% block content %}{% endblock content %}
+	</div>
+	<!-- Content END -->
 	<!-- Footer -->
     <footer class="site-footer text-uppercase">
 
@@ -121,7 +149,28 @@ $('.doc-carusel').owlCarousel({
             loop:false
         }
     }
-})
+});
+$('.anexo-carusel').owlCarousel({
+    loop:true,
+    margin:5,
+    responsiveClass:true,
+    navText: ['<i class="flaticon-left-arrow"></i>', '<i class="flaticon-right-arrow"></i>'],
+    responsive:{
+        0:{
+            items:4,
+            nav:true
+        },
+        600:{
+            items:4,
+            nav:false
+        },
+        1000:{
+            items:4,
+            nav:true,
+            loop:false
+        }
+    }
+});
 </script>
 </body>
 </html>

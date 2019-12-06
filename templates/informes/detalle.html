@@ -19,40 +19,17 @@
 	.section-informes .icon-bx-wraper p:last-child{
 		font-size: 14px;
 	}
+	.dropdown-item:focus, .dropdown-item:hover{
+		background-color: #66b205;
+		
+	}
+	.dlab-info-has .dropdown-menu a{
+		color: black;
+	}
+	.site-button.outline.white:focus{
+		color: #65b104;
+	}
 </style>
-<!-- header -->
-<header class="site-header header-transparent mo-left">
-
-	<!-- main header -->
-	<div class="sticky-header main-bar-wraper navbar-expand-lg">
-		<div class="main-bar clearfix ">
-			<div class="container clearfix">
-				<!-- website logo -->
-				<!-- nav toggle button -->
-				<button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span></span>
-					<span></span>
-					<span></span>
-				</button>
-			   
-				<!-- main nav -->
-				<div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
-					<ul class="nav navbar-nav">	
-						<li class="active"><a href="#">Inicio</a></li>
-						<li><a href="#">Proyecto</a></li>
-						<li><a href="#">Informes</a></li>
-						<li><a href="#">Anexos</a></li>
-					</ul>		
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- main header END -->
-</header>
-<!-- header END -->
-
-<!-- Content -->
-<div class="page-content">
 	<!-- Slider -->
 	<div class="main-slider style-two default-banner" id="home">
 		<div class="tp-banner-container">
@@ -248,7 +225,7 @@
 					<h2 class="m-t0 text-white">Documentos</h2>
 				</div>
 				<div class="doc-carusel owl-carousel owl-theme owl-dots-white-full owl-btn-center-lr owl-btn-3 btn-white">
-					{% for doc in object.documento_set.all %}
+					{% for doc in object.documento_set.all|slice:":8" %}
 					<div class="item wow zoomIn" data-wow-delay="0.2s">
 						{% thumbnail doc.imagen "250x272" crop="center" as im %}
 						<div class="dlab-box-bg m-b30 box-hover" style="background-image: url({{im.url}})">
@@ -350,7 +327,7 @@
 				<div class="row equal-wraper3">
 					<div class="col-lg-4 col-md-4 col-sm-12">
 						<ul class="nav nav-tabs nav_videos row" role="tablist">
-							{% for vid in object.video_set.all %}
+							{% for vid in object.video_set.all|slice:":4" %}
 							<li class=" col-lg-12 col-md-12 col-sm-6 col-xs-12 p-0">
 								<a class="{% if forloop.first %}active{% endif %}" href="#video{{vid.id}}" aria-controls="video" role="tab" data-toggle="tab">
 									<div class="row  p-b5 p-t5 p-l5">
@@ -378,7 +355,7 @@
 					</div>
 					<!-- Tab panes -->
 					<div class="tab-content col-lg-8 equal-col wow zoomInRight" data-wow-delay="0.8s">
-						{% for vid in object.video_set.all %}
+						{% for vid in object.video_set.all|slice:":4" %}
 						<div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="video{{vid.id}}">
 							{% comment %} {% video vid.url '650x415' %} {% endcomment %}
 							{% video vid.url as mivideo %}
@@ -392,26 +369,57 @@
 			</div>
 		</div>
 		<!-- videos Form END -->
+		<!-- Anexos -->
+		<div class="section-full content-inner-2 mfp-gallery wow fadeIn" data-wow-delay="0.4s">
+			<div class="container-fluid">
+				<div class="section-head text-center">
+					<h6 class="m-t0">Proyecto {{object}}</h6>
+					<h2 class="m-t0">Anexos</h2>
+				</div>
+				<div class="anexo-carusel owl-carousel owl-none">
+					{% for anexo in object.monitoreo_set.all|slice:":8" %}
+					<div class="item">
+						<div class="dlab-box portfolio-box">						
+							<div class="dlab-media dlab-img-effect dlab-img-overlay1"> <img src="
+								{% thumbnail anexo.foto "250x272" crop="center" as im %}
+								{{im.url}}
+								{% empty %}
+								http://via.placeholder.com/800x1100
+								{% endthumbnail %}
+							" alt="">
+							
+								<div class="dlab-info-has p-a15 bg-primary">
+									<div class="btn-group dropup">
+										<button type="button" class="site-button outline radius-xl white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Descargar
+										</button>
+										<div class="dropdown-menu">
+											{% for archivo in anexo.archivosmonitoreo_set.all %}
+												<a class="dropdown-item" href="/media/{{archivo.archivo}}">Archivo #{{forloop.counter}}</a>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<div class="overlay-bx">
+									<div class="overlay-icon text-white"> 
+										<h5>{{anexo.nombre}}</h5>
+										<a href="/media/{{anexo.foto}}" class="mfp-link" title="Title Come Here"> <i class="ti-fullscreen icon-bx-xs"></i> </a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+				<div class="m-t20" style="text-align: center;">
+					<a href="{% url 'imagenes' object.slug %}" class="site-button radius-xl outline">Ver todos las imagenes <i class="fa fa-long-arrow-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- Anexos END -->
 	</div>
-</div>
-<!-- Content END -->
 
-	Anexos <a href="{% url 'videos' object.slug %}">ver todos</a><br>
-	{% for anexo in object.monitoreo_set.all %}
-		{{anexo.nombre}} 
-		{% thumbnail anexo.foto "380x250" crop="center" as im %}
-            <img src="{{im.url}}" alt="">
-        {% empty %}   
-          <img src="http://via.placeholder.com/380x250" alt="">
-        {% endthumbnail %}
-
-		<br>
-		Archivos
-        {% for archivo in anexo.archivosmonitoreo_set.all %}
-        	Archivo-{{forloop.counter}} <a href="/media/{{archivo.archivo}}" download>Descargar</a>
-        {% endfor %}
-        <br>
-	{% endfor %}
 {% endblock content %}
 {% block extra_js %}
 <script>
