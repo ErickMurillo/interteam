@@ -2,12 +2,80 @@
 {% load thumbnail %}
 
 {% block content %}
-	{% for doc in object_list|dictsortreversed:"id" %}
-		{% thumbnail doc.imagen "380x250" crop="center" as im %}
-            <img src="{{im.url}}" alt="">
-        {% empty %}   
-          <img src="http://via.placeholder.com/380x250" alt="">
-        {% endthumbnail %}
-		{{doc.nombre}} - {{doc.descripcion}} - <a href="/media/{{doc.archivo}}" download>Descargar</a> <br>
-	{% endfor %}
+<style>
+
+		.doc-detalle .dlab-tilte{
+			height: 48px;
+		}
+		.doc-detalle .dlab-desc{
+			height: 112px;
+		}
+</style>
+<!-- inner page banner -->
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+  <div class="container">
+      <div class="dlab-bnr-inr-entry">
+          <h2 class="text-white m-b10">Documentos</h2>
+          <h5 class="text-white">Proyecto Grano Joven</h5>
+          <!-- Breadcrumb row END -->
+      </div>
+  </div>
+</div>
+<!-- inner page banner END -->
+<!-- contact area -->
+<div class="content-block bg-white">
+	<!-- Portfolio  -->
+	<div class="section-full content-inner-2 portfolio text-uppercase" id="portfolio">
+
+		<div class="site-filters clearfix center  m-b40">
+			<ul class="filters" data-toggle="buttons">
+				<li data-filter="" class="btn active">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>Todos</span></a> 
+				</li>
+				<li data-filter="2017" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+				</li>
+				<li data-filter="2017" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+				</li>
+				<li data-filter="2019" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2019</span></a> 
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix">
+			<div class="container-fluid doc-detalle">
+				<div class="row">
+					{% for doc in object_list|dictsortreversed:"id" %}
+					<div class="col-lg-3 col-md-6 col-sm-6 m-b30 wow zoomIn" data-wow-delay="0.2s">
+						{% thumbnail doc.imagen "250x272" crop="center" as im %}
+						<div class="dlab-box-bg m-b30 box-hover" style="background-image: url({{im.url}})">
+						{% empty %}
+						<div class="dlab-box-bg m-b30 box-hover" style="background-image: url(http://via.placeholder.com/250x272)"></div>
+						{% endthumbnail %}
+							<div class="icon-bx-wraper center p-lr20 p-tb30">
+								<div class="text-primary m-b30"> 
+									<span class="icon-cell icon-sm"><i class="ti-ruler-pencil"></i></span> 
+								</div>
+								<div class="icon-content">
+									<h5 class="dlab-tilte">{{doc.nombre}}</h5>
+									<p class="dlab-desc">{{doc.descripcion|safe|truncatechars:100}}</p>
+								</div>
+							</div>
+							<div class="icon-box-btn text-center">
+								<a href="/media/{{doc.archivo}}" target="_blank" class="site-button btn-block">Descargar</a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock content %}
