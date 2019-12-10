@@ -1,0 +1,8 @@
+{% extends "informes/base.html" %}
+{% load embed_video_tags %}
+
+{% block content %}
+	{% for video in object_list %}
+		{% video video.url '800x600' %}
+	{% endfor %}
+{% endblock content %}

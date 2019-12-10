@@ -1,0 +1,20 @@
+{% extends "informes/base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+	{% for anexo in object_list %}
+		{{anexo.nombre}}
+		{% thumbnail anexo.foto "250x272" crop="center" as im %}
+			<img src="{{im.url}}" alt="">
+		{% empty %}
+			<img src="http://via.placeholder.com/250x272" alt="">
+		{% endthumbnail %}
+
+		<br>
+		documentos
+		{% for archivo in anexo.archivosmonitoreo_set.all %}
+			<a class="dropdown-item" href="/media/{{archivo.archivo}}">Archivo #{{forloop.counter}}</a>
+		{% endfor %}
+	{% endfor %}
+	
+{% endblock content %}

@@ -8,4 +8,5 @@ urlpatterns = [
 	path('<slug>/documentos/', lista_documentos, name='lista-documentos'),
 	path('<slug>/imagenes/', imagenes, name='imagenes'),
 	path('<slug>/videos/', videos, name='videos'),
+	path('<slug>/anexos/', anexos, name='anexos'),
 ]
