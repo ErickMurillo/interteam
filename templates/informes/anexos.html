@@ -2,19 +2,95 @@
 {% load thumbnail %}
 
 {% block content %}
-	{% for anexo in object_list %}
-		{{anexo.nombre}}
-		{% thumbnail anexo.foto "250x272" crop="center" as im %}
-			<img src="{{im.url}}" alt="">
-		{% empty %}
-			<img src="http://via.placeholder.com/250x272" alt="">
-		{% endthumbnail %}
+<style>
 
-		<br>
-		documentos
-		{% for archivo in anexo.archivosmonitoreo_set.all %}
-			<a class="dropdown-item" href="/media/{{archivo.archivo}}">Archivo #{{forloop.counter}}</a>
-		{% endfor %}
-	{% endfor %}
-	
+		.dropdown-item:focus, .dropdown-item:hover{
+			background-color: #66b205;
+			
+		}
+		.dlab-info-has .dropdown-menu a{
+			color: black;
+		}
+		.site-button.outline.white:focus{
+			color: #65b104;
+		}
+	</style>
+<!-- inner page banner -->
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+	<div class="container">
+		<div class="dlab-bnr-inr-entry">
+			<h2 class="text-white m-b10">Anexos</h2>
+			<h5 class="text-white">Proyecto Grano Joven</h5>
+			<!-- Breadcrumb row END -->
+		</div>
+	</div>
+</div>
+<!-- inner page banner END -->
+<!-- contact area -->
+<div class="content-block bg-white">
+	<!-- Portfolio  -->
+	<div class="section-full content-inner-2 portfolio text-uppercase" id="portfolio">
+
+		<div class="site-filters clearfix center  m-b40">
+			<ul class="filters" data-toggle="buttons">
+				<li data-filter="" class="btn active">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>Todos</span></a> 
+				</li>
+				<li data-filter="2017" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+				</li>
+				<li data-filter="2017" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+				</li>
+				<li data-filter="2019" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2019</span></a> 
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix">
+			<div class="container-fluid">
+				<div class="row">
+					{% for anexo in object_list %}
+					<div class="col-lg-3 col-md-6 col-sm-6 m-b30 wow zoomIn" data-wow-delay="0.2s">
+							<div class="dlab-box portfolio-box">						
+								<div class="dlab-media dlab-img-effect dlab-img-overlay1"> <img src="
+									{% thumbnail anexo.foto "250x272" crop="center" as im %}
+									{{im.url}}
+									{% empty %}
+									http://via.placeholder.com/800x1100
+									{% endthumbnail %}
+								" alt="">
+								
+									<div class="dlab-info-has p-a15 bg-primary">
+										<div class="btn-group dropup">
+											<button type="button" class="site-button outline radius-xl white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												Descargar
+											</button>
+											<div class="dropdown-menu">
+												{% for archivo in anexo.archivosmonitoreo_set.all %}
+													<a class="dropdown-item" href="/media/{{archivo.archivo}}">Archivo #{{forloop.counter}}</a>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+									<div class="overlay-bx">
+										<div class="overlay-icon text-white"> 
+											<h5>{{anexo.nombre}}</h5>
+											<a href="/media/{{anexo.foto}}" class="mfp-link" title="Title Come Here"> <i class="ti-fullscreen icon-bx-xs"></i> </a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock content %}

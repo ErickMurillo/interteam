@@ -1,8 +1,89 @@
 {% extends "informes/base.html" %}
+{% load thumbnail %}
 {% load embed_video_tags %}
 
 {% block content %}
-	{% for video in object_list %}
-		{% video video.url '800x600' %}
-	{% endfor %}
+<!-- inner page banner -->
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+	<div class="container">
+		<div class="dlab-bnr-inr-entry">
+			<h2 class="text-white m-b10">Galería de Videos</h2>
+			<h5 class="text-white">Proyecto Grano Joven</h5>
+			<!-- Breadcrumb row END -->
+		</div>
+	</div>
+</div>
+<!-- inner page banner END -->
+<!-- contact area -->
+<div class="content-block bg-white">
+	<!-- Portfolio  -->
+	<div class="section-full p-t20 p-b50 portfolio text-uppercase" id="portfolio">
+		<div class="site-filters clearfix center  m-b40">
+			<ul class="filters" data-toggle="buttons">
+				<li data-filter="" class="btn active">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>Todos</span></a> 
+				</li>
+				<li data-filter="2017" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+				</li>
+				<li data-filter="2017" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+				</li>
+				<li data-filter="2019" class="btn">
+					<input type="radio">
+					<a href="#" class="site-button-secondry radius-sm"><span>2019</span></a> 
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix">
+			<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery mfp-gallery port-style1">
+                {% for video in object_list %}
+				<li class="card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
+					<div class="dlab-box dlab-gallery-box">
+						<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
+                            {% video video.url as my_video %}
+                            {% thumbnail my_video.thumbnail "650x415" crop='center' as im %}
+							<a href="javascript:void(0);"> <img src="{{im.url}}"  alt=""> </a>
+							{% empty %} 
+							<a href="javascript:void(0);"> <img src="http://via.placeholder.com/650x415"  alt=""> </a>
+                            {% endthumbnail %}
+                            {% endvideo %}
+							<div class="overlay-bx">
+								<div class="overlay-icon align-b text-white text-left"> 
+									<div class="text-white text-left port-box">
+										<h5>Herbal Beauty Salon</h5>
+										<p>Branding and Identity</p>
+										<a href="{{video.url}}" class="popup-youtube mfp-link portfolio-fullscreen" ><i class="fa fa-play icon-bx-xs"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- contact area END -->
+
 {% endblock content %}
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+		disableOn: 700,
+		type: 'iframe',
+		mainClass: 'mfp-fade',
+		removalDelay: 160,
+		preloader: false,
+
+		fixedContentPos: false
+	});
+});
+</script>
+
+{% endblock extra_js %}

@@ -18,6 +18,7 @@
 	<![endif]-->
 	
 	<!-- STYLESHEETS -->
+	{% block extra_css %}{% endblock extra_css %}
 	<link rel="stylesheet" type="text/css" href="/static/informes/css/plugins.css">
 	<link rel="stylesheet" type="text/css" href="/static/informes/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/static/informes/css/templete.css">
@@ -47,7 +48,7 @@
 					<!-- main nav -->
 					<div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="nav navbar-nav">	
-							<li><a href="/">Proyecto</a></li>
+							<li><a href="{% url 'detalle-informe' object.slug %}">Proyecto</a></li>
 							<li><a href="{% url 'lista-informes' object.slug %}">Informes</a></li>
 							<li><a href="{% url 'lista-documentos' object.slug %}">Documentos</a></li>
 							<li><a href="#">Galerías<i class="fa fa-chevron-down"></i></a>
@@ -56,7 +57,7 @@
 									<li><a href="{% url 'videos' object.slug %}" class="dez-page">Videos</a></li>
 								</ul>	
 							</li>
-							<li><a href="{% url 'videos' object.slug %}">Anexos</a></li>
+							<li><a href="{% url 'anexos' object.slug %}">Anexos</a></li>
 						</ul>		 
 					</div>
 				</div>
