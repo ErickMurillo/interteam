@@ -268,26 +268,21 @@
 							<input type="radio">
 							<a href="#" class="site-button-secondry radius-sm"><span>Todas</span></a> 
 						</li>
-						<li data-filter="web" class="btn">
+						{% for k in dict.keys %}
+						<li data-filter="web-{{forloop.counter}}" class="btn">
 							<input type="radio">
-							<a href="#" class="site-button-secondry radius-sm"><span>Monitoreo Frijol</span></a> 
+							<a href="#" class="site-button-secondry radius-sm"><span>{{k.0|date:"j M Y"}} al {{k.1|date:"j M Y"}}</span></a> 
 						</li>
-						<li data-filter="advertising" class="btn">
-							<input type="radio">
-							<a href="#" class="site-button-secondry radius-sm"><span>Finca diversificada</span></a> 
-						</li>
-						<li data-filter="branding" class="btn">
-							<input type="radio">
-							<a href="#" class="site-button-secondry radius-sm"><span>Desarrollo vegetativo</span></a> 
-						</li>
+						{% endfor %}
 
 					</ul>
 				</div>
 				<div class="clearfix">
 					<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery mfp-gallery port-style1">
-						{% for rango in object.rangofechaimagenes_set.all %}
-						{% for img in rango.imagenes_set.all|dictsortreversed:"id"|slice:":8" %}
-						<li class="web design card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
+						
+						{% for k,v in dict.items %}
+						{% for img in v|slice:"2" %}
+						<li class="web-{{forloop.counter}} design card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
 							<div class="dlab-box dlab-gallery-box">
 								<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
 									{% thumbnail img.archivo "330x220" crop="center" as im %}
@@ -381,7 +376,7 @@
 					<div class="item">
 						<div class="dlab-box portfolio-box">						
 							<div class="dlab-media dlab-img-effect dlab-img-overlay1"> <img src="
-								{% thumbnail anexo.foto "250x272" crop="center" as im %}
+								{% thumbnail anexo.foto "800x1100" crop="center" as im %}
 								{{im.url}}
 								{% empty %}
 								http://via.placeholder.com/800x1100

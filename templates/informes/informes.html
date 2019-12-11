@@ -1,8 +1,14 @@
 {% extends "informes/base.html" %}
+{% load el_pagination_tags %}
+{% load thumbnail %}
 
 {% block content %}
 <!-- inner page banner -->
-<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="{% thumbnail object.banner "1350x600" crop="center" as im %}
+	background-image:url({{im.url}});
+{% empty %} 
+	background-image:url(http://via.placeholder.com/1350x500);
+{% endthumbnail %}">
 	<div class="container">
 		<div class="dlab-bnr-inr-entry">
 			<h2 class="text-white m-b10">Informes</h2>
@@ -23,25 +29,20 @@
 					<input type="radio">
 					<a href="#" class="site-button-secondry radius-sm"><span>Todos</span></a> 
 				</li>
-				<li data-filter="2017" class="btn">
+				{% for anio in anios %}
+					<li data-filter="{{anio}}" class="btn">
 					<input type="radio">
-					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
+					<a href="#" class="site-button-secondry radius-sm"><span>{{anio}}</span></a> 
 				</li>
-				<li data-filter="2017" class="btn">
-					<input type="radio">
-					<a href="#" class="site-button-secondry radius-sm"><span>2017</span></a> 
-				</li>
-				<li data-filter="2019" class="btn">
-					<input type="radio">
-					<a href="#" class="site-button-secondry radius-sm"><span>2019</span></a> 
-				</li>
+				{% endfor %}
 			</ul>
 		</div>
 		<div class="clearfix">
 			<div class="container-fluid">
 				<div class="row">
+					{% paginate 12 object_list %}
 					{% for informe in object_list|dictsortreversed:"fecha_informe" %}
-					<div class="{{informe.inicio|date:"Y"}} col-lg-3 col-md-6 col-sm-6 m-b30 wow zoomIn" data-wow-delay="0.2s">
+					<div class="2018 col-lg-3 col-md-6 col-sm-6 m-b30 wow zoomIn" data-wow-delay="0.2s">
 						<a href="/media/{{informe.archivo}}" target="_blank">
 							<div class="icon-bx-wraper  left bg-gray p-10">
 								<div class="icon-sm text-primary m-b20"> <i class="fa fa-file-pdf-o"></i> </div>
@@ -53,6 +54,8 @@
 						</a>
 					</div>
 					{% endfor %}
+					
+					{% show_pages %}
 				</div>
 			</div>
 		</div>

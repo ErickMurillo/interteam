@@ -1,8 +1,14 @@
 {% extends "informes/base.html" %}
 {% load thumbnail %}
+
 {% block content %}
 <!-- inner page banner -->
-<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="
+{% thumbnail object.banner "1350x600" crop="center" as im %}
+	background-image:url({{im.url}});
+{% empty %} 
+	background-image:url(http://via.placeholder.com/1350x500);
+{% endthumbnail %}">
 	<div class="container">
 		<div class="dlab-bnr-inr-entry">
 			<h2 class="text-white m-b10">Galería de imágenes</h2>
@@ -15,67 +21,54 @@
 <!-- contact area -->
 <div class="content-block bg-white">
 	<!-- Portfolio  -->
-	<div class="section-full p-t20 p-b50 portfolio text-uppercase" id="portfolio">
-		<div class="container m-b40">
-			<div class="row">
-				<div class="col-lg-12">
-					<form id="login" class="p-a0 ">
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="form-group">
-									<label class="font-weight-700">Fecha inicio</label>
-									<select class="form-control bs-select-hidden" name="" id="">
-										<option>2017</option>
-										<option>2018</option>
-										<option>2019</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									<label class="font-weight-700">Fecha final</label>
-									<select class="form-control bs-select-hidden" name="" id="">
-										<option>2017</option>
-										<option>2018</option>
-										<option>2019</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="text-center">
-							<button class="site-button">Filtrar</button>
-						</div>
-					</form>
+	<div class="section-full bg-white p-t30 p-b30 portfolio section-galeria">
+			<div class="container-fluid">
+				<div class="site-filters clearfix center  m-b40">
+					<ul class="filters" data-toggle="buttons">
+						<li data-filter="" class="btn active">
+							<input type="radio">
+							<a href="#" class="site-button-secondry radius-sm"><span>Todas</span></a> 
+						</li>
+						{% for k in dict.keys %}
+						<li data-filter="web-{{forloop.counter}}" class="btn">
+							<input type="radio">
+							<a href="#" class="site-button-secondry radius-sm"><span>{{k.0|date:"j M Y"}} al {{k.1|date:"j M Y"}}</span></a> 
+						</li>
+						{% endfor %}
+
+					</ul>
 				</div>
-			</div>
-		</div>
-		<div class="clearfix">
-			<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery mfp-gallery port-style1">
-				{% for img in object_list|dictsortreversed:"id" %}
-				<li class="card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
-					<div class="dlab-box dlab-gallery-box">
-						<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
-							{% thumbnail img.archivo "330x220" crop="center" as im %}
-							<a href="javascript:void(0);"> <img src="{{im.url}}"  alt=""> </a>
-							{% empty %} 
-							<a href="javascript:void(0);"> <img src="http://via.placeholder.com/330x220"  alt=""> </a>
-							{% endthumbnail %}
-							<div class="overlay-bx">
-								<div class="overlay-icon align-b text-white text-left"> 
-									<div class="text-white text-left port-box">
-										<h5>Herbal Beauty Salon</h5>
-										<p>Branding and Identity</p>
-										<a href="/media/{{img.archivo}}" class="mfp-link portfolio-fullscreen" title="Title Come Here"><i class="ti-fullscreen icon-bx-xs"></i></a>
+				<div class="clearfix">
+					<ul id="masonry" class="dlab-gallery-listing gallery-grid-4 gallery mfp-gallery port-style1">
+						
+						{% for k,v in dict.items %}
+						{% for img in v %}
+						<li class="web-{{forloop.counter}} design card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
+							<div class="dlab-box dlab-gallery-box">
+								<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
+									{% thumbnail img.archivo "330x220" crop="center" as im %}
+										<a href="javascript:void(0);"> <img src="{{im.url}}"  alt=""> </a>
+									{% empty %}
+									  <a href="javascript:void(0);"> <img src="http://via.placeholder.com/330x220"  alt=""> </a>
+									{% endthumbnail %}
+									
+									<div class="overlay-bx">
+										<div class="overlay-icon align-b text-white text-left"> 
+											<div class="text-white text-left port-box">
+												<h5>{{img.nombre}}</h5>
+												<a href="/media/{{img.archivo}}" class="mfp-link portfolio-fullscreen" title="{{img.nombre}}"><i class="ti-fullscreen icon-bx-xs"></i></a>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</li>
-				{% endfor %}
-			</ul>
+						</li>
+						{% endfor %}
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
 		</div>
-	</div>
 </div>
 <!-- contact area END -->
      

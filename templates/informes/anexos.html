@@ -1,5 +1,6 @@
 {% extends "informes/base.html" %}
 {% load thumbnail %}
+{% load el_pagination_tags %}
 
 {% block content %}
 <style>
@@ -16,7 +17,12 @@
 		}
 	</style>
 <!-- inner page banner -->
-<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="
+{% thumbnail object.banner "1350x600" crop="center" as im %}
+	background-image:url({{im.url}});
+{% empty %} 
+	background-image:url(http://via.placeholder.com/1350x500);
+{% endthumbnail %}">
 	<div class="container">
 		<div class="dlab-bnr-inr-entry">
 			<h2 class="text-white m-b10">Anexos</h2>
@@ -31,7 +37,7 @@
 	<!-- Portfolio  -->
 	<div class="section-full content-inner-2 portfolio text-uppercase" id="portfolio">
 
-		<div class="site-filters clearfix center  m-b40">
+		<!--<div class="site-filters clearfix center  m-b40">
 			<ul class="filters" data-toggle="buttons">
 				<li data-filter="" class="btn active">
 					<input type="radio">
@@ -50,15 +56,16 @@
 					<a href="#" class="site-button-secondry radius-sm"><span>2019</span></a> 
 				</li>
 			</ul>
-		</div>
+		</div>-->
 		<div class="clearfix">
 			<div class="container-fluid">
 				<div class="row">
+					{% paginate 12 object_list %}
 					{% for anexo in object_list %}
 					<div class="col-lg-3 col-md-6 col-sm-6 m-b30 wow zoomIn" data-wow-delay="0.2s">
 							<div class="dlab-box portfolio-box">						
 								<div class="dlab-media dlab-img-effect dlab-img-overlay1"> <img src="
-									{% thumbnail anexo.foto "250x272" crop="center" as im %}
+									{% thumbnail anexo.foto "800x1100" crop="center" as im %}
 									{{im.url}}
 									{% empty %}
 									http://via.placeholder.com/800x1100
@@ -87,6 +94,7 @@
 							</div>
 						</div>
 					{% endfor %}
+					{% show_pages %}
 				</div>
 			</div>
 		</div>
