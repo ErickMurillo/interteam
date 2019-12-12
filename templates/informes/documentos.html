@@ -14,7 +14,11 @@
 		}
 </style>
 <!-- inner page banner -->
-<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="background-image:url(images/banner.jpg);">
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="{% thumbnail object.banner "1350x400" crop="center" as im %}
+	background-image:url({{im.url}});
+{% empty %} 
+	background-image:url(http://via.placeholder.com/1350x500);
+{% endthumbnail %}">
   <div class="container">
       <div class="dlab-bnr-inr-entry">
           <h2 class="text-white m-b10">Documentos</h2>
