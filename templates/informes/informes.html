@@ -4,7 +4,7 @@
 
 {% block content %}
 <!-- inner page banner -->
-<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="{% thumbnail object.banner "1350x600" crop="center" as im %}
+<div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-primary bg-pt" style="{% thumbnail object.banner "1350x400" crop="center" as im %}
 	background-image:url({{im.url}});
 {% empty %} 
 	background-image:url(http://via.placeholder.com/1350x500);
@@ -25,14 +25,14 @@
 
 		<div class="site-filters clearfix center  m-b40">
 			<ul class="filters" data-toggle="buttons">
-				<li data-filter="" class="btn active">
+				<li class="btn active">
 					<input type="radio">
-					<a href="#" class="site-button-secondry radius-sm"><span>Todos</span></a> 
+					<a href="#" class="filter-button site-button-secondry radius-sm" data-filter="all"><span>Todos</span></a> 
 				</li>
 				{% for anio in anios %}
-					<li data-filter="{{anio}}" class="btn">
+				<li class="btn">
 					<input type="radio">
-					<a href="#" class="site-button-secondry radius-sm"><span>{{anio}}</span></a> 
+					<a href="#" class="filter-button site-button-secondry radius-sm" data-filter="{{anio}}"><span>{{anio}}</span></a> 
 				</li>
 				{% endfor %}
 			</ul>
@@ -42,7 +42,7 @@
 				<div class="row">
 					{% paginate 12 object_list %}
 					{% for informe in object_list|dictsortreversed:"fecha_informe" %}
-					<div class="2018 col-lg-3 col-md-6 col-sm-6 m-b30 wow zoomIn" data-wow-delay="0.2s">
+					<div class="filter all {{informe.fecha_informe|date:"Y"}} col-lg-3 col-md-6 col-sm-6 m-b30" data-wow-delay="0.5s">
 						<a href="/media/{{informe.archivo}}" target="_blank">
 							<div class="icon-bx-wraper  left bg-gray p-10">
 								<div class="icon-sm text-primary m-b20"> <i class="fa fa-file-pdf-o"></i> </div>
@@ -63,3 +63,6 @@
 </div>
 	
 {% endblock content %}
+{% block extra_js %}
+<script src="/static/informes/plugins/filter/filter.js"></script>
+{% endblock extra_js %}

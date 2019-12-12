@@ -4054,7 +4054,7 @@ blockquote:before {
     height: 600px;
 }
 .dlab-bnr-inr.dlab-bnr-inr-sm {
-    height: 300px;
+    height: 250px;
 }
 .dlab-bnr-inr {
     height: 300px;
@@ -5347,6 +5347,7 @@ ol.comment-list li .children li {
     ol.comment-list li.comment .reply a {
         position: static;
     }
+    
 }
 @media only screen and (max-width: 480px) {
     ol.comment-list li.comment .comment-body {
@@ -5358,7 +5359,9 @@ ol.comment-list li .children li {
         width: 40px;
         height: 40px;
     }
+    
 }
+
 /*= comment form = */
 
 .comment-respond {
