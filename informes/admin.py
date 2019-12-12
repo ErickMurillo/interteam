@@ -52,6 +52,7 @@ class MonitoreoInline(nested_admin.NestedTabularInline):
 class ProyectoAdmin(nested_admin.NestedModelAdmin):
 	inlines = [ArchivoInline,InformeInline,RangoFechaImagenesInline,VideoInline,DocumentoInline,MonitoreoInline]
 	readonly_fields = ('url_para_compartir',)
+	list_display = ('nombre','url_para_compartir')
 	
 	def get_queryset(self, request):
 		if request.user.is_superuser:
