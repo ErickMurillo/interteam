@@ -337,7 +337,7 @@
 						
 						{% for k,v in dict.items %}
 						{% for img in v|slice:"2" %}
-						<li class="web-{{forloop.counter}} design card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
+						<li class="web-{{forloop.parentloop.counter}} design card-container col-lg-3 col-md-6 col-xs-12 col-sm-6 p-a0 wow zoomIn" data-wow-delay="0.2s">
 							<div class="dlab-box dlab-gallery-box">
 								<div class="dlab-media dlab-img-overlay1 dlab-img-effect">
 									{% thumbnail img.archivo "330x220" crop="center" as im %}
