@@ -44,6 +44,7 @@ REPORTE_CHOICES = (('Informe técnico','Informe técnico'),('Informe financiero'
 
 class Informe(models.Model):
 	proyecto = models.ForeignKey(Proyecto,on_delete=models.CASCADE)
+	nombre = models.CharField(max_length=300)
 	tipo_reporte = models.CharField(max_length=50,choices=REPORTE_CHOICES)
 	inicio = models.DateField()
 	fin = models.DateField()

@@ -3,6 +3,15 @@
 {% load embed_video_tags %}
 
 {% block content %}
+<style>
+#contenido ul {
+     list-style: disc !important;
+     margin: 0px 20px !important;
+}
+#contenido li {
+    margin: 10px !important;
+}
+</style>
 <div class="banner-area banner-area--events all-text-white text-center">
     <div class="container">
         <div class="row">
@@ -30,7 +39,10 @@
                         {% endthumbnail %}
                     </div>
                     <h3 class="pdb10">{{evento.evento}}</h3>
-                    {{evento.descripcion|safe}}
+                    <div id="contenido">
+                        {{evento.descripcion|safe}}
+                    </div>
+                    
                     <ul class="event-detail-meta nv-color">
                         <li>
                             <span class="event-detail-meta__title"><i class="fa fa-calendar base-color icon"></i> Horario del evento</span>
