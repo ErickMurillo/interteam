@@ -67,10 +67,11 @@
                         <div class="blog-details-top mb40">
                             <div class="blog-details-top__text-content">
                                 {% now 'd/F/o' as current_date %}
+
                                     {% if current_date <= foro.cierre|date:'d/F/o' and  current_date >= foro.apertura|date:'d/F/o' %}
-                                        <span class="label label-info pull-right">Activo</span>
+                                        <span class="label label-info pull-right">Activo{{current_date}}</span>
                                         {% else %}
-                                        <span class="label label-danger pull-right">Inactivo</span>
+                                        <span class="label label-danger pull-right">Inactivo{{current_date}}</span>
                                     {% endif %} 
                                 <h3 class="blog-details__title"><a href="{% url 'ver-foro' foro.id %}">{{foro.nombre}}</a></h3>
 
