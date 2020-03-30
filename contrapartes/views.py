@@ -275,6 +275,7 @@ def editar_evento(request, slug, template='admin/editar_evento.html'):
 #foros
 @login_required
 def list_foros(request, template='admin/list_foros.html'):
+	current_date = datetime.date.today()
 	object_list = Foros.objects.order_by('-id')
 	mis_foros = Foros.objects.filter(contraparte = request.user.id).order_by('-id')
 
