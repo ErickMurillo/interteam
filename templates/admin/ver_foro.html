@@ -86,8 +86,7 @@
                     {% endfor %}
                 </div>
                 <div class="leave-comment pdt50 mt20 mb30">
-                	{% now 'd/F/o' as current_date %}
-					{% if current_date <= discusion.cierre|date:'d/F/o' and  current_date >= discusion.apertura|date:'d/F/o' %}
+					{% if current_date <= discusion.cierre and  current_date >= discusion.apertura %}
                     <h3 class="leave-comment__title text-uppercase">Nuevo aporte</h3>
 					<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
 						<div class="row">

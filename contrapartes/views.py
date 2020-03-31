@@ -303,6 +303,7 @@ def editar_foro(request, id, template='admin/editar_foro.html'):
 
 @login_required
 def ver_foro(request, id, template='admin/ver_foro.html'):
+	current_date = datetime.date.today()
 	discusion = get_object_or_404(Foros, id=id)  
 	aportes = Aportes.objects.filter(foro = id).order_by('-id')
 	if request.method == 'POST':

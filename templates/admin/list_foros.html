@@ -66,7 +66,8 @@
                     	{% for foro in object_list %}
                         <div class="blog-details-top mb40">
                             <div class="blog-details-top__text-content">
-                                    {% if current_date|date:'d/F/o' <= foro.cierre|date:'d/F/o' and  current_date|date:'d/F/o' >= foro.apertura|date:'d/F/o' %}
+                                        {% if current_date <= foro.cierre and  current_date >= foro.apertura %}
+
                                         <span class="label label-info pull-right">Activo</span>
                                         {% else %}
                                         <span class="label label-danger pull-right">Inactivo</span>
