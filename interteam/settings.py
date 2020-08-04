@@ -188,3 +188,5 @@ DISQUS_WEBSITE_SHORTNAME = 'http-cluster-nicaragua-net'
 FILE_UPLOAD_PERMISSIONS = 0o644
 
 CELERY_BROKER_URL = 'redis://localhost'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
