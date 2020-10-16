@@ -37,6 +37,16 @@ class Pais(models.Model):
     def __str__(self):
         return self.nombre
 
+class Departamento(models.Model):
+    pais = models.ForeignKey(Pais,on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name_plural = "Departamentos"
+
+    def __str__(self):
+        return self.nombre
+
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=200)
     siglas = models.CharField("Siglas o nombre corto",help_text="Siglas o nombre corto de la oganización",max_length=200,blank=True, null=True)
