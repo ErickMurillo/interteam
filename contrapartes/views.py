@@ -819,8 +819,9 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 		formset2 = FormSetInit2(request.POST,request.FILES,instance=object)
 		formset3 = FormSetInit3(request.POST,request.FILES,instance=object)
 		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
-			form.save()
-			form.save_m2m()
+			form_uncommited = form.save()
+			form_uncommited.save()
+			# form_uncommited.save_m2m()
 
 			formset.save()
 
@@ -828,7 +829,8 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 
 			formset3.save()
 
-			return HttpResponseRedirect('/contrapartes/catalogo/')
+			# return HttpResponseRedirect('/contrapartes/catalogo/')
+			return redirect('catalogo')
 	else:
 		form = ProductoForm(instance=object)
 		formset = FormSetInit(instance=object)

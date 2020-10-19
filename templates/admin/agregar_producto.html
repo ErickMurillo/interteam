@@ -8,7 +8,7 @@
           	<section>
               <div class="blog-details-top mb40">
                 <div class="blog-details-top__text-content">
-  			        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+  			        	<form action="" method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
     								{{form.media}}
     								{{form|crispy}}
 
@@ -72,10 +72,10 @@
                                  {{ formset3.empty_form }}
                              </table>
                          </div>
-                       </div>
-                      <br>
-                      <input type="submit" name="Guardar" value="Guardar">
                     </div>
+                  <br>
+                  <input type="submit" name="Guardar" value="Guardar">
+                </div>
       				 </form>
               </div>
            </div>
