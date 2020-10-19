@@ -18,6 +18,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['__str__','__fecha_registro__']
 
 admin.site.register(Pais)
+admin.site.register(Departamento)
 admin.site.register(Contraparte, ContraparteAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Mensajero)

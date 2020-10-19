@@ -36,4 +36,8 @@ urlpatterns = [
 	path('galerias/videos/editar/<id>/', editar_video, name='editar-video'),
 	path('mensajes/', mensajes, name='mensajes'),
 	path('estadisticas/', estadisticas, name='estadisticas'),
+	path('catalogo/', catalogo, name='catalogo'),
+	path('catalogo/eliminar/<id>', eliminar_producto, name='eliminar-producto'),
+	path('catalogo/editar/<id>', editar_producto, name='editar-producto'),
+	path('catalogo/agregar/', agregar_producto, name='agregar-producto'),
 ]

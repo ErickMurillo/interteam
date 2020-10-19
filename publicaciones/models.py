@@ -1,7 +1,7 @@
 from django.db import models
 from sorl.thumbnail import ImageField
 from django.contrib.auth.models import User
-from notas.models import * 
+from notas.models import *
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.template.defaultfilters import slugify
 
@@ -12,7 +12,7 @@ class Publicacion(models.Model):
 	# archivo = models.FileField(upload_to='publicaciones/archivos/')
 	resumen = RichTextUploadingField()
 	tematica = models.ForeignKey(Temas,on_delete=models.DO_NOTHING)
-	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING,editable=False)
+	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	slug = models.SlugField(max_length=250,editable=False)
 	publicada = models.BooleanField()
 	correo_enviado = models.BooleanField(editable=False)

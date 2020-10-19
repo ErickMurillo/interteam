@@ -75,7 +75,7 @@
                             {% else %}
                                 <li><a href="/static/Manual_de_usuario_Cluster_SA_y_generación_ingresos_v2.pdf" target="_blank">Manual</a></li>
                             {% endif %}
-                            
+
                             <li><a href="/accounts/logout/"><i class="fa fa-power-off"></i> Salir</a></li>
                         </ul>
                     </div>
@@ -128,6 +128,12 @@
                     <a href="/contrapartes/mensajes/" type="button" class="btn btn-nav {% if '/contrapartes/mensajes/' in request.path %}active{% endif %}">
                         <span class="fa fa-envelope"></span>
                         <p>Mensajes</p>
+                    </a>
+                </div>
+                <div class="btn-group">
+                    <a href="/contrapartes/catalogo/" type="button" class="btn btn-nav {% if '/contrapartes/catalogo/' in request.path %}active{% endif %}">
+                        <!-- <span class="fa fa-film"></span> -->
+                        <p>Catálogo</p>
                     </a>
                 </div>
                 <div class="btn-group">
@@ -201,7 +207,7 @@
                             <a href="#" class="footer-logo"><img src="/static/images/logos/logo.png" alt="logo" height="90px"></a>
                             <br>
                             <a href=""><img src="/static/images/logos/logo1.png" alt="" width="250px"></a>
-                            
+
                         </div>
                     </div><!--/.widget-->
                 </div>

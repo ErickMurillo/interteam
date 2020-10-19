@@ -10,8 +10,10 @@ from publicaciones.models import *
 from publicaciones.forms import *
 from galerias.models import *
 from galerias.forms import *
+from catalogo.models import *
+from catalogo.forms import *
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse 
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.forms import inlineformset_factory
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -178,7 +180,7 @@ def nuevo_evento_contraparte(request, template='admin/nuevo_evento.html'):
 				instance.evento = evento
 				instance.save()
 			formset.save_m2m()
-			
+
 			instances2 = formset2.save(commit=False)
 			for instance2 in instances2:
 				instance2.evento = evento
@@ -238,7 +240,7 @@ def editar_evento(request, slug, template='admin/editar_evento.html'):
 				instance.evento = evento
 				instance.save()
 			formset.save_m2m()
-			
+
 			instances2 = formset2.save(commit=False)
 			for instance2 in instances2:
 				instance2.evento = evento
@@ -304,7 +306,7 @@ def editar_foro(request, id, template='admin/editar_foro.html'):
 @login_required
 def ver_foro(request, id, template='admin/ver_foro.html'):
 	current_date = datetime.date.today()
-	discusion = get_object_or_404(Foros, id=id)  
+	discusion = get_object_or_404(Foros, id=id)
 	aportes = Aportes.objects.filter(foro = id).order_by('-id')
 	if request.method == 'POST':
 		form = AporteForm(request.POST)
@@ -413,7 +415,7 @@ def editar_publicacion(request, id, template='admin/editar_publicacion.html'):
 				instance.publicacion = form_uncommited
 				instance.save()
 			formset.save_m2m()
-			
+
 			instances2 = formset2.save(commit=False)
 			for instance2 in instances2:
 				instance2.publicacion = form_uncommited
@@ -477,7 +479,7 @@ def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
 				instance.publicacion = publi
 				instance.save()
 			formset.save_m2m()
-			
+
 			instances2 = formset2.save(commit=False)
 			for instance2 in instances2:
 				instance2.publicacion = publi
@@ -508,7 +510,7 @@ def agregar_publicacion(request, template='admin/nueva_publicacion.html'):
 					return HttpResponseRedirect('/contrapartes/publicaciones/')
 				except:
 					pass
-			
+
 	else:
 		form = PublicacionForm()
 		formset = FormSetInit()
@@ -553,9 +555,9 @@ def agregar_comentario(request, id, template='admin/comentario.html'):
 			try:
 				subject, from_email = 'Nuevo comentario al foro ' + object.foro.nombre, 'cluster.nicaragua@gmail.com'
 				text_content = render_to_string('email/comentario.txt', {'object': form_uncommited,})
-								
+
 				html_content = render_to_string('email/comentario.txt', {'object': form_uncommited,})
-								
+
 				list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
 				msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
@@ -682,7 +684,7 @@ def editar_video(request, id, template='admin/nueva_galeria_vid.html'):
 			form_uncommited = form.save()
 			form_uncommited.user = request.user
 			form_uncommited.save()
-			
+
 			return HttpResponseRedirect('/contrapartes/galerias/')
 	else:
 		form = GaleriaVideosForm(instance=object)
@@ -719,7 +721,6 @@ def mensajes(request, template='admin/mensajes.html'):
 
 			except:
 				pass
-			
 	else:
 		form  = MensajeForm()
 		form.fields['user'].queryset = User.objects.exclude(id=request.user.id)
@@ -753,5 +754,85 @@ def estadisticas(request, template='admin/estadisticas.html'):
 		conteo_publi = Publicacion.objects.filter(usuario__userprofile__contraparte = org).count()
 
 		list_resumen.append((org.siglas,conteo,conteo_eventos,conteo_foros,conteo_aportes,conteo_coment,conteo_img,conteo_vid,conteo_publi))
+
+	return render(request, template, locals())
+
+@login_required
+def catalogo(request, template='admin/lista_catalogo.html'):
+	object_list = Producto.objects.filter(user = request.user.id).order_by('-id')
+	return render(request, template, locals())
+
+@login_required
+def eliminar_producto(request, id):
+	prod = Producto.objects.filter(id = id).delete()
+	return HttpResponseRedirect('/contrapartes/catalogo/')
+
+@login_required
+def agregar_producto(request, template='admin/agregar_producto.html'):
+	FormSetInit = inlineformset_factory(Producto, Propuesta_valor, form=Propuesta_valorForm,extra=1)
+	FormSetInit2 = inlineformset_factory(Producto, FotosProducto, form=FotosProductoForm,extra=1,max_num=4)
+	FormSetInit3 = inlineformset_factory(Producto, ArchivosProducto, form=ArchivosProductoForm,extra=1)
+	if request.method == 'POST':
+		form = ProductoForm(request.POST, request.FILES)
+		formset = FormSetInit(request.POST)
+		formset2 = FormSetInit2(request.POST,request.FILES)
+		formset3 = FormSetInit3(request.POST,request.FILES)
+		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
+			producto = form.save(commit=False)
+			producto.user = request.user
+			producto.save()
+			form.save_m2m()
+
+			instances = formset.save(commit=False)
+			for instance in instances:
+				instance.producto = producto
+				instance.save()
+
+			instances2 = formset2.save(commit=False)
+			for instance2 in instances2:
+				instance2.producto = producto
+				instance2.save()
+
+			instances3 = formset3.save(commit=False)
+			for instance3 in instances3:
+				instance3.producto = producto
+				instance3.save()
+
+			return HttpResponseRedirect('/contrapartes/catalogo/')
+	else:
+		form = ProductoForm()
+		formset = FormSetInit()
+		formset2 = FormSetInit2()
+		formset3 = FormSetInit3()
+
+	return render(request, template, locals())
+
+@login_required
+def editar_producto(request, id=None, template='admin/agregar_producto.html'):
+	object = get_object_or_404(Producto, id=id)
+	FormSetInit = inlineformset_factory(Producto, Propuesta_valor, form=Propuesta_valorForm,extra=1)
+	FormSetInit2 = inlineformset_factory(Producto, FotosProducto, form=FotosProductoForm,extra=1,max_num=4)
+	FormSetInit3 = inlineformset_factory(Producto, ArchivosProducto, form=ArchivosProductoForm,extra=1)
+	if request.method == 'POST':
+		form = ProductoForm(request.POST, request.FILES,instance=object)
+		formset = FormSetInit(request.POST,instance=object)
+		formset2 = FormSetInit2(request.POST,request.FILES,instance=object)
+		formset3 = FormSetInit3(request.POST,request.FILES,instance=object)
+		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
+			form.save()
+			form.save_m2m()
+
+			formset.save()
+
+			formset2.save()
+
+			formset3.save()
+
+			return HttpResponseRedirect('/contrapartes/catalogo/')
+	else:
+		form = ProductoForm(instance=object)
+		formset = FormSetInit(instance=object)
+		formset2 = FormSetInit2(instance=object)
+		formset3 = FormSetInit3(instance=object)
 
 	return render(request, template, locals())

@@ -1,0 +1,117 @@
+  {% extends "admin/base_admin.html" %}
+  {% load crispy_forms_tags %}
+
+  {% block content %}
+  <div class="main-content prueba">
+      <div class="container ">
+          <div class="row stickem-container prueba">
+          	<section>
+              <div class="blog-details-top mb40">
+                <div class="blog-details-top__text-content">
+  			        	<form action="." method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+    								{{form.media}}
+    								{{form|crispy}}
+
+                    <hr>
+                    <div class="row">
+                      <h4>Propuesta de valor</h4>
+                      {{ formset.management_form }}
+                      <div id="form_set" class="col-sm-12 col-md-12 form-group">
+                           {% for form in formset.forms %}
+                               {{form.non_field_errors}}
+                               {{form.errors}}
+                               <table class='no_error'>
+                                   {{ form|crispy }}
+                               </table>
+                           {% endfor %}
+                       </div>
+                       <input type="button" value="Añadir otra propuesta de valor" id="add_more">
+                       <div id="empty_form" style="display:none">
+                           <table class='no_error'>
+                               {{ formset.empty_form }}
+                           </table>
+                       </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <h4>Fotos</h4>
+                      {{ formset2.management_form }}
+                      <div id="form_set2" class="col-sm-12 col-md-12 form-group">
+                           {% for form in formset2.forms %}
+                               {{form.non_field_errors}}
+                               {{form.errors}}
+                               <table class='no_error'>
+                                   {{ form|crispy }}
+                               </table>
+                           {% endfor %}
+                       </div>
+                       <input type="button" value="Añadir otra foto" id="add_more2">
+                       <div id="empty_form2" style="display:none">
+                           <table class='no_error'>
+                               {{ formset2.empty_form }}
+                           </table>
+                       </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                      <h4>Archivos</h4>
+                      {{ formset3.management_form }}
+                      <div id="form_set3" class="col-sm-12 col-md-12 form-group">
+                         {% for form in formset3.forms %}
+                             {{form.non_field_errors}}
+                             {{form.errors}}
+                             <table class='no_error'>
+                                 {{ form|crispy }}
+                             </table>
+                         {% endfor %}
+                       </div>
+                        <input type="button" value="Añadir otro archivo" id="add_more3">
+                         <div id="empty_form3" style="display:none">
+                             <table class='no_error'>
+                                 {{ formset3.empty_form }}
+                             </table>
+                         </div>
+                       </div>
+                      <br>
+                      <input type="submit" name="Guardar" value="Guardar">
+                    </div>
+      				 </form>
+              </div>
+           </div>
+         </section>
+        </div>
+
+  </div>
+  {% endblock content %}
+
+  {% block extra_js %}
+  <script src="/static/js/django-inline-form.js"></script>
+  <script type="text/javascript">
+    $( "input, select" ).addClass( "form-control" );
+    $( "input[type='submit']" ).removeClass( "form-control" ).addClass( "btn" );
+  </script>
+  <script type="text/javascript">
+  $('#add_more').click(function() {
+      var form_idx = $('#id_propuesta_valor_set-TOTAL_FORMS').val();
+      $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+      $('#id_propuesta_valor_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+  });
+
+  $('#add_more2').click(function() {
+      var form_idx = $('#id_fotosproducto_set-TOTAL_FORMS').val();
+      if (form_idx <= 3) {
+        $('#form_set2').append($('#empty_form2').html().replace(/__prefix__/g, form_idx));
+        $('#id_fotosproducto_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+      } else {
+        $('#add_more2').hide();
+      }
+  });
+
+  $('#add_more3').click(function() {
+      var form_idx = $('#id_archivosproducto_set-TOTAL_FORMS').val();
+      $('#form_set3').append($('#empty_form3').html().replace(/__prefix__/g, form_idx));
+      $('#id_archivosproducto_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+  });
+  </script>
+  {% endblock extra_js %}

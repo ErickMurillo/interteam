@@ -1,0 +1,90 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="main-content">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-12">
+                <section>
+                    <div class="blog-details-top mb40">
+                        <div class="blog-details-top__text-content">
+                            <a href="/contrapartes/catalogo/agregar/" class="btn special-btn"><span class="fa fa-pencil base-color "></span> Nuevo producto</a>
+                            <h3 class="blog-details__title ">Productos de la organización</h3>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="example2"  style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th>Tipo de producto</th>
+                                            <th>Tipo de servicio</th>
+                                            <th>Localización</th>
+                                            <th>Disponible</th>
+                                            <th>Ver</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	{% for object in object_list %}
+                                		<tr>
+                                            <td>{{object.nombre}}</td>
+                                            <td>{{object.precio|default:"---"}}</td>
+                                            <td>{% for x in object.tipo_producto.all %}
+                                                {{x}}{% if not forloop.last %},{% endif %}
+                                            {% endfor %}</td>
+                                            <td>{% for x in object.tipo_servicio.all %}
+                                                {{x}}{% if not forloop.last %},{% endif %}
+                                            {% endfor %}</td>
+                                            <td>{% for x in object.localizacion.all %}
+                                                {{x}}{% if not forloop.last %},{% endif %}
+                                            {% endfor %}</td>
+                                            <td>{% if object.disponible == True %}
+                                                <span class="fa fa-check"></span>
+                                                {% else %}
+                                                <span class="fa fa-times"></span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-info btn-small-special" target="_blank"><span class="fa fa-globe  "></span></a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'editar-producto' object.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
+                                            </td>
+                                            <td>
+                                                <a data-toggle="modal" href='#modal-id-{{object.id}}' class="btn btn-danger btn-small-special"><span class="fa fa-trash  "></span></a>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" id="modal-id-{{object.id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Eliminar producto</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        El producto "{{object.nombre}}" se eliminara permanentemente.
+                                                        ¿Esta seguro que desea eliminar el producto?
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <a type="button" class="btn btn-danger" href="{% url 'eliminar-producto' object.id %}">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    	{% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
