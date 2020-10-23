@@ -5,17 +5,17 @@
 {% block content %}
 <style>
 #contenido ul, #contenido ol {
-     list-style: disc; 
+     list-style: disc;
 }
 </style>
 <div class="banner-area banner-area--blog all-text-white text-center">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-title">Publicaciones</h1>
+                <h1 class="page-title">Biblioteca</h1>
                 <ul class="fund-breadcumb">
                     <li><a href="/">Inicio</a> </li>
-                    <li><a href="/publicaciones/">Publicaciones</a> </li>
+                    <li><a href="/publicaciones/">Biblioteca</a> </li>
                     <li>Detalle</li>
 
                 </ul>
@@ -29,7 +29,7 @@
         	<div class="col-xs-12 col-md-4">
         		{% thumbnail object.imagen "360x390" crop="center" as im %}
 			        <img class="img-thumbnail" src="{{im.url}}" class="our-causes__image" alt="" width="100%">
-			    {% empty %}   
+			    {% empty %}
 			      <img class="img-thumbnail" src="http://via.placeholder.com/360x390" class="our-causes__image" alt="" width="100%">
 			    {% endthumbnail %}
 			    <br>
@@ -52,19 +52,19 @@
 						<h3>Archivos</h3><hr>
     					<div>
     						<ul>
-    							{% for pdf in object.archivospublicacion_set.all %}        					
+    							{% for pdf in object.archivospublicacion_set.all %}
     							<li><a href="/media/{{pdf.archivo_pdf}}" class="base-color" target="_blank">{{pdf.nombre}}</a></li>
     							{% endfor %}
 							</ul>
     					</div>
     					<br><br>
     					{% endif %}
-    					
+
     					{% if object.audiospublicacion_set.all %}
 						<h3>Audios</h3><hr>
     					<div>
 							<ul>
-    							{% for audio in object.audiospublicacion_set.all %}        					
+    							{% for audio in object.audiospublicacion_set.all %}
     							<li><a href="/media/{{audio.archivo_audio}}" target="_blank">{{audio.nombre}}</a></li>
     							{% endfor %}
 							</ul>

@@ -38,7 +38,7 @@ class Producto(models.Model):
 	disponible = models.BooleanField()
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	vistas = models.IntegerField(editable=False,default=0)
-	slug = models.SlugField(max_length=200,editable=False)
+	slug = models.SlugField(max_length=250,editable=False)
 
 	def __str__(self):
 		return self.nombre

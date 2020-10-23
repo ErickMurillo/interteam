@@ -23,7 +23,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
 from django.db.models import Q
-
+from catalogo.models import *
 
 def index(request,template='index.html'):
 
@@ -35,6 +35,7 @@ def index(request,template='index.html'):
 	contrapartes = Contraparte.objects.all()
 
 	publicaciones = Publicacion.objects.order_by('-id')[:3]
+	catalogo = Producto.objects.order_by('-id')[:3]
 
 	#galerias
 	galerias = {}
@@ -61,7 +62,7 @@ def logout_page(request):
 def lista_notas(request,template='blog.html'):
 	if request.GET.get('buscar'):
 		q = request.GET['buscar']
-		notas_list = Notas.objects.filter(Q(titulo__icontains = q) | 
+		notas_list = Notas.objects.filter(Q(titulo__icontains = q) |
 										Q(contenido__icontains = q) |
 										Q(temas__nombre__icontains = q) |
 										Q(user__userprofile__contraparte__siglas__icontains = q),publicada = True).order_by('-fecha','-id')
@@ -92,7 +93,7 @@ def lista_notas(request,template='blog.html'):
 def detalle_notas(request, slug, template='blog-details.html'):
 	nota = get_object_or_404(Notas, slug=slug)
 	nota.vistas = nota.vistas + 1
-	nota.save() 
+	nota.save()
 	ultimas_notas = Notas.objects.filter(publicada = True).exclude(slug = slug).order_by('-fecha','-id')[:4]
 	hoy = datetime.date.today()
 	eventos = Agendas.objects.filter(inicio__gte = hoy, publico = True).order_by('inicio')[:3]
@@ -125,7 +126,7 @@ def detalle_notas(request, slug, template='blog-details.html'):
 	else:
 		form = ComentarioForm()
 
-	return render(request, template, locals()) 
+	return render(request, template, locals())
 
 def filtro_temas(request, temas, template='blog.html'):
 	notas_list = Notas.objects.filter(temas__nombre = temas).order_by('-fecha','-id')
@@ -145,12 +146,12 @@ def filtro_temas(request, temas, template='blog.html'):
 		hours = delta.seconds/3600
 		dic_eventos[prox_event] = days,hours
 
-	return render(request, template, locals()) 
+	return render(request, template, locals())
 
 def publicaciones(request, template='publicaciones.html'):
 	if request.GET.get('buscar'):
 		q = request.GET['buscar']
-		object_list = Publicacion.objects.filter(Q(titulo__icontains = q) | 
+		object_list = Publicacion.objects.filter(Q(titulo__icontains = q) |
 										Q(usuario__userprofile__contraparte__siglas__icontains = q),publicada = True).order_by('-id')
 	else:
 		object_list = Publicacion.objects.filter(publicada = True).order_by('-id')

@@ -23,10 +23,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="page-title">Publicaciones</h1>
+                <h1 class="page-title">Biblioteca</h1>
                 <ul class="fund-breadcumb">
                     <li><a href="/">Inicio</a> </li>
-                    <li><a href="#">Lista de publicaciones</a> </li>
+                    <li><a href="#">Lista</a> </li>
                 </ul>
             </div>
         </div>
@@ -36,10 +36,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                
+
             </div>
         </div>
-        <div class="row list-publicaciones"> 
+        <div class="row list-publicaciones">
             <div class="col-md-3" >
                 <aside class="sidebar">
                     <form class="search-form widget" action='.' method='GET'>
@@ -56,14 +56,14 @@
                                 {% for x,y in dic_temas.items %}
                                 <li><a href="{% url 'filtro-temas-publi' x %}" class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
                                 {% endfor %}
-                               
+
                             </ul>
 
 
                         </div>
                     </div>
-                    
-                </aside>    
+
+                </aside>
             </div>
             <div class="col-md-9">
                 {% paginate 6 object_list %}
@@ -74,7 +74,7 @@
                                 <div class="our-causes__image-wrap">
                                     {% thumbnail object.imagen "360x390" crop="center" as im %}
                                         <img src="{{im.url}}" class="our-causes__image" alt="">
-                                    {% empty %}   
+                                    {% empty %}
                                       <img src="http://via.placeholder.com/360x390" class="our-causes__image" alt="" width="100%">
                                     {% endthumbnail %}
                                 </div>
@@ -85,23 +85,20 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                  
-                {% endfor %}  
+                    </div>
+                {% endfor %}
                 {% if not object_list %}
-                    <p>No hay resultados</p>             
-                {% endif %} 
-                
+                    <p>No hay resultados</p>
+                {% endif %}
+
             </div>
 
-                        
+
         </div>
         <div class="fund-pagination mb30">
             {% show_pages %}
         </div>
-        
+
     </div>
 </div>
 {% endblock content %}
-
-
-

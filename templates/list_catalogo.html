@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load el_pagination_tags %}
+
+{% block content %}
+<form action="." method="POST">{% csrf_token %}
+  {{form}}
+  <button type="submit">Consultar</button>
+</form>
+
+{% paginate 9 object_list %}
+{% for obj in object_list %}
+  {% thumbnail obj.foto_principal "380x250" crop="center" as im %}
+    <img src="{{im.url}}" alt="">
+  {% endthumbnail %}
+   <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+   {% if obj.disponible == True %}
+    Disponible
+   {% else %}
+   No disponible
+   {% endif %}
+
+   {% if obj.precio %}
+    {{obj.precio}}
+    {% else %}
+    Consulte precio del día
+   {% endif %}
+
+
+{% endfor %}
+
+{% endblock content %}

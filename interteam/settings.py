@@ -146,7 +146,7 @@ CKEDITOR_CONFIGS = {
             'autolink',
             'embed',
             'autoembed',
-            
+
             'autogrow',
             # 'devtools',
             'widget',
@@ -191,3 +191,5 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 CELERY_BROKER_URL = 'redis://localhost'
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

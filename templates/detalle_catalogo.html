@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+{% thumbnail object.foto_principal "380x250" crop="center" as im %}
+  <img src="{{im.url}}" alt="">
+{% endthumbnail %}
+
+Fotos
+{% for obj in object.fotosproducto_set.all %}
+{% thumbnail obj.foto "380x250" crop="center" as im %}
+  <img src="{{im.url}}" alt="">
+{% endthumbnail %}
+{% endfor %}
+
+
+{{object.nombre}}
+{% if object.disponible == True %}
+ Disponible
+{% else %}
+No disponible
+{% endif %}
+
+{{object.user.userprofile.contraparte}}
+
+
+{% for red in object.user.userprofile.contraparte.redes_set.all %}
+  {{red.opcion}}
+  {{red.url}}
+{% endfor %}
+
+{{object.user.userprofile.contraparte.telefono}}
+{{object.user.userprofile.contraparte.correo}}
+{{object.user.userprofile.contraparte.contacto}}
+
+
+{% if object.precio %}
+ {{object.precio}}
+ {% else %}
+ Consulte precio del día
+{% endif %}
+
+Propuesta valor
+{% for obj in object.propuesta_valor_set.all %}
+{{obj.texto}}
+{% endfor %}
+
+descripcion
+{{object.descripcion|safe}}
+
+adjuntos
+{% for obj in object.archivosproducto_set.all %}
+{{obj.nombre}}
+<a href="/media/{{obj.archivo}}">descargar</a>
+{% endfor %}
+
+
+
+
+
+productos relacionados
+{% for obj in productos_relacionados %}
+<a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+{% endfor %}
+
+{% endblock content %}

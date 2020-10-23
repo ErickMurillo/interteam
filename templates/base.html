@@ -33,7 +33,7 @@
     <link data-style="color-style" rel="stylesheet" href="/static/css/color-blue.css">
     <!-- Modernizr-->
     <script src="/static/js/modernizr-2.8.3.min.js"></script>
-    
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121568798-1"></script>
     <script>
@@ -79,9 +79,9 @@
                           {% else %}
                           <li><a href="/accounts/login/"><i class="fa fa-user"></i> Iniciar sesión</a></li>
                           {% endif %}
-                            
+
                             <!-- <li><a href="#"><i class="fa fa-bar-chart"></i> Estadisticas</a></li> -->
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -95,10 +95,11 @@
             <ul class="menu-accordion">
                 <li><a href="/notas/">Noticias</a></li>
                 <li><a href="/acerca-de/">Acerca de</a></li>
-                <li><a href="/organizaciones/">Copartes</a></li>
+                <li><a href="/organizaciones/">Organizaciones</a></li>
                 <li><a href="/eventos/">Eventos</a></li>
-                <li><a href="/publicaciones">Publicaciones</a></li>
-                <li><a href="/biblioteca">Biblioteca</a></li>
+                <li><a href="/publicaciones">Biblioteca</a></li>
+                <!-- <li><a href="/biblioteca">Biblioteca</a></li> -->
+                <li><a href="{% url 'list-catalogo' %}">Catálogo</a></li>
                 <li><a  class="has-submenu">Galería<i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown">
                         <li><a href="/galerias/videos/">Videos</a></li>
@@ -118,10 +119,11 @@
                       <ul class="menu-list">
                             <li><a href="/notas/">Noticias</a></li>
                             <li><a href="/acerca-de/">Acerca de</a></li>
-                            <li><a href="/organizaciones/">Copartes</a></li>
+                            <li><a href="/organizaciones/">Organizaciones</a></li>
                             <li><a href="/eventos/">Eventos</a></li>
-                            <li><a href="/publicaciones">Publicaciones</a></li>
-                            <li><a href="/biblioteca">Biblioteca</a></li>
+                            <li><a href="/publicaciones">Biblioteca</a></li>
+                            <!-- <li><a href="/biblioteca">Biblioteca</a></li> -->
+                            <li><a href="{% url 'list-catalogo' %}">Catálogo</a></li>
                             <li><a href="">Galería <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="/galerias/videos/">Videos</a></li>
@@ -136,7 +138,7 @@
               </div>
           </div>
         </div>
-    
+
 
    {% block content %}{% endblock content %}
 
@@ -199,7 +201,7 @@
                                 <a href="#" class="footer-logo"><img src="/static/images/logos/logo.png" alt="logo" height="90px"></a>
                                 <br>
                                 <a href=""><img src="/static/images/logos/logo1.png" alt="" width="250px"></a>
-                                
+
                             </div>
                         </div><!--/.widget-->
                     </div>
@@ -244,7 +246,7 @@
     <script src="/static/js/revolution-active.js"></script>
     <!-- == Counter == -->
     <script src="/static/js/jquery.waypoints.min.js"></script>
-  
+
     <!-- == Countdown == -->
     <script src="/static/js/jquery.plugin.js"></script>
     <!--<script src="/static/js/jquery.countdown.min.js"></script>-->
