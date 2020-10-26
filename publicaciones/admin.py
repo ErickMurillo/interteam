@@ -25,3 +25,5 @@ class PublicacionAdmin(admin.ModelAdmin):
 			obj.save()
 
 admin.site.register(Publicacion,PublicacionAdmin)
+admin.site.register(Informacion)
+admin.site.register(Herramientas)
