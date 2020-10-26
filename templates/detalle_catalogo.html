@@ -2,6 +2,20 @@
 {% load thumbnail %}
 
 {% block content %}
+<div class="banner-area banner-area--events all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">Catálogo</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li><a href="/catalogo/">Catálogo</a></li>
+                    <li>Producto o Servicio</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {% thumbnail object.foto_principal "380x250" crop="center" as im %}
   <img src="{{im.url}}" alt="">
 {% endthumbnail %}

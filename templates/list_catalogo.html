@@ -1,32 +1,111 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load el_pagination_tags %}
+{% block extra_css %}
 
+{% endblock extra_css %}
 {% block content %}
-<form action="." method="POST">{% csrf_token %}
-  {{form}}
-  <button type="submit">Consultar</button>
-</form>
+<div class="banner-area banner-area--events all-text-white text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">Catálogo</h1>
+                <ul class="fund-breadcumb">
+                    <li><a href="/">Inicio</a> </li>
+                    <li>Catálogo</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content section-padding">
+    <div class="container">
+        <div class="filtercat mb20">
+            <form action="." method="POST">{% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="input-group">
+                            <div class="input-group__label">{{form.tipo_producto.label}}</div>
+                            {{form.tipo_producto}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="input-group">
+                            <div class="input-group__label">{{form.tipo_servicio.label}}</div>
+                            {{form.tipo_servicio}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="input-group">
+                            <div class="input-group__label">{{form.localizacion.label}}</div>
+                            {{form.localizacion}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="input-group">
+                            <div class="input-group__label">{{form.organizacion.label}}</div>
+                            {{form.organizacion}}
+                        </div>
+                    </div>                          
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn" type="submit">Consultar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="productos-list">
+            <div class="row">
+                {% paginate 9 object_list %}
+                {% for obj in object_list %}     
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="blog-post">
+                        <div class="row precio">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                {% if obj.disponible == True %}
+                                    <p class="text-success">Disponible</p>
+                                {% else %}
+                                    <p class="text-danger">No disponible</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                {% if obj.precio %}
+                                    <p class="text-right">{{obj.precio}}</p>
+                                {% else %}
+                                    <p class="text-right">Consulte precio del día</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="blog-post__thumbnail-wrap">
+                            {% if obj.foto_principal %}
+                                {% thumbnail obj.foto_principal "210x210" crop="center" as im %}
+                                <a href="{% url 'detalle-catalogo' obj.slug %}">
+                                    <img src="{{im.url}}" alt="">
+                                </a>
+                                {% endthumbnail %}
+                            {% endif %}
+                        </div>
+                        <div class="blog-post__text-content">
+                            <h4 class="blog-post__title heading-label-four" style="height:25px !important">
+                                <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</div>
 
-{% paginate 9 object_list %}
-{% for obj in object_list %}
-  {% thumbnail obj.foto_principal "380x250" crop="center" as im %}
-    <img src="{{im.url}}" alt="">
-  {% endthumbnail %}
-   <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
-   {% if obj.disponible == True %}
-    Disponible
-   {% else %}
-   No disponible
-   {% endif %}
-
-   {% if obj.precio %}
-    {{obj.precio}}
-    {% else %}
-    Consulte precio del día
-   {% endif %}
-
-
-{% endfor %}
 
 {% endblock content %}
+{% block extra_js %}
+
+<script type="text/javascript">
+    $('#id_tipo_producto, #id_tipo_servicio, #id_localizacion, #id_organizacion').addClass('form-control');
+    $('#id_tipo_producto, #id_tipo_servicio, #id_localizacion, #id_organizacion').select2();
+</script>   
+{% endblock extra_js %}
