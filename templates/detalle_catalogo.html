@@ -16,26 +16,136 @@
         </div>
     </div>
 </div>
-{% thumbnail object.foto_principal "380x250" crop="center" as im %}
-  <img src="{{im.url}}" alt="">
-{% endthumbnail %}
+<div class="main-content section-padding producto-detalle">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="event-detial-wrap">
+                    <div class="image-wrap">
+                        {% thumbnail object.foto_principal "380x250" crop="center" as im %}
+                            <img src="{{im.url}}" class="img-responsive" alt="" width="100%">
+                        {% endthumbnail %}
+                    </div>
+                    <br>
+                    <div class="slider-productos" id="slider-productos">
+                        {% for obj in object.fotosproducto_set.all %}
+                        {% thumbnail obj.foto "380x250" crop="center" as im %}
+                        <div class="slider-productos__item">
+                            <div class="image text-center">
+                                <a href="#"><img class="event-thumbnail" src="{{im.url}}" alt="up">
+                                </a>
+                            </div>                        
+                        </div>
+                        {% endthumbnail %}
+                        {% endfor %}
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-5">
+                <aside class="sidebar">
+                    <div class="widget">
+                        <div class="heading">
+                            <div class="widget__heading">
+                                <h3 class="widget__title">{{object.nombre}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href=""><h4 class="mb0">{{object.user.userprofile.contraparte.siglas}}</h4></a>
+                            </div>
+                            <div class="col-md-6">
+                                {% if object.disponible == True %}
+                                <h4 class="mb0 text-success">Disponible</h4>
+                                {% else %}
+                                <h4 class="mb0 text-danger">No disponible</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <h3>{{object.precio}}</h3>
+                    </div>
+                    <div class="widget">
+                        
+                        <div class="profile-name">
+                            <div class="contact-address">
+                                <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-address-book contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Contacto</div>
+                                        {{object.user.userprofile.contraparte.contacto}}
+                                    </div>
+                                </div>
+                                <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-phone contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Teléfono</div>
+                                        {{object.user.userprofile.contraparte.telefono}}
+                                    </div>
+                                </div>
+                                <div class="contact-address-item">
+                                    <span class="icon-wrap base-color border-color"><i class="fa fa-envelope-open contact-icon"></i></span>
+                                    <div class="text-content">
+                                        <div class="base-color contact-title">Correo</div>
+                                        {{object.user.userprofile.contraparte.correo}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget">
+                            <div class="heading">
+                                <div class="widget__heading">
+                                    <h3 class="widget__title">Propuesta valor</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <ul>
+                            {% for obj in object.propuesta_valor_set.all %}
+                            <li>
+                                {{obj.texto}}
+                            </li>
+                            {% endfor %}
+                            
+                        </ul>
+                        
+                    </div>
+                    
+                </aside>
+            </div>
+        </div>
+        <div class="row mt30">
+            
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="heading">
+                        <div class="widget__heading">
+                            <h3 class="widget__title">Descripción</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="texto_nota">
+                    {{object.descripcion|safe}}
+                </div>
+            </div>
+        </div>
+        <div class="social-icons ">
+            <span>Compartir : </span>
+            <ul class="list-inline pdl20">
+                <li><a href="http://www.facebook.com/sharer.php?u=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-facebook"></i> </a> </li>
+                <li><a href="http://twitter.com/intent/tweet?url=http://cluster-nicaragua.net{{request.path}}&amp;text={{nota.titulo}}" target="_blank"><i class="fa fa-twitter"></i> </a> </li>
+                <li><a href="https://plus.google.com/share?url=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-google-plus"></i> </a> </li>
 
-Fotos
-{% for obj in object.fotosproducto_set.all %}
-{% thumbnail obj.foto "380x250" crop="center" as im %}
-  <img src="{{im.url}}" alt="">
-{% endthumbnail %}
-{% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 
 
-{{object.nombre}}
-{% if object.disponible == True %}
- Disponible
-{% else %}
-No disponible
-{% endif %}
-
-{{object.user.userprofile.contraparte}}
 
 
 {% for red in object.user.userprofile.contraparte.redes_set.all %}
@@ -43,24 +153,17 @@ No disponible
   {{red.url}}
 {% endfor %}
 
-{{object.user.userprofile.contraparte.telefono}}
-{{object.user.userprofile.contraparte.correo}}
-{{object.user.userprofile.contraparte.contacto}}
 
 
-{% if object.precio %}
- {{object.precio}}
- {% else %}
- Consulte precio del día
-{% endif %}
 
-Propuesta valor
-{% for obj in object.propuesta_valor_set.all %}
-{{obj.texto}}
-{% endfor %}
 
-descripcion
-{{object.descripcion|safe}}
+
+
+
+
+
+
+
 
 adjuntos
 {% for obj in object.archivosproducto_set.all %}

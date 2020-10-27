@@ -261,6 +261,17 @@
         autoplaySpeed: 1500,
         arrows : false,
     });
+    /*** =====================================
+    * Upcomming Event Carusel
+    * ==================================== ***/
+    $("#slider-productos").slick({
+        dots: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1500,
+        arrows : false,
+    });
     /** =====================================
     *   Search Box
     * =====================================**/

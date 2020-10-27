@@ -21,38 +21,41 @@
 <div class="main-content section-padding">
     <div class="container">
         <div class="filtercat mb20">
-            <form action="." method="POST">{% csrf_token %}
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="input-group">
-                            <div class="input-group__label">{{form.tipo_producto.label}}</div>
-                            {{form.tipo_producto}}
+            <form class="" action="." method="POST">{% csrf_token %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <div class="input-group__label">{{form.tipo_producto.label}}</div>
+                                {{form.tipo_producto}}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="input-group">
+                                <div class="input-group__label">{{form.tipo_servicio.label}}</div>
+                                {{form.tipo_servicio}}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="input-group">
+                                <div class="input-group__label">{{form.localizacion.label}}</div>
+                                {{form.localizacion}}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="input-group">
+                                <div class="input-group__label">{{form.organizacion.label}}</div>
+                                {{form.organizacion}}
+                            </div>
+                        </div>                          
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn" type="submit">Consultar</button>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="input-group">
-                            <div class="input-group__label">{{form.tipo_servicio.label}}</div>
-                            {{form.tipo_servicio}}
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="input-group">
-                            <div class="input-group__label">{{form.localizacion.label}}</div>
-                            {{form.localizacion}}
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="input-group">
-                            <div class="input-group__label">{{form.organizacion.label}}</div>
-                            {{form.organizacion}}
-                        </div>
-                    </div>                          
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn" type="submit">Consultar</button>
-                    </div>
-                </div>
+                
             </form>
         </div>
         <div class="productos-list">
