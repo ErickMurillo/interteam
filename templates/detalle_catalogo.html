@@ -52,7 +52,8 @@
                         {% thumbnail obj.foto "380x250" crop="center" as im %}
                         <div class="slider-productos__item">
                             <div class="image text-center">
-                                <a href="#"><img class="event-thumbnail" src="{{im.url}}" alt="up">
+                                <a class="gallery-item cboxElement" title="{{obj.producto}}" href="/media/{{obj.foto}}">
+                                    <img class="" src="{{im.url}}" alt="up">
                                 </a>
                             </div>                        
                         </div>

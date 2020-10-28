@@ -4803,6 +4803,7 @@ hr {
     border-color: transparent;
 }
 
+
 .productos-list .precio p{
     font-size: 16px;
     font-weight: bold;
@@ -4823,6 +4824,12 @@ hr {
   
   .slider-productos a {
     display: inline-block;
+  }
+  .slider-productos .gallery-item{
+    margin-bottom: 0px;
+  }
+  .slider-productos .slider-productos__item{
+    margin: 0 5px 0px 5px;
   }
   
   .slider-productos__item {
@@ -4856,6 +4863,9 @@ hr {
 .producto-detalle .profile-name {
     box-shadow: none;
     padding: 0;
+}
+.producto-detalle .widget:not(.widget--footer){
+    margin-bottom: 15px;
 }
 .producto-detalle .profile-name .contact-address{
     background-color: transparent;
@@ -4939,4 +4949,31 @@ hr {
 .top-bar .social-icons li a, .top-bar .social-icons span{
     color: white;
     border-color: white;
+}
+
+.upcomming-event__text-content{
+    padding-left: 180px;
+    padding-top: 0px;
+}
+.line_2{
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.upcomming-event-section .section-title--small{
+    font-size: 20px;
+}
+.upcomming-event-section .slick-arrow{
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    top: -71px;
+}
+.upcomming-event-section .slick-arrow-next {
+    right: 50px;
+}
+.upcomming-event-section .slick-arrow-prev{
+    right: 10px;
 }

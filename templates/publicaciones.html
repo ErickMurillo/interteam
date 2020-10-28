@@ -34,14 +34,41 @@
 </div>
 <div class="main-content section-padding">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-              <form action="." method="POST">{% csrf_token %}
-                {{form}}
-                <button type="submit">Consultar</button>
-              </form>
-            </div>
+        <div class="filtercat mb20">
+            <form class="" action="." method="POST">{% csrf_token %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="form-group">
+                                <div class="input-group__label">{{form.informacion.label}}</div>
+                                {{form.informacion}}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="input-group">
+                                <div class="input-group__label">{{form.herramientas.label}}</div>
+                                {{form.herramientas}}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="input-group">
+                                <div class="input-group__label">{{form.organizaciones.label}}</div>
+                                {{form.organizaciones}}
+                            </div>
+                        </div>                          
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="input-group">
+                                <label for=""></label>
+                                <br>
+                                <button class="btn" type="submit">Consultar</button>
+                            </div>
+                        </div>                          
+                    </div>
+                </div>
+                
+            </form>
         </div>
+    
         <div class="row list-publicaciones">
             <div class="col-md-3" >
                 <aside class="sidebar">
@@ -105,3 +132,10 @@
     </div>
 </div>
 {% endblock content %}
+{% block extra_js %}
+
+<script type="text/javascript">
+    $('#id_informacion, #id_herramientas, #id_organizaciones').addClass('form-control');
+    $('#id_informacion, #id_herramientas, #id_organizaciones').select2();
+</script>   
+{% endblock extra_js %}

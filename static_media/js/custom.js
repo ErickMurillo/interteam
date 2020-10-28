@@ -225,6 +225,18 @@
         autoplaySpeed: 1500,
         arrows : false,
     });
+    /*** =====================================
+    * Produtos index carousel
+    * ==================================== ***/
+    $(".index_producto-carousel").slick({
+        dots: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1500,
+        arrows : false,
+    });
+    
     /** =====================================
     *   Select 2
     * =====================================**/
@@ -284,12 +296,21 @@
     * Upcomming Event Carusel
     * ==================================== ***/
     $("#slider-productos").slick({
-        dots: true,
+        dots: false,
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 1500,
         arrows : false,
+        responsive: [{
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                centerMode: false,
+                dots: true,
+            }
+        }]
     });
     /** =====================================
     *   Search Box

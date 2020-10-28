@@ -191,40 +191,40 @@
 <section class="upcomming-event-section section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-4">
                 <div class="section-heading">
-                    <h2 class="section-title section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">PRÓXIMOS  <span class="base-color">EVENTOS</span></h2>
+                    <h3 class="section-title section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">PRÓXIMOS  <span class="base-color">EVENTOS</span></h3>
                     <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
                 </div>
                 <div class="upcommig-event-carousel wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
                     {% for evento in eventos %}
-                      <div class="upcomming-event">
-                        <div class="upcomming-event__image-wrap">
-                            {% thumbnail evento.foto "380x250" crop="center" as im %}
-                                <img class="upcomming-event__image" src="{{im.url}}" alt="event">
-                            {% empty %}
-                                <img class="upcomming-event__image" src="http://via.placeholder.com/380x250" alt="event">
-                            {% endthumbnail %}
-                            <div class="upcomming-event__date">
-                                <i class="fa fa-calendar"></i>
-                                <span>{{evento.inicio|date:"d N"}}</span>
+                        <div class="upcomming-event">
+                            <div class="upcomming-event__image-wrap">
+                                {% thumbnail evento.foto "380x250" crop="center" as im %}
+                                    <img class="upcomming-event__image" src="{{im.url}}" alt="event">
+                                {% empty %}
+                                    <img class="upcomming-event__image" src="http://via.placeholder.com/380x250" alt="event">
+                                {% endthumbnail %}
+                                <div class="upcomming-event__date">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>{{evento.inicio|date:"d N"}}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="upcomming-event__text-content">
-                            <h4 class="upcomming-event__title"><a href="{% url "agenda-detail" evento.slug %}">{{evento.evento}}</a></h4>
-                            <div class="upcomming-event__meta-info">
-                                <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>{{evento.hora_inicio|time:"P"}} - {{evento.hora_fin|time:"P"}}  </span>
-                                <span class="upcomming-event__place"><i class="fa fa-map-marker base-color"></i>{{evento.lugar}}</span>
+                            <div class="upcomming-event__text-content">
+                                <h5 class="upcomming-event__title line_2"><a href="{% url "agenda-detail" evento.slug %}">{{evento.evento}}</a></h5>
+                                <div class="upcomming-event__meta-info">
+                                    <span class="upcomming-event__time"><i class="fa fa-clock-o base-color"></i>{{evento.hora_inicio|time:"P"}} - {{evento.hora_fin|time:"P"}}  </span>
+                                    <span class="upcomming-event__place line_2"><i class="fa fa-map-marker base-color"></i>{{evento.lugar|truncatechars:50}}</span>
+                                </div>
                             </div>
-                            <!--<p>{{evento.descripcion|truncatechars:135|safe|striptags}}</p>-->
-                        </div>
-                    </div><!--/.upcomming-event-->
+
+                        </div><!--/.upcomming-event-->
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="section-heading">
-                    <h2 class="section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">ÚLTIMAS <span class="base-color">PUBLICACIONES</span></h2>
+                    <h3 class="section-title section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">ÚLTIMAS <span class="base-color">PUBLICACIONES</span></h3>
                     <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
                 </div>
                 <div class="donation-wrap wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
@@ -244,7 +244,7 @@
 
                                     <div class="our-causes__text-content text-center">
 
-                                        <h4 class=" our-causes__title"><a href="#">{{pub.titulo}}</a></h4>
+                                        <h4 class=" our-causes__title line_2"><a href="{% url 'publicacion-detalle' pub.slug %}">{{pub.titulo}}</a></h4>
                                         
                                         <a href="{% url 'publicacion-detalle' pub.slug %}" class="btn">Ver</a>
                                     </div>
@@ -252,6 +252,91 @@
                             </div>
                             {% endfor %}
                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="section-heading">
+                    <h3 class="section-title section-title--small wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".1s">PRODUCTOS <span class="base-color">Y SERVICIOS</span></h3>
+                    <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
+                </div>
+                <div class="donation-wrap wow fadeInUpXsd productos-list " data-wow-duration=".7s" data-wow-delay=".3s">
+                
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="index_producto-carousel">
+                            <div class="blog-post">
+                                <div class="row precio">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <p class="text-success">Disponible</p>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        
+                                        <p class="text-right">Precio</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="blog-post__thumbnail-wrap">
+                                    
+                                        <a href="https://via.placeholder.com/250x250">
+                                            <img src="https://via.placeholder.com/250x250" alt="">
+                                        </a>
+                                        
+                                </div>
+                                <div class="blog-post__text-content">
+                                    <h4 class="blog-post__title heading-label-four line_2" style="height:25px !important">
+                                        <a href="#">Nombre del producto o servicio</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="blog-post">
+                                <div class="row precio">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <p class="text-success">Disponible</p>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        
+                                        <p class="text-right">Precio</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="blog-post__thumbnail-wrap">
+                                    
+                                        <a href="https://via.placeholder.com/250x250">
+                                            <img src="https://via.placeholder.com/250x250" alt="">
+                                        </a>
+                                        
+                                </div>
+                                <div class="blog-post__text-content">
+                                    <h4 class="blog-post__title heading-label-four line_2" style="height:25px !important">
+                                        <a href="#">Nombre del producto o servicio</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="blog-post">
+                                <div class="row precio">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <p class="text-success">Disponible</p>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        
+                                        <p class="text-right">Precio</p>
+                                        
+                                    </div>
+                                </div>
+                                <div class="blog-post__thumbnail-wrap">
+                                    
+                                        <a href="https://via.placeholder.com/250x250">
+                                            <img src="https://via.placeholder.com/250x250" alt="">
+                                        </a>
+                                        
+                                </div>
+                                <div class="blog-post__text-content">
+                                    <h4 class="blog-post__title heading-label-four line_2" style="height:25px !important">
+                                        <a href="#">Nombre del producto o servicio</a>
+                                    </h4>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
