@@ -36,7 +36,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-
+              <form action="." method="POST">{% csrf_token %}
+                {{form}}
+                <button type="submit">Consultar</button>
+              </form>
             </div>
         </div>
         <div class="row list-publicaciones">

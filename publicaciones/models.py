@@ -6,6 +6,24 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.template.defaultfilters import slugify
 
 # Create your models here.
+class Informacion(models.Model):
+	nombre = models.CharField(max_length=250)
+
+	def __str__(self):
+		return u'%s' % self.nombre
+
+	class Meta:
+		verbose_name_plural = 'Información'
+
+class Herramientas(models.Model):
+	nombre = models.CharField(max_length=250)
+
+	def __str__(self):
+		return u'%s' % self.nombre
+
+	class Meta:
+		verbose_name_plural = 'Herramientas'
+
 class Publicacion(models.Model):
 	titulo = models.CharField(max_length=250)
 	imagen = ImageField(upload_to='publicaciones/img/',null=True, blank=True,help_text='Tamaño recomendado: 360x390')
@@ -16,6 +34,8 @@ class Publicacion(models.Model):
 	slug = models.SlugField(max_length=250,editable=False)
 	publicada = models.BooleanField()
 	correo_enviado = models.BooleanField(editable=False)
+	informacion = models.ForeignKey(Informacion,on_delete=models.DO_NOTHING,null=True, blank=True)
+	herramienta = models.ForeignKey(Herramientas,on_delete=models.DO_NOTHING,null=True, blank=True)
 
 	def __str__(self):
 		return u'%s' % self.titulo
