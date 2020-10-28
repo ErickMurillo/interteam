@@ -23,14 +23,14 @@
                <div id="rev_slider_1052_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.3.0.2">
            <ul> <!-- SLIDE  -->
             {% for banner in banners %}
-              
+
                <li data-index="rs-294{{banner.id}}" data-transition="fade" data-slotamount="1" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="1500"  data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" >
                    <!-- MAIN IMAGE -->
-                   
+
                     {% thumbnail banner.imagen "1920x940" as im %}
                         <img src="{{im.url}}" alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                     {% endthumbnail %}
-                   
+
                    <div class="texto-banner">
                        <!-- LAYERS 1-->
                        <div class="tp-caption tp-resizeme"
@@ -77,7 +77,7 @@
                            <span class="slider-sub-heading">{{banner.texto}}</span>
                        </div>
                    </div>
-                   
+
 
                </li>
                {% endfor %}
@@ -124,10 +124,10 @@
                        data-paddingbottom="[0,0,0,0]"
                        data-paddingleft="[0,0,0,0]">
                        <span class="slider-sub-heading">Nuestra comida debería ser nuestra medicina y   <br/>nuestra medicina debería ser nuestra comida. </span></div>
-                   
+
                </li>-->
            </ul>
-           <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>  
+           <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
          </div>
        </div><!-- END REVOLUTION SLIDER -->
     </div>
@@ -150,20 +150,20 @@
                     <div class="blog-post__thumbnail-wrap">
                       {% if nota.tipo == 1 %}
                         {% thumbnail nota.foto "380x250" crop="center" as im %}
-                            <img src="{{im.url}}" alt="blog">  
-                        {% empty %}   
+                            <img src="{{im.url}}" alt="blog">
+                        {% empty %}
                           <img src="http://via.placeholder.com/380x250" alt="blog">
                         {% endthumbnail %}
                       {% elif nota.tipo == 2 %}
                         {% video nota.video as my_video %}
                             {% thumbnail my_video.thumbnail "380x250" crop="center" as im %}
-                              <img src="{{im.url}}" alt="blog">  
-                            {% empty %}   
+                              <img src="{{im.url}}" alt="blog">
+                            {% empty %}
                               <img src="http://via.placeholder.com/380x250" alt="blog">
                             {% endthumbnail %}
                         {% endvideo %}
                       {% endif %}
-                        
+
                         <div class="blog-post__like-comment">
                             <span><i class="fa fa-comments"></i>{% set_disqus_identifier object.id %}
                                     <a href="/notas/{{ nota.slug }}#disqus_thread" data-disqus-identifier="{{ object.id }}">{% disqus_num_replies %}</a></span>
@@ -184,7 +184,7 @@
                 </div><!--/.blog-post-->
             </div>
           {% endfor %}
-            
+
         </div>
     </div>
 </section>
@@ -228,7 +228,7 @@
                     <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
                 </div>
                 <div class="donation-wrap wow fadeInUpXsd" data-wow-duration=".7s" data-wow-delay=".3s">
-                
+
                     <div class="col-sm-12 col-xs-12">
                         <div class="publicacion-carousel">
                             {% for pub in publicaciones %}
@@ -245,13 +245,13 @@
                                     <div class="our-causes__text-content text-center">
 
                                         <h4 class=" our-causes__title line_2"><a href="{% url 'publicacion-detalle' pub.slug %}">{{pub.titulo}}</a></h4>
-                                        
+
                                         <a href="{% url 'publicacion-detalle' pub.slug %}" class="btn">Ver</a>
                                     </div>
                                 </div>
                             </div>
                             {% endfor %}
-                            
+
                         </div>
                     </div>
                 </div>
@@ -262,81 +262,43 @@
                     <div class="section-heading-separator section-heading-separator--left-align wow fadeInUpXsd" data-wow-duration=".9s" data-wow-delay=".1s"></div>
                 </div>
                 <div class="donation-wrap wow fadeInUpXsd productos-list " data-wow-duration=".7s" data-wow-delay=".3s">
-                
+
                     <div class="col-sm-12 col-xs-12">
                         <div class="index_producto-carousel">
-                            <div class="blog-post">
-                                <div class="row precio">
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <p class="text-success">Disponible</p>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        
-                                        <p class="text-right">Precio</p>
-                                        
-                                    </div>
-                                </div>
-                                <div class="blog-post__thumbnail-wrap">
-                                    
-                                        <a href="https://via.placeholder.com/250x250">
-                                            <img src="https://via.placeholder.com/250x250" alt="">
-                                        </a>
-                                        
-                                </div>
-                                <div class="blog-post__text-content">
-                                    <h4 class="blog-post__title heading-label-four line_2" style="height:25px !important">
-                                        <a href="#">Nombre del producto o servicio</a>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="blog-post">
-                                <div class="row precio">
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <p class="text-success">Disponible</p>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        
-                                        <p class="text-right">Precio</p>
-                                        
-                                    </div>
-                                </div>
-                                <div class="blog-post__thumbnail-wrap">
-                                    
-                                        <a href="https://via.placeholder.com/250x250">
-                                            <img src="https://via.placeholder.com/250x250" alt="">
-                                        </a>
-                                        
-                                </div>
-                                <div class="blog-post__text-content">
-                                    <h4 class="blog-post__title heading-label-four line_2" style="height:25px !important">
-                                        <a href="#">Nombre del producto o servicio</a>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="blog-post">
-                                <div class="row precio">
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <p class="text-success">Disponible</p>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        
-                                        <p class="text-right">Precio</p>
-                                        
-                                    </div>
-                                </div>
-                                <div class="blog-post__thumbnail-wrap">
-                                    
-                                        <a href="https://via.placeholder.com/250x250">
-                                            <img src="https://via.placeholder.com/250x250" alt="">
-                                        </a>
-                                        
-                                </div>
-                                <div class="blog-post__text-content">
-                                    <h4 class="blog-post__title heading-label-four line_2" style="height:25px !important">
-                                        <a href="#">Nombre del producto o servicio</a>
-                                    </h4>
-                                </div>
-                            </div>                            
+                          {% for obj in catalogo %}
+                          <div class="blog-post">
+                              <div class="row precio">
+                                  <div class="col-xs-6 col-sm-6 col-md-6">
+                                      {% if obj.disponible == True %}
+                                          <p class="text-success">Disponible</p>
+                                      {% else %}
+                                          <p class="text-danger">No disponible</p>
+                                      {% endif %}
+                                  </div>
+                                  <div class="col-xs-6 col-sm-6 col-md-6">
+                                      {% if obj.precio %}
+                                          <p class="text-right">{{obj.precio}}</p>
+                                      {% else %}
+                                          <p class="text-right">Consulte precio del día</p>
+                                      {% endif %}
+                                  </div>
+                              </div>
+                              <div class="blog-post__thumbnail-wrap">
+                                  {% if obj.foto_principal %}
+                                      {% thumbnail obj.foto_principal "210x210" crop="center" as im %}
+                                      <a href="{% url 'detalle-catalogo' obj.slug %}">
+                                          <img src="{{im.url}}" alt="">
+                                      </a>
+                                      {% endthumbnail %}
+                                  {% endif %}
+                              </div>
+                              <div class="blog-post__text-content">
+                                  <h4 class="blog-post__title heading-label-four" style="height:25px !important">
+                                      <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+                                  </h4>
+                              </div>
+                          </div>  
+                          {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -420,11 +382,11 @@
                       {% if page.url == '/proposito/' %}
                           <h4>{{page.title}}</h4>
                           <p>{{page.content|safe|truncatewords:'90'}}</p>
-                  
+
                           <a href="{{page.url}}" class="btn base-bg">Leer más</a>
-                      {% endif %} 
+                      {% endif %}
                   {% endfor %}
-                    
+
                 </div>
             </div>
         </div>
@@ -484,14 +446,14 @@
                             </a>
                           </li>
                           {% endfor %}
-                            
+
                         </ul>
                         <a href="{% url "detalle-organizacion" org.slug %}" class="btn">Leer más</a>
                     </div>
                 </div><!--/.fund-volunteer-->
             </div>
             {% endfor %}
-            
+
         </div>
     </div>
 </section>
@@ -520,7 +482,7 @@
                                 {% empty %}
                                     <img src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-128.png" alt="">
                                 {% endthumbnail %}
-                                
+
                             </div>
                             <div class="fund-testimonial__author-text">
                                 <h4 class="fund-testimonial__author-name">{{opinion.nombre|upper}}</h4>
@@ -529,11 +491,10 @@
                         </div>
                     </div>
                   {% endfor %}
-                    
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 {% endblock content %}
-
