@@ -4796,6 +4796,12 @@ hr {
 .productos-list .precio{
     padding: 10px 20px;
 }
+.productos-list .slick-slide img{
+    margin: 0 auto;
+}
+.productos-list .slick-slide:focus{
+    border-color: transparent;
+}
 
 .productos-list .precio p{
     font-size: 16px;
@@ -4865,6 +4871,7 @@ hr {
 }
 .producto-detalle .profile-name .contact-address-item{
     margin-bottom: 0px;
+    min-height: 50px;
 }
 .producto-detalle .profile-name .contact-address-item .icon-wrap{
     font-size: 16px;
@@ -4881,5 +4888,55 @@ hr {
     font-size: 16px;
     font-weight: bold;
 }
+.producto-detalle ul.social-btn{
+   padding: 0;
+   margin-top: -15px;
+}
+.social-icons span{
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #243a4f;
+}
+.social-icons li{
+    margin-left: -5px;
+}
+.social-icons li a{
+    display: block;
+    height: 30px;
+    width: 30px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 100px;
+    border: 1px solid #000;
+    line-height: 28px;
+    color: #606060;
+    border-color: #606060;
+}
 
-
+.social-icons li .icon-twitter:hover{
+    color: #fff;
+    border-color: #1da1f2;
+    background-color: #1da1f2;
+}
+.social-icons li .icon-facebook:hover{
+    color: #fff;
+    border-color: #3b5998;
+    background-color: #3b5998;
+}
+.social-icons li .icon-linkedin:hover{
+    color: #fff;
+    border-color: #0077b5;
+    background-color: #0077b5;
+}
+.file_adj h4{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.file_adj a{
+    color: #007200;
+}
+.top-bar .social-icons li a, .top-bar .social-icons span{
+    color: white;
+    border-color: white;
+}

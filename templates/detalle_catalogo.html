@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% block extr_head %}
+<!-- Facebook -->
+<meta name="title" property="og:title" content="{{object.nombre}}" />
+<meta property="og:type" content="article" />
+<meta name="image" property="og:image" content="http://cluster-nicaragua.net/media/{{object.foto_principal}}">
+<meta property="og:image:width" content="300" />
+<meta property="og:image:height" content="300" />
+<meta name="description" property="og:description" content="{{object.descripcion|striptags}}" />
+<meta property="og:url" content="http://cluster-nicaragua.net{{request.path}}" />
+<meta property="og:locale" content="es_ES" />
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{object.nombre|truncatechars:70}}">
+<meta name="twitter:description" content="{{object.descripcion|striptags|truncatechars:200}}">
+<meta name="twitter:domain" content="http://cluster-nicaragua.net">
+
+<!-- Linkedin -->
+<meta name="author" content="{{object.user.userprofile.contraparte.siglas}}">
+{% endblock extr_head %}
 
 {% block content %}
 <div class="banner-area banner-area--events all-text-white text-center">
@@ -20,7 +40,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <div class="event-detial-wrap">
+                <div class="event-detial-wrap mb30">
                     <div class="image-wrap">
                         {% thumbnail object.foto_principal "380x250" crop="center" as im %}
                             <img src="{{im.url}}" class="img-responsive" alt="" width="100%">
@@ -43,7 +63,7 @@
                 
             </div>
             <div class="col-md-5">
-                <aside class="sidebar">
+                <aside class="sidebar mb30">
                     <div class="widget">
                         <div class="heading">
                             <div class="widget__heading">
@@ -57,13 +77,47 @@
                                 <a href=""><h4 class="mb0">{{object.user.userprofile.contraparte.siglas}}</h4></a>
                             </div>
                             <div class="col-md-6">
-                                {% if object.disponible == True %}
+                                <ul class="social-btn">
+                                    {% for red in object.user.userprofile.contraparte.redes_set.all %}
+                                    <li>
+                                        <a href="{{red.url}}">
+                                            <i class="{% if red.opcion == 'Sitio web' %}
+                                                        fa fa-globe
+                                                    {% elif red.opcion == 'Facebook' %}
+                                                        fa fa-facebook
+                                                    {% elif red.opcion == 'Twitter' %}
+                                                        fa fa-twitter
+                                                    {% elif red.opcion == 'Youtube' %}
+                                                        fa fa-youtube
+                                                    {% elif red.opcion == 'Google+' %}
+                                                        fa fa-google
+                                                    {% elif red.opcion == 'Instagram' %}
+                                                        fa fa-instagram
+                                                    {% elif red.opcion == 'Linkedin' %}
+                                                        fa fa-linkedin
+                                                    {% elif red.opcion == 'Flickr' %}
+                                                        fa fa-flickr
+                                                    {% elif red.opcion == 'Pinterest' %}
+                                                        fa fa-pinterest
+                                                    {% elif red.opcion == 'Vimeo' %}
+                                                        fa fa-vimeo
+                                                    {% elif red.opcion == 'Otra' %}
+                                                        fa fa-link
+                                                    {% endif %}" aria-hidden="true" target="_blank"></i>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        {% if object.disponible == True %}
                                 <h4 class="mb0 text-success">Disponible</h4>
                                 {% else %}
                                 <h4 class="mb0 text-danger">No disponible</h4>
                                 {% endif %}
-                            </div>
-                        </div>
                     </div>
                     <div class="widget">
                         <h3>{{object.precio}}</h3>
@@ -104,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <ul>
+                        <ul class="fund-arrow-left-list pdb10" >
                             {% for obj in object.propuesta_valor_set.all %}
                             <li>
                                 {{obj.texto}}
@@ -119,7 +173,6 @@
             </div>
         </div>
         <div class="row mt30">
-            
             <div class="col-md-12">
                 <div class="widget">
                     <div class="heading">
@@ -131,53 +184,92 @@
                 <div class="texto_nota">
                     {{object.descripcion|safe}}
                 </div>
+                <hr>
             </div>
         </div>
-        <div class="social-icons ">
-            <span>Compartir : </span>
-            <ul class="list-inline pdl20">
-                <li><a href="http://www.facebook.com/sharer.php?u=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-facebook"></i> </a> </li>
-                <li><a href="http://twitter.com/intent/tweet?url=http://cluster-nicaragua.net{{request.path}}&amp;text={{nota.titulo}}" target="_blank"><i class="fa fa-twitter"></i> </a> </li>
-                <li><a href="https://plus.google.com/share?url=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-google-plus"></i> </a> </li>
-
-            </ul>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="file_adj">
+                    <h4>Archivos adjuntos : </h4>
+                    <ul>
+                        {% for obj in object.archivosproducto_set.all %}
+                        <li><a href="/media/{{obj.archivo}}" target="_blank">{{obj.nombre}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="social-icons pull-right">
+                    <span>Compartir : </span>
+                    <ul class="list-inline pdl20">
+                        <li><a class="icon-facebook" href="http://www.facebook.com/sharer.php?u=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-facebook"></i> </a> </li>
+                        <li><a class="icon-twitter" href="http://twitter.com/intent/tweet?url=http://cluster-nicaragua.net{{request.path}}&amp;text={{nota.titulo}}" target="_blank"><i class="fa fa-twitter"></i> </a> </li>
+                        <li><a class="icon-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=http://cluster-nicaragua.net{{request.path}}&amp;title={{object.nombre}}" target="_blank"><i class="fa fa-linkedin"></i> </a> </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+<div class="productos-list section-padding ash-white-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading text-center">
+                    <h3>Productos relacionados</h3>
+                    <div class="section-heading-separator"></div>
+                </div>
+            </div>       
+        </div>
+        <div class="row row-eq-rs-height productos-carousel">
+            {% for obj in productos_relacionados %}     
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="blog-post">
+                    <div class="row precio">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            {% if obj.disponible == True %}
+                                <p class="text-success">Disponible</p>
+                            {% else %}
+                                <p class="text-danger">No disponible</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            {% if obj.precio %}
+                                <p class="text-right">{{obj.precio}}</p>
+                            {% else %}
+                                <p class="text-right">Consulte precio del día</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="blog-post__thumbnail-wrap">
+                        {% if obj.foto_principal %}
+                            {% thumbnail obj.foto_principal "210x210" crop="center" as im %}
+                            <a href="{% url 'detalle-catalogo' obj.slug %}">
+                                <img src="{{im.url}}" alt="">
+                            </a>
+                            {% endthumbnail %}
+                        {% endif %}
+                    </div>
+                    <div class="blog-post__text-content">
+                        <h4 class="blog-post__title heading-label-four" style="height:25px !important">
+                            <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
 
-
-
-
-{% for red in object.user.userprofile.contraparte.redes_set.all %}
-  {{red.opcion}}
-  {{red.url}}
-{% endfor %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-adjuntos
-{% for obj in object.archivosproducto_set.all %}
-{{obj.nombre}}
-<a href="/media/{{obj.archivo}}">descargar</a>
-{% endfor %}
-
-
-
-
-
-productos relacionados
-{% for obj in productos_relacionados %}
-<a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
-{% endfor %}
-
 {% endblock content %}
+{% block extra_js %}
+
+<script type="text/javascript">
+    $('.texto_nota ul').addClass('fund-arrow-left-list pdb10');
+</script>   
+{% endblock extra_js %}
+

@@ -5,6 +5,19 @@
 
 {% endblock extra_css %}
 {% block content %}
+<style type="text/css">
+    .fund-pagination span {
+        height: 40px;
+        display: inline-block;
+        width: 40px;
+        line-height: 38px;
+        text-align: center;
+        border: 1px solid #cccccc;
+        border-radius: 100%;
+        color: #1e3042;
+        margin-right: 15px;
+    }
+</style>
 <div class="banner-area banner-area--events all-text-white text-center">
     <div class="container">
         <div class="row">
@@ -58,8 +71,8 @@
                 
             </form>
         </div>
-        <div class="productos-list">
-            <div class="row">
+        <div class="productos-list section-padding">
+            <div class="row ">
                 {% paginate 9 object_list %}
                 {% for obj in object_list %}     
                 <div class="col-xs-12 col-sm-6 col-md-4">
@@ -99,6 +112,9 @@
                 {% endfor %}
                 
             </div>
+        </div>
+        <div class="fund-pagination mb30">
+            {% show_pages %}
         </div>
     </div>
 </div>
