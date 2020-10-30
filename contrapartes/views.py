@@ -780,6 +780,7 @@ def agregar_producto(request, template='admin/agregar_producto.html'):
 		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
 			producto = form.save(commit=False)
 			producto.user = request.user
+			producto.correo_enviado = False
 			producto.save()
 			form.save_m2m()
 
@@ -798,7 +799,28 @@ def agregar_producto(request, template='admin/agregar_producto.html'):
 				instance3.producto = producto
 				instance3.save()
 
+			if producto.publicada == True and producto.enviar_correo == True:
+				try:
+					subject, from_email = 'Nuevo produuto', 'cluster.nicaragua@gmail.com'
+					text_content =  render_to_string('email/catalogo.txt', {'producto': producto,})
+
+					html_content = render_to_string('email/catalogo.txt', {'producto': producto,})
+
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
+
+					enviado = 1
+					producto.correo_enviado = True
+					producto.save()
+					return HttpResponseRedirect('/contrapartes/catalogo/')
+				except:
+					pass
+
 			return HttpResponseRedirect('/contrapartes/catalogo/')
+
 	else:
 		form = ProductoForm()
 		formset = FormSetInit()
@@ -829,7 +851,27 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 
 			formset3.save()
 
-			# return HttpResponseRedirect('/contrapartes/catalogo/')
+
+			if form_uncommited.publicada == True and form_uncommited.correo_enviado == False and form_uncommited.enviar_correo == True:
+				try:
+					subject, from_email = 'Nuevo produuto', 'cluster.nicaragua@gmail.com'
+					text_content =  render_to_string('email/catalogo.txt', {'producto': form_uncommited,})
+
+					html_content = render_to_string('email/catalogo.txt', {'producto': form_uncommited,})
+
+					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
+
+					msg = EmailMultiAlternatives(subject, text_content, from_email, list_mail)
+					msg.attach_alternative(html_content, "text/html")
+					msg.send()
+
+					enviado = 1
+					form_uncommited.correo_enviado = True
+					form_uncommited.save()
+					return redirect('catalogo')
+				except:
+					pass
+
 			return redirect('catalogo')
 	else:
 		form = ProductoForm(instance=object)

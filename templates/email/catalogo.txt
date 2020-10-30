@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p>El usuario {{producto.user}} ha publicado un nuevo producto en <br>
+la plataforma Cluster Nicaragua</p>
+
+<p><br>
+Producto: {{producto.nombre}}</p>
+<p>Diríjase a la siguiente dirección: <br>
+http://cluster-nicaragua.net/catalogo/{{producto.slug}}</p>
+
+Cluster Nicaragua
+</body>
+</html>
