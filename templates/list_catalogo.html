@@ -60,7 +60,7 @@
                                 <div class="input-group__label">{{form.organizacion.label}}</div>
                                 {{form.organizacion}}
                             </div>
-                        </div>                          
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -68,13 +68,13 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         <div class="productos-list section-padding">
             <div class="row ">
                 {% paginate 9 object_list %}
-                {% for obj in object_list %}     
+                {% for obj in object_list %}
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="blog-post">
                         <div class="row precio">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                
+
             </div>
         </div>
         <div class="fund-pagination mb30">
@@ -126,5 +126,5 @@
 <script type="text/javascript">
     $('#id_tipo_producto, #id_tipo_servicio, #id_localizacion, #id_organizacion').addClass('form-control');
     $('#id_tipo_producto, #id_tipo_servicio, #id_localizacion, #id_organizacion').select2();
-</script>   
+</script>
 {% endblock extra_js %}

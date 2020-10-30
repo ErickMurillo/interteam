@@ -45,7 +45,8 @@ class Publicacion(models.Model):
 		return super(Publicacion, self).save(*args, **kwargs)
 
 	class Meta:
-		verbose_name_plural = 'Publicaciones'
+		verbose_name_plural = 'Biblioteca'
+		verbose_name = 'Biblioteca'
 
 class ArchivosPublicacion(models.Model):
 	publicacion = models.ForeignKey(Publicacion,on_delete=models.CASCADE)

@@ -9,14 +9,14 @@
                 <section>
                     <div class="blog-details-top mb40">
                         <div class="blog-details-top__text-content">
-                            <a href="/contrapartes/publicaciones/agregar/" class="btn special-btn"><span class="fa fa-pencil base-color "></span> Nueva publicación</a>
-                            <h3 class="blog-details__title ">Publicaciones</h3>
-                            <hr>                               
+                            <a href="/contrapartes/publicaciones/agregar/" class="btn special-btn"><span class="fa fa-pencil base-color "></span> Nueva biblioteca</a>
+                            <h3 class="blog-details__title ">Biblioteca</h3>
+                            <hr>
                             <div class="table-responsive">
                                 <table class="table table-hover" id="example"  style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Publicación</th>
+                                            <th>Título</th>
                                             <th>Temática</th>
                                             <th>Publicada</th>
                                             <th>Ver</th>
@@ -28,7 +28,7 @@
                                     	{% for publicacion in object_list %}
                                 		<tr>
                                             <td>{{publicacion.titulo}}</td>
-                                            <td>{{publicacion.tematica}}</td> 
+                                            <td>{{publicacion.tematica}}</td>
                                             <td>{% if publicacion.publicada == True %}
                                                 <span class="fa fa-check"></span>
                                                 {% else %}
@@ -37,7 +37,7 @@
                                             </td>
                                             <td>
                                                 <a href="{% url 'publicacion-detalle' publicacion.slug %}" class="btn btn-info btn-small-special" target="_blank"><span class="fa fa-globe"></span></a>
-                                            </td>           
+                                            </td>
                                             <td>
                                                 <a href="{% url 'editar-publicacion' publicacion.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil"></span></a>
                                             </td>
@@ -50,11 +50,11 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h4 class="modal-title">Eliminar publicación</h4>
+                                                        <h4 class="modal-title">Eliminar biblioteca</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         La publicación "{{publicacion.titulo}}" se eliminara permanentemente.
-                                                        ¿Esta seguro que desea eliminar la publicación?
+                                                        ¿Esta seguro que desea eliminar el registro?
                                                     </div>
                                                     <div class="modal-footer">
 

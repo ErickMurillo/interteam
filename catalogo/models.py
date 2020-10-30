@@ -36,6 +36,8 @@ class Producto(models.Model):
 	tipo_servicio = models.ManyToManyField(ServiciosProducto)
 	localizacion = models.ManyToManyField(Departamento)
 	disponible = models.BooleanField()
+	publicada = models.BooleanField()
+	enviar_correo = models.BooleanField()
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	vistas = models.IntegerField(editable=False,default=0)
 	slug = models.SlugField(max_length=250,editable=False)

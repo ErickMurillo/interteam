@@ -7,5 +7,5 @@ class ArchivosAdmin(admin.ModelAdmin):
 		obj.usuario = request.user
 		obj.save()
 
-admin.site.register(Archivos,ArchivosAdmin)
-admin.site.register(Categoria)
+# admin.site.register(Archivos,ArchivosAdmin)
+# admin.site.register(Categoria)
