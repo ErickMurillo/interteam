@@ -43,7 +43,9 @@
                 <div class="event-detial-wrap mb30">
                     <div class="image-wrap">
                         {% thumbnail object.foto_principal "380x250" crop="center" as im %}
-                            <img src="{{im.url}}" class="img-responsive" alt="" width="100%">
+                        <a class="gallery-item cboxElement"  href="/media/{{object.foto_principal}}">
+                            <img  src="{{im.url}}" class="img-responsive" alt="" width="100%">
+                        </a>
                         {% endthumbnail %}
                     </div>
                     <br>
