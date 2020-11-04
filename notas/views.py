@@ -36,7 +36,7 @@ def index(request,template='index.html'):
 	contrapartes = Contraparte.objects.all()
 
 	publicaciones = Publicacion.objects.order_by('-id')[:3]
-	catalogo = Producto.objects.order_by('-id')[:3]
+	catalogo = Producto.objects.order_by('-id','vistas')[:3]
 
 	#galerias
 	galerias = {}

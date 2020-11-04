@@ -6,8 +6,29 @@
 <p>El usuario {{producto.user}} ha publicado un nuevo producto en <br>
 la plataforma Cluster Nicaragua</p>
 
-<p><br>
-Producto: {{producto.nombre}}</p>
+<p>
+Producto: {{producto.nombre}}<br>
+Organización: {{producto.user.userprofile.contraparte.siglas}}<br>
+Contacto: {{object.user.userprofile.contraparte.contacto}}<br>
+Teléfono: {{object.user.userprofile.contraparte.telefono}}<br>
+Correo: {{object.user.userprofile.contraparte.correo}}<br>
+
+{% if producto.precio %}
+Precio: {{producto.precio}}<br>
+{% endif %}
+
+{% if producto.propuesta_valor_set.all %}
+<ul>
+		{% for obj in producto.propuesta_valor_set.all %}
+		<li>
+				{{obj.texto}}
+		</li>
+		{% endfor %}
+
+</ul>
+{% endif %}
+</p>
+
 <p>Diríjase a la siguiente dirección: <br>
 http://cluster-nicaragua.net/catalogo/{{producto.slug}}</p>
 
