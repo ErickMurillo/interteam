@@ -16,18 +16,14 @@ Correo: {{object.user.userprofile.contraparte.correo}}<br>
 {% if producto.precio %}
 Precio: {{producto.precio}}<br>
 {% endif %}
+</p>
 
 {% if producto.propuesta_valor_set.all %}
-<ul>
-		{% for obj in producto.propuesta_valor_set.all %}
-		<li>
-				{{obj.texto}}
-		</li>
-		{% endfor %}
-
-</ul>
+<p>Propuesta de valor</p>
+<p>{% for obj in producto.propuesta_valor_set.all %}{{obj.texto}}{% if not forloop.last %}, {% endif %}
+{% endfor %}</p>
 {% endif %}
-</p>
+
 
 <p>Diríjase a la siguiente dirección: <br>
 http://cluster-nicaragua.net/catalogo/{{producto.slug}}</p>
