@@ -801,10 +801,10 @@ def agregar_producto(request, template='admin/agregar_producto.html'):
 
 			if producto.publicada == True and producto.enviar_correo == True:
 				try:
-					subject, from_email = 'Nuevo produuto', 'cluster.nicaragua@gmail.com'
-					text_content =  render_to_string('email/catalogo.txt', {'producto': producto,})
+					subject, from_email = 'Nuevo producto', 'cluster.nicaragua@gmail.com'
+					text_content =  render_to_string('email/mail2.html', {'producto': producto,})
 
-					html_content = render_to_string('email/catalogo.txt', {'producto': producto,})
+					html_content = render_to_string('email/mail2.html', {'producto': producto,})
 
 					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
@@ -854,10 +854,10 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 
 			if form_uncommited.publicada == True and form_uncommited.correo_enviado == False and form_uncommited.enviar_correo == True:
 				try:
-					subject, from_email = 'Nuevo produuto', 'cluster.nicaragua@gmail.com'
-					text_content =  render_to_string('email/catalogo.txt', {'producto': form_uncommited,})
+					subject, from_email = 'Nuevo producto', 'cluster.nicaragua@gmail.com'
+					text_content =  render_to_string('email/mail2.html', {'producto': form_uncommited,})
 
-					html_content = render_to_string('email/catalogo.txt', {'producto': form_uncommited,})
+					html_content = render_to_string('email/mail2.html', {'producto': form_uncommited,})
 
 					list_mail = UserProfile.objects.exclude(user__id = request.user.id).values_list('user__email',flat=True)
 
