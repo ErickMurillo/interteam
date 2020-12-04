@@ -32,14 +32,20 @@ class Producto(models.Model):
 	descripcion = RichTextUploadingField()
 	precio = models.CharField(max_length=250,verbose_name='Precio y unidad de medida',blank=True,null=True)
 	foto_principal = ImageField(upload_to='productos/')
-	tipo_producto = models.ManyToManyField(TipoProducto)
-	tipo_servicio = models.ManyToManyField(ServiciosProducto)
+	tipo_producto = models.ManyToManyField(TipoProducto,blank=True)
+	tipo_servicio = models.ManyToManyField(ServiciosProducto,blank=True)
 	localizacion = models.ManyToManyField(Departamento)
 	disponible = models.BooleanField()
 	publicada = models.BooleanField()
 	enviar_correo = models.BooleanField()
 	correo_enviado = models.BooleanField(editable=False)
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
+	contacto_1 = models.CharField(max_length=200,blank=True, null=True)
+	correo_1 = models.EmailField(blank=True, null=True)
+	telefono_1 = models.CharField(max_length=200, blank=True, null=True)
+	contacto_2 = models.CharField(max_length=200,blank=True, null=True)
+	correo_2 = models.EmailField(blank=True, null=True)
+	telefono_2 = models.CharField(max_length=200, blank=True, null=True)
 	vistas = models.IntegerField(editable=False,default=0)
 	slug = models.SlugField(max_length=250,editable=False)
 
@@ -74,3 +80,16 @@ class ArchivosProducto(models.Model):
 	class Meta:
 		verbose_name_plural = "Archivos"
 		verbose_name = "Archivo"
+
+REDES_CHOICES = (('Sitio web','Sitio web'),('Facebook','Facebook'),('Twitter','Twitter'),('Youtube','Youtube'),
+					('Google+','Google+'),('Instagram','Instagram'),('Linkedin','Linkedin'),
+					('Flickr','Flickr'),('Pinterest','Pinterest'),('Vimeo','Vimeo'),('Otra','Otra'),)
+
+class Redes(models.Model):
+	producto = models.ForeignKey(Producto,on_delete=models.DO_NOTHING)
+	opcion = models.CharField(max_length=25,choices=REDES_CHOICES)
+	url = models.URLField()
+
+	class Meta:
+		verbose_name = 'Red'
+		verbose_name_plural = 'Redes'

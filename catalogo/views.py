@@ -30,8 +30,8 @@ def lista_catalogo(request,template='list_catalogo.html'):
 
 	return render(request, template, locals())
 
-def detalle_catalogo(request,slug,template='detalle_catalogo.html'):
-	object = get_object_or_404(Producto, slug=slug)
+def detalle_catalogo(request,id,slug,template='detalle_catalogo.html'):
+	object = get_object_or_404(Producto, id=id, slug=slug)
 	object.vistas = object.vistas + 1
 	object.save()
 	productos_relacionados = Producto.objects.filter(publicada = True,tipo_producto__in = object.tipo_producto.all()).exclude(id = object.id)

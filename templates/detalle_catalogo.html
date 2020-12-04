@@ -123,35 +123,87 @@
                                 {% endif %}
                     </div>
                     <div class="widget">
-                        <h3>{{object.precio}}</h3>
+                        <h3>{% if object.precio %}
+                              {{object.precio}}
+                            {% else %}
+                            Consulte precio del día
+                            {% endif %}
+                        </h3>
                     </div>
                     <div class="widget">
+                      <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                          <div class="profile-name">
+                              <div class="contact-address">
+                                {% if object.contacto_1 %}
+                                  <div class="contact-address-item">
+                                      <span class="icon-wrap base-color border-color"><i class="fa fa-address-book contact-icon"></i></span>
+                                      <div class="text-content">
+                                          <div class="base-color contact-title">Contacto</div>
+                                          {{object.contacto_1}}
+                                      </div>
+                                  </div>
+                                {% endif %}
+                                {% if object.telefono_1 %}
+                                  <div class="contact-address-item">
+                                      <span class="icon-wrap base-color border-color"><i class="fa fa-phone contact-icon"></i></span>
+                                      <div class="text-content">
+                                          <div class="base-color contact-title">Teléfono</div>
+                                          {{object.telefono_1}}
+                                      </div>
+                                  </div>
+                                {% endif %}
 
-                        <div class="profile-name">
-                            <div class="contact-address">
-                                <div class="contact-address-item">
-                                    <span class="icon-wrap base-color border-color"><i class="fa fa-address-book contact-icon"></i></span>
-                                    <div class="text-content">
-                                        <div class="base-color contact-title">Contacto</div>
-                                        {{object.user.userprofile.contraparte.contacto}}
-                                    </div>
-                                </div>
-                                <div class="contact-address-item">
-                                    <span class="icon-wrap base-color border-color"><i class="fa fa-phone contact-icon"></i></span>
-                                    <div class="text-content">
-                                        <div class="base-color contact-title">Teléfono</div>
-                                        {{object.user.userprofile.contraparte.telefono}}
-                                    </div>
-                                </div>
-                                <div class="contact-address-item">
-                                    <span class="icon-wrap base-color border-color"><i class="fa fa-envelope-open contact-icon"></i></span>
-                                    <div class="text-content">
-                                        <div class="base-color contact-title">Correo</div>
-                                        {{object.user.userprofile.contraparte.correo}}
-                                    </div>
-                                </div>
-                            </div>
+                                {% if object.correo_1 %}
+                                  <div class="contact-address-item">
+                                      <span class="icon-wrap base-color border-color"><i class="fa fa-envelope-open contact-icon"></i></span>
+                                      <div class="text-content">
+                                          <div class="base-color contact-title">Correo</div>
+                                          {{object.correo_1}}
+                                      </div>
+                                  </div>
+                                {% endif %}
+                              </div>
+
+                          </div>
                         </div>
+                        <div class="col-md-6 col-xs-12">
+                          <div class="profile-name">
+                              <div class="contact-address">
+                                {% if object.contacto_2 %}
+                                  <div class="contact-address-item">
+                                      <span class="icon-wrap base-color border-color"><i class="fa fa-address-book contact-icon"></i></span>
+                                      <div class="text-content">
+                                          <div class="base-color contact-title">Contacto</div>
+                                          {{object.contacto_2}}
+                                      </div>
+                                  </div>
+                                {% endif %}
+                                {% if object.telefono_2 %}
+                                  <div class="contact-address-item">
+                                      <span class="icon-wrap base-color border-color"><i class="fa fa-phone contact-icon"></i></span>
+                                      <div class="text-content">
+                                          <div class="base-color contact-title">Teléfono</div>
+                                          {{object.telefono_2}}
+                                      </div>
+                                  </div>
+                                {% endif %}
+
+                                {% if object.correo_2 %}
+                                  <div class="contact-address-item">
+                                      <span class="icon-wrap base-color border-color"><i class="fa fa-envelope-open contact-icon"></i></span>
+                                      <div class="text-content">
+                                          <div class="base-color contact-title">Correo</div>
+                                          {{object.correo_2}}
+                                      </div>
+                                  </div>
+                                {% endif %}
+                              </div>
+
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                     <div class="widget">
                         <div class="widget">
@@ -206,9 +258,9 @@
                     <span>Compartir : </span>
                     <ul class="list-inline pdl20">
                         <li><a class="icon-facebook" href="http://www.facebook.com/sharer.php?u=http://cluster-nicaragua.net{{request.path}}" target="_blank"><i class="fa fa-facebook"></i> </a> </li>
-                        <li><a class="icon-twitter" href="http://twitter.com/intent/tweet?url=http://cluster-nicaragua.net{{request.path}}&amp;text={{nota.titulo}}" target="_blank"><i class="fa fa-twitter"></i> </a> </li>
-                        <li><a class="icon-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=http://cluster-nicaragua.net{{request.path}}&amp;title={{object.nombre}}" target="_blank"><i class="fa fa-linkedin"></i> </a> </li>
-
+                        <li><a class="icon-twitter" href="http://twitter.com/intent/tweet?url=http://cluster-nicaragua.net{{request.path}}&amp;text={{object.nombre}}" target="_blank"><i class="fa fa-twitter"></i> </a> </li>
+                        {# <li><a class="icon-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=http://cluster-nicaragua.net{{request.path}}&amp;title={{object.nombre}}" target="_blank"><i class="fa fa-linkedin"></i> </a> </li> #}
+                        <li><a class="icon-whatsapp" href="https://wa.me/?text={{object.nombre}}" target="_blank"><i class="fa fa-whatsapp"></i> </a> </li>
                     </ul>
                 </div>
             </div>
@@ -250,7 +302,7 @@
                     <div class="blog-post__thumbnail-wrap">
                         {% if obj.foto_principal %}
                             {% thumbnail obj.foto_principal "210x210" crop="center" as im %}
-                            <a href="{% url 'detalle-catalogo' obj.slug %}">
+                            <a href="{% url 'detalle-catalogo' obj.id obj.slug %}">
                                 <img src="{{im.url}}" alt="">
                             </a>
                             {% endthumbnail %}
@@ -258,7 +310,7 @@
                     </div>
                     <div class="blog-post__text-content">
                         <h4 class="blog-post__title heading-label-four" style="height:25px !important">
-                            <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+                            <a href="{% url 'detalle-catalogo' obj.id obj.slug %}">{{obj.nombre}}</a>
                         </h4>
                     </div>
                 </div>

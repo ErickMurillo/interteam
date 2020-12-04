@@ -4821,7 +4821,7 @@ hr {
     margin-right: -5px;
     max-width: 100%;
   }
-  
+
   .slider-productos a {
     display: inline-block;
   }
@@ -4831,21 +4831,21 @@ hr {
   .slider-productos .slider-productos__item{
     margin: 0 5px 0px 5px;
   }
-  
+
   .slider-productos__item {
     border-radius: 0 0 5px 5px;
     margin: 0 5px 10px 5px;
   }
-  
+
   .slider-productos .image {
     position: relative;
   }
-  
+
   .slider-productos .image .event-thumbnail {
     border-radius: 5px 5px 0 0;
     width: 100%;
   }
-  
+
 .slider-productos__title {
     position: absolute;
     width: 270px;
@@ -4938,6 +4938,11 @@ hr {
     color: #fff;
     border-color: #0077b5;
     background-color: #0077b5;
+}
+.social-icons li .icon-whatsapp:hover{
+    color: #fff;
+    border-color: #0077b5;
+    background-color: #4AC959;
 }
 .file_adj h4{
     font-size: 16px;

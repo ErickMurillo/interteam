@@ -16,8 +16,12 @@ class ArchivosProducto_Inline(admin.TabularInline):
     model = ArchivosProducto
     extra = 1
 
+class Redes_Inline(admin.TabularInline):
+    model = Redes
+    extra = 1
+
 class ProductoAdmin(admin.ModelAdmin):
-    inlines = [Propuesta_valor_Inline,FotosProducto_Inline,ArchivosProducto_Inline]
+    inlines = [Propuesta_valor_Inline,FotosProducto_Inline,ArchivosProducto_Inline,Redes_Inline]
 
 admin.site.register(TipoProducto)
 admin.site.register(ServiciosProducto)

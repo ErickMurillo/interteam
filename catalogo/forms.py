@@ -27,10 +27,17 @@ class ArchivosProductoForm(forms.ModelForm):
         model = ArchivosProducto
         fields = '__all__'
 
+def organizaciones():
+    lista = []
+    foo = Producto.objects.order_by('user__userprofile__contraparte').distinct('user__userprofile__contraparte').values_list('user__userprofile__contraparte__id', flat=True)
+    for x in Contraparte.objects.filter(id__in=foo):
+        lista.append((x.id,x.siglas))
+    return lista
+
 class FiltrosCatalogo(forms.Form):
     def __init__(self, *args, **kwargs):
         super(FiltrosCatalogo, self).__init__(*args, **kwargs)
         self.fields['tipo_producto'] = forms.ModelMultipleChoiceField(queryset=TipoProducto.objects.order_by('nombre'), required=False)
         self.fields['tipo_servicio'] = forms.ModelMultipleChoiceField(queryset=ServiciosProducto.objects.order_by('nombre'), required=False)
         self.fields['localizacion'] = forms.ModelMultipleChoiceField(queryset=Departamento.objects.order_by('nombre'), required=False)
-        self.fields['organizacion'] = forms.ModelMultipleChoiceField(queryset=Contraparte.objects.order_by('nombre'), required=False)
+        self.fields['organizacion'] = forms.MultipleChoiceField(choices=organizaciones(), required=False)
