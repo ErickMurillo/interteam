@@ -244,6 +244,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
+              {% if object.archivosproducto_set.all %}
                 <div class="file_adj">
                     <h4>Archivos adjuntos : </h4>
                     <ul>
@@ -252,7 +253,9 @@
                         {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
             </div>
+
             <div class="col-md-6">
                 <div class="social-icons pull-right">
                     <span>Compartir : </span>
