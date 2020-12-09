@@ -46,7 +46,7 @@ urlpatterns = [
     path('eventos/', include('agendas.urls')),
     path('foros/', include('foros.urls')),
     path('galerias/', include('galerias.urls')),
-    path('publicaciones/', notas.publicaciones),
+    path('publicaciones/', notas.publicaciones, name='publicacion-list'),
     path('publicaciones/<slug>', notas.publicacion_detalle, name='publicacion-detalle'),
     path('publicaciones/filtro/tema/<tema>', notas.filtro_temas_publi, name='filtro-temas-publi'),
     path('organizaciones/', notas.organizaciones),

@@ -35,7 +35,7 @@
 <div class="main-content section-padding">
     <div class="container">
         <div class="filtercat mb20">
-            <form class="" action="." method="POST">{% csrf_token %}
+            <form class="" action="/publicaciones/" method="POST">{% csrf_token %}
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -55,20 +55,20 @@
                                 <div class="input-group__label">{{form.organizaciones.label}}</div>
                                 {{form.organizaciones}}
                             </div>
-                        </div>                          
+                        </div>
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <div class="input-group">
                                 <label for=""></label>
                                 <br>
                                 <button class="btn" type="submit">Consultar</button>
                             </div>
-                        </div>                          
+                        </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
-    
+
         <div class="row list-publicaciones">
             <div class="col-md-3" >
                 <aside class="sidebar">
@@ -84,7 +84,8 @@
                             <ul class="filter-options">
                                 <li><a href="/publicaciones/" class="pdr10 filter-options__item filter" data-filter=".todos"><i class="fa fa-tags"></i> Todos</a><span class="post-count">{{count_publi}}</span></li>
                                 {% for x,y in dic_temas.items %}
-                                <li><a href="{% url 'filtro-temas-publi' x %}" class="pdr10 filter-options__item filter" data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
+                                <li><a href="{% url 'filtro-temas-publi' x %}" class="pdr10 filter-options__item filter
+                                " data-filter=".{{x.id}}"><i class="fa fa-tags"></i> {{x}}</a><span class="post-count">{{y}}</span></li>
                                 {% endfor %}
 
                             </ul>
@@ -137,5 +138,5 @@
 <script type="text/javascript">
     $('#id_informacion, #id_herramientas, #id_organizaciones').addClass('form-control');
     $('#id_informacion, #id_herramientas, #id_organizaciones').select2();
-</script>   
+</script>
 {% endblock extra_js %}

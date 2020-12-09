@@ -191,12 +191,46 @@ def publicacion_detalle(request, slug, template='publicacion_detalle.html'):
 	return render(request, template, locals())
 
 def filtro_temas_publi(request, tema, template='publicaciones.html'):
-	object_list = Publicacion.objects.filter(publicada = True,tematica__nombre = tema).order_by('-id')
+	# object_list = Publicacion.objects.filter(publicada = True,tematica__nombre = tema).order_by('-id')
+	#
+	# count_publi = Publicacion.objects.filter(publicada = True).count()
+	# dic_temas = {}
+	# for tema in Temas.objects.all():
+	# 	count = Publicacion.objects.filter(publicada = True,tematica = tema).count()
+	# 	if count != 0:
+	# 		dic_temas[tema] = count
+	
+	if request.GET.get('buscar'):
+		q = request.GET['buscar']
+		object_list = Publicacion.objects.filter(Q(titulo__icontains = q) |
+										Q(usuario__userprofile__contraparte__siglas__icontains = q),publicada = True,tematica__nombre = tema).order_by('-id')
+		form = FiltrosBiblioteca()
+
+	elif request.method == 'POST':
+		form = FiltrosBiblioteca(request.POST)
+		if form.is_valid():
+			informacion = form.cleaned_data['informacion']
+			herramientas = form.cleaned_data['herramientas']
+			organizaciones = form.cleaned_data['organizaciones']
+
+			params = {}
+			if informacion:
+				   params['informacion__in'] = informacion
+			if herramientas:
+				   params['herramienta__in'] = herramientas
+			if organizaciones:
+				   params['usuario__userprofile__contraparte__in'] = organizaciones
+
+			object_list = Publicacion.objects.filter(publicada = True,**params).order_by('-id')
+			return HttpResponseRedirect('/publicaciones/')
+	else:
+		object_list = Publicacion.objects.filter(publicada = True,tematica__nombre = tema).order_by('-id')
+		form = FiltrosBiblioteca()
 
 	count_publi = Publicacion.objects.filter(publicada = True).count()
 	dic_temas = {}
 	for tema in Temas.objects.all():
-		count = Publicacion.objects.filter(publicada = True,tematica = tema).count()
+		count = Publicacion.objects.filter(tematica = tema,publicada = True).count()
 		if count != 0:
 			dic_temas[tema] = count
 	return render(request, template, locals())

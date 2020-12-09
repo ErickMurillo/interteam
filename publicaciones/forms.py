@@ -24,9 +24,16 @@ class VideosPubliForm(forms.ModelForm):
 		model = VideosPublicacion
 		fields = '__all__'
 
+def organizaciones():
+	lista = []
+	foo = Publicacion.objects.order_by('usuario__userprofile__contraparte').distinct('usuario__userprofile__contraparte').values_list('usuario__userprofile__contraparte__id', flat=True)
+	for x in Contraparte.objects.filter(id__in=foo):
+		lista.append((x.id,x.siglas))
+	return lista
+
 class FiltrosBiblioteca(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(FiltrosBiblioteca, self).__init__(*args, **kwargs)
-        self.fields['informacion'] = forms.ModelMultipleChoiceField(queryset=Informacion.objects.order_by('nombre'), required=False)
-        self.fields['herramientas'] = forms.ModelMultipleChoiceField(queryset=Herramientas.objects.order_by('nombre'), required=False)
-        self.fields['organizaciones'] = forms.ModelMultipleChoiceField(queryset=Contraparte.objects.order_by('nombre'), required=False)
+	def __init__(self, *args, **kwargs):
+		super(FiltrosBiblioteca, self).__init__(*args, **kwargs)
+		self.fields['informacion'] = forms.ModelMultipleChoiceField(queryset=Informacion.objects.order_by('nombre'), required=False)
+		self.fields['herramientas'] = forms.ModelMultipleChoiceField(queryset=Herramientas.objects.order_by('nombre'), required=False)
+		self.fields['organizaciones'] = forms.MultipleChoiceField(choices=organizaciones(), required=False)
