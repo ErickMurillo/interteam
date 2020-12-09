@@ -276,11 +276,11 @@
                                       {% endif %}
                                   </div>
                                   <div class="col-xs-6 col-sm-6 col-md-6">
-                                      {% if obj.precio %}
-                                          <p class="text-right">{{obj.precio}}</p>
-                                      {% else %}
-                                          <p class="text-right">Consulte precio del día</p>
-                                      {% endif %}
+                                    <p class="text-right">{% if obj.precio %}
+                                      {{obj.precio}}
+                                    {% elif obj.precio_del_dia == True %}
+                                      Consulte precio del día
+                                    {% endif %}</p>
                                   </div>
                               </div>
                               <div class="blog-post__thumbnail-wrap">
