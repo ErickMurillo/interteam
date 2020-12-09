@@ -123,10 +123,11 @@
                                 {% endif %}
                     </div>
                     <div class="widget">
-                        <h3>{% if object.precio %}
+                        <h3>
+                            {% if object.precio %}
                               {{object.precio}}
-                            {% else %}
-                            Consulte precio del día
+                            {% elif object.precio_del_dia == True %}
+                              Consulte precio del día
                             {% endif %}
                         </h3>
                     </div>

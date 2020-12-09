@@ -31,6 +31,7 @@ class Producto(models.Model):
 	nombre = models.CharField(max_length=250)
 	descripcion = RichTextUploadingField()
 	precio = models.CharField(max_length=250,verbose_name='Precio y unidad de medida',blank=True,null=True)
+	precio_del_dia= models.BooleanField('Mostrar texto "Consulte precio del día"')
 	foto_principal = ImageField(upload_to='productos/')
 	tipo_producto = models.ManyToManyField(TipoProducto,blank=True)
 	tipo_servicio = models.ManyToManyField(ServiciosProducto,blank=True)
