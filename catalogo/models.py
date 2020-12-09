@@ -74,8 +74,8 @@ class FotosProducto(models.Model):
 
 class ArchivosProducto(models.Model):
 	producto = models.ForeignKey(Producto,on_delete=models.CASCADE)
-	nombre = models.CharField(max_length=250)
-	archivo = models.FileField(upload_to='producto/archivos/')
+	nombre = models.CharField(max_length=250,blank=True, null=True)
+	archivo = models.FileField(upload_to='producto/archivos/',blank=True, null=True)
 
 	class Meta:
 		verbose_name_plural = "Archivos"
