@@ -85,7 +85,7 @@ REDES_CHOICES = (('Sitio web','Sitio web'),('Facebook','Facebook'),('Twitter','T
 					('Google+','Google+'),('Instagram','Instagram'),('Linkedin','Linkedin'),
 					('Flickr','Flickr'),('Pinterest','Pinterest'),('Vimeo','Vimeo'),('Otra','Otra'),)
 
-class Redes(models.Model):
+class RedesProducto(models.Model):
 	producto = models.ForeignKey(Producto,on_delete=models.DO_NOTHING)
 	opcion = models.CharField(max_length=25,choices=REDES_CHOICES)
 	url = models.URLField()

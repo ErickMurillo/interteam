@@ -34,6 +34,11 @@ def organizaciones():
         lista.append((x.id,x.siglas))
     return lista
 
+class RedesFormProducto(forms.ModelForm):
+	class Meta:
+		model = RedesProducto
+		fields = '__all__'
+
 class FiltrosCatalogo(forms.Form):
     def __init__(self, *args, **kwargs):
         super(FiltrosCatalogo, self).__init__(*args, **kwargs)

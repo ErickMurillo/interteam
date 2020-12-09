@@ -17,7 +17,7 @@ class ArchivosProducto_Inline(admin.TabularInline):
     extra = 1
 
 class Redes_Inline(admin.TabularInline):
-    model = Redes
+    model = RedesProducto
     extra = 1
 
 class ProductoAdmin(admin.ModelAdmin):

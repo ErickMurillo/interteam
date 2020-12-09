@@ -81,9 +81,9 @@
                             </div>
                             <div class="col-md-6">
                                 <ul class="social-btn">
-                                    {% for red in object.user.userprofile.contraparte.redes_set.all %}
+                                    {% for red in object.redesproducto_set.all %}
                                     <li>
-                                        <a href="{{red.url}}">
+                                        <a href="{{red.url}}" target="_blank">
                                             <i class="{% if red.opcion == 'Sitio web' %}
                                                         fa fa-globe
                                                     {% elif red.opcion == 'Facebook' %}
@@ -106,7 +106,7 @@
                                                         fa fa-vimeo
                                                     {% elif red.opcion == 'Otra' %}
                                                         fa fa-link
-                                                    {% endif %}" aria-hidden="true" target="_blank"></i>
+                                                    {% endif %}" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                 {% endfor %}

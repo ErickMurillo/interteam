@@ -73,6 +73,27 @@
                              </table>
                          </div>
                     </div>
+
+                    <hr>
+                    <div class="row">
+                      <h4>Redes</h4>
+                      {{ formset4.management_form }}
+                      <div id="form_set4" class="col-sm-12 col-md-12 form-group">
+                         {% for form in formset4.forms %}
+                             {{form.non_field_errors}}
+                             {{form.errors}}
+                             <table class='no_error'>
+                                 {{ form|crispy }}
+                             </table>
+                         {% endfor %}
+                       </div>
+                        <input type="button" value="Añadir otra red" id="add_more4">
+                         <div id="empty_form4" style="display:none">
+                             <table class='no_error'>
+                                 {{ formset4.empty_form }}
+                             </table>
+                         </div>
+                    </div>
                   <br>
                   <input type="submit" name="Guardar" value="Guardar">
                 </div>
@@ -112,6 +133,12 @@
       var form_idx = $('#id_archivosproducto_set-TOTAL_FORMS').val();
       $('#form_set3').append($('#empty_form3').html().replace(/__prefix__/g, form_idx));
       $('#id_archivosproducto_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+  });
+
+  $('#add_more4').click(function() {
+      var form_idx = $('#id_redesproducto_set-TOTAL_FORMS').val();
+      $('#form_set4').append($('#empty_form4').html().replace(/__prefix__/g, form_idx));
+      $('#id_redesproducto_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
   });
   </script>
   {% endblock extra_js %}

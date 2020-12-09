@@ -772,12 +772,15 @@ def agregar_producto(request, template='admin/agregar_producto.html'):
 	FormSetInit = inlineformset_factory(Producto, Propuesta_valor, form=Propuesta_valorForm,extra=1)
 	FormSetInit2 = inlineformset_factory(Producto, FotosProducto, form=FotosProductoForm,extra=1,max_num=4)
 	FormSetInit3 = inlineformset_factory(Producto, ArchivosProducto, form=ArchivosProductoForm,extra=1)
+	FormSetInit4 = inlineformset_factory(Producto, RedesProducto, form=RedesFormProducto,extra=1)
+
 	if request.method == 'POST':
 		form = ProductoForm(request.POST, request.FILES)
 		formset = FormSetInit(request.POST)
 		formset2 = FormSetInit2(request.POST,request.FILES)
 		formset3 = FormSetInit3(request.POST,request.FILES)
-		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
+		formset4 = FormSetInit4(request.POST,request.FILES)
+		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid() and formset4.is_valid():
 			producto = form.save(commit=False)
 			producto.user = request.user
 			producto.correo_enviado = False
@@ -798,6 +801,11 @@ def agregar_producto(request, template='admin/agregar_producto.html'):
 			for instance3 in instances3:
 				instance3.producto = producto
 				instance3.save()
+
+			instances4 = formset4.save(commit=False)
+			for instance4 in instances4:
+				instance4.producto = producto
+				instance4.save()
 
 			if producto.publicada == True and producto.enviar_correo == True:
 				try:
@@ -826,6 +834,7 @@ def agregar_producto(request, template='admin/agregar_producto.html'):
 		formset = FormSetInit()
 		formset2 = FormSetInit2()
 		formset3 = FormSetInit3()
+		formset4 = FormSetInit4()
 
 	return render(request, template, locals())
 
@@ -835,12 +844,15 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 	FormSetInit = inlineformset_factory(Producto, Propuesta_valor, form=Propuesta_valorForm,extra=1)
 	FormSetInit2 = inlineformset_factory(Producto, FotosProducto, form=FotosProductoForm,extra=1,max_num=4)
 	FormSetInit3 = inlineformset_factory(Producto, ArchivosProducto, form=ArchivosProductoForm,extra=1)
+	FormSetInit4 = inlineformset_factory(Producto, RedesProducto, form=RedesFormProducto,extra=1)
+
 	if request.method == 'POST':
 		form = ProductoForm(request.POST, request.FILES,instance=object)
 		formset = FormSetInit(request.POST,instance=object)
 		formset2 = FormSetInit2(request.POST,request.FILES,instance=object)
 		formset3 = FormSetInit3(request.POST,request.FILES,instance=object)
-		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid():
+		formset4 = FormSetInit4(request.POST,instance=object)
+		if form.is_valid() and formset.is_valid() and formset2.is_valid() and formset3.is_valid() and formset4.is_valid():
 			form_uncommited = form.save()
 			form_uncommited.save()
 			# form_uncommited.save_m2m()
@@ -850,6 +862,8 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 			formset2.save()
 
 			formset3.save()
+
+			formset4.save()
 
 
 			if form_uncommited.publicada == True and form_uncommited.correo_enviado == False and form_uncommited.enviar_correo == True:
@@ -878,5 +892,6 @@ def editar_producto(request, id=None, template='admin/agregar_producto.html'):
 		formset = FormSetInit(instance=object)
 		formset2 = FormSetInit2(instance=object)
 		formset3 = FormSetInit3(instance=object)
+		formset4 = FormSetInit4(instance=object)
 
 	return render(request, template, locals())
