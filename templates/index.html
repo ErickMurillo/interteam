@@ -286,7 +286,7 @@
                               <div class="blog-post__thumbnail-wrap">
                                   {% if obj.foto_principal %}
                                       {% thumbnail obj.foto_principal "210x210" crop="center" as im %}
-                                      <a href="{% url 'detalle-catalogo' obj.slug %}">
+                                      <a href="{% url 'detalle-catalogo' obj.id obj.slug  %}">
                                           <img src="{{im.url}}" alt="">
                                       </a>
                                       {% endthumbnail %}
@@ -294,10 +294,10 @@
                               </div>
                               <div class="blog-post__text-content">
                                   <h4 class="blog-post__title heading-label-four" style="height:25px !important">
-                                      <a href="{% url 'detalle-catalogo' obj.slug %}">{{obj.nombre}}</a>
+                                      <a href="{% url 'detalle-catalogo' obj.id obj.slug  %}">{{obj.nombre}}</a>
                                   </h4>
                               </div>
-                          </div>  
+                          </div>
                           {% endfor %}
                         </div>
                     </div>
