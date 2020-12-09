@@ -47,7 +47,7 @@
                                                 {% endif %}
                                             </td>
                                             <td>
-                                                <a href="{% url 'detalle-catalogo' object.slug %}" class="btn btn-info btn-small-special" target="_blank"><span class="fa fa-globe  "></span></a>
+                                                <a href="{% url 'detalle-catalogo' object.id object.slug %}" class="btn btn-info btn-small-special" target="_blank"><span class="fa fa-globe  "></span></a>
                                             </td>
                                             <td>
                                                 <a href="{% url 'editar-producto' object.id %}" class="btn btn-success btn-small-special"><span class="fa fa-pencil  "></span></a>
