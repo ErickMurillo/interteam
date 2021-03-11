@@ -156,13 +156,13 @@ def publicaciones(request, template='publicaciones.html'):
 										Q(usuario__userprofile__contraparte__siglas__icontains = q),publicada = True).order_by('-id')
 		form = FiltrosBiblioteca()
 
-	elif request.method == 'POST':
-		form = FiltrosBiblioteca(request.POST)
+	elif request.method == 'GET':
+		form = FiltrosBiblioteca(request.GET)
 		if form.is_valid():
-			informacion = form.cleaned_data['informacion']
-			herramientas = form.cleaned_data['herramientas']
-			organizaciones = form.cleaned_data['organizaciones']
-
+			informacion = request.GET.getlist('informacion') #form.cleaned_data['informacion']
+			herramientas = request.GET.getlist('herramientas') ##form.cleaned_data['herramientas']
+			organizaciones = request.GET.getlist('organizaciones')  #form.cleaned_data['organizaciones']
+			print(organizaciones)
 			params = {}
 			if informacion:
 				   params['informacion__in'] = informacion
