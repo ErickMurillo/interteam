@@ -5,28 +5,51 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def lista_catalogo(request,template='list_catalogo.html'):
-	if request.method == 'POST':
-		form = FiltrosCatalogo(request.POST)
+	if request.method == 'GET':
+		form = FiltrosCatalogo(request.GET)
 		if form.is_valid():
-			tipo_producto = form.cleaned_data['tipo_producto']
-			tipo_servicio = form.cleaned_data['tipo_servicio']
-			localizacion = form.cleaned_data['localizacion']
-			organizacion = form.cleaned_data['organizacion']
+			tipo_producto = request.GET.getlist('tipo_producto')
+			tipo_servicio = request.GET.getlist('tipo_servicio')
+			localizacion = request.GET.getlist('localizacion')
+			organizacion = request.GET.getlist('organizacion')
 
 			params = {}
 			if tipo_producto:
-				   params['tipo_producto__in'] = tipo_producto
+				params['tipo_producto__in'] = tipo_producto
 			if tipo_servicio:
-				   params['tipo_servicio__in'] = tipo_servicio
+				params['tipo_servicio__in'] = tipo_servicio
 			if localizacion:
-				   params['localizacion__in'] = localizacion
+				params['localizacion__in'] = localizacion
 			if organizacion:
-				   params['user__userprofile__contraparte__in'] = organizacion
-
+				params['user__userprofile__contraparte__in'] = organizacion
+			
 			object_list = Producto.objects.filter(**params,publicada = True).order_by('-id','vistas')
 	else:
 		form = FiltrosCatalogo()
 		object_list = Producto.objects.filter(publicada = True).order_by('-id','vistas')
+
+	# if request.method == 'POST':
+	# 	form = FiltrosCatalogo(request.POST)
+	# 	if form.is_valid():
+	# 		tipo_producto = form.cleaned_data['tipo_producto']
+	# 		tipo_servicio = form.cleaned_data['tipo_servicio']
+	# 		localizacion = form.cleaned_data['localizacion']
+	# 		organizacion = form.cleaned_data['organizacion']
+
+	# 		params = {}
+	# 		if tipo_producto:
+	# 			   params['tipo_producto__in'] = tipo_producto
+	# 		if tipo_servicio:
+	# 			   params['tipo_servicio__in'] = tipo_servicio
+	# 		if localizacion:
+	# 			   params['localizacion__in'] = localizacion
+	# 		if organizacion:
+	# 			   params['user__userprofile__contraparte__in'] = organizacion
+
+	# 		object_list = Producto.objects.filter(**params,publicada = True).order_by('-id','vistas')
+	# else:
+	# 	form = FiltrosCatalogo()
+	# 	object_list = Producto.objects.filter(publicada = True).order_by('-id','vistas')
 
 	return render(request, template, locals())
 
