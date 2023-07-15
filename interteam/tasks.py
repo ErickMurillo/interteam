@@ -29,5 +29,4 @@ def send_mail_foro(id,user):
 	msg.attach_alternative(html_content, "text/html")
 	msg.send()
 
-	print(foro.id)
 	return foro.id

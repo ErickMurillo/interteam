@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse 
 import json as simplejson
 import os
@@ -15,7 +15,7 @@ def unslugify(value):
     
 def save_as_xls(request):
     tabla = request.POST['tabla']    
-    response = render_to_response('xls.html', {'tabla': tabla, })
+    response = render('xls.html', {'tabla': tabla, })
     response['Content-Disposition'] = 'attachment; filename=tabla.xls'
     response['Content-Type'] = 'application/vnd.ms-excel'
     response['Charset'] ='UTF-8'

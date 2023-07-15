@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from notas.models import *
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 import datetime
 from django.db.models import Q
 from agendas.models import *
