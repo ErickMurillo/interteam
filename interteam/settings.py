@@ -189,7 +189,7 @@ DISQUS_WEBSITE_SHORTNAME = 'http-cluster-nicaragua-net'
 
 FILE_UPLOAD_PERMISSIONS = 0o644
 
-CELERY_BROKER_URL = 'redis://localhost'
+CELERY_broker_url = 'redis://localhost'
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
@@ -199,3 +199,7 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+# set the celery timezone
+timezone = 'America/Managua'
