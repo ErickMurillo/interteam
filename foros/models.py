@@ -102,7 +102,7 @@ class Foros(models.Model):
 	#fotos = fields.GenericRelation(Imagen)
 	#video = fields.GenericRelation(Videos)
 	#audio = fields.GenericRelation(Audios)
-	correo_enviado = models.BooleanField(editable=False)
+	correo_enviado = models.BooleanField(editable=False, null=True)
 
 	class Meta:
 		verbose_name_plural = "Foros"

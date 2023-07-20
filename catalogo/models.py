@@ -39,7 +39,7 @@ class Producto(models.Model):
 	disponible = models.BooleanField()
 	publicada = models.BooleanField()
 	enviar_correo = models.BooleanField()
-	correo_enviado = models.BooleanField(editable=False)
+	correo_enviado = models.BooleanField(editable=False, null=True)
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	contacto_1 = models.CharField(max_length=200,blank=True, null=True)
 	correo_1 = models.EmailField(blank=True, null=True)

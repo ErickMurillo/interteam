@@ -42,7 +42,7 @@ class Notas(models.Model):
 
 	user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	publicada = models.BooleanField()
-	correo_enviado = models.BooleanField(editable=False)
+	correo_enviado = models.BooleanField(editable=False, null=True)
 
 	class Meta:
 		verbose_name_plural = "Notas"

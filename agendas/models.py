@@ -27,7 +27,7 @@ class Agendas(models.Model):
     # adjunto = fields.GenericRelation(Documentos)
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     slug = models.SlugField(max_length=200,editable=False)
-    correo_enviado = models.BooleanField(editable=False)
+    correo_enviado = models.BooleanField(editable=False, null=True)
 
     class Meta:
     	verbose_name_plural = "Agendas"

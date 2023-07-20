@@ -33,7 +33,7 @@ class Publicacion(models.Model):
 	usuario = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	slug = models.SlugField(max_length=250,editable=False)
 	publicada = models.BooleanField()
-	correo_enviado = models.BooleanField(editable=False)
+	correo_enviado = models.BooleanField(editable=False, null=True)
 	informacion = models.ForeignKey(Informacion,on_delete=models.DO_NOTHING,null=True, blank=True)
 	herramienta = models.ForeignKey(Herramientas,on_delete=models.DO_NOTHING,null=True, blank=True)
 
