@@ -48,8 +48,7 @@
                                 {% if nota.tipo == 1 %}
                                     {% thumbnail nota.foto "380x250" crop="center" as im %}
                                         <img src="{{im.url}}" class="widget-latest-causes__thubnail" alt="">
-                                    {% empty %}   
-                                      <img src="http://via.placeholder.com/380x250" class="widget-latest-causes__thubnail" alt="">
+                                    
                                     {% endthumbnail %}
                                   {% elif nota.tipo == 2 %}
                                     {% video nota.video as my_video %}
