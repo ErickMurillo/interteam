@@ -23,3 +23,14 @@ class BannerProposito(models.Model):
 
 	def __str__(self):
 		return 'Imagen %s' % (self.id)
+
+class OrgCooperantes(models.Model):
+	titulo = models.CharField(max_length=50)
+	imagen = ImageField(upload_to='org-coop/')
+
+	class Meta:
+		verbose_name = 'Organización Cooperante'
+		verbose_name_plural = 'Organizaciones Cooperantes'
+
+	def __str__(self):
+		return self.titulo

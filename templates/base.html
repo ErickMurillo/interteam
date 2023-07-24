@@ -198,9 +198,14 @@
                                 <h4 class="widget__title">ORGANIZACIONES COOPERANTES</h4>
                             </div>
                             <div class="widget__text-content">
-                                <a href="#" class="footer-logo"><img src="/static/images/logos/logo.png" alt="logo" height="90px"></a>
-                                <br>
-                                <a href=""><img src="/static/images/logos/logo1.png" alt="" width="250px"></a>
+                                {% load thumbnail %}
+                                {% for org in coop %}
+                                {% thumbnail org.imagen "x90" crop="center" format="PNG" as im %}
+                                    <a href="#" class="footer-logo"><img src="{{im.url}}" alt="{{org.nombre}}"></a>
+                                {% empty %}   
+                                    <img src="http://via.placeholder.com/90x90" class="our-causes__image" alt="">
+                                {% endthumbnail %}
+                                {% endfor %} 
 
                             </div>
                         </div><!--/.widget-->
